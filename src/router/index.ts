@@ -13,7 +13,7 @@ const routes = [
     redirect: '/',
   },
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     component: Login,
   },
@@ -27,7 +27,7 @@ const routes = [
     },
   },
   {
-    path: '/',
+    path: '/create-request',
     name: 'CreateRequest',
     component: CreateRequestView,
     meta: {
