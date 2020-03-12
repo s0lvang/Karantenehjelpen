@@ -19,14 +19,12 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Button from '@/components/shared/Button.vue';
 import TextInput from '@/components/shared/TextInput.vue';
 import Item from '@/components/shared/Item.vue';
 
-import Vue from 'vue';
-
-export default Vue.extend({
+export default {
   name: 'CreateRequest',
   components: {
     TextInput,
@@ -39,10 +37,10 @@ export default Vue.extend({
     };
   },
   methods: {
-    deleteItem(index: number) {
+    deleteItem(index) {
       this.items.splice(index, 1);
     },
-    addItem(index: number) {
+    addItem(index) {
       this.items[index].added = true;
     },
     renderNewItem() {
@@ -52,20 +50,20 @@ export default Vue.extend({
         added: false,
       });
     },
-    updateItemName(input: string, index: number) {
+    updateItemName(input, index) {
       this.items[index].itemName = input;
     },
-    incrementItemCount(index: number) {
+    incrementItemCount(index) {
       this.items[index].count += 1;
     },
-    decrementItemCount(index: number) {
+    decrementItemCount(index) {
       this.items[index].count -= 1;
     },
     toSummary() {
       console.log('to summary');
     },
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>

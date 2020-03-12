@@ -14,11 +14,10 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Button from '@/components/shared/Button.vue';
-import Vue from 'vue';
 
-export default Vue.extend({
+export default {
   name: 'Request',
   components: {
     Button,
@@ -28,7 +27,7 @@ export default Vue.extend({
       console.log('yee');
     },
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>

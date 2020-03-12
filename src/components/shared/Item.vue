@@ -45,12 +45,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import TextInput from '@/components/shared/TextInput.vue';
 import Button from '@/components/shared/Button.vue';
-import Vue from 'vue';
 
-export default Vue.extend({
+export default {
   name: 'Item',
   components: {
     TextInput,
@@ -70,24 +69,24 @@ export default Vue.extend({
     },
   },
   methods: {
-    addItem(index: number) {
+    addItem(index) {
       this.$emit('addItem', index);
     },
-    deleteItem(index: number) {
+    deleteItem(index) {
       this.$emit('deleteItem', index);
     },
-    incrementCount(index: number) {
+    incrementCount(index) {
       this.$emit('incrementCount', index);
     },
-    decrementCount(index: number) {
+    decrementCount(index) {
       this.$emit('decrementCount', index);
     },
-    emitInputText(event: HTMLFormElement, index: number) {
+    emitInputText(event, index) {
       const input = event.target.value;
       this.$emit('updateName', input, index);
     },
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>

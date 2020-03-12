@@ -10,10 +10,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
+<script>
 
-export default Vue.extend({
+export default {
   name: 'Button',
   props: {
     btnText: {
@@ -30,7 +29,7 @@ export default Vue.extend({
       this.$emit('btnClicked');
     },
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>

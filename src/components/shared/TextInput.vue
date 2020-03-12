@@ -11,10 +11,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
+<script>
 
-export default Vue.extend({
+export default {
   name: 'TextInput',
   props: {
     labelText: {
@@ -31,11 +30,11 @@ export default Vue.extend({
     },
   },
   methods: {
-    emitInputText(event: HTMLFormElement) {
+    emitInputText(event) {
       this.$emit('emitInputText', event, this.localIndex);
     },
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>

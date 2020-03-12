@@ -4,16 +4,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import CreateRequest from '@/components/CreateRequest.vue';
-import Vue from 'vue';
 
-export default Vue.extend({
+export default {
   name: 'CreateRequestView',
   components: {
     CreateRequest,
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>
