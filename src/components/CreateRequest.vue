@@ -2,7 +2,7 @@
   <div class="container">
     <div class="adress">
       <h4>Leveringsadresse:</h4>
-      <TextInput labelText="Adresse" placeholderText="Kongens slott 1"/>
+      <TextInput labelText="" placeholderText="Kongens slott 1"/>
     </div>
     <div v-if="this.items.length >= 1" class="items">
       <Item @updateItem="addItem" :nrOfItems="items"
@@ -69,13 +69,19 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+
+
 .container{
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 .adress{
   display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 .items {
   display: flex;

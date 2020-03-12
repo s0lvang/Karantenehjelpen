@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main_container">
     <div v-for="(item, index) in nrOfItems" :key="index" class="item_container">
       <h4>Vare:</h4>
       <template v-if="!item.added">
@@ -14,15 +14,14 @@
         {{nrOfItems[index].itemName}}
       </p>
       <div >
-        <h4>Antall</h4>
         <div class="item_counter" v-if="!item.added">
           <Button btnText="-1"
                   @btnClicked="decrementCount(index)"
                   :btnDisabled="false"
           />
-          <p>
+          <h3>
             {{nrOfItems[index].count}}
-          </p>
+          </h3>
           <Button btnText="+1"
                   @btnClicked="incrementCount(index)"
                   :btnDisabled="false"
@@ -92,11 +91,13 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.main_container{
+  width: 100%
+}
 .item_container{
-  border: 1px solid red;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  align-items: center;
 }
 .item_counter{
   display: flex;
