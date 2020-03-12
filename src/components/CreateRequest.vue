@@ -4,13 +4,23 @@
       <h4>Leveringsadresse:</h4>
       <TextInput labelText="Adresse" placeholderText="Kongens slott 1"/>
     </div>
-    <div v-for="n in val" :key="n">
-      <Item @deleteItem="deleteItem(n)"/>
+    <div v-if="this.items.length >= 1" class="items">
+      <Item @updateItem="addItem" :nrOfItems="items"
+            @addItem="addItem"
+            @deleteItem="deleteItem"
+            @decrementCount="decrementItemCount"
+            @incrementCount="incrementItemCount"
+            @updateName="updateItemName"
+      />
     </div>
+    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>
+    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
+    {{this.items}}
   </div>
 </template>
 
 <script lang="ts">
+import Button from '@/components/shared/Button.vue';
 import TextInput from '@/components/shared/TextInput.vue';
 import Item from '@/components/shared/Item.vue';
 
@@ -21,15 +31,38 @@ export default Vue.extend({
   components: {
     TextInput,
     Item,
+    Button,
   },
   data() {
     return {
-      val: 1,
+      items: [],
     };
   },
   methods: {
-    deleteItem(n: number) {
-      console.log(n);
+    deleteItem(index: number) {
+      this.items.splice(index, 1);
+    },
+    addItem(index: number) {
+      this.items[index].added = true;
+    },
+    renderNewItem() {
+      this.items.push({
+        itemName: '',
+        count: 1,
+        added: false,
+      });
+    },
+    updateItemName(input: string, index: number) {
+      this.items[index].itemName = input;
+    },
+    incrementItemCount(index: number) {
+      this.items[index].count += 1;
+    },
+    decrementItemCount(index: number) {
+      this.items[index].count -= 1;
+    },
+    toSummary() {
+      console.log('to summary');
     },
   },
 });
@@ -43,5 +76,9 @@ export default Vue.extend({
 }
 .adress{
   display: flex;
+}
+.items {
+  display: flex;
+  justify-content: space-evenly;
 }
 </style>

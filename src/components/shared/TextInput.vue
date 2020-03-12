@@ -25,10 +25,14 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    localIndex: {
+      type: Number,
+      required: false,
+    },
   },
   methods: {
     emitInputText(event: HTMLFormElement) {
-      this.$emit('emitInputText', event);
+      this.$emit('emitInputText', event, this.localIndex);
     },
   },
 });
