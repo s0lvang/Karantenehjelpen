@@ -13,7 +13,7 @@ const routes = [
     redirect: 'all-requests',
   },
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login,
   },
