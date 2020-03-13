@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Login from '@/views/Login.vue';
 import AllRequests from '@/views/AllRequests.vue';
 import CreateRequestView from '@/views/CreateRequestView.vue';
+import StartScreenView from '@/views/StartScreenView.vue';
 import firebase from 'firebase';
 
 Vue.use(VueRouter);
@@ -10,14 +11,21 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '*',
-    redirect: 'all-requests',
+    redirect: 'start-screen',
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
   },
-
+  {
+    path: '/start-screen',
+    name: 'StartScreen',
+    component: StartScreenView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
   {
     path: '/all-requests',
     name: 'AllRequests',

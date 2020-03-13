@@ -1,5 +1,8 @@
 <template>
   <div class="req_container">
+    <section>
+      <LogoutButton />
+    </section>
     <template v-if="step === 1">
       <CreateRequest @toSummary="toSummary"/>
     </template>
@@ -12,12 +15,15 @@
 <script>
 import CreateRequest from '@/components/CreateRequest.vue';
 import RequestSummary from '@/components/RequestSummary.vue';
+import LogoutButton from '@/components/LogoutButton.vue';
+
 
 export default {
   name: 'CreateRequestView',
   components: {
     CreateRequest,
     RequestSummary,
+    LogoutButton,
   },
   data() {
     return {
