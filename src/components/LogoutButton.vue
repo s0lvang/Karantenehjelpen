@@ -1,5 +1,5 @@
 <template>
-  <Button @btnClicked="logout" btnText="Logg ut beibi" :btnDisabled="false" />
+  <Button @btnClicked="logout" btnText="Logg ut" :btnDisabled="false" />
 </template>
 
 <script>

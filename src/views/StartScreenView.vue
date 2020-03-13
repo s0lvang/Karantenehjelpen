@@ -1,8 +1,5 @@
 <template>
   <div>
-    <section>
-      <LogoutButton />
-    </section>
     <div>
       <p>
         Jeg sitter i karantene og trenger hjelp
@@ -20,14 +17,11 @@
 
 <script>
 import Button from '@/components/shared/Button.vue';
-import LogoutButton from '@/components/LogoutButton.vue';
-
 
 export default {
   name: 'StartScreenView',
   components: {
     Button,
-    LogoutButton,
   },
   methods: {
     needHelp() {

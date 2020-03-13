@@ -1,8 +1,5 @@
 <template>
   <div class="req_container">
-    <section>
-      <LogoutButton />
-    </section>
     <template v-if="step === 1">
       <CreateRequest @toSummary="toSummary"/>
     </template>
@@ -15,7 +12,6 @@
 <script>
 import CreateRequest from '@/components/CreateRequest.vue';
 import RequestSummary from '@/components/RequestSummary.vue';
-import LogoutButton from '@/components/LogoutButton.vue';
 
 
 export default {
@@ -23,7 +19,6 @@ export default {
   components: {
     CreateRequest,
     RequestSummary,
-    LogoutButton,
   },
   data() {
     return {
@@ -53,7 +48,6 @@ export default {
   }
 }
 
-
 @media (max-width: 767px){
   .req_container{
     display: flex;
@@ -62,7 +56,6 @@ export default {
     width: 100%;
   }
 }
-
 
 @media (min-width: 1026px){
   .req_container{
