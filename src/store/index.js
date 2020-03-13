@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { User } from 'firebase';
 import fb from '../firebaseConfig';
 
 Vue.use(Vuex);
@@ -9,7 +8,11 @@ const store = {
   state: {
     currentUser: null,
   },
-  mutations: {},
+  mutations: {
+    setCurrentUser(state, val) {
+      state.currentUser = val;
+    },
+  },
   actions: {
     fetchUserProfile({ commit, state }) {
       fb.usersCollection

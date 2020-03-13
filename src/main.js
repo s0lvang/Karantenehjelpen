@@ -6,7 +6,7 @@ import fb from './firebaseConfig';
 
 Vue.config.productionTip = false;
 
-let app: Vue;
+let app;
 fb.auth.onAuthStateChanged((user) => {
   if (!app) {
     app = new Vue({

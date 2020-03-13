@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '*',
-    redirect: '/',
+    redirect: 'all-requests',
   },
   {
     path: '/',
