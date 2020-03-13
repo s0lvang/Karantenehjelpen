@@ -7,6 +7,7 @@
       @input="emitInputText"
       :placeholder="placeholderText"
       class="text_input"
+      :value="existing"
     />
   </div>
 </template>
@@ -28,6 +29,7 @@ export default {
       type: Number,
       required: false,
     },
+    existing: String,
   },
   methods: {
     emitInputText(event) {
