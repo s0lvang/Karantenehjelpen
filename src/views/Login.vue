@@ -18,7 +18,7 @@ export default {
     socialLogin() {
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then((user) => {
-        this.$store.dispatch('setCurrentUser', user.user);
+        this.$store.dispatch('SET_CURRENT_USER', user);
         this.$router.replace('home');
       }).catch((err) => {
         alert(`Oops. ${err.message}`);

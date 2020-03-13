@@ -14,13 +14,16 @@ const store = {
   },
   getters: {
     currentUser: (state) => state.currentUser,
+    name: (state) => state.currentUser.additionalUserInfo.name,
+    email: (state) => state.currentUser.additionalUserInfo.email,
+    id: (state) => state.currentUser.additionalUserInfo.id,
     address: (state) => state.address,
     phoneNumber: (state) => state.phoneNumber,
     arrivalDescription: (state) => state.arrivalDescription,
     items: (state) => state.items,
   },
   mutations: {
-    setCurrentUser(state, val) {
+    SET_CURRENT_USER(state, val) {
       state.currentUser = val;
     },
     SET_ADDRESS(state, payload) {
@@ -37,8 +40,8 @@ const store = {
     },
   },
   actions: {
-    setCurrentUser: (context, payload) => {
-      context.commit('setCurrentUser', payload);
+    SET_CURRENT_USER: (context, payload) => {
+      context.commit('SET_CURRENT_USER', payload);
     },
     SET_ADDRESS: (context, payload) => {
       context.commit('SET_ADDRESS', payload);

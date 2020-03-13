@@ -4,7 +4,7 @@
       <CreateRequest @toSummary="toSummary" />
     </template>
     <template v-if="step === 2">
-      <RequestSummary @goBack="goBack" />
+      <RequestSummary @goBack="goBack" @createRequest="createRequest" />
     </template>
   </div>
 </template>
@@ -26,12 +26,13 @@ export default {
     };
   },
   methods: {
-    createRequest: () => {
-      fb.postsCollection
+    createRequest() {
+      fb.requestsCollection
         .add({
           createdOn: new Date(),
-          email: this.$store.currentUser.email,
-          name: this.$store.userProfile.name,
+          email: this.$store.getters.email,
+          name: this.$store.getters.name,
+          id: this.$store.getters.id,
           phoneNumber: this.$store.getters.phoneNumber,
           address: this.$store.getters.address,
           items: this.$store.getters.items,
