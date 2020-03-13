@@ -40,12 +40,12 @@ export default {
           console.log(err);
         });
     },
-  },
-  toSummary() {
-    this.step += 1;
-  },
-  goBack() {
-    this.step -= 1;
+    toSummary() {
+      this.step += 1;
+    },
+    goBack() {
+      this.step -= 1;
+    },
   },
 };
 </script>
