@@ -1,8 +1,18 @@
 <template>
   <div class="container">
-    <div class="adress">
-      <h4>Leveringsadresse:</h4>
-      <TextInput labelText="" placeholderText="Kongens slott 1"/>
+    <div class="address">
+      <TextInput
+        labelText="Leveringsadresse"
+        placeholderText="Kongens slott 1"
+        @emitInputText="updateAddress"
+        :existing="existingAddress"
+      />
+      <BigTextInput
+        labelText="Ankomstbeskrivelse"
+        placeholderText="F.eks: I smuget bak rammeverkstedet"
+        @change="updateArrivalDescription"
+        :existing="existingArrivalDescription"
+      />
     </div>
     <div v-if="this.items.length >= 1" class="items">
       <Item @updateItem="addItem" :nrOfItems="items"
@@ -22,6 +32,7 @@
 <script>
 import Button from '@/components/shared/Button.vue';
 import TextInput from '@/components/shared/TextInput.vue';
+import BigTextInput from '@/components/shared/BigTextInput.vue';
 import Item from '@/components/shared/Item.vue';
 
 export default {
@@ -30,6 +41,7 @@ export default {
     TextInput,
     Item,
     Button,
+    BigTextInput,
   },
   data() {
     return {
@@ -37,11 +49,20 @@ export default {
     };
   },
   methods: {
+    updateAddress(event) {
+      const { value } = event.target;
+      this.$store.dispatch('SET_ADDRESS', value);
+    },
+    updateArrivalDescription(value) {
+      this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', value);
+    },
     deleteItem(index) {
       this.items.splice(index, 1);
+      this.$store.dispatch('SET_ITEMS', this.items);
     },
     addItem(index) {
       this.items[index].added = true;
+      this.$store.dispatch('SET_ITEMS', this.items);
     },
     renderNewItem() {
       this.items.push({
@@ -60,27 +81,35 @@ export default {
       this.items[index].count -= 1;
     },
     toSummary() {
-      console.log('to summary');
+      this.$emit('toSummary');
     },
+  },
+  computed: {
+    existingArrivalDescription() {
+      return this.$store.getters.arrivalDescription;
+    },
+    existingAddress() {
+      return this.$store.getters.address;
+    },
+    getItems() {
+      return this.$store.getters.items;
+    },
+  },
+  mounted() {
+    this.items = this.getItems;
   },
 };
 </script>
 
 <style lang="scss" scoped>
 
-
 .container{
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
 }
-.adress{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
+
 .items {
   display: flex;
   justify-content: space-evenly;

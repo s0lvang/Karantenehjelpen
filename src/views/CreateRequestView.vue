@@ -1,16 +1,36 @@
 <template>
   <div class="req_container">
-    <CreateRequest />
+    <template v-if="step === 1">
+      <CreateRequest @toSummary="toSummary"/>
+    </template>
+    <template v-if="step === 2">
+      <RequestSummary @goBack="goBack"/>
+    </template>
   </div>
 </template>
 
 <script>
 import CreateRequest from '@/components/CreateRequest.vue';
+import RequestSummary from '@/components/RequestSummary.vue';
 
 export default {
   name: 'CreateRequestView',
   components: {
     CreateRequest,
+    RequestSummary,
+  },
+  data() {
+    return {
+      step: 1,
+    };
+  },
+  methods: {
+    toSummary() {
+      this.step += 1;
+    },
+    goBack() {
+      this.step -= 1;
+    },
   },
 };
 </script>

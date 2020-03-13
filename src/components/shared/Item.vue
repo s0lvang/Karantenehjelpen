@@ -28,7 +28,7 @@
           />
         </div>
         <p v-if="item.added">
-          {{nrOfItems[index].count}}
+          <b>Antall: </b> {{nrOfItems[index].count}}
         </p>
       </div>
       <template v-if="!item.added">
