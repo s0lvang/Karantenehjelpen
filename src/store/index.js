@@ -11,6 +11,7 @@ const store = {
     items: [],
   },
   getters: {
+    currentUser: (state) => state.currentUser,
     address: (state) => state.address,
     arrivalDescription: (state) => state.arrivalDescription,
     items: (state) => state.items,
@@ -43,9 +44,5 @@ const store = {
       context.commit('SET_ITEMS', payload);
     },
   },
-  getters: {
-    currentUser: (state) => state.currentUser,
-  },
-  modules: {},
 };
 export default new Vuex.Store(store);
