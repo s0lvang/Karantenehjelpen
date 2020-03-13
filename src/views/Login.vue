@@ -1,5 +1,11 @@
 <template>
   <div class="login">
+    <h1>Karantenehjelpen</h1>
+    <p>
+      <b>Hva er Karantenehjelpen?</b>
+      <br/>
+      Karantenehjelpen hjelper deg med shit bro
+    </p>
     <p>
       Login med Google <br>
       <button @click="socialLogin" class="social-button">
@@ -31,24 +37,6 @@ export default {
 <style scoped>  /* "scoped" attribute limit the CSS to this component only */
   .login {
     margin-top: 40px;
-  }
-  input {
-    margin: 10px 0;
-    width: 20%;
-    padding: 15px;
-  }
-  button {
-    margin-top: 20px;
-    width: 10%;
-    cursor: pointer;
-  }
-  p {
-    margin-top: 40px;
-    font-size: 13px;
-  }
-  p a {
-    text-decoration: underline;
-    cursor: pointer;
   }
   .social-button {
     width: 75px;
