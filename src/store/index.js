@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import fb from '@/firebaseConfig.js';
 
 Vue.use(Vuex);
 
@@ -8,11 +9,13 @@ const store = {
     currentUser: null,
     address: '',
     arrivalDescription: '',
+    phoneNumber: '',
     items: [],
   },
   getters: {
     currentUser: (state) => state.currentUser,
     address: (state) => state.address,
+    phoneNumber: (state) => state.phoneNumber,
     arrivalDescription: (state) => state.arrivalDescription,
     items: (state) => state.items,
   },
@@ -23,6 +26,9 @@ const store = {
     SET_ADDRESS(state, payload) {
       state.address = payload;
     },
+    SET_PHONE_NUMBER(state, payload) {
+      state.phoneNumber = payload;
+    },
     SET_ARRIVAL_DESCRIPTION(state, payload) {
       state.arrivalDescription = payload;
     },
@@ -31,11 +37,14 @@ const store = {
     },
   },
   actions: {
-    setCurrentUser(context, payload) {
+    setCurrentUser: (context, payload) => {
       context.commit('setCurrentUser', payload);
     },
     SET_ADDRESS: (context, payload) => {
       context.commit('SET_ADDRESS', payload);
+    },
+    SET_PHONE_NUMBER: (context, payload) => {
+      context.commit('SET_PHONE_NUMBER', payload);
     },
     SET_ARRIVAL_DESCRIPTION: (context, payload) => {
       context.commit('SET_ARRIVAL_DESCRIPTION', payload);

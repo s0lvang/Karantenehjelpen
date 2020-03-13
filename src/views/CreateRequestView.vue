@@ -1,10 +1,10 @@
 <template>
   <div class="req_container">
     <template v-if="step === 1">
-      <CreateRequest @toSummary="toSummary"/>
+      <CreateRequest @toSummary="toSummary" />
     </template>
     <template v-if="step === 2">
-      <RequestSummary @goBack="goBack"/>
+      <RequestSummary @goBack="goBack" />
     </template>
   </div>
 </template>
@@ -12,6 +12,7 @@
 <script>
 import CreateRequest from '@/components/CreateRequest.vue';
 import RequestSummary from '@/components/RequestSummary.vue';
+import fb from '@/firebaseConfig.js';
 
 export default {
   name: 'CreateRequestView',
@@ -25,19 +26,32 @@ export default {
     };
   },
   methods: {
-    toSummary() {
-      this.step += 1;
+    createRequest: () => {
+      fb.postsCollection
+        .add({
+          createdOn: new Date(),
+          email: this.$store.currentUser.email,
+          name: this.$store.userProfile.name,
+          phoneNumber: this.$store.getters.phoneNumber,
+          address: this.$store.getters.address,
+          items: this.$store.getters.items,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    goBack() {
-      this.step -= 1;
-    },
+  },
+  toSummary() {
+    this.step += 1;
+  },
+  goBack() {
+    this.step -= 1;
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-@media (min-width: 768px) and (max-width: 1025px){
+@media (min-width: 768px) and (max-width: 1025px) {
   .req_container {
     display: flex;
     flex-direction: column;
@@ -47,9 +61,8 @@ export default {
   }
 }
 
-
-@media (max-width: 767px){
-  .req_container{
+@media (max-width: 767px) {
+  .req_container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,9 +70,8 @@ export default {
   }
 }
 
-
-@media (min-width: 1026px){
-  .req_container{
+@media (min-width: 1026px) {
+  .req_container {
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -68,5 +80,4 @@ export default {
     width: 80%;
   }
 }
-
 </style>

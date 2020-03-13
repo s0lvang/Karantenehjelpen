@@ -47,7 +47,7 @@ label {
   font-weight: bold;
   font-size: 0.75rem;
   margin-bottom: 0.5rem;
-  color: $online-blue;
+  color: rgb(0, 96, 163);
 }
 
 input::-webkit-outer-spin-button,
