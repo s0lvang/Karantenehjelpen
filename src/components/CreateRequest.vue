@@ -5,7 +5,7 @@
         labelText="Leveringsadresse"
         placeholderText="Kongens slott 1"
         @emitInputText="updateAddress"
-        :existing="existingAddress"
+        :existing="getAddress"
       />
       <BigTextInput
         labelText="Ankomstbeskrivelse"
@@ -24,8 +24,11 @@
       />
     </div>
     <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>
+    <p v-if="errorMsg">Du må legge til alle varene!</p>
+    <p v-if="addressError">Du må legge til en adresse!</p>
+    <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
+
     <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
-    {{this.items}}
   </div>
 </template>
 
@@ -46,11 +49,15 @@ export default {
   data() {
     return {
       items: [],
+      errorMsg: false,
+      addressError: false,
+      zeroItemsError: false,
     };
   },
   methods: {
     updateAddress(event) {
       const { value } = event.target;
+      this.addressError = false;
       this.$store.dispatch('SET_ADDRESS', value);
     },
     updateArrivalDescription(value) {
@@ -59,10 +66,12 @@ export default {
     deleteItem(index) {
       this.items.splice(index, 1);
       this.$store.dispatch('SET_ITEMS', this.items);
+      this.errorMsg = false;
     },
     addItem(index) {
       this.items[index].added = true;
       this.$store.dispatch('SET_ITEMS', this.items);
+      this.errorMsg = false;
     },
     renderNewItem() {
       this.items.push({
@@ -70,6 +79,8 @@ export default {
         count: 1,
         added: false,
       });
+      this.errorMsg = false;
+      this.zeroItemsError = false;
     },
     updateItemName(input, index) {
       this.items[index].itemName = input;
@@ -78,17 +89,30 @@ export default {
       this.items[index].count += 1;
     },
     decrementItemCount(index) {
-      this.items[index].count -= 1;
+      if (this.items[index].count > 1) {
+        this.items[index].count -= 1;
+      }
     },
     toSummary() {
-      this.$emit('toSummary');
+      const itemsMapped = this.items.map((item) => item.added);
+      if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
+        if (this.getAddress.length > 0) {
+          this.$emit('toSummary');
+        } else {
+          this.addressError = true;
+        }
+      } else if (!itemsMapped.every(Boolean)) {
+        this.errorMsg = true;
+      } else {
+        this.zeroItemsError = true;
+      }
     },
   },
   computed: {
     existingArrivalDescription() {
       return this.$store.getters.arrivalDescription;
     },
-    existingAddress() {
+    getAddress() {
       return this.$store.getters.address;
     },
     getItems() {
