@@ -14,9 +14,9 @@ const store = {
   },
   getters: {
     currentUser: (state) => state.currentUser,
-    name: (state) => state.currentUser.additionalUserInfo.name,
-    email: (state) => state.currentUser.additionalUserInfo.email,
-    id: (state) => state.currentUser.additionalUserInfo.id,
+    name: (state) => state.currentUser.displayName,
+    email: (state) => state.currentUser.email,
+    id: (state) => state.currentUser.uid,
     address: (state) => state.address,
     phoneNumber: (state) => state.phoneNumber,
     arrivalDescription: (state) => state.arrivalDescription,
