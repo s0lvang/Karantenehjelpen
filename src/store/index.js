@@ -1,26 +1,28 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import fb from '@/firebaseConfig.js';
 
 Vue.use(Vuex);
 
-const store = {
+const store = new Vuex.Store({
   state: {
     currentUser: null,
     address: '',
     arrivalDescription: '',
     phoneNumber: '',
     items: [],
+    requests: [],
   },
   getters: {
     currentUser: (state) => state.currentUser,
-    name: (state) => state.currentUser.displayName,
-    email: (state) => state.currentUser.email,
-    id: (state) => state.currentUser.uid,
+    name: (state) => (state.currentUser ? state.currentUser.displayName : null),
+    email: (state) => (state.currentUser ? state.currentUser.email : null),
+    id: (state) => (state.currentUser ? state.currentUser.uid : null),
     address: (state) => state.address,
     phoneNumber: (state) => state.phoneNumber,
     arrivalDescription: (state) => state.arrivalDescription,
     items: (state) => state.items,
+    requests: (state) => state.requests,
   },
   mutations: {
     SET_CURRENT_USER(state, val) {
@@ -37,6 +39,9 @@ const store = {
     },
     SET_ITEMS(state, payload) {
       state.items = payload;
+    },
+    SET_REQUESTS(state, payload) {
+      state.requests = payload;
     },
   },
   actions: {
@@ -55,6 +60,21 @@ const store = {
     SET_ITEMS: (context, payload) => {
       context.commit('SET_ITEMS', payload);
     },
+    SET_REQUESTS: (context, payload) => {
+      context.commit('SET_REQUESTS', payload);
+    },
   },
-};
-export default new Vuex.Store(store);
+});
+//
+fb.auth.onAuthStateChanged((user) => {
+  if (user) {
+    store.commit('SET_CURRENT_USER', user);
+    fb.requestsCollection.orderBy('createdOn', 'desc').onSnapshot((querySnapshot) => {
+      const requests = querySnapshot.docs.map((request) => request.data());
+      store.commit('SET_REQUESTS', requests);
+    });
+  }
+});
+
+
+export default store;

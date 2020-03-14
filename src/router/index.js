@@ -4,7 +4,6 @@ import Login from '@/views/Login.vue';
 import AllRequests from '@/views/AllRequests.vue';
 import CreateRequestView from '@/views/CreateRequestView.vue';
 import firebase from 'firebase';
-import store from '@/store/index';
 
 Vue.use(VueRouter);
 
@@ -45,9 +44,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
   const { currentUser } = firebase.auth();
-  if (!store.getters.currentUser && currentUser) {
-    store.dispatch('SET_CURRENT_USER', currentUser);
-  }
   if (requiresAuth && !currentUser) {
     next('/login');
   } else if (requiresAuth && currentUser) {
