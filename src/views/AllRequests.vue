@@ -1,6 +1,9 @@
 <template>
-  <section>
-    <section v-for="(request, index) in getRequests" :key="index">
+  <section class="container mx-auto">
+    <p class="text-3xl ml-3" >Tilgjengelige oppdrag</p>
+    <section v-for="(request, index) in getRequests" :key="index"
+      class="p-3"
+    >
       <Request :request="request"/>
     </section>
   </section>
