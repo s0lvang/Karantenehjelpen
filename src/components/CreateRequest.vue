@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
-    <div class="pl-6 mt-10">
+    <div class="pl-6 mt-5">
       <TextInput
         labelText="Leveringsadresse"
         placeholderText="Kongens slott 1"

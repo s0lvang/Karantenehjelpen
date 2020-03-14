@@ -10,7 +10,7 @@
           placeholderText="Varenavn.."
           @emitInputText="emitInputText"
           :localIndex="index"
-          class="w-2/3 pl-3"
+          class="w-2/3 pl-3 self-center"
         />
       </template>
       <section v-if="item.added" class="w-1/2 pl-3">
@@ -24,19 +24,20 @@
           {{nrOfItems[index].count}}
         </p>
       <div class="flex-end w-1/3 ">
+        <p class="text-center">Antall</p>
         <div class="flex" v-if="!item.added">
           <Button btnText="-1"
                   @btnClicked="decrementCount(index)"
                   :btnDisabled="false"
-                  class="flex-auto"
+                  class="flex-1"
           />
-          <h3 class="flex-auto text-center self-center">
+          <h3 class="flex-1 text-center self-center">
             <b>{{nrOfItems[index].count}}</b>
           </h3>
           <Button btnText="+1"
                   @btnClicked="incrementCount(index)"
                   :btnDisabled="false"
-                  class="flex-auto"
+                  class="flex-1"
           />
         </div>
       </div>
