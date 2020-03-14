@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-    <div class="address">
+  <div class="container mx-auto">
+    <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
+    <div class="pl-6 mt-5">
       <TextInput
         labelText="Leveringsadresse"
         placeholderText="Kongens slott 1"
@@ -12,6 +13,7 @@
         placeholderText="F.eks: I smuget bak rammeverkstedet"
         @change="updateArrivalDescription"
         :existing="existingArrivalDescription"
+        class="pr-10"
       />
       <NumberInput
         labelText="Telefonummer"
@@ -31,21 +33,15 @@
         @updateName="updateItemName"
       />
     </div>
-    <Button
-      btnText="Ny vare"
-      :btnDisabled="false"
-      @btnClicked="renderNewItem"
-    />
-    <p v-if="errorMsg">Du må legge til alle varene!</p>
-    <p v-if="addressError">Du må legge til en adresse!</p>
-    <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
-    <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
-
-    <Button
-      btnText="Gå til oppsummering"
-      :btnDisabled="false"
-      @btnClicked="toSummary"
-    />
+    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>
+    <div class="flex justify-center">
+      <p v-if="errorMsg">Du må legge til alle varene!</p>
+      <p v-if="addressError">Du må legge til en adresse!</p>
+      <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
+      <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
+      <p v-if="itemNameError">Varen må ha et navn!</p>
+    </div>
+    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
   </div>
 </template>
 
@@ -72,6 +68,7 @@ export default {
       addressError: false,
       phoneNumberError: false,
       zeroItemsError: false,
+      itemNameError: false,
     };
   },
   methods: {
@@ -94,9 +91,13 @@ export default {
       this.errorMsg = false;
     },
     addItem(index) {
-      this.items[index].added = true;
-      this.$store.dispatch('SET_ITEMS', this.items);
-      this.errorMsg = false;
+      if (this.items[index].itemName.length > 0) {
+        this.items[index].added = true;
+        this.$store.dispatch('SET_ITEMS', this.items);
+        this.errorMsg = false;
+      } else {
+        this.itemNameError = true;
+      }
     },
     renderNewItem() {
       this.items.push({
@@ -108,6 +109,7 @@ export default {
       this.zeroItemsError = false;
     },
     updateItemName(input, index) {
+      this.itemNameError = false;
       this.items[index].itemName = input;
     },
     incrementItemCount(index) {
@@ -152,17 +154,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
-
-.items {
-  display: flex;
-  justify-content: space-evenly;
-}
-</style>

@@ -1,12 +1,11 @@
 <template>
-  <div :class="$style.main">
-    <label :class="$style.label" for="number-input"> {{ labelText }} </label>
+  <div class="main">
+    <label for="number-input"> {{ labelText }} </label>
     <input
       type="number"
       name="number-input"
       @input="emitNumberInput"
       :placeholder="placeholderText"
-      :class="$style.input"
       min="1"
     />
   </div>
@@ -35,11 +34,12 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss" module>
+<style lang="scss" scoped>
 .main {
   display: flex;
   flex-flow: column nowrap;
   box-sizing: border-box;
+  margin-top: 0.5rem;
 }
 label {
   align-self: flex-start;
@@ -57,7 +57,7 @@ input::-webkit-inner-spin-button {
 }
 input {
   &[type="number"] {
-    max-width: 100px;
+    max-width: 200px;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
     padding: 0.625em 1em;

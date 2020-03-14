@@ -1,20 +1,15 @@
 <template>
   <section>
-    <section>
-      <LogoutButton />
-    </section>
     <DetailedRequest :request="getRequest" />
   </section>
 </template>
 
 <script>
-import LogoutButton from '@/components/LogoutButton.vue';
 import DetailedRequest from '@/components/DetailedRequest.vue';
 
 export default {
   name: 'RequestView',
   components: {
-    LogoutButton,
     DetailedRequest,
   },
   computed: {

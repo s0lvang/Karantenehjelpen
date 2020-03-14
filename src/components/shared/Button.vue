@@ -3,6 +3,7 @@
     <button
       @click="btnClick"
       class="button_style"
+      :class="isDanger"
       :disabled="btnDisabled"
     >
       {{ btnText }}
@@ -23,6 +24,7 @@ export default {
       type: Boolean,
       required: true,
     },
+    isDanger: String,
   },
   methods: {
     btnClick() {
@@ -58,6 +60,9 @@ export default {
     color: #555658;
     border-color: 1px solid rgb(241, 241, 241);
     background-color: #ECECEC;
+  }
+  &.true{
+    background-color: #DF2020
   }
 }
 </style>
