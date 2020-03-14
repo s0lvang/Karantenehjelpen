@@ -3,7 +3,6 @@
     <div v-for="(item, index) in nrOfItems" :key="index"
       class="flex flex-wrap mb-4 border rounded-lg"
     >
-      <!-- <h4 class="self-center pl-8">Vare:</h4> -->
       <template v-if="!item.added">
         <TextInput
           labelText="Vare"
