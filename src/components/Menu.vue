@@ -7,7 +7,7 @@
         <span class="burger-bun-bot"></span>
       </a>
     </template>
-    <template v-if="showMenu">
+    <template v-if="this.clicked">
       <h2>Tilgjengelige oppdrag</h2>
       <section>
         <h3>Frisk hjelper:</h3>
@@ -58,10 +58,11 @@ export default {
     Button,
     LogoutButton,
   },
-  data() {
-    return {
-      showMenu: false,
-    };
+  props: {
+    clicked: {
+      type: Boolean,
+      required: true,
+    },
   },
   methods: {
     toAllRequests() {
@@ -74,11 +75,8 @@ export default {
       console.log('implement this');
     },
     menuClick() {
-      if (this.showMenu) {
-        this.showMenu = false;
-      } else {
-        this.showMenu = true;
-      }
+      console.log('traff');
+      this.$emit('burgerClick');
     },
   },
 

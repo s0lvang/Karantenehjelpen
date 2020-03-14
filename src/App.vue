@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <template v-if="getUser">
-      <Menu />
+      <MenuView />
     </template>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Menu from '@/components/Menu.vue';
+import MenuView from '@/views/MenuView.vue';
 
 export default {
   components: {
-    Menu,
+    MenuView,
   },
   computed: {
     getUser() {

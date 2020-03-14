@@ -8,6 +8,7 @@
         <b>Varenavn: </b>{{item.itemName}} - <b>Antall: </b> {{item.count}}
       </li>
     </ul>
+    <Button btnText="Send Forespørsel" :btnDisabled="false" @btnClicked="createRequest"/>
     <Button btnText="Gå tilbake" :btnDisabled="false" @btnClicked="goBack"/>
   </div>
 </template>
@@ -23,6 +24,9 @@ export default {
   methods: {
     goBack() {
       this.$emit('goBack');
+    },
+    createRequest() {
+      this.$emit('createRequest');
     },
   },
   computed: {

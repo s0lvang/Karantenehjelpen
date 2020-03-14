@@ -16,7 +16,7 @@ export default {
       fb.auth()
         .signOut()
         .then(() => {
-          this.$store.dispatch('setCurrentUser', null);
+          this.$store.dispatch('SET_CURRENT_USER', null);
           this.$router.push('/login');
         })
         .catch((error) => {

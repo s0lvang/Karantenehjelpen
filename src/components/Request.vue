@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <p>
-      kart
+      {{request.name}}
     </p>
     <p>
       info
     </p>
     <Button
-            btnText="Se forespørsel"
-            @btnClicked="seeMore"
-            :btnDisabled="false"
-          />
+      btnText="Se forespørsel"
+      @btnClicked="seeMore"
+      :btnDisabled="false"
+    />
   </div>
 </template>
 
@@ -19,6 +19,12 @@ import Button from '@/components/shared/Button.vue';
 
 export default {
   name: 'Request',
+  props: {
+    request: {
+      type: Object,
+      required: true,
+    },
+  },
   components: {
     Button,
   },
@@ -31,11 +37,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.container{
+.container {
   border: 1px solid black;
   display: flex;
   justify-content: space-evenly;
 }
-
 </style>
