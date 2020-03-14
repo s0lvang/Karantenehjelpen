@@ -1,48 +1,47 @@
 <template>
   <div>
-    <h2>Oppsummering</h2>
-    <p><b>Adresse: </b>{{getAddress}}</p>
-    <p><b>Ankomstbeskrivelse: </b>{{getArrivalDesc}}</p>
-    <ul>
-      <li v-for="(item, index) in getItems" :key="index">
-        <b>Varenavn: </b>{{item.itemName}} - <b>Antall: </b> {{item.count}}
-      </li>
-    </ul>
-    <Button btnText="Send Forespørsel" :btnDisabled="false" @btnClicked="createRequest"/>
-    <Button btnText="Gå tilbake" :btnDisabled="false" @btnClicked="goBack"/>
+    <h2> Din Bestilling </h2>
+    <DetailedRequest :request="getRequest" />
+    <Button
+      btnText="Send Forespørsel"
+      :btnDisabled="false"
+      @btnClicked="createRequest"
+    />
+    <Button btnText="Gå tilbake" :btnDisabled="false" @btnClicked="goBack" />
   </div>
 </template>
 
 <script>
 import Button from '@/components/shared/Button.vue';
+import DetailedRequest from '@/components/DetailedRequest.vue';
 
 export default {
   name: 'RequestSummary',
   components: {
     Button,
+    DetailedRequest,
   },
   methods: {
     goBack() {
       this.$emit('goBack');
     },
     createRequest() {
-      this.$emit('createRequest');
+      this.$emit('createRequest', this.getRequest);
     },
   },
   computed: {
-    getAddress() {
-      return this.$store.getters.address;
-    },
-    getArrivalDesc() {
-      return this.$store.getters.arrivalDescription;
-    },
-    getItems() {
-      return this.$store.getters.items;
+    getRequest() {
+      return {
+        email: this.$store.getters.email,
+        name: this.$store.getters.name,
+        phoneNumber: this.$store.getters.phoneNumber,
+        address: this.$store.getters.address,
+        arrivalDescription: this.$store.getters.arrivalDescription,
+        items: this.$store.getters.items,
+      };
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

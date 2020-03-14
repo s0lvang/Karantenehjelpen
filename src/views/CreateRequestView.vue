@@ -26,15 +26,11 @@ export default {
     };
   },
   methods: {
-    createRequest() {
+    createRequest(request) {
       fb.requestsCollection
         .add({
           createdOn: new Date(),
-          email: this.$store.getters.email,
-          name: this.$store.getters.name,
-          phoneNumber: this.$store.getters.phoneNumber,
-          address: this.$store.getters.address,
-          items: this.$store.getters.items,
+          ...request,
         })
         .catch((err) => {
           console.log(err);
