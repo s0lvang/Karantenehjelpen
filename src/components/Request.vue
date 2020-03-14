@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <p>
-      {{request.name}}
-    </p>
-    <p>
-      info
+    <h3>
+      {{request.address}}
+    </h3>
+    <p><b> Handleliste: </b>
+    {{getItemNames}}
     </p>
     <Button
       btnText="Se forespørsel"
@@ -30,7 +30,12 @@ export default {
   },
   methods: {
     seeMore() {
-      console.log('yee');
+      this.$router.push(`/request/${this.request.id}`);
+    },
+  },
+  computed: {
+    getItemNames() {
+      return this.request.items.map((item) => item.itemName).join(', ');
     },
   },
 };
