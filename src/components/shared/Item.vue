@@ -51,6 +51,7 @@
             @btnClicked="deleteItem(index)"
             :btnDisabled="false"
             class="w-auto pl-3"
+            isDanger="true"
       />
     </div>
   </div>

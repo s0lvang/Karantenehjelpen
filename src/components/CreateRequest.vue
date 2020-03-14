@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <h1>Ny bestilling</h1>
+    <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
     <div class="pl-6 mt-10">
       <TextInput
         labelText="Leveringsadresse"
@@ -134,18 +134,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
-// .container{
-//   display: flex;
-//   flex-direction: column;
-//   width: 100%;
-//   height: 100%;
-// }
-
-// .items {
-//   display: flex;
-//   justify-content: space-evenly;
-// }
-</style>
