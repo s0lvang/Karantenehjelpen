@@ -13,22 +13,39 @@
         @change="updateArrivalDescription"
         :existing="existingArrivalDescription"
       />
-    </div>
-    <div v-if="this.items.length >= 1" class="items">
-      <Item @updateItem="addItem" :nrOfItems="items"
-            @addItem="addItem"
-            @deleteItem="deleteItem"
-            @decrementCount="decrementItemCount"
-            @incrementCount="incrementItemCount"
-            @updateName="updateItemName"
+      <NumberInput
+        labelText="Telefonummer"
+        placeholderText="Telefonnummer"
+        @change="updatePhoneNumber"
+        :existing="existingPhoneNumber"
       />
     </div>
-    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>
+    <div v-if="this.items.length >= 1" class="items">
+      <Item
+        @updateItem="addItem"
+        :nrOfItems="items"
+        @addItem="addItem"
+        @deleteItem="deleteItem"
+        @decrementCount="decrementItemCount"
+        @incrementCount="incrementItemCount"
+        @updateName="updateItemName"
+      />
+    </div>
+    <Button
+      btnText="Ny vare"
+      :btnDisabled="false"
+      @btnClicked="renderNewItem"
+    />
     <p v-if="errorMsg">Du må legge til alle varene!</p>
     <p v-if="addressError">Du må legge til en adresse!</p>
+    <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
     <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
 
-    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
+    <Button
+      btnText="Gå til oppsummering"
+      :btnDisabled="false"
+      @btnClicked="toSummary"
+    />
   </div>
 </template>
 
@@ -36,6 +53,7 @@
 import Button from '@/components/shared/Button.vue';
 import TextInput from '@/components/shared/TextInput.vue';
 import BigTextInput from '@/components/shared/BigTextInput.vue';
+import NumberInput from '@/components/shared/NumberInput.vue';
 import Item from '@/components/shared/Item.vue';
 
 export default {
@@ -45,12 +63,14 @@ export default {
     Item,
     Button,
     BigTextInput,
+    NumberInput,
   },
   data() {
     return {
       items: [],
       errorMsg: false,
       addressError: false,
+      phoneNumberError: false,
       zeroItemsError: false,
     };
   },
@@ -59,6 +79,11 @@ export default {
       const { value } = event.target;
       this.addressError = false;
       this.$store.dispatch('SET_ADDRESS', value);
+    },
+    updatePhoneNumber(event) {
+      const { value } = event.target;
+      this.phoneNumberError = false;
+      this.$store.dispatch('SET_PHONE_NUMBER', value);
     },
     updateArrivalDescription(value) {
       this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', value);
@@ -118,6 +143,9 @@ export default {
     getItems() {
       return this.$store.getters.items;
     },
+    existingPhoneNumber() {
+      return this.$store.getters.phoneNumber;
+    },
   },
   mounted() {
     this.items = this.getItems;
@@ -126,8 +154,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.container{
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;

@@ -1,27 +1,38 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import fb from '@/firebaseConfig.js';
 
 Vue.use(Vuex);
 
-const store = {
+const store = new Vuex.Store({
   state: {
     currentUser: null,
     address: '',
     arrivalDescription: '',
+    phoneNumber: '',
     items: [],
+    requests: [],
   },
   getters: {
     currentUser: (state) => state.currentUser,
+    name: (state) => (state.currentUser ? state.currentUser.displayName : null),
+    email: (state) => (state.currentUser ? state.currentUser.email : null),
+    id: (state) => (state.currentUser ? state.currentUser.uid : null),
     address: (state) => state.address,
+    phoneNumber: (state) => state.phoneNumber,
     arrivalDescription: (state) => state.arrivalDescription,
     items: (state) => state.items,
+    requests: (state) => state.requests,
   },
   mutations: {
-    setCurrentUser(state, val) {
+    SET_CURRENT_USER(state, val) {
       state.currentUser = val;
     },
     SET_ADDRESS(state, payload) {
       state.address = payload;
+    },
+    SET_PHONE_NUMBER(state, payload) {
+      state.phoneNumber = payload;
     },
     SET_ARRIVAL_DESCRIPTION(state, payload) {
       state.arrivalDescription = payload;
@@ -29,13 +40,19 @@ const store = {
     SET_ITEMS(state, payload) {
       state.items = payload;
     },
+    SET_REQUESTS(state, payload) {
+      state.requests = payload;
+    },
   },
   actions: {
-    setCurrentUser(context, payload) {
-      context.commit('setCurrentUser', payload);
+    SET_CURRENT_USER: (context, payload) => {
+      context.commit('SET_CURRENT_USER', payload);
     },
     SET_ADDRESS: (context, payload) => {
       context.commit('SET_ADDRESS', payload);
+    },
+    SET_PHONE_NUMBER: (context, payload) => {
+      context.commit('SET_PHONE_NUMBER', payload);
     },
     SET_ARRIVAL_DESCRIPTION: (context, payload) => {
       context.commit('SET_ARRIVAL_DESCRIPTION', payload);
@@ -43,6 +60,21 @@ const store = {
     SET_ITEMS: (context, payload) => {
       context.commit('SET_ITEMS', payload);
     },
+    SET_REQUESTS: (context, payload) => {
+      context.commit('SET_REQUESTS', payload);
+    },
   },
-};
-export default new Vuex.Store(store);
+});
+//
+fb.auth.onAuthStateChanged((user) => {
+  if (user) {
+    store.commit('SET_CURRENT_USER', user);
+    fb.requestsCollection.orderBy('createdOn', 'desc').onSnapshot((querySnapshot) => {
+      const requests = querySnapshot.docs.map((request) => request.data());
+      store.commit('SET_REQUESTS', requests);
+    });
+  }
+});
+
+
+export default store;
