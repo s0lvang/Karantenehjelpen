@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div>
-      <p>
+  <div class="container mx-auto mt-10" >
+    <div class="flex flex-col">
+      <p class="text-center">
         Jeg sitter i karantene og trenger hjelp
       </p>
       <Button btnText="TRENGER HJELP" :btnDisabled="false" @btnClicked="needHelp" />
     </div>
     <div>
-      <p>
+      <p class="text-center">
         Jeg er frisk og vil hjelpe
       </p>
       <Button btnText="VIL HJELPE" :btnDisabled="false" @btnClicked="giveHelp" />
