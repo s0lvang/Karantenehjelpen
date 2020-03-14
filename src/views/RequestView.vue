@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="p-2">
     <DetailedRequest :request="getRequest" />
   </section>
 </template>

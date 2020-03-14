@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2> Din Bestilling </h2>
+  <div class="container mx-auto ">
+    <h2 class="text-3xl"> Din Bestilling </h2>
     <DetailedRequest :request="getRequest" />
     <Button
       btnText="Send Forespørsel"
@@ -43,5 +43,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
