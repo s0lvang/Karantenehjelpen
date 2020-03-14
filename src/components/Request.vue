@@ -6,7 +6,7 @@
     <p class="text-xl underline p-2">
       Handleliste:
     </p>
-    <div class="p-2 break-words">
+    <div class="p-2 truncate">
     {{getItemNames}}
     </div>
     <Button
