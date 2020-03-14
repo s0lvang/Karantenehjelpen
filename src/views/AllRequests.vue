@@ -1,8 +1,5 @@
 <template>
   <section>
-    <section>
-      <LogoutButton />
-    </section>
     <section v-for="(request, index) in getRequests" :key="index">
       <Request :request="request"/>
     </section>

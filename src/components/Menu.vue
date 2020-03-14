@@ -74,10 +74,10 @@ export default {
       console.log('sumthing clicked');
     },
     toAllRequests() {
-      this.$router.push('all-requests');
+      this.$router.push('/all-requests');
     },
     newRequest() {
-      this.$router.push('create-request');
+      this.$router.push('/create-request');
     },
     logout() {
       fb.auth()

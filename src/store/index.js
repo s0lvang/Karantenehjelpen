@@ -70,7 +70,7 @@ fb.auth.onAuthStateChanged((user) => {
   if (user) {
     store.commit('SET_CURRENT_USER', user);
     fb.requestsCollection.orderBy('createdOn', 'desc').onSnapshot((querySnapshot) => {
-      const requests = querySnapshot.docs.map((request) => request.data());
+      const requests = querySnapshot.docs.map((request) => ({ ...request.data(), id: request.id }));
       store.commit('SET_REQUESTS', requests);
     });
   }

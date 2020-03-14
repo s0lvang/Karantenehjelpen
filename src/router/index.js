@@ -4,6 +4,7 @@ import Login from '@/views/Login.vue';
 import AllRequests from '@/views/AllRequests.vue';
 import CreateRequestView from '@/views/CreateRequestView.vue';
 import StartScreenView from '@/views/StartScreenView.vue';
+import RequestView from '@/views/RequestView.vue'; // eslint-disable
 import firebase from 'firebase';
 
 Vue.use(VueRouter);
@@ -42,6 +43,15 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/request/:id',
+    name: 'Request',
+    component: RequestView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
 ];
 
 const router = new VueRouter({
