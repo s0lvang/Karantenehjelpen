@@ -19,7 +19,6 @@ export default {
   },
   methods: {
     burgerClicked() {
-      console.log('clickeee');
       this.clicked = this.clicked ? this.clicked = false : true;
     },
   },

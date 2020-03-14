@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <template v-if="getUser">
-      <MenuView />
+      <Menu />
     </template>
     <router-view/>
   </div>
 </template>
 
 <script>
-import MenuView from '@/views/MenuView.vue';
+import Menu from '@/components/Menu.vue';
 
 export default {
   components: {
-    MenuView,
+    Menu,
   },
   computed: {
     getUser() {
@@ -27,7 +27,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   height: 100vh;
   width: 100%;

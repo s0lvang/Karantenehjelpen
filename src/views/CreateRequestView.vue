@@ -1,5 +1,5 @@
 <template>
-  <div class="req_container">
+  <div class="container mx-auto">
     <template v-if="step === 1">
       <CreateRequest @toSummary="toSummary" />
     </template>

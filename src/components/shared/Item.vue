@@ -1,45 +1,58 @@
 <template>
-  <div class="main_container">
-    <div v-for="(item, index) in nrOfItems" :key="index" class="item_container">
-      <h4>Vare:</h4>
+  <div class="container mx-auto p-3">
+    <div v-for="(item, index) in nrOfItems" :key="index"
+      class="flex flex-wrap mb-4 border rounded-lg"
+    >
+      <!-- <h4 class="self-center pl-8">Vare:</h4> -->
       <template v-if="!item.added">
         <TextInput
-          labelText=""
+          labelText="Vare"
           placeholderText="Varenavn.."
           @emitInputText="emitInputText"
           :localIndex="index"
+          class="w-2/3 pl-3 self-center"
         />
       </template>
-      <p v-if="item.added">
-        {{nrOfItems[index].itemName}}
-      </p>
-      <div >
-        <div class="item_counter" v-if="!item.added">
+      <section v-if="item.added" class="w-1/2 pl-3">
+        <b>Vare:</b>
+        <p class="break-words">
+          {{nrOfItems[index].itemName}}
+        </p>
+      </section>
+      <p v-if="item.added" class="w-1/2 text-center">
+          <b>Antall:</b>
+          {{nrOfItems[index].count}}
+        </p>
+      <div class="flex-end w-1/3 ">
+        <p class="text-center">Antall</p>
+        <div class="flex" v-if="!item.added">
           <Button btnText="-1"
                   @btnClicked="decrementCount(index)"
                   :btnDisabled="false"
+                  class="flex-1"
           />
-          <h3>
-            {{nrOfItems[index].count}}
+          <h3 class="flex-1 text-center self-center">
+            <b>{{nrOfItems[index].count}}</b>
           </h3>
           <Button btnText="+1"
                   @btnClicked="incrementCount(index)"
                   :btnDisabled="false"
+                  class="flex-1"
           />
         </div>
-        <p v-if="item.added">
-          <b>Antall: </b> {{nrOfItems[index].count}}
-        </p>
       </div>
       <template v-if="!item.added">
         <Button btnText="Legg til"
                 @btnClicked="addItem(index)"
                 :btnDisabled="false"
+                class="w-1/2"
         />
       </template>
       <Button btnText="Slett"
             @btnClicked="deleteItem(index)"
             :btnDisabled="false"
+            class="w-auto pl-3"
+            isDanger="true"
       />
     </div>
   </div>
@@ -88,17 +101,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.main_container{
-  width: 100%
-}
-.item_container{
-  display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
-  align-items: center;
-}
-.item_counter{
-  display: flex;
-}
-</style>
