@@ -22,7 +22,7 @@
                 Epost:
               </p>
               <div class="ml-2">
-                {{"epost@epost.epost"}}
+                {{request.email}}
               </div>
             </div>
             <div class="flex">
