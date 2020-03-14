@@ -1,7 +1,9 @@
 <template>
   <nav id="asd" class="flex items-center justify-between flex-wrap bg-black p-6">
     <div class="flex items-center flex-no-shrink mr-6 text-white" >
-      <span class="font-semibold text-xl tracking-tight" >Karantenehjelpen</span>
+      <a class="font-semibold text-xl tracking-tight cursor-pointer" @click="goToStart">
+        Karantenehjelpen
+      </a>
     </div>
     <div class="block sm:hidden">
       <button @click="toggle" class="flex items-center px-3 py-2 border rounded">
@@ -80,6 +82,9 @@ export default {
     newRequest() {
       this.$router.push('/create-request');
       this.toggle();
+    },
+    goToStart() {
+      this.$router.push('/start-screen');
     },
     logout() {
       fb.auth()
