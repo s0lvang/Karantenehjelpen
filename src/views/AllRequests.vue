@@ -3,8 +3,8 @@
     <section>
       <LogoutButton />
     </section>
-    <section>
-      <Request />
+    <section v-for="(request, index) in getRequests" :key="index">
+      <Request :request="request"/>
     </section>
   </section>
 </template>
@@ -18,6 +18,11 @@ export default {
   components: {
     Request,
     LogoutButton,
+  },
+  computed: {
+    getRequests() {
+      return this.$store.getters.requests;
+    },
   },
 };
 </script>
