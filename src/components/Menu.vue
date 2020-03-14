@@ -1,7 +1,7 @@
 <template>
-  <nav id="asd" class="flex items-center justify-between flex-wrap bg-black p-6">
+  <nav id="forBGcolor" class="flex items-center justify-between flex-wrap bg-black p-6">
     <div class="flex items-center flex-no-shrink mr-6 text-white" >
-      <span class="font-semibold text-xl tracking-tight" >Karantenehjelpen</span>
+      <span class="font-semibold text-2xl tracking-tight" >Karantenehjelpen</span>
     </div>
     <div class="block sm:hidden">
       <button @click="toggle" class="flex items-center px-3 py-2 border rounded">
@@ -17,28 +17,28 @@
       <div class="text-sm sm:flex-grow">
         <a @click="toAllRequests"
           class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer">
+          cursor-pointer text-xl">
           Oppdragslisten
         </a>
       </div>
       <div class="text-sm sm:flex-grow">
         <a @click="dummyClick"
           class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer">
+          cursor-pointer text-xl">
           Mine oppdrag
         </a>
       </div>
       <div class="text-sm sm:flex-grow">
         <a @click="newRequest"
           class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer">
+          cursor-pointer text-xl">
           Ny bestilling
         </a>
       </div>
       <div class="text-sm sm:flex-grow">
         <a @click="dummyClick"
           class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer">
+          cursor-pointer text-xl">
           Mine bestillinger
         </a>
       </div>
@@ -94,7 +94,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#asd{
+#forBGcolor{
   background-color: #0060A3;
 }
 #onlyHover:hover{
