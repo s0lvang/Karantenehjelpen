@@ -1,24 +1,18 @@
 <template>
-  <div class="container">
-    <h3>
-      {{request.address}}
-    </h3>
-    <p><b> Handleliste: </b>
-    {{getItemNames}}
-    </p>
-    <Button
-      btnText="Se forespørsel"
-      @btnClicked="seeMore"
-      :btnDisabled="false"
-    />
+  <div>
+    <p><b>Adresse: </b>{{request.address}}</p>
+    <p><b>Ankomstbeskrivelse: </b>{{request.arrivalDescription}}</p>
+    <ul>
+      <li v-for="(item, index) in request.items" :key="index">
+        <b>Varenavn: </b>{{item.itemName}} - <b>Antall: </b> {{item.count}}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import Button from '@/components/shared/Button.vue';
-
 export default {
-  name: 'Request',
+  name: 'DetailedRequest',
   props: {
     request: {
       type: Object,
@@ -26,12 +20,8 @@ export default {
     },
   },
   components: {
-    Button,
   },
   methods: {
-    seeMore() {
-      this.$router.push(`/request/${this.request.id}`);
-    },
   },
   computed: {
     getItemNames() {
