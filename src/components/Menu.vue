@@ -73,15 +73,20 @@ export default {
       this.open = !this.open;
     },
     dummyClick() {
+      console.log(this.$route.name);
       console.log('sumthing clicked');
     },
     toAllRequests() {
-      this.$router.push('/all-requests');
-      this.toggle();
+      if (this.$route.name !== 'AllRequests') {
+        this.$router.push('/all-requests');
+        this.toggle();
+      }
     },
     newRequest() {
-      this.$router.push('/create-request');
-      this.toggle();
+      if (this.$route.name !== 'CreateRequest') {
+        this.$router.push('/create-request');
+        this.toggle();
+      }
     },
     goToStart() {
       this.$router.push('/start-screen');
