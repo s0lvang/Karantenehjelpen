@@ -3,7 +3,6 @@
     <div v-for="(item, index) in nrOfItems" :key="index"
       class="flex flex-wrap mb-4 border rounded-lg"
     >
-      <!-- <h4 class="self-center pl-8">Vare:</h4> -->
       <template v-if="!item.added">
         <TextInput
           labelText="Vare"
@@ -24,7 +23,7 @@
           {{nrOfItems[index].count}}
         </p>
       <div class="flex-end w-1/3 ">
-        <p class="text-center">Antall</p>
+        <p v-if="!item.added" class="text-center">Antall</p>
         <div class="flex" v-if="!item.added">
           <Button btnText="-1"
                   @btnClicked="decrementCount(index)"
