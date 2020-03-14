@@ -6,20 +6,20 @@
         labelText="Leveringsadresse"
         placeholderText="Kongens slott 1"
         @emitInputText="updateAddress"
-        :existing="getAddress"
+        :existing="address"
       />
       <BigTextInput
         labelText="Ankomstbeskrivelse"
         placeholderText="F.eks: I smuget bak rammeverkstedet"
         @change="updateArrivalDescription"
-        :existing="existingArrivalDescription"
+        :existing="arrivalDesc"
         class="pr-10"
       />
       <NumberInput
         labelText="Telefonummer"
         placeholderText="Telefonnummer"
-        @change="updatePhoneNumber"
-        :existing="existingPhoneNumber"
+        @emitNumberInput="updatePhoneNumber"
+        :existing="phoneNr"
       />
     </div>
     <div v-if="this.items.length >= 1" class="items">
@@ -69,21 +69,24 @@ export default {
       phoneNumberError: false,
       zeroItemsError: false,
       itemNameError: false,
+      address: '',
+      phoneNr: '',
+      arrivalDesc: '',
     };
   },
   methods: {
     updateAddress(event) {
       const { value } = event.target;
       this.addressError = false;
-      this.$store.dispatch('SET_ADDRESS', value);
+      this.address = value;
     },
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
-      this.$store.dispatch('SET_PHONE_NUMBER', value);
+      this.phoneNr = value;
     },
     updateArrivalDescription(value) {
-      this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', value);
+      this.arrivalDesc = value;
     },
     deleteItem(index) {
       this.items.splice(index, 1);
@@ -123,7 +126,10 @@ export default {
     toSummary() {
       const itemsMapped = this.items.map((item) => item.added);
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        if (this.getAddress.length > 0) {
+        if (this.address.length > 0) {
+          this.$store.dispatch('SET_ADDRESS', this.address);
+          this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
+          this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
           this.$emit('toSummary');
         } else {
           this.addressError = true;
@@ -136,7 +142,7 @@ export default {
     },
   },
   computed: {
-    existingArrivalDescription() {
+    getArrivalDescription() {
       return this.$store.getters.arrivalDescription;
     },
     getAddress() {
@@ -145,12 +151,15 @@ export default {
     getItems() {
       return this.$store.getters.items;
     },
-    existingPhoneNumber() {
+    getPhoneNumber() {
       return this.$store.getters.phoneNumber;
     },
   },
   mounted() {
     this.items = this.getItems;
+    this.address = this.getAddress;
+    this.phoneNr = this.getPhoneNumber;
+    this.arrivalDesc = this.getArrivalDescription;
   },
 };
 </script>

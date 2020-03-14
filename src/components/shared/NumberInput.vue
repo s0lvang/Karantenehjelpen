@@ -6,6 +6,7 @@
       name="number-input"
       @input="emitNumberInput"
       :placeholder="placeholderText"
+      :value="existing"
       min="1"
     />
   </div>
@@ -25,6 +26,7 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    existing: String,
   },
   methods: {
     emitNumberInput(event) {
