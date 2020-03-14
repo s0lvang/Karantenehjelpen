@@ -75,9 +75,11 @@ export default {
     },
     toAllRequests() {
       this.$router.push('/all-requests');
+      this.toggle();
     },
     newRequest() {
       this.$router.push('/create-request');
+      this.toggle();
     },
     logout() {
       fb.auth()
