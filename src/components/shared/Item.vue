@@ -24,7 +24,7 @@
           {{nrOfItems[index].count}}
         </p>
       <div class="flex-end w-1/3 ">
-        <p class="text-center">Antall</p>
+        <p v-if="!item.added" class="text-center">Antall</p>
         <div class="flex" v-if="!item.added">
           <Button btnText="-1"
                   @btnClicked="decrementCount(index)"
