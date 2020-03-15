@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto ">
-    <h2 class="text-3xl"> Din Bestilling </h2>
+    <h2 class="text-3xl text-center"> Din Bestilling </h2>
     <DetailedRequest :request="getRequest" />
     <Button
       btnText="Send Forespørsel"
@@ -38,6 +38,7 @@ export default {
         address: this.$store.getters.address,
         arrivalDescription: this.$store.getters.arrivalDescription,
         items: this.$store.getters.items,
+        paymentSolution: this.$store.getters.paymentSolution,
       };
     },
   },
