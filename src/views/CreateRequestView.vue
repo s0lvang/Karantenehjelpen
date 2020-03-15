@@ -28,7 +28,9 @@ export default {
   },
   methods: {
     createRequest(request) {
-      fb.requestsCollection
+      fb.usersCollection
+        .doc(this.$store.getters.id)
+        .collection('requests')
         .add({
           createdOn: new Date(),
           ...request,
