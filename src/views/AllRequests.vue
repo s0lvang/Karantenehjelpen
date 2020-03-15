@@ -1,7 +1,7 @@
 <template>
   <section>
     <section v-for="(request, index) in getRequests" :key="index">
-      <Request :request="request"/>
+      <Request :request="request" />
     </section>
   </section>
 </template>
@@ -10,7 +10,7 @@
 import Request from '@/components/Request.vue';
 
 export default {
-  name: 'AllRequests',
+  name: 'MyRequests',
   components: {
     Request,
   },

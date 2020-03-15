@@ -63,18 +63,23 @@ const store = new Vuex.Store({
     SET_REQUESTS: (context, payload) => {
       context.commit('SET_REQUESTS', payload);
     },
+
   },
 });
 //
 fb.auth.onAuthStateChanged((user) => {
   if (user) {
     store.commit('SET_CURRENT_USER', user);
-    fb.requestsCollection.orderBy('createdOn', 'desc').onSnapshot((querySnapshot) => {
-      const requests = querySnapshot.docs.map((request) => ({ ...request.data(), id: request.id }));
-      store.commit('SET_REQUESTS', requests);
-    });
+    fb.requestsCollection
+      .orderBy('createdOn', 'desc')
+      .onSnapshot((querySnapshot) => {
+        const requests = querySnapshot.docs.map((request) => ({
+          ...request.data(),
+          id: request.id,
+        }));
+        store.commit('SET_REQUESTS', requests);
+      });
   }
 });
-
 
 export default store;

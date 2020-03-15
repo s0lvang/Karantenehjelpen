@@ -36,7 +36,7 @@
         </a>
       </div>
       <div class="text-sm sm:flex-grow">
-        <a @click="dummyClick"
+        <a @click="myRequests"
           class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
           cursor-pointer">
           Mine bestillinger
@@ -72,6 +72,9 @@ export default {
     },
     dummyClick() {
       console.log('sumthing clicked');
+    },
+    myRequests() {
+      this.$router.push('/my-requests');
     },
     toAllRequests() {
       this.$router.push('/all-requests');
