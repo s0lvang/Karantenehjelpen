@@ -2,7 +2,7 @@
   <div class="container mx-auto mt-3">
     <div class="flex flex-col items-center">
         <div>
-          <Map :locationCenter="request.address.center"/>
+          <Map :locationCenter="request.address.center" class="" />
           <p class="text-2xl p-2">
             {{request.address.place_name_no}}
           </p>

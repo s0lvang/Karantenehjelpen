@@ -1,5 +1,5 @@
 <template>
-  <div id="map">
+  <div id="map" >
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
         style: 'mapbox://styles/mapbox/streets-v11',
         maxZoom: 22,
         minZoom: 0,
-        zoom: 7,
+        zoom: 12,
         center: this.selectedAddress,
       });
     },
@@ -58,36 +58,14 @@ export default {
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css");
 #map {
-    margin-right: auto;
-    margin-left: auto;
     height: 300px !important;
 }
-#map.mapboxgl-map {
-  width: 400px;
-  height: 300px !important;
-  margin-top: 0 !important;
-}
-.mapboxgl-canvas {
-  width: 400px !important;
-  height: 300px;
-  margin-top: 0 !important;
-}
-canvas.mapboxgl-canvas {
-  height: 300px !important;
-  margin-top: 0 !important;
-}
-
 .marker {
   background-size: cover;
   width: 10px;
   height: 10px;
   border-radius: 50%;
 }
-
-.storemarker {
-  background-color: red;
-}
-
 .addressmarker {
   background-color: blue;
 }
