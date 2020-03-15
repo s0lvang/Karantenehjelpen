@@ -89,7 +89,9 @@ export default {
       }
     },
     goToStart() {
-      this.$router.push('/start-screen');
+      if (this.$route.name !== 'StartScreen') {
+        this.$router.push('/start-screen');
+      }
     },
     logout() {
       fb.auth()

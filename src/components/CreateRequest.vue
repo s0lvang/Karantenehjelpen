@@ -1,19 +1,14 @@
 <template>
   <div class="container mx-auto">
-    <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
+    <h1 class="text-3xl pt-4 pl-6">Ny bestilling</h1>
     <div class="pl-6 mt-5">
-      <TextInput
-        labelText="Leveringsadresse"
-        placeholderText="Kongens slott 1"
-        @emitInputText="updateAddress"
-        :existing="address"
-      />
+      <AddressInput />
       <BigTextInput
         labelText="Ankomstbeskrivelse"
         placeholderText="F.eks: I smuget bak rammeverkstedet"
         @change="updateArrivalDescription"
         :existing="arrivalDesc"
-        class="pr-10"
+        class="pr-5"
       />
       <NumberInput
         labelText="Telefonummer"
@@ -38,6 +33,7 @@
         @decrementCount="decrementItemCount"
         @incrementCount="incrementItemCount"
         @updateName="updateItemName"
+        class="pr-5 pl-5"
       />
     </div>
     <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>
@@ -59,6 +55,8 @@ import TextInput from '@/components/shared/TextInput.vue';
 import BigTextInput from '@/components/shared/BigTextInput.vue';
 import NumberInput from '@/components/shared/NumberInput.vue';
 import Item from '@/components/shared/Item.vue';
+import AddressInput from '@/components/AddressInput.vue';
+
 
 export default {
   name: 'CreateRequest',
@@ -68,6 +66,8 @@ export default {
     Button,
     BigTextInput,
     NumberInput,
+    AddressInput,
+
   },
   data() {
     return {
@@ -145,8 +145,8 @@ export default {
         return;
       }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        if (this.address.length > 0) {
-          this.$store.dispatch('SET_ADDRESS', this.address);
+        const localAddress = this.getAddress;
+        if (localAddress.place_name_no !== undefined && localAddress.place_name_no.length > 1) {
           this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
           this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
           this.$store.dispatch('SET_PAYMENT_SOLUTION', this.paymentSolution);

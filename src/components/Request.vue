@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto border rounded-lg mt-3">
     <h3 class="text-2xl p-2">
-      {{request.address}}
+      {{request.address.place_name_no}}
     </h3>
     <p class="text-xl underline p-2">
       Handleliste:
