@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="input" type="text" @change="searchAddress">
+    <input v-model="locationInput" type="text">
     <div>
       <ul>
         <li
@@ -11,7 +11,8 @@
         </li>
       </ul>
     </div>
-    {{locations}}
+    {{locations}} <br/>
+    {{locationInput}} <br/>
   </div>
 </template>
 
@@ -26,24 +27,42 @@ export default {
     return {
       locations: [],
       input: '',
+      locationInput: '',
     };
   },
-  methods: {
-    debounce(time = 1000) {
-      setTimeout(this.getLocations, time);
-    },
-    async getLocations() {
-      this.locations = await fetchLocation(this.input);
-    },
-    searchAddress() {
-      this.getLocations();
+  watch: {
+    locationInput(newVal) {
+      if (newVal === '') {
+        return;
+      }
+
+      this.debounce(this.getLocations);
     },
   },
-  // watch: {
-  //   input() {
-  //     this.getLocations();
-  //   },
-  // },
+  methods: {
+    // debounce(time = 1000) {
+    //   setTimeout(this.getLocations, time);
+    // },
+    async getLocations() {
+      const response = await fetchLocation(this.locationInput);
+      if (response !== undefined && response !== null) {
+        if (response.length === 0) {
+          console.log('lengde 0');
+        } else if (response.length === undefined) {
+          console.log('lengde undefined');
+        } else {
+          this.locations = response;
+        }
+      }
+    },
+    debounce(functionName, time = 1000) {
+      const functionCall = () => functionName.apply(this, arguments);
+      setTimeout(functionCall, time);
+    },
+  },
+  mounted() {
+    // this.locations = fetchLocation('Tordenskiolds gate 17');
+  },
 };
 </script>
 
