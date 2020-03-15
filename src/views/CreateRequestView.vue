@@ -34,6 +34,14 @@ export default {
           createdOn: new Date(),
           ...request,
         })
+        .then(() => {
+          this.$store.dispatch('SET_ADDRESS', '');
+          this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', '');
+          this.$store.dispatch('SET_PHONE_NUMBER', '');
+          this.$store.dispatch('SET_PAYMENT_SOLUTION', '');
+          this.$store.dispatch('SET_ITEMS', []);
+          this.$router.push('/all-requests');
+        })
         .catch((err) => {
           console.log(err);
         });
