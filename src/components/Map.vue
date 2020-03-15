@@ -1,5 +1,5 @@
 <template>
-  <div id="map" >
+  <div id="map">
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
       adressMarker: undefined,
       key: 'pk.eyJ1IjoiYWRyaWFuaHQiLCJhIjoiY2s3c3dpeWtrMHR6cTNobXZxZDNjc2l4biJ9.zNJjCC7o0UmLMKv9mx93FQ',
       selectedAddress: this.locationCenter,
-      markerTest: this.locationCenter,
+      markerPlace: this.locationCenter,
     };
   },
   props: {
@@ -39,11 +39,8 @@ export default {
     },
 
     drawMarker() {
-      this.adressMarker = document.createElement('div');
-      this.adressMarker.className = 'marker addressmarker';
-
-      new Mapbox.Marker(this.adressMarker)
-        .setLngLat(this.markerTest)
+      new Mapbox.Marker()
+        .setLngLat(this.markerPlace)
         .addTo(this.map);
     },
   },
@@ -60,13 +57,8 @@ export default {
 #map {
     height: 300px !important;
 }
-.marker {
-  background-size: cover;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.addressmarker {
-  background-color: blue;
+
+.mapboxgl-marker.mapboxgl-marker-anchor-center svg g{
+  fill: rgb(0, 96, 163);
 }
 </style>
