@@ -38,7 +38,7 @@
                 Betalingsmåte:
               </p>
               <div class="ml-2">
-                {{"vipps"}}
+                {{request.paymentSolution}}
               </div>
             </div>
           </div>

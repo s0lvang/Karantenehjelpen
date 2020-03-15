@@ -21,6 +21,13 @@
         @emitNumberInput="updatePhoneNumber"
         :existing="phoneNr"
       />
+      <TextInput
+        labelText="Betalingsløsing"
+        placeholderText="Vipps"
+        @emitInputText="updatePaymentSolution"
+        :existing="paymentSolution"
+        class="mt-2"
+      />
     </div>
     <div v-if="this.items.length >= 1" class="items">
       <Item
@@ -40,6 +47,7 @@
       <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
       <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
       <p v-if="itemNameError">Varen må ha et navn!</p>
+      <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
     </div>
     <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
   </div>
@@ -69,9 +77,11 @@ export default {
       phoneNumberError: false,
       zeroItemsError: false,
       itemNameError: false,
+      paymentSolutionError: false,
       address: '',
       phoneNr: '',
       arrivalDesc: '',
+      paymentSolution: '',
     };
   },
   methods: {
@@ -87,6 +97,11 @@ export default {
     },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
+    },
+    updatePaymentSolution(event) {
+      const { value } = event.target;
+      this.paymentSolutionError = false;
+      this.paymentSolution = value;
     },
     deleteItem(index) {
       this.items.splice(index, 1);
@@ -125,11 +140,16 @@ export default {
     },
     toSummary() {
       const itemsMapped = this.items.map((item) => item.added);
+      if (this.paymentSolution.length <= 0) {
+        this.paymentSolutionError = true;
+        return;
+      }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
         if (this.address.length > 0) {
           this.$store.dispatch('SET_ADDRESS', this.address);
           this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
           this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
+          this.$store.dispatch('SET_PAYMENT_SOLUTION', this.paymentSolution);
           this.$emit('toSummary');
         } else {
           this.addressError = true;
@@ -154,12 +174,16 @@ export default {
     getPhoneNumber() {
       return this.$store.getters.phoneNumber;
     },
+    getPaymentSolution() {
+      return this.$store.getters.paymentSolution;
+    },
   },
   mounted() {
     this.items = this.getItems;
     this.address = this.getAddress;
     this.phoneNr = this.getPhoneNumber;
     this.arrivalDesc = this.getArrivalDescription;
+    this.paymentSolution = this.getPaymentSolution;
   },
 };
 </script>
