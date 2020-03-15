@@ -1,6 +1,7 @@
 <template>
   <div>
-    <input v-model="locationInput" type="text">
+    <label for="address_input">Addresse</label>
+    <input v-model="locationInput" type="text" name="address_input">
     <div>
       <ul class='field-autocomplete' v-if="showList && locations.length > 1">
         <li

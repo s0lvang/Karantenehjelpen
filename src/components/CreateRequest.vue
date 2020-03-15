@@ -2,12 +2,16 @@
   <div class="container mx-auto">
     <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
     <div class="pl-6 mt-5">
-      <TextInput
+
+      <AddressInput />
+
+
+      <!-- <TextInput
         labelText="Leveringsadresse"
         placeholderText="Kongens slott 1"
         @emitInputText="updateAddress"
         :existing="address"
-      />
+      /> -->
       <BigTextInput
         labelText="Ankomstbeskrivelse"
         placeholderText="F.eks: I smuget bak rammeverkstedet"
@@ -59,6 +63,8 @@ import TextInput from '@/components/shared/TextInput.vue';
 import BigTextInput from '@/components/shared/BigTextInput.vue';
 import NumberInput from '@/components/shared/NumberInput.vue';
 import Item from '@/components/shared/Item.vue';
+import AddressInput from '@/components/AddressInput.vue';
+
 
 export default {
   name: 'CreateRequest',
@@ -68,6 +74,8 @@ export default {
     Button,
     BigTextInput,
     NumberInput,
+    AddressInput,
+
   },
   data() {
     return {
@@ -145,8 +153,7 @@ export default {
         return;
       }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        if (this.address.length > 0) {
-          this.$store.dispatch('SET_ADDRESS', this.address);
+        if (true) {
           this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
           this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
           this.$store.dispatch('SET_PAYMENT_SOLUTION', this.paymentSolution);

@@ -2,8 +2,9 @@
   <div class="container mx-auto mt-3">
     <div class="flex flex-col items-center">
         <div>
+          <Map :locationCenter="request.address.center"/>
           <p class="text-2xl p-2">
-            {{request.address}}
+            {{request.address.place_name_no}}
           </p>
 
           <ul class="p-2">
@@ -58,12 +59,14 @@
 </template>
 
 <script>
+import Map from '@/components/Map.vue';
 import Button from '@/components/shared/Button.vue';
 
 export default {
   name: 'DetailedRequest',
   components: {
     Button,
+    Map,
   },
   props: {
     request: {

@@ -1,8 +1,6 @@
 <template>
   <div class="container mx-auto mt-10" >
     <Map />
-    <br />
-    <AddressInput />
     <div class="flex flex-col">
       <p class="text-center">
         Jeg sitter i karantene og trenger hjelp
@@ -20,15 +18,12 @@
 
 <script>
 import Button from '@/components/shared/Button.vue';
-import Map from '@/components/Map.vue';
-import AddressInput from '@/components/AddressInput.vue';
 
 export default {
   name: 'StartScreenView',
   components: {
     Button,
     Map,
-    AddressInput,
   },
   methods: {
     needHelp() {

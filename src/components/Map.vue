@@ -14,9 +14,15 @@ export default {
       map: undefined,
       adressMarker: undefined,
       key: 'pk.eyJ1IjoiYWRyaWFuaHQiLCJhIjoiY2s3c3dpeWtrMHR6cTNobXZxZDNjc2l4biJ9.zNJjCC7o0UmLMKv9mx93FQ',
-      selectedAddress: [10.43917, 59.83306],
-      markerTest: [10.000, 59.800],
+      selectedAddress: this.locationCenter,
+      markerTest: this.locationCenter,
     };
+  },
+  props: {
+    locationCenter: {
+      type: Array,
+      required: true,
+    },
   },
 
   methods: {
