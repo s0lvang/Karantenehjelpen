@@ -5,7 +5,7 @@
     </section>
     <Button
       v-if="userOwnsRequest"
-      btnText="Marker som levert"
+      :btnText="getButtonText"
       :btnDisabled="false"
       @btnClicked="markAsDelivered"
     />
@@ -36,25 +36,36 @@ export default {
         (request) => request.id === this.$route.params.id,
       );
     },
+    getButtonText() {
+      return !this.getRequest.delivered
+        ? 'Marker som levert'
+        : 'Marker som ikke levert';
+    },
     userOwnsRequest() {
       return this.getRequest.email === this.$store.getters.email;
     },
   },
   methods: {
     markAsDelivered() {
-      return this.$store.getters.requests.find(
-        (request) => request.id === this.$route.params.id,
-      );
-    },
-    deleteRequest() {
       fb.usersCollection
         .doc(this.$store.getters.id)
         .collection('requests')
         .doc(this.$route.params.id)
-        .delete()
+        .update({
+          delivered: !this.getRequest.delivered,
+        })
         .then(() => this.$router.push('/my-requests'))
         .catch((error) => console.log(error));
     },
+  },
+  deleteRequest() {
+    fb.usersCollection
+      .doc(this.$store.getters.id)
+      .collection('requests')
+      .doc(this.$route.params.id)
+      .delete()
+      .then(() => this.$router.push('/my-requests'))
+      .catch((error) => console.log(error));
   },
 };
 </script>
