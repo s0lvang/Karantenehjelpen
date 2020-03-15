@@ -6,20 +6,27 @@
         labelText="Leveringsadresse"
         placeholderText="Kongens slott 1"
         @emitInputText="updateAddress"
-        :existing="getAddress"
+        :existing="address"
       />
       <BigTextInput
         labelText="Ankomstbeskrivelse"
         placeholderText="F.eks: I smuget bak rammeverkstedet"
         @change="updateArrivalDescription"
-        :existing="existingArrivalDescription"
+        :existing="arrivalDesc"
         class="pr-10"
       />
       <NumberInput
         labelText="Telefonummer"
         placeholderText="Telefonnummer"
-        @change="updatePhoneNumber"
-        :existing="existingPhoneNumber"
+        @emitNumberInput="updatePhoneNumber"
+        :existing="phoneNr"
+      />
+      <TextInput
+        labelText="Betalingsløsing"
+        placeholderText="Vipps"
+        @emitInputText="updatePaymentSolution"
+        :existing="paymentSolution"
+        class="mt-2"
       />
     </div>
     <div v-if="this.items.length >= 1" class="items">
@@ -40,6 +47,7 @@
       <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
       <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
       <p v-if="itemNameError">Varen må ha et navn!</p>
+      <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
     </div>
     <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
   </div>
@@ -69,21 +77,31 @@ export default {
       phoneNumberError: false,
       zeroItemsError: false,
       itemNameError: false,
+      paymentSolutionError: false,
+      address: '',
+      phoneNr: '',
+      arrivalDesc: '',
+      paymentSolution: '',
     };
   },
   methods: {
     updateAddress(event) {
       const { value } = event.target;
       this.addressError = false;
-      this.$store.dispatch('SET_ADDRESS', value);
+      this.address = value;
     },
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
-      this.$store.dispatch('SET_PHONE_NUMBER', value);
+      this.phoneNr = value;
     },
     updateArrivalDescription(value) {
-      this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', value);
+      this.arrivalDesc = value;
+    },
+    updatePaymentSolution(event) {
+      const { value } = event.target;
+      this.paymentSolutionError = false;
+      this.paymentSolution = value;
     },
     deleteItem(index) {
       this.items.splice(index, 1);
@@ -122,8 +140,16 @@ export default {
     },
     toSummary() {
       const itemsMapped = this.items.map((item) => item.added);
+      if (this.paymentSolution.length <= 0) {
+        this.paymentSolutionError = true;
+        return;
+      }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        if (this.getAddress.length > 0) {
+        if (this.address.length > 0) {
+          this.$store.dispatch('SET_ADDRESS', this.address);
+          this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
+          this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
+          this.$store.dispatch('SET_PAYMENT_SOLUTION', this.paymentSolution);
           this.$emit('toSummary');
         } else {
           this.addressError = true;
@@ -136,7 +162,7 @@ export default {
     },
   },
   computed: {
-    existingArrivalDescription() {
+    getArrivalDescription() {
       return this.$store.getters.arrivalDescription;
     },
     getAddress() {
@@ -145,12 +171,19 @@ export default {
     getItems() {
       return this.$store.getters.items;
     },
-    existingPhoneNumber() {
+    getPhoneNumber() {
       return this.$store.getters.phoneNumber;
+    },
+    getPaymentSolution() {
+      return this.$store.getters.paymentSolution;
     },
   },
   mounted() {
     this.items = this.getItems;
+    this.address = this.getAddress;
+    this.phoneNr = this.getPhoneNumber;
+    this.arrivalDesc = this.getArrivalDescription;
+    this.paymentSolution = this.getPaymentSolution;
   },
 };
 </script>

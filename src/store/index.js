@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     address: '',
     arrivalDescription: '',
     phoneNumber: '',
+    paymentSolution: '',
     items: [],
     requests: [],
   },
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     address: (state) => state.address,
     phoneNumber: (state) => state.phoneNumber,
     arrivalDescription: (state) => state.arrivalDescription,
+    paymentSolution: (state) => state.paymentSolution,
     items: (state) => state.items,
     requests: (state) => state.requests,
   },
@@ -43,6 +45,9 @@ const store = new Vuex.Store({
     SET_REQUESTS(state, payload) {
       state.requests = payload;
     },
+    SET_PAYMENT_SOLUTION(state, payload) {
+      state.paymentSolution = payload;
+    },
   },
   actions: {
     SET_CURRENT_USER: (context, payload) => {
@@ -63,14 +68,16 @@ const store = new Vuex.Store({
     SET_REQUESTS: (context, payload) => {
       context.commit('SET_REQUESTS', payload);
     },
-
+    SET_PAYMENT_SOLUTION: (context, payload) => {
+      context.commit('SET_PAYMENT_SOLUTION', payload);
+    },
   },
 });
 //
 fb.auth.onAuthStateChanged((user) => {
   if (user) {
     store.commit('SET_CURRENT_USER', user);
-    fb.requestsCollection
+    fb.db.collectionGroup('requests')
       .orderBy('createdOn', 'desc')
       .onSnapshot((querySnapshot) => {
         const requests = querySnapshot.docs.map((request) => ({

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section>
+    <section class="p-2">
       <DetailedRequest :request="getRequest" />
     </section>
     <Button

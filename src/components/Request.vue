@@ -1,11 +1,14 @@
 <template>
-  <div class="container">
-    <h3>
+  <div class="container mx-auto border rounded-lg mt-3">
+    <h3 class="text-2xl p-2">
       {{request.address}}
     </h3>
-    <p><b> Handleliste: </b>
-    {{getItemNames}}
+    <p class="text-xl underline p-2">
+      Handleliste:
     </p>
+    <div class="p-2 truncate">
+    {{getItemNames}}
+    </div>
     <Button
       btnText="Se forespørsel"
       @btnClicked="seeMore"
@@ -40,11 +43,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.container {
-  border: 1px solid black;
-  display: flex;
-  justify-content: space-evenly;
-}
-</style>
