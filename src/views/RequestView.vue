@@ -57,15 +57,16 @@ export default {
         .then(() => this.$router.push('/my-requests'))
         .catch((error) => console.log(error));
     },
-  },
-  deleteRequest() {
-    fb.usersCollection
-      .doc(this.$store.getters.id)
-      .collection('requests')
-      .doc(this.$route.params.id)
-      .delete()
-      .then(() => this.$router.push('/my-requests'))
-      .catch((error) => console.log(error));
+
+    deleteRequest() {
+      fb.usersCollection
+        .doc(this.$store.getters.id)
+        .collection('requests')
+        .doc(this.$route.params.id)
+        .delete()
+        .then(() => this.$router.push('/my-requests'))
+        .catch((error) => console.log(error));
+    },
   },
 };
 </script>

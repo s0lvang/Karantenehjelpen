@@ -1,11 +1,11 @@
 <template>
   <section>
     <h3>Mine Bestillinger </h3>
-    <section v-for="(request, index) in getNotDelivered" :key="index">
+    <section v-for="request  in getNotDelivered" :key="request.id">
       <Request :request="request" />
     </section>
     <h3>Mine Leverte </h3>
-    <section v-for="(request, index) in getDelivered" :key="index">
+    <section v-for="request in getDelivered" :key="request.id">
       <Request :request="request" />
     </section>
   </section>
