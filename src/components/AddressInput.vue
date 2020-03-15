@@ -51,24 +51,25 @@ export default {
       if (newVal === '') {
         return;
       }
-      this.showList = true;
       this.showError = false;
-      this.debounce(this.getLocations);
+      const locMap = this.locations.map((x) => x.place_name_no);
+      if (!locMap.includes(this.locationInput)) {
+        this.debounce(this.getLocations);
+      }
     },
   },
   methods: {
     async getLocations() {
-      if (this.locationInput !== this.locationInput2) {
-        const response = await fetchLocation(this.locationInput);
-        if (response !== undefined && response !== null) {
-          if (response.length === 0) {
-            this.showError = true;
-          } else if (response.length === undefined) {
-            this.showError = true;
-          } else {
-            this.showError = false;
-            this.locations = response;
-          }
+      this.showList = true;
+      const response = await fetchLocation(this.locationInput);
+      if (response !== undefined && response !== null) {
+        if (response.length === 0) {
+          this.showError = true;
+        } else if (response.length === undefined) {
+          this.showError = true;
+        } else {
+          this.showError = false;
+          this.locations = response;
         }
       }
     },
@@ -77,9 +78,7 @@ export default {
       setTimeout(functionCall, time);
     },
     selectedLocation(location) {
-      this.showList = false;
       this.locationInput = location.place_name_no;
-      this.locationInput2 = location.place_name_no;
       this.showList = false;
       this.$store.dispatch('SET_ADDRESS', location);
     },
