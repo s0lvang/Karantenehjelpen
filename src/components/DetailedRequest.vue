@@ -50,9 +50,6 @@
           <div class="p-2 break-words">
             {{request.arrivalDescription}}
           </div>
-
-          <Button btnText="Marker levert" :btnDisabled="false" @btnClicked="markDelivered" />
-
         </div>
       </div>
     </div>
@@ -60,12 +57,10 @@
 
 <script>
 import Map from '@/components/Map.vue';
-import Button from '@/components/shared/Button.vue';
 
 export default {
   name: 'DetailedRequest',
   components: {
-    Button,
     Map,
   },
   props: {
@@ -75,14 +70,8 @@ export default {
     },
   },
   methods: {
-    markDelivered() {
-      console.log('implement me pls');
-    },
   },
   computed: {
-    getItemNames() {
-      return this.request.items.map((item) => item.itemName).join(', ');
-    },
   },
 };
 </script>

@@ -38,7 +38,10 @@ export default {
         address: this.$store.getters.address,
         arrivalDescription: this.$store.getters.arrivalDescription,
         items: this.$store.getters.items,
+        uid: this.$store.getters.id,
         paymentSolution: this.$store.getters.paymentSolution,
+        delivered: false,
+        connectedUser: null,
       };
     },
   },
