@@ -144,7 +144,8 @@ export default {
         return;
       }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        if (true) {
+        const localAddress = this.getAddress;
+        if (localAddress.place_name_no !== undefined && localAddress.place_name_no.length > 1) {
           this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
           this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
           this.$store.dispatch('SET_PAYMENT_SOLUTION', this.paymentSolution);

@@ -81,9 +81,6 @@ export default {
       this.$store.dispatch('SET_ADDRESS', location);
     },
   },
-  mounted() {
-    // this.locations = fetchLocation('Tordenskiolds gate 17');
-  },
 };
 </script>
 

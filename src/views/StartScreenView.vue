@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto mt-10" >
-    <Map />
     <div class="flex flex-col">
       <p class="text-center">
         Jeg sitter i karantene og trenger hjelp
@@ -23,7 +22,6 @@ export default {
   name: 'StartScreenView',
   components: {
     Button,
-    Map,
   },
   methods: {
     needHelp() {
