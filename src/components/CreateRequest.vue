@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
+    <h1 class="text-3xl pt-4 pl-6">Ny bestilling</h1>
     <div class="pl-6 mt-5">
       <AddressInput />
       <BigTextInput
@@ -8,7 +8,7 @@
         placeholderText="F.eks: I smuget bak rammeverkstedet"
         @change="updateArrivalDescription"
         :existing="arrivalDesc"
-        class="pr-10"
+        class="pr-5"
       />
       <NumberInput
         labelText="Telefonummer"
@@ -33,6 +33,7 @@
         @decrementCount="decrementItemCount"
         @incrementCount="incrementItemCount"
         @updateName="updateItemName"
+        class="pr-5 pl-5"
       />
     </div>
     <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>

@@ -46,7 +46,6 @@ export default {
 }
 
 textarea {
-  max-width: 500px;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
   padding: 0.625em 1em;
