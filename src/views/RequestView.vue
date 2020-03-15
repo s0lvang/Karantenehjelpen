@@ -5,7 +5,7 @@
     </section>
     <Button
       v-if="userOwnsRequest"
-      :btnText="getButtonText"
+      :btnText="getDeliveredButtonText"
       :btnDisabled="false"
       @btnClicked="markAsDelivered"
     />
@@ -16,6 +16,22 @@
       :btnDisabled="false"
       @btnClicked="deleteRequest"
     />
+    <Button
+      v-if="(!userOwnsRequest && !requestIsTaken) || userIsAssigned "
+      :btnText="getAssignedButtonText"
+      :btnDisabled="false"
+      @btnClicked="connectUserToRequest"
+    />
+    <section v-if="userOwnsRequest && requestIsTaken">
+      <p>{{getRequest.connectedUser.name}} har tatt oppdraget ditt. </p>
+      <p> Du kan nå denne personen på {{getRequest.connectedUser.email}} </p>
+      <Button
+      btnText="Fjern Brukeren fra oppdraget"
+      :btnDisabled="false"
+      isDanger="true"
+      @btnClicked="connectUserToRequest"
+    />
+    </section>
   </section>
 </template>
 
@@ -36,13 +52,25 @@ export default {
         (request) => request.id === this.$route.params.id,
       );
     },
-    getButtonText() {
+    userOwnsRequest() {
+      return this.getRequest.email === this.$store.getters.email;
+    },
+    requestIsTaken() {
+      return this.getRequest.connectedUser != null;
+    },
+    userIsAssigned() {
+      return (
+        this.getRequest.connectedUser
+        && this.getRequest.connectedUser.email === this.$store.getters.email
+      );
+    },
+    getDeliveredButtonText() {
       return !this.getRequest.delivered
         ? 'Marker som levert'
         : 'Marker som ikke levert';
     },
-    userOwnsRequest() {
-      return this.getRequest.email === this.$store.getters.email;
+    getAssignedButtonText() {
+      return !this.userIsAssigned ? 'Ta oppdraget' : 'Gi fra deg oppdraget';
     },
   },
   methods: {
@@ -65,6 +93,24 @@ export default {
         .doc(this.$route.params.id)
         .delete()
         .then(() => this.$router.push('/my-requests'))
+        .catch((error) => console.log(error));
+    },
+    connectUserToRequest() {
+      fb.usersCollection
+        .doc(this.getRequest.uid)
+        .collection('requests')
+        .doc(this.$route.params.id)
+        .update(
+          !this.requestIsTaken
+            ? {
+              connectedUser: {
+                name: this.$store.getters.name,
+                email: this.$store.getters.email,
+              },
+            }
+            : { connectedUser: null },
+        )
+
         .catch((error) => console.log(error));
     },
   },
