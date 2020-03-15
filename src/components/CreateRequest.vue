@@ -100,7 +100,6 @@ export default {
     },
     updatePaymentSolution(event) {
       const { value } = event.target;
-      console.log(value);
       this.paymentSolutionError = false;
       this.paymentSolution = value;
     },
