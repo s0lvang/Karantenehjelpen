@@ -2,16 +2,7 @@
   <div class="container mx-auto">
     <h1 class="text-3xl pt-4 pl-4">Ny bestilling</h1>
     <div class="pl-6 mt-5">
-
       <AddressInput />
-
-
-      <!-- <TextInput
-        labelText="Leveringsadresse"
-        placeholderText="Kongens slott 1"
-        @emitInputText="updateAddress"
-        :existing="address"
-      /> -->
       <BigTextInput
         labelText="Ankomstbeskrivelse"
         placeholderText="F.eks: I smuget bak rammeverkstedet"

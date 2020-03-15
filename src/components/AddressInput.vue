@@ -1,7 +1,15 @@
 <template>
-  <div>
-    <label for="address_input">Addresse</label>
-    <input v-model="locationInput" type="text" name="address_input">
+  <div class="container">
+    <label
+      class="input_label"
+      for="address_input"
+      >Addresse</label>
+    <input
+      v-model="locationInput"
+      type="text"
+      name="address_input"
+      class="address_input"
+    >
     <div>
       <ul class='field-autocomplete' v-if="showList && locations.length > 1">
         <li
@@ -80,22 +88,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input {
-  &[type=text],
-  &[type=email],
-  &[type=number],
-  &[type=tel] {
-    width: 90%;
-    height: 5vh;
-    border-radius: 0.3rem;
-    border: 0.05rem solid black;
-    margin-top: 0.3rem;
-    font-size: 1rem;
-    padding: 0 0 0 .5rem;
-    display: flex;
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+}
+.input_label {
+  align-self: flex-start;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  color: rgb(0, 96, 163);
+}
+.address_input {
+  &[type="text"] {
+    max-width: 320px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    padding: 0.625em 1em;
+    font-size: 1em;
+    color: rgb(42, 39, 34);
+    border: 1px solid rgb(241, 241, 241);
   }
 }
 .field-autocomplete {
+    max-width: 320px;
     border: 0.06rem solid grey;
     border-radius: 0.3rem;
     list-style-type: none;
