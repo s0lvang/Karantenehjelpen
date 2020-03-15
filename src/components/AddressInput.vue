@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mx-auto flex flex-col pr-5 text-sm md:text-base lg:text-lg">
     <label
       class="input_label"
       for="address_input"
@@ -85,11 +85,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  display: flex;
-  flex-flow: column nowrap;
-  box-sizing: border-box;
-}
+// .container {
+//   display: flex;
+//   flex-flow: column nowrap;
+//   box-sizing: border-box;
+// }
 .input_label {
   align-self: flex-start;
   text-transform: uppercase;
@@ -100,7 +100,7 @@ export default {
 }
 .address_input {
   &[type="text"] {
-    max-width: 320px;
+    // max-width: 320px;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
     padding: 0.625em 1em;
@@ -110,7 +110,7 @@ export default {
   }
 }
 .field-autocomplete {
-    max-width: 320px;
+    // max-width: 320px;
     border: 0.06rem solid grey;
     border-radius: 0.3rem;
     list-style-type: none;
