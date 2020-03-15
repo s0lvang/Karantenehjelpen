@@ -7,7 +7,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     currentUser: null,
-    address: '',
+    address: {},
     arrivalDescription: '',
     phoneNumber: '',
     paymentSolution: '',
