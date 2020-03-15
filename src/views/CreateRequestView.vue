@@ -14,7 +14,6 @@ import CreateRequest from '@/components/CreateRequest.vue';
 import RequestSummary from '@/components/RequestSummary.vue';
 import fb from '@/firebaseConfig.js';
 
-
 export default {
   name: 'CreateRequestView',
   components: {
@@ -28,7 +27,9 @@ export default {
   },
   methods: {
     createRequest(request) {
-      fb.requestsCollection
+      fb.usersCollection
+        .doc(this.$store.getters.id)
+        .collection('requests')
         .add({
           createdOn: new Date(),
           ...request,
