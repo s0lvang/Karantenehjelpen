@@ -26,6 +26,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build
-    - run: npm lint --no-fix
+    - run: npm run lint --no-fix
       env:
         CI: true
