@@ -27,13 +27,11 @@
 
 <script>
 import Button from '@/components/shared/Button.vue';
-// import Footer from '@/components/shared/Footer.vue';
 
 export default {
   name: 'StartScreenView',
   components: {
     Button,
-    // Footer,
   },
   methods: {
     needHelp() {
