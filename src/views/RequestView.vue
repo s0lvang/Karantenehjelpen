@@ -1,7 +1,7 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center container mx-auto mt-3 extra-information">
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
@@ -147,4 +147,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.extra-information {
+  margin-bottom: 3rem;
+}
+</style>
