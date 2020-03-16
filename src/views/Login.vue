@@ -28,11 +28,6 @@
           </a>
         </div>
       </div>
-      <footer id="forBgColor">
-        <p>
-          Karantenehjelpen@online.ntnu.no
-        </p>
-      </footer>
     </div>
   </div>
 </template>
@@ -60,10 +55,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-#forBgColor {
-  background-color: rgb(0, 96, 163);
-  color: white;
-}
-</style>

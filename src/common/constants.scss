@@ -1,0 +1,29 @@
+$color-primary: #0060a3;
+$color-text: #2c3e50;
+$color-text-contrast: white;
+
+// breakpoints
+$sm: 320;
+$md: 756;
+$lg: 1200;
+$xl: 1704;
+
+$minMobileWidth: $sm + 0px;
+$maxMobileWidth: $md - 1px;
+$minTabletWidth: $md + 0px;
+$maxTabletWidth: $lg - 1px;
+$minDesktopWidth: $lg + 0px;
+$maxDesktopWidth: $xl - 1px;
+$minWidescreenWidth: $xl + 0px;
+
+$breakpoint-mobileOnly: "only screen and ( max-width: #{$maxMobileWidth} )";
+$breakpoint-tabletOnly: "only screen and( min-width: #{$minTabletWidth} ) and ( max-width: #{$maxTabletWidth} )";
+$breakpoint-desktopOnly: "only screen and ( min-width: #{$minDesktopWidth} ) and ( max-width: #{$maxDesktopWidth} )";
+$breakpoint-widescreenOnly: "only screen and ( min-width: #{$minWidescreenWidth} )";
+$breakpoint-tabletAndUp: "only screen and ( min-width: #{$minTabletWidth} )";
+$breakpoint-desktopAndUp: "only screen and ( min-width: #{$minDesktopWidth} )";
+$breakpoint-widescreenAndUp: "only screen and ( min-width: #{$minWidescreenWidth} )";
+
+$page-width-tablet: 41rem;
+$page-width-desktop: 62rem;
+$page-width-widescreen: 93rem;
