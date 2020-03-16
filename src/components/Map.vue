@@ -13,7 +13,7 @@ export default {
     return {
       map: undefined,
       adressMarker: undefined,
-      key: 'pk.eyJ1IjoiYWRyaWFuaHQiLCJhIjoiY2s3c3dpeWtrMHR6cTNobXZxZDNjc2l4biJ9.zNJjCC7o0UmLMKv9mx93FQ',
+      key: 'pk.eyJ1IjoiYWRyaWFuaHQiLCJhIjoiY2s3dWw4M3Y0MTA4NjNmcGdrM3M5c2prOSJ9.zVaLZPgkz7K-J_zPiXS08w',
       selectedAddress: this.locationCenter,
       markerPlace: this.locationCenter,
     };
