@@ -36,11 +36,7 @@
         class="pr-5 pl-5"
       />
     </div>
-    <Button
-      btnText="Ny vare"
-      :btnDisabled="false"
-      @btnClicked="renderNewItem"
-    />
+    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem" />
     <div class="flex justify-center">
       <p v-if="errorMsg">Du må legge til alle varene!</p>
       <p v-if="addressError">Du må legge til en adresse!</p>
@@ -49,11 +45,7 @@
       <p v-if="itemNameError">Varen må ha et navn!</p>
       <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
     </div>
-    <Button
-      btnText="Gå til oppsummering"
-      :btnDisabled="false"
-      @btnClicked="toSummary"
-    />
+    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary" />
   </div>
 </template>
 
