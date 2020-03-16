@@ -1,14 +1,13 @@
 <template>
-  <div class="container mx-auto">
-    <h1 class="text-3xl pt-4 pl-6">Ny bestilling</h1>
-    <div class="pl-6 mt-5">
+  <div>
+    <h1>Ny bestilling</h1>
+    <div>
       <AddressInput />
       <BigTextInput
         labelText="Ankomstbeskrivelse"
         placeholderText="F.eks: I smuget bak rammeverkstedet"
         @change="updateArrivalDescription"
         :existing="arrivalDesc"
-        class="pr-5"
       />
       <NumberInput
         labelText="Telefonummer"
@@ -21,10 +20,9 @@
         placeholderText="Vipps"
         @emitInputText="updatePaymentSolution"
         :existing="paymentSolution"
-        class="mt-2"
       />
     </div>
-    <div v-if="this.items.length >= 1" class="items">
+    <div v-if="this.items.length >= 1">
       <Item
         @updateItem="addItem"
         :nrOfItems="items"
@@ -33,7 +31,6 @@
         @decrementCount="decrementItemCount"
         @incrementCount="incrementItemCount"
         @updateName="updateItemName"
-        class="pr-5 pl-5"
       />
     </div>
     <Button
@@ -41,7 +38,7 @@
       :btnDisabled="false"
       @btnClicked="renderNewItem"
     />
-    <div class="flex justify-center">
+    <div>
       <p v-if="errorMsg">Du må legge til alle varene!</p>
       <p v-if="addressError">Du må legge til en adresse!</p>
       <p v-if="zeroItemsError">Du må legge til minst en vare!</p>

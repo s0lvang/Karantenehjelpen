@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <label for="number-input"> {{ labelText }} </label>
     <input
       type="number"

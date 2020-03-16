@@ -1,46 +1,39 @@
 <template>
-  <div class="container mx-auto p-3">
-    <div
-      v-for="(item, index) in nrOfItems"
-      :key="index"
-      class="flex flex-wrap mb-4 border rounded-lg"
-    >
+  <div>
+    <div v-for="(item, index) in nrOfItems" :key="index">
       <template v-if="!item.added">
         <TextInput
           labelText="Vare"
           placeholderText="Varenavn.."
           @emitInputText="emitInputText"
           :localIndex="index"
-          class="w-2/3 pl-3 self-center"
         />
       </template>
-      <section v-if="item.added" class="w-1/2 pl-3">
+      <section v-if="item.added">
         <b>Vare:</b>
-        <p class="break-words">
+        <p>
           {{ nrOfItems[index].itemName }}
         </p>
       </section>
-      <p v-if="item.added" class="w-1/2 text-center">
+      <p v-if="item.added">
         <b>Antall:</b>
         {{ nrOfItems[index].count }}
       </p>
-      <div class="flex-end w-1/3 ">
-        <p v-if="!item.added" class="text-center">Antall</p>
+      <div>
+        <p v-if="!item.added">Antall</p>
         <div v-if="!item.added">
           <Button
             btnText="-1"
             @btnClicked="decrementCount(index)"
             :btnDisabled="false"
-            class="flex-1"
           />
-          <h3 class="flex-1 text-center self-center">
+          <h3>
             <b>{{ nrOfItems[index].count }}</b>
           </h3>
           <Button
             btnText="+1"
             @btnClicked="incrementCount(index)"
             :btnDisabled="false"
-            class="flex-1"
           />
         </div>
       </div>
@@ -49,14 +42,12 @@
           btnText="Legg til"
           @btnClicked="addItem(index)"
           :btnDisabled="false"
-          class="w-1/2"
         />
       </template>
       <Button
         btnText="Slett"
         @btnClicked="deleteItem(index)"
         :btnDisabled="false"
-        class="w-auto pl-3"
         isDanger="true"
       />
     </div>

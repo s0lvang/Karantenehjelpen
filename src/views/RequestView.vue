@@ -1,7 +1,7 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div class="flex flex-col items-center">
+    <div>
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
@@ -22,10 +22,10 @@
         @btnClicked="connectUserToRequest"
       />
       <section v-if="userOwnsRequest && requestIsTaken">
-        <p class="p-5">
+        <p>
           <b>{{ getRequest.connectedUser.name }}</b> har tatt oppdraget ditt.
         </p>
-        <p class="p-5">
+        <p>
           Du kan nå denne personen på
           <b>{{ getRequest.connectedUser.email }}</b>
         </p>

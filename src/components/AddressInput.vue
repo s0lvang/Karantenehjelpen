@@ -1,22 +1,16 @@
 <template>
-  <div
-    class="container mx-auto flex flex-col
-          pr-5 text-sm md:text-base lg:text-lg
-    "
-  >
+  <div>
     <label for="address_input">Addresse</label>
     <input
       v-model="locationInput"
       type="text"
       name="address_input"
-      class="address_input"
       placeholder="Kongens slott"
     />
     <div>
       <Spinner :showSpinner="showSpinner" />
       <ul v-if="showList && locations.length > 1">
         <li
-          class="autocomplete-element"
           v-for="location in locations"
           :key="location.id"
           @click="selectedLocation(location)"

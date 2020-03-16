@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <label for="comment">{{ labelText }}</label>
     <textarea
       rows="4"

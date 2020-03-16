@@ -1,11 +1,6 @@
 <template>
-  <div class="btnDiv">
-    <button
-      @click="btnClick"
-      class="button_style"
-      :class="isDanger"
-      :disabled="btnDisabled"
-    >
+  <div>
+    <button @click="btnClick" :class="isDanger" :disabled="btnDisabled">
       {{ btnText }}
     </button>
   </div>

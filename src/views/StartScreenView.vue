@@ -1,13 +1,13 @@
 <template>
-  <div class="pt-10 h-full">
-    <div class="flex flex-col h-full">
+  <div>
+    <div>
       <div>
-        <p class="text-3xl text-center pb-20">
+        <p>
           Karantenehjelpen
         </p>
       </div>
-      <div class="flex-1 mx-auto">
-        <p class="text-center break-words ml-10 mr-10">
+      <div>
+        <p>
           Jeg sitter i karantene og trenger hjelp til å handle inn mat
         </p>
         <Button
@@ -15,7 +15,7 @@
           :btnDisabled="false"
           @btnClicked="needHelp"
         />
-        <p class="text-center pt-20 break-words ml-10 mr-10">
+        <p>
           Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
         </p>
         <Button
@@ -24,10 +24,7 @@
           @btnClicked="giveHelp"
         />
       </div>
-      <footer
-        class="w-full text-center border-t border-grey p-4 pin-b"
-        id="forBgColor"
-      >
+      <footer id="forBgColor">
         <p>
           Karantenehjelpen@online.ntnu.no
         </p>

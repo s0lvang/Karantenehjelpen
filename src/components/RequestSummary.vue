@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto ">
-    <h2 class="text-3xl text-center">Din Bestilling</h2>
+  <div>
+    <h2>Din Bestilling</h2>
     <DetailedRequest :request="getRequest" />
     <Spinner :showSpinner="showSpinner" />
     <div v-if="!showSpinner">

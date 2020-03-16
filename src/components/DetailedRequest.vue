@@ -1,59 +1,55 @@
 <template>
-  <div class="container mx-auto mt-3">
-    <div class="flex flex-col items-center">
+  <div>
+    <div>
       <div>
         <Map :locationCenter="request.address.center" />
-        <p class="text-2xl p-2">
+        <p>
           {{ request.address.place_name_no }}
         </p>
 
-        <ul class="p-2">
-          <li
-            v-for="(item, index) in request.items"
-            :key="index"
-            class="break-words list-disc ml-4"
-          >
-            <span class="font-bold">{{ item.count }}x</span>
+        <ul>
+          <li v-for="(item, index) in request.items" :key="index">
+            <span>{{ item.count }}x</span>
             {{
               item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
             }}
           </li>
         </ul>
 
-        <div class="p-2">
-          <h1 class="font-bold text-lg">
+        <div>
+          <h1>
             Kontaktinformasjon
           </h1>
-          <div class="flex">
-            <p class="font-bold">
+          <div>
+            <p>
               Epost:
             </p>
-            <div class="ml-2">
+            <div>
               {{ request.email }}
             </div>
           </div>
-          <div class="flex">
-            <p class="font-bold">
+          <div>
+            <p>
               Telefon:
             </p>
-            <div class="ml-2">
+            <div>
               {{ "12345678" }}
             </div>
           </div>
-          <div class="flex">
-            <p class="font-bold">
+          <div>
+            <p>
               Betalingsmåte:
             </p>
-            <div class="ml-2">
+            <div>
               {{ request.paymentSolution }}
             </div>
           </div>
         </div>
 
-        <p class="text-lg font-bold p-2">
+        <p>
           Ankomstbeskrivelse:
         </p>
-        <div class="p-2 break-words">
+        <div>
           {{ request.arrivalDescription }}
         </div>
       </div>

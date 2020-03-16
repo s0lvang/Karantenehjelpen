@@ -1,11 +1,11 @@
 <template>
-  <section class="container mx-auto">
-    <h3 class="text-3xl pt-4 pl-4">{{ firstHeaderText }}</h3>
-    <section v-for="request in getNotDelivered" :key="request.id" class="p-3">
+  <section>
+    <h3>{{ firstHeaderText }}</h3>
+    <section v-for="request in getNotDelivered" :key="request.id">
       <Request :request="request" />
     </section>
-    <h3 class="text-3xl pt-4 pl-4">{{ secondHeaderText }}</h3>
-    <section v-for="request in getDelivered" :key="request.id" class="p-3">
+    <h3>{{ secondHeaderText }}</h3>
+    <section v-for="request in getDelivered" :key="request.id">
       <Request :request="request" />
     </section>
   </section>
