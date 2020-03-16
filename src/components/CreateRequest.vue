@@ -36,7 +36,11 @@
         class="pr-5 pl-5"
       />
     </div>
-    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem"/>
+    <Button
+      btnText="Ny vare"
+      :btnDisabled="false"
+      @btnClicked="renderNewItem"
+    />
     <div class="flex justify-center">
       <p v-if="errorMsg">Du må legge til alle varene!</p>
       <p v-if="addressError">Du må legge til en adresse!</p>
@@ -45,29 +49,31 @@
       <p v-if="itemNameError">Varen må ha et navn!</p>
       <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
     </div>
-    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary"/>
+    <Button
+      btnText="Gå til oppsummering"
+      :btnDisabled="false"
+      @btnClicked="toSummary"
+    />
   </div>
 </template>
 
 <script>
-import Button from '@/components/shared/Button.vue';
-import TextInput from '@/components/shared/TextInput.vue';
-import BigTextInput from '@/components/shared/BigTextInput.vue';
-import NumberInput from '@/components/shared/NumberInput.vue';
-import Item from '@/components/shared/Item.vue';
-import AddressInput from '@/components/AddressInput.vue';
-
+import Button from "@/components/shared/Button.vue";
+import TextInput from "@/components/shared/TextInput.vue";
+import BigTextInput from "@/components/shared/BigTextInput.vue";
+import NumberInput from "@/components/shared/NumberInput.vue";
+import Item from "@/components/shared/Item.vue";
+import AddressInput from "@/components/AddressInput.vue";
 
 export default {
-  name: 'CreateRequest',
+  name: "CreateRequest",
   components: {
     TextInput,
     Item,
     Button,
     BigTextInput,
     NumberInput,
-    AddressInput,
-
+    AddressInput
   },
   data() {
     return {
@@ -78,10 +84,10 @@ export default {
       zeroItemsError: false,
       itemNameError: false,
       paymentSolutionError: false,
-      address: '',
-      phoneNr: '',
-      arrivalDesc: '',
-      paymentSolution: '',
+      address: "",
+      phoneNr: "",
+      arrivalDesc: "",
+      paymentSolution: ""
     };
   },
   methods: {
@@ -105,13 +111,13 @@ export default {
     },
     deleteItem(index) {
       this.items.splice(index, 1);
-      this.$store.dispatch('SET_ITEMS', this.items);
+      this.$store.dispatch("SET_ITEMS", this.items);
       this.errorMsg = false;
     },
     addItem(index) {
       if (this.items[index].itemName.length > 0) {
         this.items[index].added = true;
-        this.$store.dispatch('SET_ITEMS', this.items);
+        this.$store.dispatch("SET_ITEMS", this.items);
         this.errorMsg = false;
       } else {
         this.itemNameError = true;
@@ -119,9 +125,9 @@ export default {
     },
     renderNewItem() {
       this.items.push({
-        itemName: '',
+        itemName: "",
         count: 1,
-        added: false,
+        added: false
       });
       this.errorMsg = false;
       this.zeroItemsError = false;
@@ -139,18 +145,21 @@ export default {
       }
     },
     toSummary() {
-      const itemsMapped = this.items.map((item) => item.added);
+      const itemsMapped = this.items.map(item => item.added);
       if (this.paymentSolution.length <= 0) {
         this.paymentSolutionError = true;
         return;
       }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
         const localAddress = this.getAddress;
-        if (localAddress.place_name_no !== undefined && localAddress.place_name_no.length > 1) {
-          this.$store.dispatch('SET_PHONE_NUMBER', this.phoneNr);
-          this.$store.dispatch('SET_ARRIVAL_DESCRIPTION', this.arrivalDesc);
-          this.$store.dispatch('SET_PAYMENT_SOLUTION', this.paymentSolution);
-          this.$emit('toSummary');
+        if (
+          localAddress.place_name_no !== undefined &&
+          localAddress.place_name_no.length > 1
+        ) {
+          this.$store.dispatch("SET_PHONE_NUMBER", this.phoneNr);
+          this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
+          this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
+          this.$emit("toSummary");
         } else {
           this.addressError = true;
         }
@@ -159,7 +168,7 @@ export default {
       } else {
         this.zeroItemsError = true;
       }
-    },
+    }
   },
   computed: {
     getArrivalDescription() {
@@ -176,7 +185,7 @@ export default {
     },
     getPaymentSolution() {
       return this.$store.getters.paymentSolution;
-    },
+    }
   },
   mounted() {
     this.items = this.getItems;
@@ -184,6 +193,6 @@ export default {
     this.phoneNr = this.getPhoneNumber;
     this.arrivalDesc = this.getArrivalDescription;
     this.paymentSolution = this.getPaymentSolution;
-  },
+  }
 };
 </script>

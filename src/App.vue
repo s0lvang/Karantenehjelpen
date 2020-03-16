@@ -1,24 +1,24 @@
 <template>
   <div id="app">
-    <template v-if="getUser && this.$route.name !== 'StartScreen' ">
+    <template v-if="getUser && this.$route.name !== 'StartScreen'">
       <Menu />
     </template>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Menu from '@/components/Menu.vue';
+import Menu from "@/components/Menu.vue";
 
 export default {
   components: {
-    Menu,
+    Menu
   },
   computed: {
     getUser() {
       return this.$store.getters.currentUser;
-    },
-  },
+    }
+  }
 };
 </script>
 
