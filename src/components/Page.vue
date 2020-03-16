@@ -10,8 +10,9 @@ export default {};
 @import "@/common/constants.scss";
 
 article {
-  padding: 0 1rem;
+  padding: 0 2rem;
   margin: 0 auto;
+  flex: 1;
 }
 
 @media #{$breakpoint-tabletAndUp} {
