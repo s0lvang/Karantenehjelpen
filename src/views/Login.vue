@@ -1,8 +1,8 @@
 <template>
-  <div class="container mx-auto">
-    <div class="flex flex-col items-center">
-      <div >
-        <h1 class="text-4xl m-3 text-center">Karantenehjelpen</h1>
+  <div class="pt-10 h-full">
+    <div class="flex flex-col h-full">
+      <h1 class="text-4xl m-3 text-center">Karantenehjelpen</h1>
+      <div class="flex-1 mx-auto">
         <p class="font-bold text-lg m-3">Hva er Karantenehjelpen?</p>
         <p class="m-3">Når du sitter i hjemmekarantene skal du ikke oppholde
           deg på steder der man lett kommer nær andre.
@@ -20,11 +20,18 @@
         <p class="m-3">
           Just do it
         </p>
+        <p class="text-center mt-20 font-bold">Logg inn med Google</p>
+        <div class="flex flex-col">
+          <a @click="socialLogin" class="self-center cursor-pointer">
+            <img alt="Google Logo" src="../assets/google-logo.png" class="h-24">
+          </a>
+        </div>
       </div>
-      <p class="text-center mt-20 font-bold">Logg inn med Google</p>
-      <a @click="socialLogin" class="align-middle cursor-pointer">
-        <img alt="Google Logo" src="../assets/google-logo.png" class="h-24">
-      </a>
+      <footer class="w-full text-center border-t border-grey p-4 pin-b" id="forBgColor">
+        <p>
+          Karantenehjelpen@online.ntnu.no
+        </p>
+      </footer>
     </div>
   </div>
 </template>
@@ -48,3 +55,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+#forBgColor{
+  background-color: rgb(0, 96, 163);
+  color: white;
+}
+</style>
