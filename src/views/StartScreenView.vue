@@ -7,12 +7,12 @@
         </p>
       </div>
       <div class="flex-1 mx-auto">
-        <p class="text-center">
-          Jeg sitter i karantene og trenger hjelp
+        <p class="text-center break-words ml-10 mr-10">
+          Jeg sitter i karantene og trenger hjelp til å handle inn mat
         </p>
         <Button btnText="TRENGER HJELP" :btnDisabled="false" @btnClicked="needHelp" />
-        <p class="text-center pt-20">
-          Jeg er frisk og vil hjelpe
+        <p class="text-center pt-20 break-words ml-10 mr-10">
+          Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
         </p>
         <Button btnText="VIL HJELPE" :btnDisabled="false" @btnClicked="giveHelp" />
       </div>
