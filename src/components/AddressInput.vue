@@ -12,8 +12,10 @@
       type="text"
       name="address_input"
       class="address_input"
+      placeholder="Kongens slott"
     >
     <div>
+      <Spinner :showSpinner="showSpinner" />
       <ul class='field-autocomplete' v-if="showList && locations.length > 1">
         <li
           class="autocomplete-element"
@@ -33,9 +35,13 @@
 /* eslint-disable prefer-rest-params */
 /* eslint-disable import/extensions */
 import fetchLocation from '@/services/fetchLocations.js';
+import Spinner from '@/components/shared/Spinner.vue';
 
 export default {
   name: 'AddressInput',
+  components: {
+    Spinner,
+  },
   data() {
     return {
       locations: [],
@@ -44,6 +50,7 @@ export default {
       locationInput2: '',
       showList: true,
       showError: false,
+      showSpinner: false,
     };
   },
   watch: {
@@ -54,6 +61,7 @@ export default {
       this.showError = false;
       const locMap = this.locations.map((x) => x.place_name_no);
       if (!locMap.includes(this.locationInput)) {
+        this.showSpinner = true;
         this.debounce(this.getLocations);
       }
     },
@@ -61,6 +69,7 @@ export default {
   methods: {
     async getLocations() {
       this.showList = true;
+      this.showSpinner = false;
       const response = await fetchLocation(this.locationInput);
       if (response !== undefined && response !== null) {
         if (response.length === 0) {
