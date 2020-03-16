@@ -1,8 +1,8 @@
 <template>
   <Requests
     :requests="getMyRequests"
-    firstHeaderText="Mine Bestillinger"
-    secondHeaderText="Mine Leverte"
+    firstHeaderText="Mine Oppdrag"
+    secondHeaderText="Mine Leverte Oppdrag"
   />
 </template>
 
@@ -10,7 +10,7 @@
 import Requests from '@/components/Requests.vue';
 
 export default {
-  name: 'MyRequests',
+  name: 'MyAssignedRequests',
   components: {
     Requests,
   },
@@ -18,7 +18,8 @@ export default {
   computed: {
     getMyRequests() {
       return this.$store.getters.requests.filter(
-        (request) => request.email === this.$store.getters.email,
+        (request) => request.connectedUser
+          && request.connectedUser.email === this.$store.getters.email,
       );
     },
   },
