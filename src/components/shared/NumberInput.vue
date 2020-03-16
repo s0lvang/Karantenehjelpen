@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <label for="number-input"> {{ labelText }} </label>
+  <div class="main">
+    <label for="number-input">{{ labelText }}</label>
     <input
       type="number"
       name="number-input"

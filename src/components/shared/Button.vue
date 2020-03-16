@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <button @click="btnClick" :class="isDanger" :disabled="btnDisabled">
-      {{ btnText }}
-    </button>
+  <div class="btnDiv">
+    <button
+      @click="btnClick"
+      class="button_style"
+      :class="isDanger"
+      :disabled="btnDisabled"
+    >{{ btnText }}</button>
   </div>
 </template>
 

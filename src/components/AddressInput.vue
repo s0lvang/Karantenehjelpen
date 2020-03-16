@@ -1,7 +1,8 @@
 <template>
   <div>
-    <label for="address_input">Addresse</label>
+    <label class="input_label" for="address_input">Addresse</label>
     <input
+      class="address_input"
       v-model="locationInput"
       type="text"
       name="address_input"
@@ -9,14 +10,13 @@
     />
     <div>
       <Spinner :showSpinner="showSpinner" />
-      <ul v-if="showList && locations.length > 1">
+      <ul class="field-autocomplete" v-if="showList && locations.length > 1">
         <li
+          class="autocomplete-element"
           v-for="location in locations"
           :key="location.id"
           @click="selectedLocation(location)"
-        >
-          {{ location.place_name_no }}
-        </li>
+        >{{ location.place_name_no }}</li>
       </ul>
     </div>
     <p v-if="showError">Noe gikk galt under henting av addresser</p>
@@ -128,6 +128,7 @@ export default {
   margin-bottom: 0.4rem;
 }
 .autocomplete-container {
+  // unused?
   margin-left: 1rem/2;
   width: 100%;
   margin-top: -1rem;

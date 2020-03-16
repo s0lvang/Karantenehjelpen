@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <label for="text-input"> {{ labelText }} </label>
+  <div class="container">
+    <label class="input_label" for="text-input">{{ labelText }}</label>
     <input
       type="text"
       name="text-input"
+      class="text_input"
       @input="emitInputText"
       :placeholder="placeholderText"
       :value="existing"

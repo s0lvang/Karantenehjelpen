@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showSpinner" />
+  <div class="spinner" v-if="showSpinner" />
 </template>
 
 <script>
