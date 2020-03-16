@@ -5,7 +5,7 @@
   >
     <div class="flex items-center flex-no-shrink mr-6 text-white">
       <a
-        class="font-semibold text-xl tracking-tight cursor-pointer"
+        class="font-semibold text-2xl tracking-tight cursor-pointer mr-12"
         @click="goToStart"
       >
         Karantenehjelpen
