@@ -11,9 +11,12 @@
           <li
             v-for="(item, index) in request.items"
             :key="index"
-            class="break-words"
+            class="break-words list-disc ml-4"
           >
-            - {{ item.count }}x {{ item.itemName }}
+            <span class="font-bold">{{ item.count }}x</span>
+            {{
+              item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
+            }}
           </li>
         </ul>
 

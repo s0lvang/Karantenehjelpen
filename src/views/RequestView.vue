@@ -1,41 +1,46 @@
 <template>
   <section>
-    <section class="p-2">
-      <DetailedRequest :request="getRequest" />
-    </section>
-    <Button
-      v-if="userOwnsRequest"
-      :btnText="getDeliveredButtonText"
-      :btnDisabled="false"
-      @btnClicked="markAsDelivered"
-    />
-    <p v-if="userIsAssigned">
-      Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
-      Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
-    </p>
-    <Button
-      v-if="userOwnsRequest"
-      btnText="Slett bestilling"
-      isDanger="true"
-      :btnDisabled="false"
-      @btnClicked="deleteRequest"
-    />
-    <Button
-      v-if="(!userOwnsRequest && !requestIsTaken) || userIsAssigned"
-      :btnText="getAssignedButtonText"
-      :btnDisabled="false"
-      @btnClicked="connectUserToRequest"
-    />
-    <section v-if="userOwnsRequest && requestIsTaken">
-      <p>{{ getRequest.connectedUser.name }} har tatt oppdraget ditt.</p>
-      <p>Du kan nå denne personen på {{ getRequest.connectedUser.email }}</p>
+    <DetailedRequest :request="getRequest" />
+    <div class="flex flex-col items-center">
       <Button
-        btnText="Fjern Brukeren fra oppdraget"
+        v-if="userOwnsRequest"
+        :btnText="getDeliveredButtonText"
         :btnDisabled="false"
+        @btnClicked="markAsDelivered"
+      />
+      <Button
+        v-if="userOwnsRequest"
+        btnText="Slett bestilling"
         isDanger="true"
+        :btnDisabled="false"
+        @btnClicked="deleteRequest"
+      />
+      <Button
+        v-if="(!userOwnsRequest && !requestIsTaken) || userIsAssigned"
+        :btnText="getAssignedButtonText"
+        :btnDisabled="false"
         @btnClicked="connectUserToRequest"
       />
-    </section>
+      <p v-if="userIsAssigned" class="">
+        Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
+        Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
+      </p>
+      <section v-if="userOwnsRequest && requestIsTaken">
+        <p class="p-5">
+          <b>{{ getRequest.connectedUser.name }}</b> har tatt oppdraget ditt.
+        </p>
+        <p class="p-5">
+          Du kan nå denne personen på
+          <b>{{ getRequest.connectedUser.email }}</b>
+        </p>
+        <Button
+          btnText="Fjern Brukeren fra oppdraget"
+          :btnDisabled="false"
+          isDanger="true"
+          @btnClicked="connectUserToRequest"
+        />
+      </section>
+    </div>
   </section>
 </template>
 

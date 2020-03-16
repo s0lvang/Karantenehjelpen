@@ -1,34 +1,17 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
+  "folders": [
+    {
+      "path": "."
+    }
   ],
   "settings": {
-    "eslint.validate": [
-      {
-        "language": "vue",
-        "autoFix": true
-      },
-      {
-        "language": "javascript",
-        "autoFix": true
-      },
-      {
-        "language": "typescript",
-        "autoFix": true
-      },
-      { "language": "html", "autoFix": true }
-    ],
     "eslint.options": {
-      "extensions": [".ts", ".js", ".vue"],
+      "extensions": [".ts", ".js", ".vue"]
     },
-    "eslint.autoFixOnSave": true,
-    "editor.formatOnSave": false,
     "vetur.validation.template": false,
     "javascript.implicitProjectConfig.experimentalDecorators": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-    },
+      "source.fixAll.eslint": true
+    }
   }
 }
