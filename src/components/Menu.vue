@@ -72,10 +72,6 @@ export default {
     toggle() {
       this.open = !this.open;
     },
-    dummyClick() {
-      console.log(this.$route.name);
-      console.log('sumthing clicked');
-    },
     myRequests() {
       if (this.$route.name !== 'MyRequests') {
         this.$router.push('/my-requests');
