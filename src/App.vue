@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <template v-if="getUser">
+    <template v-if="getUser && this.$route.name !== 'StartScreen' ">
       <Menu />
     </template>
     <router-view/>
