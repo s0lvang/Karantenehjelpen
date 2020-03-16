@@ -16,7 +16,6 @@ export default {
   components: {
     Requests,
   },
-
   computed: {
     getMyRequests() {
       return this.$store.getters.requests.filter(
