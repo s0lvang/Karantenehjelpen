@@ -1,7 +1,7 @@
 <template>
   <nav id="forBGcolor" class="flex items-center justify-between flex-wrap bg-black p-6">
     <div class="flex items-center flex-no-shrink mr-6 text-white" >
-      <a class="font-semibold text-xl tracking-tight cursor-pointer" @click="goToStart">
+      <a class="font-semibold text-2xl tracking-tight cursor-pointer mr-12" @click="goToStart">
         Karantenehjelpen
       </a>
     </div>

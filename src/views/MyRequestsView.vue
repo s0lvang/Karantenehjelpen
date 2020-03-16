@@ -1,9 +1,11 @@
 <template>
-  <Requests
-    :requests="getMyRequests"
-    firstHeaderText="Mine Bestillinger"
-    secondHeaderText="Mine Leverte"
-  />
+  <div class="container mx-auto">
+    <Requests
+      :requests="getMyRequests"
+      firstHeaderText="Mine Bestillinger"
+      secondHeaderText="Mine Leverte"
+    />
+  </div>
 </template>
 
 <script>
