@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <label class="input_label" for="comment" >{{labelText}}</label>
+    <label class="input_label" for="comment">{{ labelText }}</label>
     <textarea
       rows="4"
       maxlength="1000"
@@ -14,27 +14,25 @@
 </template>
 
 <script>
-
 export default {
-  name: 'BigTextInput',
+  name: "BigTextInput",
   methods: {
     handleInput(event) {
-      this.$emit('change', event.target.value);
-    },
+      this.$emit("change", event.target.value);
+    }
   },
   props: {
     labelText: {
       type: String,
-      required: true,
+      required: true
     },
     placeholderText: {
       type: String,
-      required: true,
+      required: true
     },
-    existing: String,
-  },
+    existing: String
+  }
 };
-
 </script>
 
 <style lang="scss" scoped>

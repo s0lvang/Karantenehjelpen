@@ -2,28 +2,26 @@
   <div
     class="container mx-auto flex flex-col
           pr-5 text-sm md:text-base lg:text-lg
-    ">
-    <label
-      class="input_label"
-      for="address_input"
-      >Addresse</label>
+    "
+  >
+    <label class="input_label" for="address_input">Addresse</label>
     <input
       v-model="locationInput"
       type="text"
       name="address_input"
       class="address_input"
       placeholder="Kongens slott"
-    >
+    />
     <div>
       <Spinner :showSpinner="showSpinner" />
-      <ul class='field-autocomplete' v-if="showList && locations.length > 1">
+      <ul class="field-autocomplete" v-if="showList && locations.length > 1">
         <li
           class="autocomplete-element"
           v-for="location in locations"
           :key="location.id"
           @click="selectedLocation(location)"
         >
-          {{location.place_name_no}}
+          {{ location.place_name_no }}
         </li>
       </ul>
     </div>
@@ -34,37 +32,37 @@
 <script>
 /* eslint-disable prefer-rest-params */
 /* eslint-disable import/extensions */
-import fetchLocation from '@/services/fetchLocations.js';
-import Spinner from '@/components/shared/Spinner.vue';
+import fetchLocation from "@/services/fetchLocations.js";
+import Spinner from "@/components/shared/Spinner.vue";
 
 export default {
-  name: 'AddressInput',
+  name: "AddressInput",
   components: {
-    Spinner,
+    Spinner
   },
   data() {
     return {
       locations: [],
-      input: '',
-      locationInput: '',
-      locationInput2: '',
+      input: "",
+      locationInput: "",
+      locationInput2: "",
       showList: true,
       showError: false,
-      showSpinner: false,
+      showSpinner: false
     };
   },
   watch: {
     locationInput(newVal) {
-      if (newVal === '') {
+      if (newVal === "") {
         return;
       }
       this.showError = false;
-      const locMap = this.locations.map((x) => x.place_name_no);
+      const locMap = this.locations.map(x => x.place_name_no);
       if (!locMap.includes(this.locationInput)) {
         this.showSpinner = true;
         this.debounce(this.getLocations);
       }
-    },
+    }
   },
   methods: {
     async getLocations() {
@@ -89,9 +87,9 @@ export default {
     selectedLocation(location) {
       this.locationInput = location.place_name_no;
       this.showList = false;
-      this.$store.dispatch('SET_ADDRESS', location);
-    },
-  },
+      this.$store.dispatch("SET_ADDRESS", location);
+    }
+  }
 };
 </script>
 
@@ -115,10 +113,10 @@ export default {
   }
 }
 .field-autocomplete {
-    border: 0.06rem solid grey;
-    border-radius: 0.3rem;
-    list-style-type: none;
-    padding: 0 1rem 0 1rem;
+  border: 0.06rem solid grey;
+  border-radius: 0.3rem;
+  list-style-type: none;
+  padding: 0 1rem 0 1rem;
 }
 .autocomplete-element {
   text-align: left;

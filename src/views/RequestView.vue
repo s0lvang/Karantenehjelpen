@@ -17,39 +17,39 @@
       @btnClicked="deleteRequest"
     />
     <Button
-      v-if="(!userOwnsRequest && !requestIsTaken) || userIsAssigned "
+      v-if="(!userOwnsRequest && !requestIsTaken) || userIsAssigned"
       :btnText="getAssignedButtonText"
       :btnDisabled="false"
       @btnClicked="connectUserToRequest"
     />
     <section v-if="userOwnsRequest && requestIsTaken">
-      <p>{{getRequest.connectedUser.name}} har tatt oppdraget ditt. </p>
-      <p> Du kan nå denne personen på {{getRequest.connectedUser.email}} </p>
+      <p>{{ getRequest.connectedUser.name }} har tatt oppdraget ditt.</p>
+      <p>Du kan nå denne personen på {{ getRequest.connectedUser.email }}</p>
       <Button
-      btnText="Fjern Brukeren fra oppdraget"
-      :btnDisabled="false"
-      isDanger="true"
-      @btnClicked="connectUserToRequest"
-    />
+        btnText="Fjern Brukeren fra oppdraget"
+        :btnDisabled="false"
+        isDanger="true"
+        @btnClicked="connectUserToRequest"
+      />
     </section>
   </section>
 </template>
 
 <script>
-import DetailedRequest from '@/components/DetailedRequest.vue';
-import Button from '@/components/shared/Button.vue';
-import fb from '@/firebaseConfig.js';
+import DetailedRequest from "@/components/DetailedRequest.vue";
+import Button from "@/components/shared/Button.vue";
+import fb from "@/firebaseConfig.js";
 
 export default {
-  name: 'RequestView',
+  name: "RequestView",
   components: {
     DetailedRequest,
-    Button,
+    Button
   },
   computed: {
     getRequest() {
       return this.$store.getters.requests.find(
-        (request) => request.id === this.$route.params.id,
+        request => request.id === this.$route.params.id
       );
     },
     userOwnsRequest() {
@@ -60,60 +60,60 @@ export default {
     },
     userIsAssigned() {
       return (
-        this.getRequest.connectedUser
-        && this.getRequest.connectedUser.email === this.$store.getters.email
+        this.getRequest.connectedUser &&
+        this.getRequest.connectedUser.email === this.$store.getters.email
       );
     },
     getDeliveredButtonText() {
       return !this.getRequest.delivered
-        ? 'Marker som levert'
-        : 'Marker som ikke levert';
+        ? "Marker som levert"
+        : "Marker som ikke levert";
     },
     getAssignedButtonText() {
-      return !this.userIsAssigned ? 'Ta oppdraget' : 'Gi fra deg oppdraget';
-    },
+      return !this.userIsAssigned ? "Ta oppdraget" : "Gi fra deg oppdraget";
+    }
   },
   methods: {
     markAsDelivered() {
       fb.usersCollection
         .doc(this.$store.getters.id)
-        .collection('requests')
+        .collection("requests")
         .doc(this.$route.params.id)
         .update({
-          delivered: !this.getRequest.delivered,
+          delivered: !this.getRequest.delivered
         })
-        .then(() => this.$router.push('/my-requests'))
-        .catch((error) => console.log(error));
+        .then(() => this.$router.push("/my-requests"))
+        .catch(error => console.log(error));
     },
 
     deleteRequest() {
       fb.usersCollection
         .doc(this.$store.getters.id)
-        .collection('requests')
+        .collection("requests")
         .doc(this.$route.params.id)
         .delete()
-        .then(() => this.$router.push('/my-requests'))
-        .catch((error) => console.log(error));
+        .then(() => this.$router.push("/my-requests"))
+        .catch(error => console.log(error));
     },
     connectUserToRequest() {
       fb.usersCollection
         .doc(this.getRequest.uid)
-        .collection('requests')
+        .collection("requests")
         .doc(this.$route.params.id)
         .update(
           !this.requestIsTaken
             ? {
-              connectedUser: {
-                name: this.$store.getters.name,
-                email: this.$store.getters.email,
-              },
-            }
-            : { connectedUser: null },
+                connectedUser: {
+                  name: this.$store.getters.name,
+                  email: this.$store.getters.email
+                }
+              }
+            : { connectedUser: null }
         )
 
-        .catch((error) => console.log(error));
-    },
-  },
+        .catch(error => console.log(error));
+    }
+  }
 };
 </script>
 
