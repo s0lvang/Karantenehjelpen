@@ -6,24 +6,11 @@
   ],
   "settings": {
     "eslint.validate": [
-      {
-        "language": "vue",
-        "autoFix": true
-      },
-      {
-        "language": "javascript",
-        "autoFix": true
-      },
-      {
-        "language": "typescript",
-        "autoFix": true
-      },
-      { "language": "html", "autoFix": true }
+      "vue", "javascript", "typescript", "html",
     ],
     "eslint.options": {
       "extensions": [".ts", ".js", ".vue"],
     },
-    "eslint.autoFixOnSave": true,
     "editor.formatOnSave": false,
     "vetur.validation.template": false,
     "javascript.implicitProjectConfig.experimentalDecorators": true,
