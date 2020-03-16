@@ -9,6 +9,10 @@
       :btnDisabled="false"
       @btnClicked="markAsDelivered"
     />
+    <p v-if="userIsAssigned">
+      Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
+      Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
+    </p>
     <Button
       v-if="userOwnsRequest"
       btnText="Slett bestilling"
