@@ -16,7 +16,9 @@
           v-for="location in locations"
           :key="location.id"
           @click="selectedLocation(location)"
-        >{{ location.place_name_no }}</li>
+        >
+          {{ location.place_name_no }}
+        </li>
       </ul>
     </div>
     <p v-if="showError">Noe gikk galt under henting av addresser</p>

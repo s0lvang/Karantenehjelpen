@@ -5,7 +5,9 @@
       class="button_style"
       :class="isDanger"
       :disabled="btnDisabled"
-    >{{ btnText }}</button>
+    >
+      {{ btnText }}
+    </button>
   </div>
 </template>
 
