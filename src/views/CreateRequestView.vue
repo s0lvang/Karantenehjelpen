@@ -4,7 +4,7 @@
       <CreateRequest @toSummary="toSummary" />
     </template>
     <template v-if="step === 2">
-      <RequestSummary @goBack="goBack" @createRequest="createRequest" />
+      <RequestSummary @goBack="goBack" @createRequest="createRequest" :showSpinner="showSpinner"/>
     </template>
   </div>
 </template>
@@ -23,10 +23,12 @@ export default {
   data() {
     return {
       step: 1,
+      showSpinner: false,
     };
   },
   methods: {
     createRequest(request) {
+      this.showSpinner = true;
       fb.usersCollection
         .doc(this.$store.getters.id)
         .collection('requests')
@@ -40,6 +42,7 @@ export default {
           this.$store.dispatch('SET_PHONE_NUMBER', '');
           this.$store.dispatch('SET_PAYMENT_SOLUTION', '');
           this.$store.dispatch('SET_ITEMS', []);
+          this.showSpinner = false;
           this.$router.push('/all-requests');
         })
         .catch((err) => {
