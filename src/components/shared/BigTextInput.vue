@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <label class="input_label" for="comment">{{ labelText }}</label>
+    <label for="comment">{{ labelText }}</label>
     <textarea
       rows="4"
       maxlength="1000"

@@ -4,7 +4,7 @@
           pr-5 text-sm md:text-base lg:text-lg
     "
   >
-    <label class="input_label" for="address_input">Addresse</label>
+    <label for="address_input">Addresse</label>
     <input
       v-model="locationInput"
       type="text"
@@ -14,7 +14,7 @@
     />
     <div>
       <Spinner :showSpinner="showSpinner" />
-      <ul class="field-autocomplete" v-if="showList && locations.length > 1">
+      <ul v-if="showList && locations.length > 1">
         <li
           class="autocomplete-element"
           v-for="location in locations"

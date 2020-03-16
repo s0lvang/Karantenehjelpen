@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <label class="input_label" for="text-input"> {{ labelText }} </label>
+    <label for="text-input"> {{ labelText }} </label>
     <input
       type="text"
       name="text-input"
