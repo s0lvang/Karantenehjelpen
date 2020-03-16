@@ -9,18 +9,14 @@
           der man lett kommer nær andre. Da kan det bli veldig vanskelig å få
           handlet inn.
           <br />
+          <br />Karantenehjelpen skal hjelpe de som sitter i karantene komme i
+          kontakt med friske folk som ønsker å hjelpe.
           <br />
-          Karantenehjelpen skal hjelpe de som sitter i karantene komme i kontakt
-          med friske folk som ønsker å hjelpe.
-          <br />
-          <br />
-          Vi trenger både folk som er friske og vil stille opp for sine naboer,
-          og tilbyr handlehjelp til de som trenger det mest.
+          <br />Vi trenger både folk som er friske og vil stille opp for sine
+          naboer, og tilbyr handlehjelp til de som trenger det mest.
         </p>
         <h3 class="font-bold text-lg m-3">Følg FHI sine råd!</h3>
-        <p class="m-3">
-          Just do it
-        </p>
+        <p class="m-3">Just do it</p>
         <p class="text-center mt-20 font-bold">Logg inn med Google</p>
         <div class="flex flex-col">
           <a @click="socialLogin" class="self-center cursor-pointer">
@@ -36,9 +32,7 @@
         class="w-full text-center border-t border-grey p-4 pin-b"
         id="forBgColor"
       >
-        <p>
-          Karantenehjelpen@online.ntnu.no
-        </p>
+        <p>Karantenehjelpen@online.ntnu.no</p>
       </footer>
     </div>
   </div>

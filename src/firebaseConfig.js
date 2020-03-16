@@ -1,18 +1,15 @@
-import firebase from "firebase";
-import "firebase/firestore";
-import secrets from "./secrets";
-// firebase init goes here
-const config = secrets;
-firebase.initializeApp(config);
+import firebase from "firebase/app";
+
+import "firebase/auth";
+
+firebase.initializeApp(JSON.parse(process.env.VUE_APP_FIREBASE_CONFIG));
 
 // firebase utils
 const db = firebase.firestore();
 const auth = firebase.auth();
 const { currentUser } = auth;
 
-// date issue fix according to firebase
-const settings = {};
-db.settings(settings);
+db.settings({});
 
 // firebase collections
 const usersCollection = db.collection("users");

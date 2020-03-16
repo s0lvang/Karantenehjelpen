@@ -1,7 +1,7 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center container mx-auto mt-3 extra-information">
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
@@ -21,7 +21,7 @@
         :btnDisabled="false"
         @btnClicked="connectUserToRequest"
       />
-      <p v-if="userIsAssigned" class="">
+      <p v-if="userIsAssigned" class>
         Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
         Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
       </p>
@@ -48,6 +48,10 @@
 import DetailedRequest from "@/components/DetailedRequest.vue";
 import Button from "@/components/shared/Button.vue";
 import fb from "@/firebaseConfig.js";
+import sms from "@/services/sms";
+
+const printItemNames = items =>
+  items.map(i => `${i.count}x ${i.itemName}`).join("\n");
 
 export default {
   name: "RequestView",
@@ -119,11 +123,32 @@ export default {
               }
             : { connectedUser: null }
         )
-
+        .then(() => {
+          sms(
+            this.getRequest.phoneNumber,
+            this.requestIsTaken
+              ? `${
+                  this.$store.getters.name
+                } har tatt din ordre på: \n\n${printItemNames(
+                  this.getRequest.items
+                )}\n\nDu kan nå din lille hjelper på ${
+                  this.$store.getters.email
+                }.`
+              : `${
+                  this.$store.getters.name
+                } har sagt fra seg din ordre på: \n\n${printItemNames(
+                  this.getRequest.items
+                )}`
+          );
+        })
         .catch(error => console.log(error));
     }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.extra-information {
+  margin-bottom: 3rem;
+}
+</style>
