@@ -13,26 +13,26 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from "vue";
 
 export default Vue.extend({
-  name: 'NumberInput',
+  name: "NumberInput",
   props: {
     labelText: {
       type: String,
-      required: true,
+      required: true
     },
     placeholderText: {
       type: String,
-      required: true,
+      required: true
     },
-    existing: String,
+    existing: String
   },
   methods: {
     emitNumberInput(event) {
-      this.$emit('emitNumberInput', event);
-    },
-  },
+      this.$emit("emitNumberInput", event);
+    }
+  }
 });
 </script>
 

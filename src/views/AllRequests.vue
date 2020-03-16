@@ -8,24 +8,25 @@
 </template>
 
 <script>
-import Request from '@/components/Request.vue';
+import Request from "@/components/Request.vue";
 
 export default {
-  name: 'MyRequests',
+  name: "MyRequests",
   components: {
-    Request,
+    Request
   },
   computed: {
     getRequests() {
       // All requests that are available or the ones owned by yourself.
       return this.$store.getters.requests
-        .filter((request) => !request.delivered)
+        .filter(request => !request.delivered)
         .filter(
-          (request) => request.connectedUser === null
-            || this.$store.getters.email === request.connectedUser.email,
+          request =>
+            request.connectedUser === null ||
+            this.$store.getters.email === request.connectedUser.email
         );
-    },
-  },
+    }
+  }
 };
 </script>
 
