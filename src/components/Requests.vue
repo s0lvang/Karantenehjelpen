@@ -1,10 +1,10 @@
 <template>
   <section>
-    <h3>{{firstHeaderText}}</h3>
-    <section v-for="request  in getNotDelivered" :key="request.id">
+    <h3>{{ firstHeaderText }}</h3>
+    <section v-for="request in getNotDelivered" :key="request.id">
       <Request :request="request" />
     </section>
-    <h3>{{secondHeaderText}}</h3>
+    <h3>{{ secondHeaderText }}</h3>
     <section v-for="request in getDelivered" :key="request.id">
       <Request :request="request" />
     </section>
@@ -12,35 +12,35 @@
 </template>
 
 <script>
-import Request from '@/components/Request.vue';
+import Request from "@/components/Request.vue";
 
 export default {
-  name: 'Requests',
+  name: "Requests",
   components: {
-    Request,
+    Request
   },
   props: {
     requests: {
       type: Array,
-      required: true,
+      required: true
     },
     firstHeaderText: {
       type: String,
-      required: true,
+      required: true
     },
     secondHeaderText: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     getDelivered() {
-      return this.requests.filter((request) => request.delivered);
+      return this.requests.filter(request => request.delivered);
     },
     getNotDelivered() {
-      return this.requests.filter((request) => !request.delivered);
-    },
-  },
+      return this.requests.filter(request => !request.delivered);
+    }
+  }
 };
 </script>
 

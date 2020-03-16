@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto ">
-    <h2 class="text-3xl text-center"> Din Bestilling </h2>
+    <h2 class="text-3xl text-center">Din Bestilling</h2>
     <DetailedRequest :request="getRequest" />
-    <Spinner :showSpinner="showSpinner"/>
+    <Spinner :showSpinner="showSpinner" />
     <div v-if="!showSpinner">
       <Button
         btnText="Send Forespørsel"
@@ -15,27 +15,27 @@
 </template>
 
 <script>
-import Button from '@/components/shared/Button.vue';
-import DetailedRequest from '@/components/DetailedRequest.vue';
-import Spinner from '@/components/shared/Spinner.vue';
+import Button from "@/components/shared/Button.vue";
+import DetailedRequest from "@/components/DetailedRequest.vue";
+import Spinner from "@/components/shared/Spinner.vue";
 
 export default {
-  name: 'RequestSummary',
+  name: "RequestSummary",
   components: {
     Button,
     DetailedRequest,
-    Spinner,
+    Spinner
   },
   props: {
-    showSpinner: Boolean,
+    showSpinner: Boolean
   },
   methods: {
     goBack() {
-      this.$emit('goBack');
+      this.$emit("goBack");
     },
     createRequest() {
-      this.$emit('createRequest', this.getRequest);
-    },
+      this.$emit("createRequest", this.getRequest);
+    }
   },
   computed: {
     getRequest() {
@@ -49,9 +49,9 @@ export default {
         uid: this.$store.getters.id,
         paymentSolution: this.$store.getters.paymentSolution,
         delivered: false,
-        connectedUser: null,
+        connectedUser: null
       };
-    },
-  },
+    }
+  }
 };
 </script>

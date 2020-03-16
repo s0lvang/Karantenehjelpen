@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
+import axios from "axios";
 
 export default async function fetchLocation(location) {
   return axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json`, {
