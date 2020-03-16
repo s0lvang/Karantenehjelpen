@@ -24,7 +24,7 @@
         </a>
       </div>
       <div class="text-sm sm:flex-grow">
-        <a @click="dummyClick"
+        <a @click="myAssignedRequests"
           class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
           cursor-pointer text-xl">
           Mine oppdrag
@@ -72,12 +72,17 @@ export default {
     toggle() {
       this.open = !this.open;
     },
-    dummyClick() {
-      console.log(this.$route.name);
-      console.log('sumthing clicked');
-    },
     myRequests() {
-      this.$router.push('/my-requests');
+      if (this.$route.name !== 'MyRequests') {
+        this.$router.push('/my-requests');
+        this.toggle();
+      }
+    },
+    myAssignedRequests() {
+      if (this.$route.name !== 'MyAssignedRequests') {
+        this.$router.push('/my-assigned-requests');
+        this.toggle();
+      }
     },
     toAllRequests() {
       if (this.$route.name !== 'AllRequests') {

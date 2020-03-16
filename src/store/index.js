@@ -77,7 +77,8 @@ const store = new Vuex.Store({
 fb.auth.onAuthStateChanged((user) => {
   if (user) {
     store.commit('SET_CURRENT_USER', user);
-    fb.db.collectionGroup('requests')
+    fb.db
+      .collectionGroup('requests')
       .orderBy('createdOn', 'desc')
       .onSnapshot((querySnapshot) => {
         const requests = querySnapshot.docs.map((request) => ({
