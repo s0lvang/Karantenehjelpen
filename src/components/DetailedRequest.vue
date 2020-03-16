@@ -13,7 +13,7 @@
           >
             <span class="font-bold">{{ item.count }}x</span>
             {{
-            item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
+              item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
             }}
           </li>
         </ul>
