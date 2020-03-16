@@ -21,6 +21,10 @@
         :btnDisabled="false"
         @btnClicked="connectUserToRequest"
       />
+      <p v-if="userIsAssigned" class="">
+        Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
+        Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
+      </p>
       <section v-if="userOwnsRequest && requestIsTaken">
         <p class="p-5">
           <b>{{ getRequest.connectedUser.name }}</b> har tatt oppdraget ditt.
