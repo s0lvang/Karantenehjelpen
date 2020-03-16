@@ -51,7 +51,10 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "no-console": "off",
+      "no-alert": "off"
+    }
   },
   "browserslist": [
     "> 1%",

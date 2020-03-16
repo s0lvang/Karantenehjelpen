@@ -11,8 +11,8 @@
         class="pr-5"
       />
       <NumberInput
-        labelText="Telefonummer"
-        placeholderText="Telefonnummer"
+        labelText="Telefonummer (uten landskode)"
+        placeholderText="98765432"
         @emitNumberInput="updatePhoneNumber"
         :existing="phoneNr"
       />
@@ -36,16 +36,24 @@
         class="pr-5 pl-5"
       />
     </div>
-    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem" />
+    <Button
+      btnText="Ny vare"
+      :btnDisabled="false"
+      @btnClicked="renderNewItem"
+    />
     <div class="flex justify-center">
       <p v-if="errorMsg">Du må legge til alle varene!</p>
       <p v-if="addressError">Du må legge til en adresse!</p>
       <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
-      <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
+      <p v-if="phoneNumberError">Du må legge til en telefonummer!</p>
       <p v-if="itemNameError">Varen må ha et navn!</p>
       <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
     </div>
-    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary" />
+    <Button
+      btnText="Gå til oppsummering"
+      :btnDisabled="false"
+      @btnClicked="toSummary"
+    />
   </div>
 </template>
 
@@ -91,7 +99,7 @@ export default {
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
-      this.phoneNr = value;
+      this.phoneNr = value.replace(/\+47/g, "").replace(/ /g, "");
     },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
