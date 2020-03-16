@@ -1,28 +1,31 @@
 <template>
-  <Requests
-    :requests="getMyRequests"
-    firstHeaderText="Mine Oppdrag"
-    secondHeaderText="Mine Leverte Oppdrag"
-  />
+  <div class="container mx-auto">
+    <Requests
+      :requests="getMyRequests"
+      firstHeaderText="Mine Oppdrag"
+      secondHeaderText="Mine Leverte Oppdrag"
+    />
+  </div>
 </template>
 
 <script>
-import Requests from '@/components/Requests.vue';
+import Requests from "@/components/Requests.vue";
 
 export default {
-  name: 'MyAssignedRequests',
+  name: "MyAssignedRequests",
   components: {
-    Requests,
+    Requests
   },
 
   computed: {
     getMyRequests() {
       return this.$store.getters.requests.filter(
-        (request) => request.connectedUser
-          && request.connectedUser.email === this.$store.getters.email,
+        request =>
+          request.connectedUser &&
+          request.connectedUser.email === this.$store.getters.email
       );
-    },
-  },
+    }
+  }
 };
 </script>
 

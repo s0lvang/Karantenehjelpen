@@ -13,29 +13,28 @@
 </template>
 
 <script>
-
 export default {
-  name: 'TextInput',
+  name: "TextInput",
   props: {
     labelText: {
       type: String,
-      required: true,
+      required: true
     },
     placeholderText: {
       type: String,
-      required: true,
+      required: true
     },
     localIndex: {
       type: Number,
-      required: false,
+      required: false
     },
-    existing: String,
+    existing: String
   },
   methods: {
     emitInputText(event) {
-      this.$emit('emitInputText', event, this.localIndex);
-    },
-  },
+      this.$emit("emitInputText", event, this.localIndex);
+    }
+  }
 };
 </script>
 

@@ -5,13 +5,18 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prettier-check": "prettier --check 'src/**/*.{vue,js}'",
+    "prettier-fix": "prettier --write 'src/**/*.{vue,js}'"
   },
   "dependencies": {
+    "@vue/eslint-config-prettier": "^6.0.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "eslint-plugin-prettier": "^3.1.2",
     "firebase": "^7.10.0",
     "mapbox-gl": "^1.8.1",
+    "prettier": "^1.19.1",
     "tailwindcss": "^1.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
@@ -40,7 +45,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "@vue/airbnb"
+      "@vue/airbnb",
+      "@vue/eslint-config-prettier"
     ],
     "parserOptions": {
       "ecmaVersion": 2020

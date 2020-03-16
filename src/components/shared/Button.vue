@@ -12,25 +12,24 @@
 </template>
 
 <script>
-
 export default {
-  name: 'Button',
+  name: "Button",
   props: {
     btnText: {
       type: String,
-      required: true,
+      required: true
     },
     btnDisabled: {
       type: Boolean,
-      required: true,
+      required: true
     },
-    isDanger: String,
+    isDanger: String
   },
   methods: {
     btnClick() {
-      this.$emit('btnClicked');
-    },
-  },
+      this.$emit("btnClicked");
+    }
+  }
 };
 </script>
 
@@ -59,10 +58,10 @@ export default {
   &:disabled {
     color: #555658;
     border-color: 1px solid rgb(241, 241, 241);
-    background-color: #ECECEC;
+    background-color: #ececec;
   }
-  &.true{
-    background-color: #DF2020
+  &.true {
+    background-color: #df2020;
   }
 }
 </style>

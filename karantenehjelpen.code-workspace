@@ -1,21 +1,18 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
+  "folders": [
+    {
+      "path": "."
+    }
   ],
   "settings": {
-    "eslint.validate": [
-      "vue", "javascript", "typescript", "html",
-    ],
     "eslint.options": {
-      "extensions": [".ts", ".js", ".vue"],
+      "extensions": [".ts", ".js", ".vue"]
     },
-    "editor.formatOnSave": false,
     "vetur.validation.template": false,
     "javascript.implicitProjectConfig.experimentalDecorators": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
+      "source.fixAll.eslint": true
     },
+    "editor.formatOnSave": true
   }
 }

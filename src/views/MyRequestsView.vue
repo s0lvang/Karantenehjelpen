@@ -1,27 +1,28 @@
 <template>
-  <Requests
-    :requests="getMyRequests"
-    firstHeaderText="Mine Bestillinger"
-    secondHeaderText="Mine Leverte"
-  />
+  <div class="container mx-auto">
+    <Requests
+      :requests="getMyRequests"
+      firstHeaderText="Mine Bestillinger"
+      secondHeaderText="Mine Leverte"
+    />
+  </div>
 </template>
 
 <script>
-import Requests from '@/components/Requests.vue';
+import Requests from "@/components/Requests.vue";
 
 export default {
-  name: 'MyRequests',
+  name: "MyRequests",
   components: {
-    Requests,
+    Requests
   },
-
   computed: {
     getMyRequests() {
       return this.$store.getters.requests.filter(
-        (request) => request.email === this.$store.getters.email,
+        request => request.email === this.$store.getters.email
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
