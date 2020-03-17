@@ -3,6 +3,7 @@
     <h3 class="text-2xl p-2">
       {{ request.address.place_name_no }}
     </h3>
+    <p class="text-sm p-2">{{ distance.toFixed(2) }} km unna deg</p>
     <p class="text-xl underline p-2">
       Handleliste:
     </p>
@@ -20,6 +21,7 @@
 
 <script>
 import Button from "@/components/shared/Button.vue";
+import coordinateDistance from "@/helpers/coord";
 
 export default {
   name: "Request",
@@ -40,6 +42,15 @@ export default {
   computed: {
     getItemNames() {
       return this.request.items.map(item => item.itemName).join(", ");
+    },
+    distance() {
+      return coordinateDistance(
+        this.$store.getters.location.latitude,
+        this.$store.getters.location.longitude,
+        this.request.address.center[1],
+        this.request.address.center[0],
+        "K"
+      );
     },
     userIsAssigned() {
       return (

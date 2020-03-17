@@ -112,6 +112,9 @@ fb.auth.onAuthStateChanged(user => {
  * The fallback address is actually my home address, so if people aren't cool
  * enough to enable geolocation, they'll be inclined to deliver to me first.
  *
+ * EDIT: Turns out that the rest of the team didn't appreciate my humor, so I'm setting
+ * the default to Trondheim city.
+ *
  * This should probably be changed to something better for humanity, but it'll
  * do for now.
  */
@@ -123,7 +126,10 @@ navigator.geolocation.getCurrentPosition(
     console.error(
       `Could not retrieve geolocation. ${err.code}: ${err.message}.`
     );
-    store.commit("SET_GEOLOCATION", { latitude: 63.41002, longitude: 10.4153 });
+    store.commit("SET_GEOLOCATION", {
+      latitude: 63.41002,
+      longitude: 10.395053
+    });
   },
   { enableHighAccuracy: true, maximumAge: 60000, timeout: 5000 }
 );
