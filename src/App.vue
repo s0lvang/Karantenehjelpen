@@ -35,13 +35,17 @@ export default {
 }
 
 footer {
-  margin-top: 4rem;
   padding: 1rem;
+  margin-top: 2rem;
   background: $color-primary;
   text-align: center;
 
   a {
     color: $color-text-contrast;
+  }
+
+  @media #{$tabletAndUp} {
+    margin-top: 4rem;
   }
 }
 </style>

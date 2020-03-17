@@ -48,22 +48,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 1rem;
-}
 h1 {
-  grid-column: 1 / -1;
-  text-align: center;
+  display: none;
 }
 .role {
   @include card;
   text-align: center;
-
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
   button {
     margin: 2rem auto 1rem;
+  }
+}
+
+@media #{$tabletAndUp} {
+  section {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1rem;
+  }
+
+  h1 {
+    display: inherit;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+
+  .role {
+    margin: 0;
   }
 }
 </style>

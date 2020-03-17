@@ -36,10 +36,18 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-  margin-top: 4rem;
-  text-align: center;
+  display: none;
 }
+
 button {
   margin: 2rem auto;
+}
+
+@media #{$tabletAndUp} {
+  h1 {
+    display: inherit;
+    margin-top: 4rem;
+    text-align: center;
+  }
 }
 </style>
