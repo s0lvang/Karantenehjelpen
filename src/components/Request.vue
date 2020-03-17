@@ -14,6 +14,7 @@
       @btnClicked="seeMore"
       :btnDisabled="false"
     />
+    <img v-if="userIsAssigned" src="@/assets/groceries.svg" />
   </div>
 </template>
 
@@ -39,7 +40,20 @@ export default {
   computed: {
     getItemNames() {
       return this.request.items.map(item => item.itemName).join(", ");
+    },
+    userIsAssigned() {
+      return (
+        this.request.connectedUser &&
+        this.request.connectedUser.email === this.$store.getters.email
+      );
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+img {
+  height: auto;
+  width: 50px; // TODO: The placement of the icon should be fixed.
+}
+</style>
