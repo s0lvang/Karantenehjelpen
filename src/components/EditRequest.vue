@@ -5,7 +5,7 @@
     </div>
     <div v-if="resolvedValue">
       <div class="pl-6 mt-5">
-        <AddressInput :existing="this.address.place_name_no" />
+        <AddressInput :existing="this.address.place_name_no" inEdit="true" />
         <BigTextInput
           labelText="Ankomstbeskrivelse"
           placeholderText="F.eks: I smuget bak rammeverkstedet"

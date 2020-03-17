@@ -11,6 +11,7 @@
       name="address_input"
       class="address_input"
       :placeholder="this.checkAddress"
+      :class="inEdit"
     />
     <div>
       <Spinner :showSpinner="showSpinner" />
@@ -41,7 +42,8 @@ export default {
     Spinner
   },
   props: {
-    existing: String
+    existing: String,
+    inEdit: String
   },
   data() {
     return {
@@ -118,6 +120,12 @@ export default {
     font-size: 1em;
     color: rgb(42, 39, 34);
     border: 1px solid rgb(241, 241, 241);
+    &.true {
+      &::placeholder {
+        color: black;
+        opacity: 1;
+      }
+    }
   }
 }
 .field-autocomplete {
