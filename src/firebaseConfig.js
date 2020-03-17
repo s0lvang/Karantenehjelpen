@@ -13,10 +13,12 @@ db.settings({});
 
 // firebase collections
 const usersCollection = db.collection("users");
+const additionalUserInfoCollection = db.collection("userInfo");
 
 export default {
   db,
   auth,
   currentUser,
-  usersCollection
+  usersCollection,
+  additionalUserInfoCollection
 };
