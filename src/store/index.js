@@ -18,6 +18,8 @@ const store = new Vuex.Store({
     currentUser: state => state.currentUser,
     name: state => (state.currentUser ? state.currentUser.displayName : null),
     email: state => (state.currentUser ? state.currentUser.email : null),
+    phoneNumber: state =>
+      state.currentUser ? state.currentUser.phoneNumber : null,
     id: state => (state.currentUser ? state.currentUser.uid : null),
     address: state => state.address,
     phoneNumberInput: state => state.phoneNumberInput,
