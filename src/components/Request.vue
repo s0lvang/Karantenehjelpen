@@ -42,8 +42,10 @@ export default {
     }
   },
   computed: {
-    getItemNames() {
-      return this.request.items.map(item => item.itemName).join(", ");
+    getItems() {
+      return this.request.items
+        .map(item => `<b>${item.count}x</b> ${item.itemName}`)
+        .join(", ");
     },
     userIsAssigned() {
       return (

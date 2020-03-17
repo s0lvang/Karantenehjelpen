@@ -6,7 +6,11 @@
   ],
   "settings": {
     "eslint.options": {
-      "extensions": [".ts", ".js", ".vue"]
+      "extensions": [
+        ".ts",
+        ".js",
+        ".vue"
+      ]
     },
     "vetur.format.enable": false,
     "javascript.implicitProjectConfig.experimentalDecorators": true,

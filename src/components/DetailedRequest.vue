@@ -8,8 +8,8 @@
     <h3>
       Kontaktinformasjon
     </h3>
-    <p><strong>Epost:</strong> {{ request.email }}</p>
-    <p><strong>Telefon:</strong> {{ "12345678" }}</p>
+    <p><strong>Epost:</strong><a class="link" :href="getEmailLink">{{ request.email }}</a></p>
+    <p><strong>Telefon:</strong><a class="link" :href="getPhoneLink">{{ request.phoneNumber }}</a></p>
     <p><strong>Betalingsmåte:</strong> {{ request.paymentSolution }}</p>
 
     <h3>Handleliste</h3>
@@ -40,7 +40,14 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {
+    getPhoneLink() {
+      return `tel:${this.request.phoneNumber}`;
+    },
+    getEmailLink() {
+      return `mailto:${this.request.email}`;
+    }
+  }
 };
 </script>
 
@@ -53,6 +60,18 @@ li {
     display: inline-block;
     width: 2rem;
   }
+}
+
+.link {
+  color: #038df0;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:active {
+  color: #004bac;
 }
 
 hr {
