@@ -7,12 +7,12 @@ import StartScreenView from "@/views/StartScreenView.vue";
 import RequestView from "@/views/RequestView.vue"; // eslint-disable
 import MyRequestsView from "@/views/MyRequestsView.vue"; // eslint-disable
 import MyAssignedRequestsView from "@/views/MyAssignedRequestsView.vue"; // eslint-disable
+import EditRequestView from "@/views/EditRequestView.vue";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "*",
     redirect: "start-screen"
   },
@@ -69,6 +69,14 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/edit/:id",
+    name: "Request",
+    component: EditRequestView,
+    meta: {
+      requiresAuth: true
+    }
   }
 ];
 
@@ -79,7 +87,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const { currentUser } = firebase.auth();
+  const {
+    currentUser
+  } = firebase.auth();
   if (requiresAuth && !currentUser) {
     next("/login");
   } else if (requiresAuth && currentUser) {

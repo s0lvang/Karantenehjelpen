@@ -13,7 +13,7 @@
           >
             <span class="font-bold">{{ item.count }}x</span>
             {{
-            item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
+              item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
             }}
           </li>
         </ul>
@@ -37,17 +37,25 @@
         <p class="text-lg font-bold p-2">Ankomstbeskrivelse:</p>
         <div class="p-2 break-words">{{ request.arrivalDescription }}</div>
       </div>
+      <Button
+        btnText="Endre"
+        :btnDisabled="false"
+        v-if="resolvedValue"
+        @btnClicked="goToEdit"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import Map from "@/components/Map.vue";
+import Button from "@/components/shared/Button.vue";
 
 export default {
   name: "DetailedRequest",
   components: {
-    Map
+    Map,
+    Button
   },
   props: {
     request: {
@@ -55,7 +63,25 @@ export default {
       required: true
     }
   },
-  methods: {},
-  computed: {}
+  methods: {
+    goToEdit() {
+      this.$router.push(`/edit/${this.request.id}`);
+    },
+    getRequest() {
+      return new Promise(resolve => {
+        resolve(
+          this.$store.getters.requests.find(
+            request => request.id === this.$route.params.id
+          )
+        );
+      });
+    }
+  },
+  asyncComputed: {
+    async resolvedValue() {
+      const x = await this.getRequest();
+      return x.email === this.$store.getters.email;
+    }
+  }
 };
 </script>

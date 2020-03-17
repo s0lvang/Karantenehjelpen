@@ -10,7 +10,7 @@
       type="text"
       name="address_input"
       class="address_input"
-      placeholder="Kongens slott"
+      :placeholder="this.checkAddress"
     />
     <div>
       <Spinner :showSpinner="showSpinner" />
@@ -39,6 +39,9 @@ export default {
   name: "AddressInput",
   components: {
     Spinner
+  },
+  props: {
+    existing: String
   },
   data() {
     return {
@@ -88,6 +91,11 @@ export default {
       this.locationInput = location.place_name_no;
       this.showList = false;
       this.$store.dispatch("SET_ADDRESS", location);
+    }
+  },
+  computed: {
+    checkAddress() {
+      return this.existing ? this.existing : "Kongens slott";
     }
   }
 };
