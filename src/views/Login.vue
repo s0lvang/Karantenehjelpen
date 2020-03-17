@@ -57,4 +57,7 @@ h1 {
   margin-top: 4rem;
   text-align: center;
 }
+button {
+  margin: 2rem auto;
+}
 </style>

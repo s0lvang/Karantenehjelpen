@@ -61,5 +61,9 @@ h1 {
 .role {
   @include card;
   text-align: center;
+
+  button {
+    margin: 2rem auto 1rem;
+  }
 }
 </style>

@@ -32,7 +32,6 @@ button {
   background: $color-primary;
   color: $color-text-contrast;
   padding: 1rem;
-  margin: 2rem auto;
   border-radius: 4px;
   letter-spacing: 1px;
   cursor: pointer;

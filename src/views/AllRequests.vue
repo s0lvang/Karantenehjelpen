@@ -1,9 +1,11 @@
 <template>
   <section>
-    <p>Tilgjengelige oppdrag</p>
-    <section v-for="request in getRequests" :key="request.id">
-      <Request :request="request" />
-    </section>
+    <h2>Tilgjengelige oppdrag</h2>
+    <Request
+      v-for="request in getRequests"
+      :key="request.id"
+      :request="request"
+    />
   </section>
 </template>
 

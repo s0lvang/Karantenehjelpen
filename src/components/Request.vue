@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="request">
     <h3>
       {{ request.address.place_name_no }}
     </h3>
-    <p>
+    <strong>
       Handleliste:
-    </p>
+    </strong>
     <div>
       {{ getItemNames }}
     </div>
@@ -43,3 +43,22 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.request {
+  @include card;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin: 2rem auto 1rem;
+}
+</style>
