@@ -1,3 +1,4 @@
+
 name: Continuous Deployment
 
 on:
@@ -18,7 +19,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
+    - name: Create env file
+      run: echo -e "VUE_APP_MAPBOX_TOKEN=${{secrets.MAPBOX_TOKEN}}\nVUE_APP_FIREBASE_CONFIG=${{secrets.FIREBASE_CONFIG}}\nVUE_APP_ACCOUNT_SID=${{secrets.ACCOUNT_SID}}\nVUE_APP_AUTH_TOKEN=${{secrets.AUTH_TOKEN}}" > .env
     - run: npm install
     - run: npm run build
     - name: Deploy to firebase
