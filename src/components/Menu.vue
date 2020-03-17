@@ -1,5 +1,5 @@
 <template>
-  <header id="forBGcolor">
+  <header>
     <a class="brand" @click="goToStart">
       <img src="@/assets/logo.svg" alt="logo" />
       <h1>
@@ -135,10 +135,6 @@ svg {
   }
 }
 
-.hidden {
-  display: none;
-}
-
 nav {
   position: absolute;
   display: flex;
@@ -146,27 +142,35 @@ nav {
   width: 100%;
   left: 0;
   bottom: 0;
-  background: white;
-  border-top: 1px solid $color-text;
-  box-shadow: 0 2px 4px rgba(black, 0.25);
+  overflow: hidden;
+  color: white;
   transform: translateY(100%);
   z-index: 100;
+  height: calc(100vh - 4rem);
+  transition: max-height 1s ease-out, backdrop-filter 1s ease-out,
+    background 1s ease-out;
+
+  &.hidden {
+    background: transparent;
+    max-height: 0px;
+    backdrop-filter: none;
+  }
+
+  &.block {
+    background: rgba(black, 0.25);
+    max-height: calc(100vh - 4rem);
+    backdrop-filter: blur(10px);
+  }
 
   & > a {
+    font-size: 1.5rem;
     padding: 1rem;
     margin: 0 0.5rem;
-
-    &:not(:first-child) {
-      border-top: 1px solid $color-background-contrast;
-    }
   }
 }
 
 .divider {
-  display: inline-block;
-  height: 2px;
-  margin: 0 0.5rem;
-  background: $color-text;
+  display: hidden;
 }
 
 @media #{$tabletAndUp} {
@@ -183,14 +187,19 @@ nav {
 }
 
 @media #{$desktopAndUp} {
-  nav,
-  .hidden {
+  nav {
     display: block;
     position: static;
     box-shadow: none;
     border: none;
     transform: none;
     width: inherit;
+    color: inherit;
+    height: auto;
+
+    &.hidden {
+      max-height: none;
+    }
 
     & > a {
       padding: 0;
@@ -204,6 +213,8 @@ nav {
     display: none;
   }
   .divider {
+    display: inline-block;
+    background: $color-text;
     width: 2px;
     height: 2rem;
     margin: -0.5rem 1rem;
