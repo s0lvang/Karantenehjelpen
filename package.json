@@ -19,6 +19,7 @@
     "mapbox-gl": "^1.8.1",
     "prettier": "^1.19.1",
     "vue": "^2.6.11",
+    "vue-fragment": "^1.5.1",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   },

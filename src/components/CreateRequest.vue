@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <h1>Ny bestilling</h1>
-    <div>
-      <AddressInput />
-      <BigTextInput
-        labelText="Ankomstbeskrivelse"
-        placeholderText="F.eks: I smuget bak rammeverkstedet"
-        @change="updateArrivalDescription"
-        :existing="arrivalDesc"
-      />
-      <NumberInput
-        labelText="Telefonummer"
-        placeholderText="Telefonnummer"
-        @emitNumberInput="updatePhoneNumber"
-        :existing="phoneNr"
-      />
-      <TextInput
-        labelText="Betalingsløsing"
-        placeholderText="Vipps"
-        @emitInputText="updatePaymentSolution"
-        :existing="paymentSolution"
-      />
-    </div>
+  <fragment>
+    <h2>Ny bestilling</h2>
+    <AddressInput />
+    <BigTextInput
+      labelText="Ankomstbeskrivelse"
+      placeholderText="F.eks: I smuget bak rammeverkstedet"
+      @change="updateArrivalDescription"
+      :existing="arrivalDesc"
+    />
+    <NumberInput
+      labelText="Telefonummer"
+      placeholderText="Telefonnummer"
+      @emitNumberInput="updatePhoneNumber"
+      :existing="phoneNr"
+    />
+    <TextInput
+      labelText="Betalingsløsing"
+      placeholderText="Vipps"
+      @emitInputText="updatePaymentSolution"
+      :existing="paymentSolution"
+    />
     <div v-if="this.items.length >= 1">
       <Item
         @updateItem="addItem"
@@ -51,10 +49,12 @@
       :btnDisabled="false"
       @btnClicked="toSummary"
     />
-  </div>
+  </fragment>
 </template>
 
 <script>
+import { Fragment } from "vue-fragment";
+
 import Button from "@/components/shared/Button.vue";
 import TextInput from "@/components/shared/TextInput.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
@@ -65,6 +65,7 @@ import AddressInput from "@/components/AddressInput.vue";
 export default {
   name: "CreateRequest",
   components: {
+    Fragment,
     TextInput,
     Item,
     Button,

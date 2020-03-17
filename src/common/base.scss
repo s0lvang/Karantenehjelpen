@@ -31,6 +31,22 @@ img {
   max-width: 100%;
 }
 
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: $color-primary;
+}
+
+input[type="text"] {
+  width: 100%;
+  color: $color-text;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border: 1px solid $color-background-contrast;
+  max-width: 200px;
+  @include elevation-soft;
+}
+
 @mixin heading($font-size) {
   $line-height: $font-size + 0.5rem;
 
