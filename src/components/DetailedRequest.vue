@@ -3,7 +3,18 @@
     <div class="flex flex-col items-center">
       <div>
         <Map :locationCenter="request.address.center" class />
-        <p class="text-2xl p-2">{{ request.address.place_name_no }}</p>
+        <a
+          target="_blank"
+          class="address"
+          :href="
+            `https://www.google.com/maps/dir/?api=1&destination=${request.address.place_name_no.replace(
+              / /g,
+              '+'
+            )}&travelmode=driving`
+          "
+        >
+          <p class="text-2xl p-2">{{ request.address.place_name_no }}</p>
+        </a>
 
         <ul class="p-2">
           <li
@@ -59,3 +70,9 @@ export default {
   computed: {}
 };
 </script>
+
+<style lang="scss" scoped>
+.address {
+  color: #0060a3;
+}
+</style>
