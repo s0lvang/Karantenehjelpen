@@ -1,12 +1,12 @@
 <template>
   <section>
-    <h3>{{ firstHeaderText }}</h3>
+    <h2>{{ firstHeaderText }}</h2>
     <Request
       v-for="request in getNotDelivered"
       :key="request.id"
       :request="request"
     />
-    <h3>{{ secondHeaderText }}</h3>
+    <h2>{{ secondHeaderText }}</h2>
     <Request
       v-for="request in getDelivered"
       :key="request.id"

@@ -1,11 +1,9 @@
 <template>
-  <section>
-    <Requests
-      :requests="getMyRequests"
-      firstHeaderText="Mine Oppdrag"
-      secondHeaderText="Mine Leverte Oppdrag"
-    />
-  </section>
+  <Requests
+    :requests="getMyRequests"
+    firstHeaderText="Mine Oppdrag"
+    secondHeaderText="Mine Leverte Oppdrag"
+  />
 </template>
 
 <script>
