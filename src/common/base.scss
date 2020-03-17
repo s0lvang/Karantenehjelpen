@@ -28,7 +28,6 @@ a {
 
 img {
   display: block;
-  max-width: 100%;
 }
 
 label {
@@ -54,7 +53,11 @@ input[type="number"] {
 }
 
 hr {
-  margin: 3rem 0;
+  margin: 1rem 0;
+
+  @media #{$desktopAndUp} {
+    margin: 3rem 0;
+  }
 }
 
 @mixin heading($font-size) {

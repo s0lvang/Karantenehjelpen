@@ -36,7 +36,7 @@ export default {
 
 footer {
   padding: 1rem;
-  margin-top: 2rem;
+  margin-top: $vertical-space;
   background: $color-primary;
   text-align: center;
 
@@ -45,7 +45,7 @@ footer {
   }
 
   @media #{$tabletAndUp} {
-    margin-top: 4rem;
+    margin-top: $vertical-space-large;
   }
 }
 </style>

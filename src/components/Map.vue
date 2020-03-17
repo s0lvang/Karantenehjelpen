@@ -56,7 +56,7 @@ export default {
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css");
 #map {
-  margin-top: -4rem;
+  margin-top: -1 * $vertical-space;
   position: relative;
   width: 100vw;
   left: 50%;
@@ -66,19 +66,38 @@ export default {
   h3 {
     position: absolute;
     background: white;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    width: 100%;
     margin: 0;
     bottom: 0;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     z-index: 10;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 }
 
 .mapboxgl-marker.mapboxgl-marker-anchor-center svg g {
   fill: $color-primary;
+}
+
+@media #{$tabletAndUp} {
+  #map {
+    margin-top: -1 * $vertical-space-large;
+
+    h3 {
+      width: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media #{$desktopAndUp} {
+  #map {
+    h3 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+  }
 }
 </style>

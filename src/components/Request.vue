@@ -1,8 +1,13 @@
 <template>
   <div class="request">
-    <h3>
-      {{ request.address.place_name_no }}
-    </h3>
+    <div class="heading">
+      <h3>
+        {{ request.address.place_name_no }}
+      </h3>
+      <span v-if="userIsAssigned" class="badge">
+        <img src="@/assets/groceries.svg" />
+      </span>
+    </div>
     <strong>
       Handleliste:
     </strong>
@@ -14,9 +19,6 @@
       @btnClicked="seeMore"
       :btnDisabled="false"
     />
-    <span v-if="userIsAssigned" class="badge">
-      <img src="@/assets/groceries.svg" />
-    </span>
   </div>
 </template>
 
@@ -69,23 +71,37 @@ h3 {
   margin-bottom: 1rem;
 }
 
+.heading {
+  display: flex;
+}
+
 .badge {
-  position: absolute;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: $color-primary;
-  width: 5rem;
-  height: 5rem;
-  padding: 1rem;
+  margin-left: 1rem;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
   border-radius: 50%;
 
   img {
-    width: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
 button {
   margin: 2rem auto 1rem;
+}
+
+@media #{$tabletAndUp} {
+  .badge {
+    width: 5rem;
+    height: 5rem;
+
+    img {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
 }
 </style>

@@ -108,7 +108,7 @@ header {
   justify-content: space-between;
   padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(black, 0.25);
-  margin-bottom: 2rem;
+  margin-bottom: $vertical-space;
 }
 
 img {
@@ -149,7 +149,7 @@ nav {
   border-top: 1px solid $color-text;
   box-shadow: 0 2px 4px rgba(black, 0.25);
   transform: translateY(100%);
-  z-index: 1;
+  z-index: 100;
 
   & > a {
     padding: 1rem;
@@ -170,7 +170,7 @@ nav {
 
 @media #{$tabletAndUp} {
   header {
-    margin-bottom: 4rem;
+    margin-bottom: $vertical-space-large;
   }
   h1 {
     font-size: 2rem;

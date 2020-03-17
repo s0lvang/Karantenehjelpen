@@ -4,6 +4,7 @@
       :address="request.address.place_name_no"
       :locationCenter="request.address.center"
     />
+    <hr />
     <h3>
       Kontaktinformasjon
     </h3>
@@ -51,6 +52,16 @@ li {
     line-height: inherit;
     display: inline-block;
     width: 2rem;
+  }
+}
+
+hr {
+  margin: 0;
+}
+
+@media #{$tabletAndUp} {
+  hr {
+    display: none;
   }
 }
 </style>
