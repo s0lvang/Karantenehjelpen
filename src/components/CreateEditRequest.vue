@@ -1,67 +1,61 @@
 <template>
-  <div>
+  <section>
+    <h2>Bestilling</h2>
+    <AddressInput :existing="this.address.place_name_no" :inEdit="checkEdit" />
+    <BigTextInput
+      labelText="Ankomstbeskrivelse"
+      placeholderText="F.eks: I smuget bak rammeverkstedet"
+      @change="updateArrivalDescription"
+      :existing="arrivalDesc"
+    />
+    <NumberInput
+      labelText="Telefonummer (uten landskode)"
+      placeholderText="98765432"
+      @emitNumberInput="updatePhoneNumber"
+      :existing="phoneNr"
+    />
+    <label for="payment-solution">Betalingsmetode</label>
+    <v-select
+      id="payment-solution"
+      name="payment-solution"
+      :options="['Vipps', 'Kontant', 'Bankoverføring']"
+      :value="paymentSolution"
+      @input="updatePaymentSolution"
+    />
+    <Items
+      v-if="this.items.length >= 1"
+      @updateItem="addItem"
+      :nrOfItems="items"
+      @addItem="addItem"
+      @deleteItem="deleteItem"
+      @decrementCount="decrementItemCount"
+      @incrementCount="incrementItemCount"
+      @updateName="updateItemName"
+    />
+    <Button
+      btnText="Ny vare"
+      :btnDisabled="false"
+      @btnClicked="renderNewItem"
+    />
+    <p class="error" v-if="errorMsg">Du må legge til alle varene!</p>
+    <p class="error" v-if="addressError">Du må legge til en adresse!</p>
+    <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
+    <p class="error" v-if="phoneNumberError">
+      Du må legge til en Telefonummer!
+    </p>
+    <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
+    <p class="error" v-if="paymentSolutionError">
+      Du må legge til en betalingsløsing!
+    </p>
     <div>
-      <div class="pl-6 mt-5">
-        <AddressInput
-          :existing="this.address.place_name_no"
-          :inEdit="checkEdit"
-        />
-        <BigTextInput
-          labelText="Ankomstbeskrivelse"
-          placeholderText="F.eks: I smuget bak rammeverkstedet"
-          @change="updateArrivalDescription"
-          :existing="arrivalDesc"
-          class="pr-5"
-        />
-        <NumberInput
-          labelText="Telefonummer (uten landskode)"
-          placeholderText="98765432"
-          @emitNumberInput="updatePhoneNumber"
-          :existing="phoneNr"
-        />
-        <label class="payment-solution-label" for="payment-solution"
-          >Betalingsmetode</label
-        >
-        <v-select
-          id="payment-solution"
-          name="payment-solution"
-          :options="['Vipps', 'Kontant', 'Bankoverføring']"
-          :value="paymentSolution"
-          @input="updatePaymentSolution"
-        />
-      </div>
-      <div v-if="this.items.length >= 1" class="items">
-        <Items
-          @updateItem="addItem"
-          :nrOfItems="items"
-          @addItem="addItem"
-          @deleteItem="deleteItem"
-          @decrementCount="decrementItemCount"
-          @incrementCount="incrementItemCount"
-          @updateName="updateItemName"
-          class="pr-5 pl-5"
-        />
-      </div>
-      <Button
-        btnText="Ny vare"
-        :btnDisabled="false"
-        @btnClicked="renderNewItem"
-      />
-      <div class="flex justify-center">
-        <p v-if="errorMsg">Du må legge til alle varene!</p>
-        <p v-if="addressError">Du må legge til en adresse!</p>
-        <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
-        <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
-        <p v-if="itemNameError">Varen må ha et navn!</p>
-        <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
-      </div>
+      <hr />
       <Button
         btnText="Gå til oppsummering"
         :btnDisabled="false"
         @btnClicked="toSummary"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -235,15 +229,14 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
-.payment-solution-label {
-  align-self: flex-start;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75rem;
+section > * + * {
   margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  display: block;
-  color: rgb(0, 96, 163);
+}
+
+.error {
+  text-align: center;
+  color: $color-danger;
 }
 </style>
