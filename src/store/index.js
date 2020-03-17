@@ -13,7 +13,8 @@ const store = new Vuex.Store({
     paymentSolution: "",
     items: [],
     requests: [],
-    geolocation: {}
+    geolocation: {},
+    showDistance: false
   },
   getters: {
     currentUser: state => state.currentUser,
@@ -28,7 +29,8 @@ const store = new Vuex.Store({
     paymentSolution: state => state.paymentSolution,
     items: state => state.items,
     requests: state => state.requests,
-    location: state => state.geolocation
+    location: state => state.geolocation,
+    showDistance: state => state.showDistance
   },
   mutations: {
     SET_CURRENT_USER(state, val) {
@@ -54,6 +56,9 @@ const store = new Vuex.Store({
     },
     SET_GEOLOCATION(state, payload) {
       state.geolocation = payload;
+    },
+    SET_SHOW_DISTANCE(state, payload) {
+      state.showDistance = payload;
     }
   },
   actions: {
@@ -80,6 +85,9 @@ const store = new Vuex.Store({
     },
     SET_GEOLOCATION: (context, payload) => {
       context.commit("SET_GEOLOCATION", payload);
+    },
+    SET_SHOW_DISTANCE: (context, payload) => {
+      context.commit("SET_SHOW_DISTANCE", payload);
     }
   }
 });
@@ -132,6 +140,7 @@ fb.auth.onAuthStateChanged(user => {
 navigator.geolocation.getCurrentPosition(
   ({ coords: { latitude, longitude } }) => {
     store.commit("SET_GEOLOCATION", { latitude, longitude });
+    store.commit("SET_SHOW_DISTANCE", true);
   },
   err => {
     console.error(
@@ -141,6 +150,7 @@ navigator.geolocation.getCurrentPosition(
       latitude: 63.41002,
       longitude: 10.395053
     });
+    store.commit("SET_SHOW_DISTANCE", false);
   },
   { enableHighAccuracy: true, maximumAge: 60000, timeout: 5000 }
 );

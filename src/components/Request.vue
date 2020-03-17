@@ -4,7 +4,7 @@
       <h3>
         {{ request.address.place_name_no }}
       </h3>
-      <p>{{ distance.toFixed(2) }} km unna deg</p>
+      <p v-if="showDistance">{{ distance.toFixed(2) }} km unna deg</p>
       <span v-if="userIsAssigned" class="badge">
         <img src="@/assets/groceries.svg" />
       </span>
@@ -48,6 +48,9 @@ export default {
       return this.request.items
         .map(item => `${item.count}x ${item.itemName}`)
         .join(", ");
+    },
+    showDistance() {
+      return this.$store.getters.showDistance;
     },
     distance() {
       return coordinateDistance(
