@@ -8,6 +8,7 @@ export default {};
 
 <style lang="scss" scoped>
 article {
+  width: 100%;
   padding: 0 2rem;
   margin: 0 auto;
   flex: 1;
