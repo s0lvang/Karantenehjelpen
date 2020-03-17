@@ -11,6 +11,7 @@
 
 <script>
 import firebase from "firebase";
+import fb from "@/firebaseConfig.js";
 
 export default {
   name: "LoginButton",
@@ -22,8 +23,27 @@ export default {
         .signInWithPopup(provider)
         .then(() => {
           const { currentUser } = firebase.auth();
-          this.$store.dispatch("SET_CURRENT_USER", currentUser);
-          this.$router.replace("home");
+          fb.additionalUserInfoCollection
+            .doc(currentUser.uid)
+            .get()
+            .then(userInfo => {
+              if (userInfo.data() && userInfo.data().phoneNumber) {
+                this.$store.dispatch("SET_CURRENT_USER", {
+                  ...currentUser,
+                  ...userInfo.data()
+                });
+              } else {
+                const phoneNumber = prompt("Skriv inn telefonnummer", "");
+                fb.additionalUserInfoCollection
+                  .doc(currentUser.uid)
+                  .set({ phoneNumber });
+                this.$store.dispatch("SET_CURRENT_USER", {
+                  ...currentUser,
+                  phoneNumber
+                });
+              }
+              this.$router.replace("home");
+            });
         })
         .catch(err => {
           alert(`Oops. ${err.message}`);

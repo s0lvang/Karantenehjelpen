@@ -76,7 +76,16 @@ const store = new Vuex.Store({
 //
 fb.auth.onAuthStateChanged(user => {
   if (user) {
-    store.commit("SET_CURRENT_USER", user);
+    fb.additionalUserInfoCollection
+      .doc(user.uid)
+      .get()
+      .then(userInfo => {
+        console.log(userInfo.data());
+        store.commit("SET_CURRENT_USER", { ...user, ...userInfo.data() });
+      })
+      .catch(() =>
+        console.log("noe gikk galt da vi skulle hente brukerinfoen din")
+      );
     fb.db
       .collectionGroup("requests")
       .orderBy("createdOn", "desc")
