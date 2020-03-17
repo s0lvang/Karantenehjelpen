@@ -157,7 +157,7 @@ nav {
   }
 
   &.block {
-    background: rgba(black, 0.25);
+    background: rgba(black, 0.4);
     max-height: calc(100vh - 4rem);
     backdrop-filter: blur(10px);
   }
