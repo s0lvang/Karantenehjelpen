@@ -8,7 +8,7 @@
       inn.
     </p>
     <p>
-      Karantenehjelpen skal hjelpe de som sitter i karantene komme i kontakt med
+      Karantenehjelpen skal hjelpe de som sitter i karantene å komme i kontakt med
       friske folk som ønsker å hjelpe.
     </p>
     <p>
