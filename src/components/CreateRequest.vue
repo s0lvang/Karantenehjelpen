@@ -11,17 +11,20 @@
         class="pr-5"
       />
       <NumberInput
-        labelText="Telefonummer"
-        placeholderText="Telefonnummer"
+        labelText="Telefonummer (uten landskode)"
+        placeholderText="98765432"
         @emitNumberInput="updatePhoneNumber"
         :existing="phoneNr"
       />
-      <TextInput
-        labelText="Betalingsløsing"
-        placeholderText="Vipps"
-        @emitInputText="updatePaymentSolution"
-        :existing="paymentSolution"
-        class="mt-2"
+      <label class="payment-solution-label" for="payment-solution"
+        >Betalingsmetode</label
+      >
+      <v-select
+        id="payment-solution"
+        name="payment-solution"
+        :options="['Vipps', 'Kontant', 'Bankoverføring']"
+        :value="paymentSolution"
+        @input="updatePaymentSolution"
       />
     </div>
     <div v-if="this.items.length >= 1" class="items">
@@ -36,22 +39,29 @@
         class="pr-5 pl-5"
       />
     </div>
-    <Button btnText="Ny vare" :btnDisabled="false" @btnClicked="renderNewItem" />
+    <Button
+      btnText="Ny vare"
+      :btnDisabled="false"
+      @btnClicked="renderNewItem"
+    />
     <div class="flex justify-center">
       <p v-if="errorMsg">Du må legge til alle varene!</p>
       <p v-if="addressError">Du må legge til en adresse!</p>
       <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
-      <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
+      <p v-if="phoneNumberError">Du må legge til en telefonummer!</p>
       <p v-if="itemNameError">Varen må ha et navn!</p>
       <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
     </div>
-    <Button btnText="Gå til oppsummering" :btnDisabled="false" @btnClicked="toSummary" />
+    <Button
+      btnText="Gå til oppsummering"
+      :btnDisabled="false"
+      @btnClicked="toSummary"
+    />
   </div>
 </template>
 
 <script>
 import Button from "@/components/shared/Button.vue";
-import TextInput from "@/components/shared/TextInput.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
 import Item from "@/components/shared/Item.vue";
@@ -60,7 +70,6 @@ import AddressInput from "@/components/AddressInput.vue";
 export default {
   name: "CreateRequest",
   components: {
-    TextInput,
     Item,
     Button,
     BigTextInput,
@@ -91,13 +100,12 @@ export default {
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
-      this.phoneNr = value;
+      this.phoneNr = value.replace(/\+47/g, "").replace(/ /g, "");
     },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
     },
-    updatePaymentSolution(event) {
-      const { value } = event.target;
+    updatePaymentSolution(value) {
       this.paymentSolutionError = false;
       this.paymentSolution = value;
     },
@@ -138,7 +146,7 @@ export default {
     },
     toSummary() {
       const itemsMapped = this.items.map(item => item.added);
-      if (this.paymentSolution.length <= 0) {
+      if (!this.paymentSolution) {
         this.paymentSolutionError = true;
         return;
       }
@@ -188,3 +196,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.payment-solution-label {
+  align-self: flex-start;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: rgb(0, 96, 163);
+}
+</style>
