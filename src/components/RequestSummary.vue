@@ -4,7 +4,7 @@
     <Spinner :showSpinner="showSpinner" />
     <div class="buttons" v-if="!showSpinner">
       <Button
-        btnText="Send Forespørsel"
+        btnText="Send forespørsel"
         :btnDisabled="false"
         @btnClicked="createRequest"
       />

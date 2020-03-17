@@ -40,7 +40,7 @@
           <b>{{ getRequest.connectedUser.phoneNumber }}</b>
         </p>
         <Button
-          btnText="Fjern Brukeren fra oppdraget"
+          btnText="Fjern brukeren fra oppdraget"
           :btnDisabled="false"
           isDanger="true"
           @btnClicked="connectUserToRequest"
