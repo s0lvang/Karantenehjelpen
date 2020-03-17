@@ -14,14 +14,13 @@
       @emitNumberInput="updatePhoneNumber"
       :existing="phoneNr"
     />
-    <label for="payment-solution"
-        >Betalingsmetode</label
-      >
-    <TextInput
-      labelText="Betalingsløsing"
-      placeholderText="Vipps"
-      @emitInputText="updatePaymentSolution"
-      :existing="paymentSolution"
+    <label for="payment-solution">Betalingsmetode</label>
+    <v-select
+      id="payment-solution"
+      name="payment-solution"
+      :options="['Vipps', 'Kontant', 'Bankoverføring']"
+      :value="paymentSolution"
+      @input="updatePaymentSolution"
     />
     <Items
       v-if="this.items.length >= 1"
@@ -202,5 +201,7 @@ section > * + * {
 }
 
 .error {
+  text-align: center;
   color: $color-danger;
+}
 </style>

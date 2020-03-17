@@ -108,6 +108,7 @@ export default {
 .split-row {
   display: grid;
   align-items: flex-end;
+  grid-column-gap: 2rem;
   grid-template-columns: 33% 33% auto;
 }
 

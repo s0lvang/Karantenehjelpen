@@ -26,8 +26,6 @@
 <script>
 import LoginButton from "@/components/LoginButton.vue";
 
-import Button from "@/components/shared/Button.vue";
-
 export default {
   name: "login",
   components: {

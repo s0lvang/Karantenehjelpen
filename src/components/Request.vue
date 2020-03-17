@@ -14,7 +14,9 @@
       @btnClicked="seeMore"
       :btnDisabled="false"
     />
-    <img v-if="userIsAssigned" src="@/assets/groceries.svg" />
+    <span v-if="userIsAssigned" class="badge">
+      <img src="@/assets/groceries.svg" />
+    </span>
   </div>
 </template>
 
@@ -53,6 +55,8 @@ export default {
 
 <style lang="scss" scoped>
 .request {
+  position: relative;
+  overflow: hidden;
   @include card;
 
   &:not(:last-child) {
@@ -63,6 +67,22 @@ export default {
 h3 {
   font-size: 2rem;
   margin-bottom: 1rem;
+}
+
+.badge {
+  position: absolute;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: $color-primary;
+  width: 5rem;
+  height: 5rem;
+  padding: 1rem;
+  border-radius: 50%;
+
+  img {
+    width: 3rem;
+  }
 }
 
 button {

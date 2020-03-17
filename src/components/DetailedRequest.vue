@@ -1,6 +1,9 @@
 <template>
   <section>
-    <Map :address="request.address.place_name_no" :locationCenter="request.address.center" />
+    <Map
+      :address="request.address.place_name_no"
+      :locationCenter="request.address.center"
+    />
     <h3>
       Kontaktinformasjon
     </h3>
