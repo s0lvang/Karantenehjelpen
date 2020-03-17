@@ -97,7 +97,7 @@ export default {
   },
   computed: {
     checkAddress() {
-      return this.existing ? this.existing : "Kongens slott";
+      return this.existing || "Kongens slott";
     }
   }
 };

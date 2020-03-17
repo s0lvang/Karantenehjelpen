@@ -61,6 +61,7 @@
         @btnClicked="toSummary"
       />
     </div>
+    {{ this.paymentSolution }}
   </div>
 </template>
 
@@ -122,6 +123,7 @@ export default {
     },
     updatePaymentSolution(value) {
       this.paymentSolutionError = false;
+      console.log(value);
       this.paymentSolution = value;
     },
     deleteItem(index) {
@@ -164,8 +166,7 @@ export default {
         return;
       }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        const localAddress = this.getAddress ? this.getAddress : this.address;
-        console.log(localAddress);
+        const localAddress = this.getAddress || this.address;
         if (
           localAddress.place_name_no !== undefined &&
           localAddress.place_name_no.length > 1
@@ -188,9 +189,7 @@ export default {
   },
   asyncComputed: {
     async resolvedValue() {
-      // legg til if her
       if (!this.checkEdit) {
-        console.log("ikke edit");
         this.items = this.getItems;
         this.address = this.getAddress;
         this.phoneNr = this.getPhoneNumber;
@@ -239,3 +238,15 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.payment-solution-label {
+  align-self: flex-start;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: rgb(0, 96, 163);
+}
+</style>
