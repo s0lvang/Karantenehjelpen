@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="!resolvedValue">
-      Du kan ikke endre andres bestillinger
-    </div>
-    <div v-if="resolvedValue && checkEdit">
+    <div>
       <div class="pl-6 mt-5">
-        <AddressInput :existing="this.address.place_name_no" inEdit="true" />
+        <AddressInput
+          :existing="this.address.place_name_no"
+          :inEdit="checkEditForClass"
+        />
         <BigTextInput
           labelText="Ankomstbeskrivelse"
           placeholderText="F.eks: I smuget bak rammeverkstedet"
@@ -211,10 +211,15 @@ export default {
   computed: {
     checkEdit() {
       if (this.$route.name === "EditRequest") {
-        console.log("yee");
         return true;
       }
       return false;
+    },
+    checkEditForClass() {
+      if (this.$route.name === "EditRequest") {
+        return "true";
+      }
+      return "false";
     },
     getArrivalDescription() {
       return this.$store.getters.arrivalDescription;
@@ -234,5 +239,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
