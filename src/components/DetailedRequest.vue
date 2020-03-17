@@ -62,7 +62,7 @@ export default {
   methods: {},
   computed: {
     getPhoneLink() {
-      return `tel:+47${this.request.phoneNumber}`;
+      return `tel:${this.request.phoneNumber}`;
     },
     getEmailLink() {
       return `mailto:${this.request.email}`;
