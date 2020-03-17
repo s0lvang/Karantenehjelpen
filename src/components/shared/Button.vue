@@ -42,7 +42,7 @@ button {
   transition: background 0.2s, opacity 0.2s;
 
   &:hover:not(:disabled) {
-    background: lighten($color-primary, 5%);
+    background: lighten($color-primary, 10%);
   }
 
   &:disabled {

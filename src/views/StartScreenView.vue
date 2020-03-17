@@ -1,31 +1,31 @@
 <template>
-  <div>
-    <div>
-      <div>
-        <p>
-          Karantenehjelpen
-        </p>
-      </div>
-      <div>
-        <p>
-          Jeg sitter i karantene og trenger hjelp til å handle inn mat
-        </p>
-        <Button
-          btnText="TRENGER HJELP"
-          :btnDisabled="false"
-          @btnClicked="needHelp"
-        />
-        <p>
-          Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
-        </p>
-        <Button
-          btnText="VIL HJELPE"
-          :btnDisabled="false"
-          @btnClicked="giveHelp"
-        />
-      </div>
+  <section>
+    <h1>
+      Karantenehjelpen
+    </h1>
+    <div class="role">
+      <h2>Trenger hjelp</h2>
+      <p>
+        Jeg sitter i karantene og trenger hjelp til å handle inn mat
+      </p>
+      <Button
+        btnText="Ny bestilling"
+        :btnDisabled="false"
+        @btnClicked="needHelp"
+      />
     </div>
-  </div>
+    <div class="role">
+      <h2>Ønsker å hjelpe</h2>
+      <p>
+        Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
+      </p>
+      <Button
+        btnText="Til oppdragslisten"
+        :btnDisabled="false"
+        @btnClicked="giveHelp"
+      />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -46,3 +46,25 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/common/constants.scss";
+
+section {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+}
+h1 {
+  grid-column: 1 / -1;
+  margin-top: 4rem;
+  text-align: center;
+}
+.role {
+  padding: 2rem;
+  border: 2px solid $color-background-contrast;
+  border-radius: 4px;
+  text-align: center;
+}
+</style>
