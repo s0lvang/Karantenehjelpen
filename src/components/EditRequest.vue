@@ -3,7 +3,7 @@
     <div v-if="!resolvedValue">
       Du kan ikke endre andres bestillinger
     </div>
-    <div v-if="resolvedValue">
+    <div v-if="resolvedValue && checkEdit">
       <div class="pl-6 mt-5">
         <AddressInput :existing="this.address.place_name_no" inEdit="true" />
         <BigTextInput
@@ -14,17 +14,20 @@
           class="pr-5"
         />
         <NumberInput
-          labelText="Telefonummer"
-          placeholderText="Telefonnummer"
+          labelText="Telefonummer (uten landskode)"
+          placeholderText="98765432"
           @emitNumberInput="updatePhoneNumber"
           :existing="phoneNr"
         />
-        <TextInput
-          labelText="Betalingsløsing"
-          placeholderText="Vipps"
-          @emitInputText="updatePaymentSolution"
-          :existing="paymentSolution"
-          class="mt-2"
+        <label class="payment-solution-label" for="payment-solution"
+          >Betalingsmetode</label
+        >
+        <v-select
+          id="payment-solution"
+          name="payment-solution"
+          :options="['Vipps', 'Kontant', 'Bankoverføring']"
+          :value="paymentSolution"
+          @input="updatePaymentSolution"
         />
       </div>
       <div v-if="this.items.length >= 1" class="items">
@@ -64,7 +67,6 @@
 <script>
 /* eslint-disable no-unused-vars */
 import Button from "@/components/shared/Button.vue";
-import TextInput from "@/components/shared/TextInput.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
 import Item from "@/components/shared/Item.vue";
@@ -73,7 +75,6 @@ import AddressInput from "@/components/AddressInput.vue";
 export default {
   name: "EditRequestView",
   components: {
-    TextInput,
     Item,
     Button,
     BigTextInput,
@@ -114,13 +115,12 @@ export default {
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
-      this.phoneNr = value;
+      this.phoneNr = value.replace(/\+47/g, "").replace(/ /g, "");
     },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
     },
-    updatePaymentSolution(event) {
-      const { value } = event.target;
+    updatePaymentSolution(value) {
       this.paymentSolutionError = false;
       this.paymentSolution = value;
     },
@@ -165,11 +165,12 @@ export default {
       }
       if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
         const localAddress = this.getAddress ? this.getAddress : this.address;
+        console.log(localAddress);
         if (
           localAddress.place_name_no !== undefined &&
           localAddress.place_name_no.length > 1
         ) {
-          this.$store.dispatch("SET_ADDRESS", this.address);
+          this.$store.dispatch("SET_ADDRESS", localAddress);
           this.$store.dispatch("SET_ITEMS", this.items);
           this.$store.dispatch("SET_PHONE_NUMBER", this.phoneNr);
           this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
@@ -187,6 +188,16 @@ export default {
   },
   asyncComputed: {
     async resolvedValue() {
+      // legg til if her
+      if (!this.checkEdit) {
+        console.log("ikke edit");
+        this.items = this.getItems;
+        this.address = this.getAddress;
+        this.phoneNr = this.getPhoneNumber;
+        this.arrivalDesc = this.getArrivalDescription;
+        this.paymentSolution = this.getPaymentSolution;
+        return false;
+      }
       const x = await this.getRequest();
       this.id = x.id;
       this.items = x.items;
@@ -195,6 +206,30 @@ export default {
       this.arrivalDesc = x.arrivalDescription;
       this.paymentSolution = x.paymentSolution;
       return x.email === this.$store.getters.email;
+    }
+  },
+  computed: {
+    checkEdit() {
+      if (this.$route.name === "EditRequest") {
+        console.log("yee");
+        return true;
+      }
+      return false;
+    },
+    getArrivalDescription() {
+      return this.$store.getters.arrivalDescription;
+    },
+    getAddress() {
+      return this.$store.getters.address;
+    },
+    getItems() {
+      return this.$store.getters.items;
+    },
+    getPhoneNumber() {
+      return this.$store.getters.phoneNumber;
+    },
+    getPaymentSolution() {
+      return this.$store.getters.paymentSolution;
     }
   }
 };

@@ -12,7 +12,8 @@ import firebase from "firebase";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "*",
     redirect: "start-screen"
   },
@@ -72,7 +73,7 @@ const routes = [{
   },
   {
     path: "/edit/:id",
-    name: "Request",
+    name: "EditRequest",
     component: EditRequestView,
     meta: {
       requiresAuth: true
@@ -87,9 +88,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const {
-    currentUser
-  } = firebase.auth();
+  const { currentUser } = firebase.auth();
   if (requiresAuth && !currentUser) {
     next("/login");
   } else if (requiresAuth && currentUser) {
