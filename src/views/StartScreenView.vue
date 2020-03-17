@@ -62,9 +62,7 @@ h1 {
   text-align: center;
 }
 .role {
-  padding: 2rem;
-  border: 2px solid $color-background-contrast;
-  border-radius: 4px;
+  @include card;
   text-align: center;
 }
 </style>
