@@ -1,5 +1,7 @@
 <template>
-  <div id="map"></div>
+  <div id="map">
+    <h3>{{ address }}</h3>
+  </div>
 </template>
 
 <script>
@@ -22,7 +24,8 @@ export default {
     locationCenter: {
       type: Array,
       required: true
-    }
+    },
+    address: String
   },
 
   methods: {
@@ -49,14 +52,33 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css");
 #map {
-  height: 300px !important;
+  margin-top: -4rem;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  height: 20rem !important;
+
+  h3 {
+    position: absolute;
+    background: white;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    margin: 0;
+    bottom: 0;
+    padding: 0.5rem 1rem;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+  }
 }
 
 .mapboxgl-marker.mapboxgl-marker-anchor-center svg g {
-  fill: rgb(0, 96, 163);
+  fill: $color-primary;
 }
 </style>

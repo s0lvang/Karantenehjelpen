@@ -1,7 +1,7 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div>
+    <div class="buttons">
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
@@ -121,3 +121,14 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.buttons {
+  display: flex;
+  margin-top: 2rem;
+
+  & > * + * {
+    margin-left: 1rem;
+  }
+}
+</style>

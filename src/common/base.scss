@@ -7,7 +7,6 @@ body {
 }
 
 body {
-  background: $color-background;
   font-family: "Source Sans Pro", sans-serif;
   color: $color-text;
   line-height: 1.5;
@@ -36,7 +35,7 @@ img {
   $line-height: $font-size + 0.5rem;
 
   font-family: "Source Serif Pro", serif;
-  margin: 2rem 0;
+  margin: 2rem 0 1rem;
   font-weight: 500;
 
   &:first-child {

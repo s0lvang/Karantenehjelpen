@@ -1,60 +1,28 @@
 <template>
-  <div>
-    <div>
-      <div>
-        <Map :locationCenter="request.address.center" />
-        <p>
-          {{ request.address.place_name_no }}
-        </p>
+  <section>
+    <Map
+      :address="request.address.place_name_no"
+      :locationCenter="request.address.center"
+    />
 
-        <ul>
-          <li v-for="(item, index) in request.items" :key="index">
-            <span>{{ item.count }}x</span>
-            {{
-              item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
-            }}
-          </li>
-        </ul>
+    <h3>
+      Kontaktinformasjon
+    </h3>
+    <p>Epost: {{ request.email }}</p>
+    <p>Telefon: {{ "12345678" }}</p>
+    <p>Betalingsmåte: {{ request.paymentSolution }}</p>
 
-        <div>
-          <h1>
-            Kontaktinformasjon
-          </h1>
-          <div>
-            <p>
-              Epost:
-            </p>
-            <div>
-              {{ request.email }}
-            </div>
-          </div>
-          <div>
-            <p>
-              Telefon:
-            </p>
-            <div>
-              {{ "12345678" }}
-            </div>
-          </div>
-          <div>
-            <p>
-              Betalingsmåte:
-            </p>
-            <div>
-              {{ request.paymentSolution }}
-            </div>
-          </div>
-        </div>
+    <h3>Handleliste</h3>
+    <ul>
+      <li v-for="(item, index) in request.items" :key="index">
+        <strong>{{ item.count }}x</strong>
+        {{ item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1) }}
+      </li>
+    </ul>
 
-        <p>
-          Ankomstbeskrivelse:
-        </p>
-        <div>
-          {{ request.arrivalDescription }}
-        </div>
-      </div>
-    </div>
-  </div>
+    <h3>Ankomstbeskrivelse</h3>
+    <p>{{ request.arrivalDescription }}</p>
+  </section>
 </template>
 
 <script>
@@ -75,3 +43,15 @@ export default {
   computed: {}
 };
 </script>
+
+<style lang="scss" scoped>
+li {
+  line-height: 1.5rem;
+
+  & > strong {
+    line-height: inherit;
+    display: inline-block;
+    width: 2rem;
+  }
+}
+</style>
