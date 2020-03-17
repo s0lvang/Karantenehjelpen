@@ -40,7 +40,11 @@
       <Button
         btnText="Endre"
         :btnDisabled="false"
-        v-if="resolvedValue && !this.connectedUser"
+        v-if="
+          resolvedValue &&
+            !this.connectedUser &&
+            this.$route.name !== 'EditRequest'
+        "
         @btnClicked="goToEdit"
       />
     </div>
