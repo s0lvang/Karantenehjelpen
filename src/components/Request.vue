@@ -81,11 +81,19 @@ export default {
 
 h3 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .heading {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  p {
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+  }
 }
 
 .badge {
