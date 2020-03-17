@@ -1,16 +1,13 @@
 <template>
-  <div class="container mx-auto">
-    <template v-if="step === 1">
-      <CreateEditRequest @toSummary="toSummary" />
-    </template>
-    <template v-if="step === 2">
-      <RequestSummary
-        @goBack="goBack"
-        @createRequest="createRequest"
-        :showSpinner="showSpinner"
-      />
-    </template>
-  </div>
+  <section>
+    <CreateEditRequest v-if="step === 1" @toSummary="toSummary" />
+    <RequestSummary
+      v-if="step === 2"
+      @goBack="goBack"
+      @createRequest="createRequest"
+      :showSpinner="showSpinner"
+    />
+  </section>
 </template>
 
 <script>

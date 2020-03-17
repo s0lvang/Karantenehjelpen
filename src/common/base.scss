@@ -1,0 +1,114 @@
+@import "@/assets/reset.scss";
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro|Source+Serif+Pro&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  color: $color-text;
+  line-height: 1.5;
+
+  @media #{$desktopAndUp} {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  display: block;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: $color-primary;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  color: $color-text;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border: 1px solid $color-background-contrast;
+  @include elevation-soft;
+}
+
+input[type="text"],
+input[type="number"] {
+  max-width: 200px;
+}
+
+hr {
+  margin: 1rem 0;
+
+  @media #{$desktopAndUp} {
+    margin: 3rem 0;
+  }
+}
+
+@mixin heading($font-size) {
+  $line-height: $font-size + 0.5rem;
+
+  font-family: "Source Serif Pro", serif;
+  margin: 2rem 0 1rem;
+  font-weight: 500;
+
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  font-size: $font-size;
+  line-height: $line-height;
+
+  @media #{$tabletAndUp} {
+    font-size: $font-size + 0.25rem;
+    line-height: $line-height + 0.25rem;
+  }
+  @media #{$desktopAndUp} {
+    font-size: $font-size + 0.5rem;
+    line-height: $line-height + 0.5rem;
+  }
+  @media #{$widescreenAndUp} {
+    font-size: $font-size + 0.75rem;
+    line-height: $line-height + 0.75rem;
+  }
+}
+
+h1 {
+  @include heading(2.25rem);
+}
+
+h2 {
+  @include heading(1.75rem);
+}
+
+h3 {
+  @include heading(1.5rem);
+}
+
+strong {
+  line-height: 2.5rem;
+  font-weight: bold;
+}
+
+em {
+  line-height: 2.5rem;
+  font-style: italic;
+}

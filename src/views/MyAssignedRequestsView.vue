@@ -1,11 +1,9 @@
 <template>
-  <div class="container mx-auto">
-    <Requests
-      :requests="getMyRequests"
-      firstHeaderText="Mine Oppdrag"
-      secondHeaderText="Mine Leverte Oppdrag"
-    />
-  </div>
+  <Requests
+    :requests="getMyRequests"
+    firstHeaderText="Mine Oppdrag"
+    secondHeaderText="Mine Leverte Oppdrag"
+  />
 </template>
 
 <script>
@@ -28,5 +26,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

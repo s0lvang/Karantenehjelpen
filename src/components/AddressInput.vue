@@ -1,31 +1,26 @@
 <template>
-  <div
-    class="container mx-auto flex flex-col
-          pr-5 text-sm md:text-base lg:text-lg
-    "
-  >
-    <label class="input_label" for="address_input">Addresse</label>
-    <input
-      v-model="locationInput"
-      type="text"
-      name="address_input"
-      class="address_input"
-      :placeholder="this.checkAddress"
-      :class="inEdit"
-    />
-    <div>
+  <div>
+    <label for="address_input">Addresse</label>
+    <div class="spinnerWrapper">
+      <input
+        v-model="locationInput"
+        type="text"
+        name="address_input"
+        :placeholder="this.checkAddress"
+        :class="inEdit"
+      />
       <Spinner :showSpinner="showSpinner" />
-      <ul class="field-autocomplete" v-if="showList && locations.length > 1">
-        <li
-          class="autocomplete-element"
-          v-for="location in locations"
-          :key="location.id"
-          @click="selectedLocation(location)"
-        >
-          {{ location.place_name_no }}
-        </li>
-      </ul>
     </div>
+    <ul class="suggestions" v-if="showList && locations.length > 1">
+      <li
+        class="suggestion"
+        v-for="location in locations"
+        :key="location.id"
+        @click="selectedLocation(location)"
+      >
+        {{ location.place_name_no }}
+      </li>
+    </ul>
     <p v-if="showError">Noe gikk galt under henting av addresser</p>
   </div>
 </template>
@@ -104,54 +99,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input_label {
-  align-self: flex-start;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75rem;
-  margin-bottom: 0.5rem;
-  color: rgb(0, 96, 163);
+.spinnerWrapper {
+  position: relative;
 }
-.address_input {
-  &[type="text"] {
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-    padding: 0.625em 1em;
-    font-size: 1em;
-    color: rgb(42, 39, 34);
-    border: 1px solid rgb(241, 241, 241);
-    &.true {
-      &::placeholder {
-        color: black;
-        opacity: 1;
-      }
-    }
+input[type="text"] {
+  max-width: none;
+  &.true {
+    opacity: 1;
   }
 }
-.field-autocomplete {
-  border: 0.06rem solid grey;
-  border-radius: 0.3rem;
-  list-style-type: none;
-  padding: 0 1rem 0 1rem;
+.suggestions {
+  border: 1px solid $color-background-contrast;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  & > * + * {
+    margin-top: 0.5rem;
+    border-top: 1px solid $color-background-contrast;
+  }
 }
-.autocomplete-element {
-  text-align: left;
-  margin-top: 0.4rem;
-  border-bottom: 0.08rem solid lightslategrey;
+.suggestion {
   overflow: hidden;
   white-space: nowrap;
-}
-.autocomplete-element:hover {
-  color: rgb(0, 96, 163);
   cursor: pointer;
+  transition: color 0.1s;
+
+  &:hover {
+    color: $color-primary;
+  }
 }
-.autocomplete-element:last-child {
-  border: 0;
-  margin-bottom: 0.4rem;
-}
-.autocomplete-container {
-  margin-left: 1rem/2;
-  width: 100%;
-  margin-top: -1rem;
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  transform: translate(-50%, -50%);
+
+  &::before {
+    width: 2rem;
+    height: 2rem;
+  }
 }
 </style>

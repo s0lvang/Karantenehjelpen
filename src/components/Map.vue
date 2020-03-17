@@ -1,5 +1,18 @@
 <template>
-  <div id="map"></div>
+  <div id="map">
+    <a
+      target="_blank"
+      class="address"
+      :href="
+        `https://www.google.com/maps/dir/?api=1&destination=${address.replace(
+          / /g,
+          '+'
+        )}&travelmode=driving`
+      "
+    >
+      <p>{{ address }}</p>
+    </a>
+  </div>
 </template>
 
 <script>
@@ -22,7 +35,8 @@ export default {
     locationCenter: {
       type: Array,
       required: true
-    }
+    },
+    address: String
   },
 
   methods: {
@@ -49,14 +63,44 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css");
 #map {
-  height: 300px !important;
+  margin-top: -1 * $vertical-space;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  height: 20rem !important;
+
+  a {
+    position: absolute;
+    background: white;
+    width: 100%;
+    margin: 0;
+    bottom: 0;
+    padding: 1rem 2rem;
+    z-index: 10;
+  }
 }
 
 .mapboxgl-marker.mapboxgl-marker-anchor-center svg g {
-  fill: rgb(0, 96, 163);
+  fill: $color-primary;
+}
+
+@media #{$tabletAndUp} {
+  #map {
+    margin-top: -1 * $vertical-space-large;
+
+    a {
+      width: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.25rem;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+  }
 }
 </style>

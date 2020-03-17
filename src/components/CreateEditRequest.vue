@@ -32,7 +32,7 @@
         />
       </div>
       <div v-if="this.items.length >= 1" class="items">
-        <Item
+        <Items
           @updateItem="addItem"
           :nrOfItems="items"
           @addItem="addItem"
@@ -74,14 +74,14 @@
 import Button from "@/components/shared/Button.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
-import Item from "@/components/shared/Item.vue";
+import Items from "@/components/shared/Items.vue";
 import AddressInput from "@/components/AddressInput.vue";
 import Spinner from "@/components/shared/Spinner.vue";
 
 export default {
   name: "EditRequestView",
   components: {
-    Item,
+    Items,
     Button,
     BigTextInput,
     NumberInput,
