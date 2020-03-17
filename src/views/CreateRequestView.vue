@@ -40,7 +40,7 @@ export default {
         .then(() => {
           this.$store.dispatch("SET_ADDRESS", "");
           this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", "");
-          this.$store.dispatch("SET_PHONE_NUMBER", "");
+          this.$store.dispatch("SET_PHONE_NUMBER_INPUT", "");
           this.$store.dispatch("SET_PAYMENT_SOLUTION", "");
           this.$store.dispatch("SET_ITEMS", []);
           this.showSpinner = false;
