@@ -57,8 +57,4 @@ h1 {
   margin-top: 4rem;
   text-align: center;
 }
-img {
-  height: 5rem;
-  margin: 0 auto;
-}
 </style>

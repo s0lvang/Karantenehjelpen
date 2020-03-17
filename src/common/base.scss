@@ -12,6 +12,11 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   color: $color-text;
   line-height: 1.5;
+
+  @media #{$desktopAndUp} {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
 }
 
 img {
