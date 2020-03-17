@@ -40,7 +40,8 @@ footer {
   background: $color-primary;
   text-align: center;
 
-  a {
+  a:link,
+  a:visited {
     color: $color-text-contrast;
   }
 
