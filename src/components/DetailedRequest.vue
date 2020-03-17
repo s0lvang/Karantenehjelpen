@@ -1,16 +1,12 @@
 <template>
   <section>
-    <Map
-      :address="request.address.place_name_no"
-      :locationCenter="request.address.center"
-    />
-
+    <Map :address="request.address.place_name_no" :locationCenter="request.address.center" />
     <h3>
       Kontaktinformasjon
     </h3>
-    <p>Epost: {{ request.email }}</p>
-    <p>Telefon: {{ "12345678" }}</p>
-    <p>Betalingsmåte: {{ request.paymentSolution }}</p>
+    <p><strong>Epost:</strong> {{ request.email }}</p>
+    <p><strong>Telefon:</strong> {{ "12345678" }}</p>
+    <p><strong>Betalingsmåte:</strong> {{ request.paymentSolution }}</p>
 
     <h3>Handleliste</h3>
     <ul>

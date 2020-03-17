@@ -19,35 +19,19 @@
     <p>
       Just do it
     </p>
-    <Button btnText="Logg inn med Google" @btnClicked="socialLogin" />
+    <LoginButton />
   </section>
 </template>
 
 <script>
-import firebase from "firebase";
+import LoginButton from "@/components/LoginButton.vue";
 
 import Button from "@/components/shared/Button.vue";
 
 export default {
   name: "login",
   components: {
-    Button
-  },
-  methods: {
-    socialLogin() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(() => {
-          const { currentUser } = firebase.auth();
-          this.$store.dispatch("SET_CURRENT_USER", currentUser);
-          this.$router.replace("home");
-        })
-        .catch(err => {
-          alert(`Oops. ${err.message}`);
-        });
-    }
+    LoginButton
   }
 };
 </script>

@@ -9,11 +9,14 @@
       :existing="arrivalDesc"
     />
     <NumberInput
-      labelText="Telefonummer"
-      placeholderText="Telefonnummer"
+      labelText="Telefonummer (uten landskode)"
+      placeholderText="98765432"
       @emitNumberInput="updatePhoneNumber"
       :existing="phoneNr"
     />
+    <label for="payment-solution"
+        >Betalingsmetode</label
+      >
     <TextInput
       labelText="Betalingsløsing"
       placeholderText="Vipps"
@@ -58,7 +61,6 @@
 
 <script>
 import Button from "@/components/shared/Button.vue";
-import TextInput from "@/components/shared/TextInput.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
 import Items from "@/components/shared/Items.vue";
@@ -67,7 +69,6 @@ import AddressInput from "@/components/AddressInput.vue";
 export default {
   name: "CreateRequest",
   components: {
-    TextInput,
     Items,
     Button,
     BigTextInput,
@@ -98,13 +99,12 @@ export default {
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
-      this.phoneNr = value;
+      this.phoneNr = value.replace(/\+47/g, "").replace(/ /g, "");
     },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
     },
-    updatePaymentSolution(event) {
-      const { value } = event.target;
+    updatePaymentSolution(value) {
       this.paymentSolutionError = false;
       this.paymentSolution = value;
     },
@@ -145,7 +145,7 @@ export default {
     },
     toSummary() {
       const itemsMapped = this.items.map(item => item.added);
-      if (this.paymentSolution.length <= 0) {
+      if (!this.paymentSolution) {
         this.paymentSolutionError = true;
         return;
       }
@@ -203,5 +203,4 @@ section > * + * {
 
 .error {
   color: $color-danger;
-}
 </style>

@@ -21,6 +21,7 @@
     "vue": "^2.6.11",
     "vue-fragment": "^1.5.1",
     "vue-router": "^3.1.5",
+    "vue-select": "^3.9.1",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
@@ -53,7 +54,10 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "no-console": "off",
+      "no-alert": "off"
+    }
   },
   "browserslist": [
     "> 1%",
