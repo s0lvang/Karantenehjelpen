@@ -57,7 +57,7 @@ export default {
   #btnText {
     display: flex;
     align-items: center;
-    padding: 0 0.3rem;
+    padding: 0 0.5rem;
   }
 }
 </style>
