@@ -10,12 +10,15 @@
         )}&travelmode=driving`
       "
     >
+      <icon name="directions" />
       <p>{{ address }}</p>
     </a>
   </div>
 </template>
 
 <script>
+import Icon from "@/components/shared/Icon.vue";
+
 import Mapbox from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -38,7 +41,9 @@ export default {
     },
     address: String
   },
-
+  components: {
+    Icon
+  },
   methods: {
     drawMap() {
       Mapbox.accessToken = this.key;
@@ -75,6 +80,7 @@ export default {
   height: 20rem !important;
 
   a {
+    display: flex;
     position: absolute;
     background: white;
     width: 100%;
@@ -82,6 +88,10 @@ export default {
     bottom: 0;
     padding: 1rem 2rem;
     z-index: 10;
+
+    i {
+      margin-right: 0.25rem;
+    }
   }
 }
 
