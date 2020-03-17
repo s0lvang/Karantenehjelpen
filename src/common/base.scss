@@ -37,14 +37,20 @@ label {
   color: $color-primary;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"],
+textarea {
   width: 100%;
   color: $color-text;
   border-radius: 4px;
   padding: 0.5rem 1rem;
   border: 1px solid $color-background-contrast;
-  max-width: 200px;
   @include elevation-soft;
+}
+
+input[type="text"],
+input[type="number"] {
+  max-width: 200px;
 }
 
 @mixin heading($font-size) {

@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <section>
     <h2>Ny bestilling</h2>
     <AddressInput />
     <BigTextInput
@@ -20,54 +20,52 @@
       @emitInputText="updatePaymentSolution"
       :existing="paymentSolution"
     />
-    <div v-if="this.items.length >= 1">
-      <Item
-        @updateItem="addItem"
-        :nrOfItems="items"
-        @addItem="addItem"
-        @deleteItem="deleteItem"
-        @decrementCount="decrementItemCount"
-        @incrementCount="incrementItemCount"
-        @updateName="updateItemName"
-      />
-    </div>
+    <Items
+      v-if="this.items.length >= 1"
+      @updateItem="addItem"
+      :nrOfItems="items"
+      @addItem="addItem"
+      @deleteItem="deleteItem"
+      @decrementCount="decrementItemCount"
+      @incrementCount="incrementItemCount"
+      @updateName="updateItemName"
+    />
     <Button
       btnText="Ny vare"
       :btnDisabled="false"
       @btnClicked="renderNewItem"
     />
-    <div>
-      <p v-if="errorMsg">Du må legge til alle varene!</p>
-      <p v-if="addressError">Du må legge til en adresse!</p>
-      <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
-      <p v-if="phoneNumberError">Du må legge til en Telefonummer!</p>
-      <p v-if="itemNameError">Varen må ha et navn!</p>
-      <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
-    </div>
+    <p class="error" v-if="errorMsg">Du må legge til alle varene!</p>
+    <p class="error" v-if="addressError">Du må legge til en adresse!</p>
+    <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
+    <p class="error" v-if="phoneNumberError">
+      Du må legge til en Telefonummer!
+    </p>
+    <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
+    <p class="error" v-if="paymentSolutionError">
+      Du må legge til en betalingsløsing!
+    </p>
     <Button
       btnText="Gå til oppsummering"
       :btnDisabled="false"
       @btnClicked="toSummary"
     />
-  </fragment>
+  </section>
 </template>
 
 <script>
-import { Fragment } from "vue-fragment";
-
 import Button from "@/components/shared/Button.vue";
 import TextInput from "@/components/shared/TextInput.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
-import Item from "@/components/shared/Item.vue";
+import Items from "@/components/shared/Items.vue";
 import AddressInput from "@/components/AddressInput.vue";
 
 export default {
   name: "CreateRequest",
   components: {
-    Fragment,
     TextInput,
-    Item,
+    Items,
     Button,
     BigTextInput,
     NumberInput,
@@ -194,3 +192,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+section > * + * {
+  margin-top: 1rem;
+}
+
+.error {
+  color: $color-danger;
+}
+</style>

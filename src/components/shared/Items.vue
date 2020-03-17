@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div v-for="(item, index) in nrOfItems" :key="index">
       <template v-if="!item.added">
         <TextInput
@@ -97,3 +97,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  @include card;
+}
+</style>

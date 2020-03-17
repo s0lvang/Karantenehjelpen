@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <label for="number-input">{{ labelText }}</label>
     <input
       type="number"
@@ -37,36 +37,9 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.main {
-  display: flex;
-  flex-flow: column nowrap;
-  box-sizing: border-box;
-  margin-top: 0.5rem;
-}
-label {
-  align-self: flex-start;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75rem;
-  margin-bottom: 0.5rem;
-  color: rgb(0, 96, 163);
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-input {
-  &[type="number"] {
-    max-width: 200px;
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-    padding: 0.625em 1em;
-    font-size: 1em;
-    color: rgb(42, 39, 34);
-    -moz-appearance: textfield;
-    border: 1px solid rgb(241, 241, 241);
-  }
 }
 </style>
