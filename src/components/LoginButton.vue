@@ -32,17 +32,37 @@ export default {
                   ...currentUser,
                   ...userInfo.data()
                 });
+                this.$router.replace("home");
               } else {
-                const phoneNumber = prompt("Skriv inn telefonnummer", "");
-                fb.additionalUserInfoCollection
-                  .doc(currentUser.uid)
-                  .set({ phoneNumber });
-                this.$store.dispatch("SET_CURRENT_USER", {
-                  ...currentUser,
-                  phoneNumber
-                });
+                this.$dialog
+                  .prompt({
+                    title: "Telefonnummer",
+                    body: "Skriv inn telefonnummeret ditt",
+                    promptHelp: ""
+                  })
+                  .then(dialog => {
+                    fb.additionalUserInfoCollection
+                      .doc(currentUser.uid)
+                      .set({ phoneNumber: dialog.data });
+                    this.$store.dispatch("SET_CURRENT_USER", {
+                      ...currentUser,
+                      phoneNumber: dialog.data
+                    });
+                    this.$router.replace("home");
+                  })
+                  .catch(() => {
+                    console.log("yolo");
+                    firebase
+                      .auth()
+                      .signOut()
+                      .then(() => {
+                        this.$store.dispatch("SET_CURRENT_USER", null);
+                      })
+                      .catch(error => {
+                        console.log(`something went wrong ${error.message}`);
+                      });
+                  });
               }
-              this.$router.replace("home");
             });
         })
         .catch(err => {
