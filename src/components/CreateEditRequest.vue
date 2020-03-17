@@ -158,7 +158,7 @@ export default {
         ) {
           this.$store.dispatch("SET_ADDRESS", localAddress);
           this.$store.dispatch("SET_ITEMS", this.items);
-          this.$store.dispatch("SET_PHONE_NUMBER", this.phoneNr);
+          this.$store.dispatch("SET_PHONE_NUMBER_INPUT", this.phoneNr);
           this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
           this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
           this.$emit("toSummary");
