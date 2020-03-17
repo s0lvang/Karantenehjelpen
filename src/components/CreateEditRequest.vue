@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div>
+    <Spinner :showSpinner="showSpinner" />
+    <div v-if="!showSpinner">
       <div class="pl-6 mt-5">
         <AddressInput
           :existing="this.address.place_name_no"
@@ -61,7 +62,6 @@
         @btnClicked="toSummary"
       />
     </div>
-    {{ this.paymentSolution }}
   </div>
 </template>
 
@@ -72,6 +72,7 @@ import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
 import Item from "@/components/shared/Item.vue";
 import AddressInput from "@/components/AddressInput.vue";
+import Spinner from "@/components/shared/Spinner.vue";
 
 export default {
   name: "EditRequestView",
@@ -80,7 +81,8 @@ export default {
     Button,
     BigTextInput,
     NumberInput,
-    AddressInput
+    AddressInput,
+    Spinner
   },
   data() {
     return {
@@ -95,19 +97,11 @@ export default {
       phoneNr: "",
       arrivalDesc: "",
       paymentSolution: "",
-      id: ""
+      id: "",
+      showSpinner: false
     };
   },
   methods: {
-    getRequest() {
-      return new Promise((resolve, reject) => {
-        resolve(
-          this.$store.getters.requests.find(
-            request => request.id === this.$route.params.id
-          )
-        );
-      });
-    },
     updateAddress(event) {
       const { value } = event.target;
       this.addressError = false;
@@ -188,8 +182,33 @@ export default {
     }
   },
   asyncComputed: {
+    // getRequest() {
+    //   console.log("skjer dette først?");
+    // },
+    getContent: {
+      get() {
+        // const x = this.$store.getters.requests.find(
+        //   request => request.id === this.$route.params.id
+        // );
+        return new Promise((resolve, reject) => {
+          setTimeout(
+            () =>
+              resolve(
+                this.$store.getters.requests.find(
+                  request => request.id === this.$route.params.id
+                )
+              ),
+            1000
+          );
+        });
+      },
+      default: "no"
+      // default: "Loading"
+    },
     async resolvedValue() {
+      this.showSpinner = true;
       if (!this.checkEdit) {
+        this.showSpinner = false;
         this.items = this.getItems;
         this.address = this.getAddress;
         this.phoneNr = this.getPhoneNumber;
@@ -197,15 +216,35 @@ export default {
         this.paymentSolution = this.getPaymentSolution;
         return false;
       }
-      const x = await this.getRequest();
+      const x = await this.getContent;
+      if (x === "no") {
+        return false;
+      }
+      this.showSpinner = false;
       this.id = x.id;
       this.items = x.items;
       this.address = x.address;
       this.phoneNr = x.phoneNumber;
       this.arrivalDesc = x.arrivalDescription;
       this.paymentSolution = x.paymentSolution;
+
       return x.email === this.$store.getters.email;
     }
+    // get() {
+    //   return get(this.$store.getters.currentUser).then(
+    //     request => request.id === this.$route.params.id
+    //   );
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() =>
+    //     resolve(
+    //       this.$getters.currentUser.find(
+    //         request => request.id === this.$route.params.id
+    //       ),
+    //       1000
+    //     )
+    //   );
+    // });
+    // }
   },
   computed: {
     checkEdit() {

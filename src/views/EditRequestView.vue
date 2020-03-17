@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <template v-if="step === 1">
-      <EditRequest @toSummary="toSummary" />
+      <CreateEditRequest @toSummary="toSummary" />
     </template>
     <template v-if="step === 2">
       <RequestSummary
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import EditRequest from "@/components/EditRequest.vue";
+import CreateEditRequest from "@/components/CreateEditRequest.vue";
 import RequestSummary from "@/components/RequestSummary.vue";
 import fb from "@/firebaseConfig.js";
 
 export default {
   name: "EditRequestView",
   components: {
-    EditRequest,
+    CreateEditRequest,
     RequestSummary
   },
   data() {
