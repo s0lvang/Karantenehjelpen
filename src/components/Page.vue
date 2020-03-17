@@ -15,19 +15,19 @@ article {
   flex: 1;
 }
 
-@media #{$breakpoint-tabletAndUp} {
+@media #{$tabletAndUp} {
   article {
     max-width: $page-width-tablet;
   }
 }
 
-@media #{$breakpoint-desktopAndUp} {
+@media #{$desktopAndUp} {
   article {
     max-width: $page-width-desktop;
   }
 }
 
-@media #{$breakpoint-widescreenAndUp} {
+@media #{$widescreenAndUp} {
   article {
     max-width: $page-width-widescreen;
   }

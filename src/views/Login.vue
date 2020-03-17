@@ -1,28 +1,25 @@
 <template>
   <section>
     <h1>Karantenehjelpen</h1>
-    <div>
-      <h2>Hva er Karantenehjelpen?</h2>
-      <p>
-        Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
-        man lett kommer nær andre. Da kan det bli veldig vanskelig å få handlet
-        inn.
-      </p>
-      <p>
-        Karantenehjelpen skal hjelpe de som sitter i karantene komme i kontakt
-        med friske folk som ønsker å hjelpe.
-      </p>
-      <p>
-        Vi trenger både folk som er friske og vil stille opp for sine naboer, og
-        tilbyr handlehjelp til de som trenger det mest.
-      </p>
-      <h2>Følg FHI sine råd!</h2>
-      <p>
-        Just do it
-      </p>
-      <img alt="Google Logo" src="../assets/google-logo.png" />
-      <Button btnText="Logg inn" @btnClicked="socialLogin" />
-    </div>
+    <strong>Hva er Karantenehjelpen?</strong>
+    <p>
+      Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
+      man lett kommer nær andre. Da kan det bli veldig vanskelig å få handlet
+      inn.
+    </p>
+    <p>
+      Karantenehjelpen skal hjelpe de som sitter i karantene komme i kontakt med
+      friske folk som ønsker å hjelpe.
+    </p>
+    <p>
+      Vi trenger både folk som er friske og vil stille opp for sine naboer, og
+      tilbyr handlehjelp til de som trenger det mest.
+    </p>
+    <strong>Følg FHI sine råd!</strong>
+    <p>
+      Just do it
+    </p>
+    <Button btnText="Logg inn med Google" @btnClicked="socialLogin" />
   </section>
 </template>
 
@@ -57,6 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
+  margin-top: 4rem;
   text-align: center;
 }
 img {

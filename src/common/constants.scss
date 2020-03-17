@@ -17,13 +17,13 @@ $minDesktopWidth: $lg + 0px;
 $maxDesktopWidth: $xl - 1px;
 $minWidescreenWidth: $xl + 0px;
 
-$breakpoint-mobileOnly: "only screen and ( max-width: #{$maxMobileWidth} )";
-$breakpoint-tabletOnly: "only screen and( min-width: #{$minTabletWidth} ) and ( max-width: #{$maxTabletWidth} )";
-$breakpoint-desktopOnly: "only screen and ( min-width: #{$minDesktopWidth} ) and ( max-width: #{$maxDesktopWidth} )";
-$breakpoint-widescreenOnly: "only screen and ( min-width: #{$minWidescreenWidth} )";
-$breakpoint-tabletAndUp: "only screen and ( min-width: #{$minTabletWidth} )";
-$breakpoint-desktopAndUp: "only screen and ( min-width: #{$minDesktopWidth} )";
-$breakpoint-widescreenAndUp: "only screen and ( min-width: #{$minWidescreenWidth} )";
+$mobileOnly: "only screen and ( max-width: #{$maxMobileWidth} )";
+$tabletOnly: "only screen and( min-width: #{$minTabletWidth} ) and ( max-width: #{$maxTabletWidth} )";
+$desktopOnly: "only screen and ( min-width: #{$minDesktopWidth} ) and ( max-width: #{$maxDesktopWidth} )";
+$widescreenOnly: "only screen and ( min-width: #{$minWidescreenWidth} )";
+$tabletAndUp: "only screen and ( min-width: #{$minTabletWidth} )";
+$desktopAndUp: "only screen and ( min-width: #{$minDesktopWidth} )";
+$widescreenAndUp: "only screen and ( min-width: #{$minWidescreenWidth} )";
 
 $page-width-tablet: 41rem;
 $page-width-desktop: 62rem;
