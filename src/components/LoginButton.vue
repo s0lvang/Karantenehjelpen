@@ -2,9 +2,9 @@
   <div class="btnDiv">
     <button @click="socialLogin()" class="button_style">
       <img alt="Google Logo" src="../assets/google-logo.svg" />
-      <p id="btnText">
+      <span id="btnText">
         Logg inn med google
-      </p>
+      </span>
     </button>
   </div>
 </template>
