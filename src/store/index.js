@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     phoneNumber: "",
     paymentSolution: "",
     items: [],
-    requests: []
+    requests: [],
+    geolocation: {}
   },
   getters: {
     currentUser: state => state.currentUser,
@@ -24,7 +25,8 @@ const store = new Vuex.Store({
     arrivalDescription: state => state.arrivalDescription,
     paymentSolution: state => state.paymentSolution,
     items: state => state.items,
-    requests: state => state.requests
+    requests: state => state.requests,
+    location: state => state.geolocation
   },
   mutations: {
     SET_CURRENT_USER(state, val) {
@@ -47,6 +49,9 @@ const store = new Vuex.Store({
     },
     SET_PAYMENT_SOLUTION(state, payload) {
       state.paymentSolution = payload;
+    },
+    SET_GEOLOCATION(state, payload) {
+      state.geolocation = payload;
     }
   },
   actions: {
@@ -70,10 +75,14 @@ const store = new Vuex.Store({
     },
     SET_PAYMENT_SOLUTION: (context, payload) => {
       context.commit("SET_PAYMENT_SOLUTION", payload);
+    },
+    SET_GEOLOCATION: (context, payload) => {
+      context.commit("SET_GEOLOCATION", payload);
     }
   }
 });
-//
+
+// Firebase auth state change
 fb.auth.onAuthStateChanged(user => {
   if (user) {
     store.commit("SET_CURRENT_USER", user);
@@ -89,5 +98,34 @@ fb.auth.onAuthStateChanged(user => {
       });
   }
 });
+
+/**
+ * GEOLOCATION
+ * ===========
+ *
+ * Firstly, this will prompt the user for permissions to retrieve geolocation.
+ * We want to retrieve a high accuracy position, and it can be a maximum of a
+ * minute old (cache might return cached pos). We also want to time out after 5
+ * seconds as browser geolocation APIs are quite buggy, and sometimes will just
+ * _die_.
+ *
+ * The fallback address is actually my home address, so if people aren't cool
+ * enough to enable geolocation, they'll be inclined to deliver to me first.
+ *
+ * This should probably be changed to something better for humanity, but it'll
+ * do for now.
+ */
+navigator.geolocation.getCurrentPosition(
+  ({ coords: { latitude, longitude } }) => {
+    store.commit("SET_GEOLOCATION", { latitude, longitude });
+  },
+  err => {
+    console.error(
+      `Could not retrieve geolocation. ${err.code}: ${err.message}.`
+    );
+    store.commit("SET_GEOLOCATION", { latitude: 63.41002, longitude: 10.4153 });
+  },
+  { enableHighAccuracy: true, maximumAge: 60000, timeout: 5000 }
+);
 
 export default store;
