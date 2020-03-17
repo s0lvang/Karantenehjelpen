@@ -88,13 +88,6 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       font-size: 1.5rem;
-    }
-  }
-}
-
-@media #{$desktopAndUp} {
-  #map {
-    h3 {
       border-top-left-radius: 0.5rem;
       border-top-right-radius: 0.5rem;
     }

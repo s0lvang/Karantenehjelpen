@@ -12,7 +12,7 @@
       Handleliste:
     </strong>
     <div>
-      {{ getItemNames }}
+      {{ getItems }}
     </div>
     <Button
       btnText="Se forespørsel"
@@ -44,7 +44,7 @@ export default {
   computed: {
     getItems() {
       return this.request.items
-        .map(item => `<b>${item.count}x</b> ${item.itemName}`)
+        .map(item => `${item.count}x ${item.itemName}`)
         .join(", ");
     },
     userIsAssigned() {

@@ -126,6 +126,7 @@ h1 {
 }
 
 svg {
+  cursor: pointer;
   width: 1.5rem;
   height: 1.5rem;
 

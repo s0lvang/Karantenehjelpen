@@ -8,9 +8,15 @@
     <h3>
       Kontaktinformasjon
     </h3>
-    <p><strong>Epost:</strong><a class="link" :href="getEmailLink">{{ request.email }}</a></p>
-    <p><strong>Telefon:</strong><a class="link" :href="getPhoneLink">{{ request.phoneNumber }}</a></p>
-    <p><strong>Betalingsmåte:</strong> {{ request.paymentSolution }}</p>
+    <p>
+      <strong>Epost: </strong>
+      <a :href="getEmailLink">{{ request.email }}</a>
+    </p>
+    <p>
+      <strong>Telefon: </strong>
+      <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
+    </p>
+    <p><strong>Betalingsmåte: </strong>{{ request.paymentSolution }}</p>
 
     <h3>Handleliste</h3>
     <ul>
@@ -60,18 +66,6 @@ li {
     display: inline-block;
     width: 2rem;
   }
-}
-
-.link {
-  color: #038df0;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-.link:active {
-  color: #004bac;
 }
 
 hr {

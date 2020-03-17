@@ -78,6 +78,7 @@ h1 {
 
   .role {
     margin: 0;
+    place-self: start;
   }
 }
 </style>
