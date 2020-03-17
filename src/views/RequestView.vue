@@ -1,7 +1,9 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div class="flex flex-col items-center container mx-auto mt-3 extra-information">
+    <div
+      class="flex flex-col items-center container mx-auto mt-3 extra-information"
+    >
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
@@ -20,6 +22,12 @@
         :btnText="getAssignedButtonText"
         :btnDisabled="false"
         @btnClicked="connectUserToRequest"
+      />
+      <Button
+        btnText="Jeg har levert ordren"
+        v-if="userIsAssigned"
+        :btnDisabled="userIsNotifiedAboutCompletedOrder"
+        @btnClicked="notifyUserThatOrderIsComplete"
       />
       <p v-if="userIsAssigned" class>
         Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
@@ -59,6 +67,11 @@ export default {
     DetailedRequest,
     Button
   },
+  data() {
+    return {
+      userIsNotifiedAboutCompletedOrder: false
+    };
+  },
   computed: {
     getRequest() {
       return this.$store.getters.requests.find(
@@ -87,6 +100,20 @@ export default {
     }
   },
   methods: {
+    notifyUserThatOrderIsComplete() {
+      sms(
+        this.getRequest.phoneNumber,
+        `${
+          this.$store.getters.name
+        } påstår å ha levert din ordre på: \n\n${printItemNames(
+          this.getRequest.items
+        )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/my-requests.`
+      );
+      this.userIsNotifiedAboutCompletedOrder = true;
+      alert(
+        "Kunden har blitt varslet om at du har levert varene. Vennligst tillat opptil en halvtime før kunden har markert oppdraget som utført."
+      );
+    },
     markAsDelivered() {
       fb.usersCollection
         .doc(this.$store.getters.id)
@@ -98,7 +125,6 @@ export default {
         .then(() => this.$router.push("/my-requests"))
         .catch(error => console.log(error));
     },
-
     deleteRequest() {
       fb.usersCollection
         .doc(this.$store.getters.id)
