@@ -56,7 +56,6 @@ section {
 }
 h1 {
   grid-column: 1 / -1;
-  margin-top: 4rem;
   text-align: center;
 }
 .role {

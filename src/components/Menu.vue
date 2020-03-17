@@ -14,7 +14,7 @@
         </svg>
       </button>
     </div>-->
-    <nav :class="open ? 'block' : 'hidden'">
+    <nav v-if="getUser" :class="open ? 'block' : 'hidden'">
       <a @click="toAllRequests">
         Oppdragslisten
       </a>
@@ -89,6 +89,11 @@ export default {
         .catch(error => {
           console.log(`something went wrong ${error.message}`);
         });
+    }
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
     }
   }
 };

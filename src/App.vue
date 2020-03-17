@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu v-if="getUser && this.$route.name !== 'StartScreen'" />
+    <Menu />
     <Page>
       <router-view />
     </Page>
@@ -20,11 +20,6 @@ export default {
   components: {
     Menu,
     Page
-  },
-  computed: {
-    getUser() {
-      return this.$store.getters.currentUser;
-    }
   }
 };
 </script>
@@ -39,6 +34,7 @@ export default {
 }
 
 footer {
+  margin-top: 4rem;
   padding: 1rem;
   background: $color-primary;
   text-align: center;
