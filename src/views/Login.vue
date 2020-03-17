@@ -18,7 +18,6 @@
         <h3 class="font-bold text-lg m-3">Følg FHI sine råd!</h3>
         <p class="m-3">Just do it</p>
         <LoginButton />
-        <div class="flex flex-col"></div>
       </div>
       <footer
         class="w-full text-center border-t border-grey p-4 pin-b"
