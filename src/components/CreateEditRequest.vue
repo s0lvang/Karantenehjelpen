@@ -43,6 +43,10 @@
           class="pr-5 pl-5"
         />
       </div>
+      {{ this.address }}<br />
+      {{ this.arrivalDesc }}<br />
+      {{ this.phoneNr }}<br />
+      {{ this.paymentSolution }}
       <Button
         btnText="Ny vare"
         :btnDisabled="false"
@@ -117,7 +121,6 @@ export default {
     },
     updatePaymentSolution(value) {
       this.paymentSolutionError = false;
-      console.log(value);
       this.paymentSolution = value;
     },
     deleteItem(index) {
@@ -190,6 +193,7 @@ export default {
         // const x = this.$store.getters.requests.find(
         //   request => request.id === this.$route.params.id
         // );
+        console.log("oops");
         return new Promise((resolve, reject) => {
           setTimeout(
             () =>
@@ -207,6 +211,7 @@ export default {
     },
     async resolvedValue() {
       this.showSpinner = true;
+      console.log("kallt");
       if (!this.checkEdit) {
         this.showSpinner = false;
         this.items = this.getItems;
