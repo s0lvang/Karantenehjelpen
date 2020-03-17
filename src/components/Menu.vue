@@ -98,26 +98,26 @@ export default {
     myRequests() {
       if (this.$route.name !== "MyRequests") {
         this.$router.push("/my-requests");
-        this.toggle();
       }
+      this.toggle();
     },
     myAssignedRequests() {
       if (this.$route.name !== "MyAssignedRequests") {
         this.$router.push("/my-assigned-requests");
-        this.toggle();
       }
+      this.toggle();
     },
     toAllRequests() {
       if (this.$route.name !== "AllRequests") {
         this.$router.push("/all-requests");
-        this.toggle();
       }
+      this.toggle();
     },
     newRequest() {
       if (this.$route.name !== "CreateRequest") {
         this.$router.push("/create-request");
-        this.toggle();
       }
+      this.toggle();
     },
     goToStart() {
       if (this.$route.name !== "StartScreen") {
