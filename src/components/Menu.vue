@@ -1,46 +1,35 @@
 <template>
-  <nav id="forBGcolor">
-    <div>
-      <a @click="goToStart">
-        Karantenehjelpen
-      </a>
-    </div>
-    <div>
+  <header id="forBGcolor">
+    <h1 @click="goToStart">
+      Karantenehjelpen
+    </h1>
+    <!--<div>
       <button @click="toggle">
         <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <title>Meny</title>
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
       </button>
-    </div>
-    <div :class="open ? 'block' : 'hidden'">
-      <div>
-        <a @click="toAllRequests">
-          Oppdragslisten
-        </a>
-      </div>
-      <div>
-        <a @click="myAssignedRequests">
-          Mine oppdrag
-        </a>
-      </div>
-      <div>
-        <a @click="newRequest">
-          Ny bestilling
-        </a>
-      </div>
-      <div>
-        <a @click="myRequests">
-          Mine bestillinger
-        </a>
-      </div>
-      <div>
-        <a @click="logout" id="onlyHover">
-          Logg ut
-        </a>
-      </div>
-    </div>
-  </nav>
+    </div>-->
+    <nav :class="open ? 'block' : 'hidden'">
+      <a @click="toAllRequests">
+        Oppdragslisten
+      </a>
+      <a @click="myAssignedRequests">
+        Mine oppdrag
+      </a>
+      <a @click="newRequest">
+        Ny bestilling
+      </a>
+      <a @click="myRequests">
+        Mine bestillinger
+      </a>
+      <span class="divider" />
+      <a @click="logout" id="onlyHover">
+        Logg ut
+      </a>
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -101,10 +90,31 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#forBGcolor {
-  background-color: #0060a3;
+header {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(black, 0.25);
+  margin-bottom: 4rem;
 }
-#onlyHover:hover {
-  color: #0060a3;
+
+h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  margin: 0;
+}
+
+nav > a {
+  margin: 0 0.5rem;
+}
+
+.divider {
+  display: inline-block;
+  width: 2px;
+  height: 2rem;
+  margin: -0.5rem 1rem;
+  background: $color-text;
 }
 </style>

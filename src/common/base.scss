@@ -18,6 +18,15 @@ body {
   }
 }
 
+a {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 img {
   display: block;
   max-width: 100%;

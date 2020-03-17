@@ -45,11 +45,6 @@ footer {
 
   a {
     color: $color-text-contrast;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }
 </style>
