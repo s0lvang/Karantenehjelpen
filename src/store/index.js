@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     currentUser: null,
     address: {},
     arrivalDescription: "",
-    phoneNumber: "",
+    phoneNumberInput: "",
     paymentSolution: "",
     items: [],
     requests: []
@@ -20,7 +20,7 @@ const store = new Vuex.Store({
     email: state => (state.currentUser ? state.currentUser.email : null),
     id: state => (state.currentUser ? state.currentUser.uid : null),
     address: state => state.address,
-    phoneNumber: state => state.phoneNumber,
+    phoneNumberInput: state => state.phoneNumberInput,
     arrivalDescription: state => state.arrivalDescription,
     paymentSolution: state => state.paymentSolution,
     items: state => state.items,
@@ -33,8 +33,8 @@ const store = new Vuex.Store({
     SET_ADDRESS(state, payload) {
       state.address = payload;
     },
-    SET_PHONE_NUMBER(state, payload) {
-      state.phoneNumber = payload;
+    SET_PHONE_NUMBER_INPUT(state, payload) {
+      state.phoneNumberInput = payload;
     },
     SET_ARRIVAL_DESCRIPTION(state, payload) {
       state.arrivalDescription = payload;
@@ -56,8 +56,8 @@ const store = new Vuex.Store({
     SET_ADDRESS: (context, payload) => {
       context.commit("SET_ADDRESS", payload);
     },
-    SET_PHONE_NUMBER: (context, payload) => {
-      context.commit("SET_PHONE_NUMBER", payload);
+    SET_PHONE_NUMBER_INPUT: (context, payload) => {
+      context.commit("SET_PHONE_NUMBER_INPUT", payload);
     },
     SET_ARRIVAL_DESCRIPTION: (context, payload) => {
       context.commit("SET_ARRIVAL_DESCRIPTION", payload);

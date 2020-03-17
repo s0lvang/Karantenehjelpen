@@ -156,7 +156,7 @@ export default {
           localAddress.place_name_no !== undefined &&
           localAddress.place_name_no.length > 1
         ) {
-          this.$store.dispatch("SET_PHONE_NUMBER", this.phoneNr);
+          this.$store.dispatch("SET_PHONE_NUMBER_INPUT", this.phoneNr);
           this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
           this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
           this.$emit("toSummary");
@@ -181,7 +181,7 @@ export default {
       return this.$store.getters.items;
     },
     getPhoneNumber() {
-      return this.$store.getters.phoneNumber;
+      return this.$store.getters.phoneNumberInput;
     },
     getPaymentSolution() {
       return this.$store.getters.paymentSolution;
@@ -190,7 +190,7 @@ export default {
   mounted() {
     this.items = this.getItems;
     this.address = this.getAddress;
-    this.phoneNr = this.getPhoneNumber;
+    this.phoneNr = this.$store.getters.phoneNumber || this.phoneNr;
     this.arrivalDesc = this.getArrivalDescription;
     this.paymentSolution = this.getPaymentSolution;
   }

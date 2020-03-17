@@ -37,7 +37,7 @@ export default {
                 this.$dialog
                   .prompt({
                     title: "Telefonnummer",
-                    body: "Skriv inn telefonnummeret ditt",
+                    body: "Skriv inn telefonnummeret ditt uten landskode",
                     promptHelp: ""
                   })
                   .then(dialog => {
@@ -51,7 +51,6 @@ export default {
                     this.$router.replace("home");
                   })
                   .catch(() => {
-                    console.log("yolo");
                     firebase
                       .auth()
                       .signOut()
