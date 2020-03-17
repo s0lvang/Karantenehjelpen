@@ -37,7 +37,7 @@
         </p>
         <p>
           Du kan nå denne personen på
-          <b>{{ getRequest.connectedUser.email }}</b>
+          <b>{{ getRequest.connectedUser.phoneNumber }}</b>
         </p>
         <Button
           btnText="Fjern Brukeren fra oppdraget"
@@ -142,7 +142,8 @@ export default {
             ? {
                 connectedUser: {
                   name: this.$store.getters.name,
-                  email: this.$store.getters.email
+                  email: this.$store.getters.email,
+                  phoneNumber: this.$store.getters.phoneNumber
                 }
               }
             : { connectedUser: null }

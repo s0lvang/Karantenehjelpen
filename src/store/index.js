@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     currentUser: null,
     address: {},
     arrivalDescription: "",
-    phoneNumber: "",
+    phoneNumberInput: "",
     paymentSolution: "",
     items: [],
     requests: []
@@ -18,9 +18,11 @@ const store = new Vuex.Store({
     currentUser: state => state.currentUser,
     name: state => (state.currentUser ? state.currentUser.displayName : null),
     email: state => (state.currentUser ? state.currentUser.email : null),
+    phoneNumber: state =>
+      state.currentUser ? state.currentUser.phoneNumber : null,
     id: state => (state.currentUser ? state.currentUser.uid : null),
     address: state => state.address,
-    phoneNumber: state => state.phoneNumber,
+    phoneNumberInput: state => state.phoneNumberInput,
     arrivalDescription: state => state.arrivalDescription,
     paymentSolution: state => state.paymentSolution,
     items: state => state.items,
@@ -33,8 +35,8 @@ const store = new Vuex.Store({
     SET_ADDRESS(state, payload) {
       state.address = payload;
     },
-    SET_PHONE_NUMBER(state, payload) {
-      state.phoneNumber = payload;
+    SET_PHONE_NUMBER_INPUT(state, payload) {
+      state.phoneNumberInput = payload;
     },
     SET_ARRIVAL_DESCRIPTION(state, payload) {
       state.arrivalDescription = payload;
@@ -56,8 +58,8 @@ const store = new Vuex.Store({
     SET_ADDRESS: (context, payload) => {
       context.commit("SET_ADDRESS", payload);
     },
-    SET_PHONE_NUMBER: (context, payload) => {
-      context.commit("SET_PHONE_NUMBER", payload);
+    SET_PHONE_NUMBER_INPUT: (context, payload) => {
+      context.commit("SET_PHONE_NUMBER_INPUT", payload);
     },
     SET_ARRIVAL_DESCRIPTION: (context, payload) => {
       context.commit("SET_ARRIVAL_DESCRIPTION", payload);
@@ -76,7 +78,16 @@ const store = new Vuex.Store({
 //
 fb.auth.onAuthStateChanged(user => {
   if (user) {
-    store.commit("SET_CURRENT_USER", user);
+    fb.additionalUserInfoCollection
+      .doc(user.uid)
+      .get()
+      .then(userInfo => {
+        console.log(userInfo.data());
+        store.commit("SET_CURRENT_USER", { ...user, ...userInfo.data() });
+      })
+      .catch(() =>
+        console.log("noe gikk galt da vi skulle hente brukerinfoen din")
+      );
     fb.db
       .collectionGroup("requests")
       .orderBy("createdOn", "desc")
