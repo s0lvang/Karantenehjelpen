@@ -17,7 +17,7 @@ export default (to, body) => {
                 // It might seem strange to not invert the next statement, but
                 // this is async so nothing should be logical. Accept it.
                 Body: body,
-                From: "Karanthjelp",
+                From: "Koronial",
                 To: `+47${to}`
             }),
             headers: {
