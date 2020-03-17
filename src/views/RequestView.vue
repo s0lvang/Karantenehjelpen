@@ -40,7 +40,7 @@
           <b>{{ getRequest.connectedUser.phoneNumber }}</b>
         </p>
         <Button
-          btnText="Fjern Brukeren fra oppdraget"
+          btnText="Fjern brukeren fra oppdraget"
           :btnDisabled="false"
           isDanger="true"
           @btnClicked="connectUserToRequest"
@@ -156,9 +156,8 @@ export default {
                   this.$store.getters.name
                 } har tatt din ordre på: \n\n${printItemNames(
                   this.getRequest.items
-                )}\n\nDu kan nå din lille hjelper på ${
-                  this.$store.getters.email
-                }.`
+                )}\n\nDu kan nå din lille hjelper på ${this.$store.getters
+                  .phoneNumber || this.$store.getters.email}.`
               : `${
                   this.$store.getters.name
                 } har sagt fra seg din ordre på: \n\n${printItemNames(

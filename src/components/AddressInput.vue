@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label for="address_input">Addresse</label>
+    <label for="address_input">Adresse</label>
     <div class="spinnerWrapper">
       <input
         v-model="locationInput"
@@ -20,7 +20,7 @@
         {{ location.place_name_no }}
       </li>
     </ul>
-    <p v-if="showError">Noe gikk galt under henting av addresser</p>
+    <p v-if="showError">Noe gikk galt under henting av adresser</p>
   </div>
 </template>
 

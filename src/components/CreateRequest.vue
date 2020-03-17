@@ -9,7 +9,7 @@
       :existing="arrivalDesc"
     />
     <NumberInput
-      labelText="Telefonummer (uten landskode)"
+      labelText="Telefonnummer (uten landskode)"
       placeholderText="98765432"
       @emitNumberInput="updatePhoneNumber"
       :existing="phoneNr"
@@ -41,7 +41,7 @@
     <p class="error" v-if="addressError">Du må legge til en adresse!</p>
     <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
     <p class="error" v-if="phoneNumberError">
-      Du må legge til en Telefonummer!
+      Du må legge til et telefonnummer!
     </p>
     <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
     <p class="error" v-if="paymentSolutionError">

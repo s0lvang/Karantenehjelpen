@@ -3,6 +3,7 @@
     <h3>
       {{ request.address.place_name_no }}
     </h3>
+    <p v-if="showDistance">{{ distance.toFixed(2) }} km unna deg</p>
     <strong>
       Handleliste:
     </strong>
@@ -21,6 +22,8 @@
 <script>
 import Button from "@/components/shared/Button.vue";
 import Info from "@/components/shared/Info.vue";
+
+import coordinateDistance from "@/helpers/coord";
 
 export default {
   name: "Request",
@@ -45,6 +48,18 @@ export default {
         .map(item => `${item.count}x ${item.itemName}`)
         .join(", ");
     },
+    showDistance() {
+      return this.$store.getters.showDistance;
+    },
+    distance() {
+      return coordinateDistance(
+        this.$store.getters.location.latitude,
+        this.$store.getters.location.longitude,
+        this.request.address.center[1],
+        this.request.address.center[0],
+        "K"
+      );
+    },
     userIsAssigned() {
       return (
         this.request.connectedUser &&
@@ -68,7 +83,7 @@ export default {
 
 h3 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 button {
