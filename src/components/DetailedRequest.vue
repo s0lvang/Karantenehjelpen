@@ -40,7 +40,7 @@
       <Button
         btnText="Endre"
         :btnDisabled="false"
-        v-if="resolvedValue"
+        v-if="resolvedValue && !this.connectedUser"
         @btnClicked="goToEdit"
       />
     </div>
@@ -56,6 +56,11 @@ export default {
   components: {
     Map,
     Button
+  },
+  data() {
+    return {
+      connectedUser: false
+    };
   },
   props: {
     request: {
@@ -80,6 +85,9 @@ export default {
   asyncComputed: {
     async resolvedValue() {
       const x = await this.getRequest();
+      if (x.connectedUser) {
+        this.connectedUser = true;
+      }
       return x.email === this.$store.getters.email;
     }
   }
