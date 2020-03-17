@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <section>
     <Requests
       :requests="getMyRequests"
       firstHeaderText="Mine Bestillinger"
       secondHeaderText="Mine Leverte"
     />
-  </div>
+  </section>
 </template>
 
 <script>

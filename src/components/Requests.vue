@@ -1,13 +1,17 @@
 <template>
   <section>
     <h3>{{ firstHeaderText }}</h3>
-    <section v-for="request in getNotDelivered" :key="request.id">
-      <Request :request="request" />
-    </section>
+    <Request
+      v-for="request in getNotDelivered"
+      :key="request.id"
+      :request="request"
+    />
     <h3>{{ secondHeaderText }}</h3>
-    <section v-for="request in getDelivered" :key="request.id">
-      <Request :request="request" />
-    </section>
+    <Request
+      v-for="request in getDelivered"
+      :key="request.id"
+      :request="request"
+    />
   </section>
 </template>
 
