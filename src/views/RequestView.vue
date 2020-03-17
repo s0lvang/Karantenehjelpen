@@ -1,7 +1,9 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div class="flex flex-col items-center container mx-auto mt-3 extra-information">
+    <div
+      class="flex flex-col items-center container mx-auto mt-3 extra-information"
+    >
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
