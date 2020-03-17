@@ -1,44 +1,34 @@
 <template>
-  <div class="container mx-auto mt-3">
-    <div class="flex flex-col items-center">
-      <div>
-        <Map :locationCenter="request.address.center" class />
-        <p class="text-2xl p-2">{{ request.address.place_name_no }}</p>
+  <section>
+    <Map
+      :address="request.address.place_name_no"
+      :locationCenter="request.address.center"
+    />
+    <hr />
+    <h3>
+      Kontaktinformasjon
+    </h3>
+    <p>
+      <strong>Epost: </strong>
+      <a :href="getEmailLink">{{ request.email }}</a>
+    </p>
+    <p>
+      <strong>Telefon: </strong>
+      <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
+    </p>
+    <p><strong>Betalingsmåte: </strong>{{ request.paymentSolution }}</p>
 
-        <ul class="p-2">
-          <li
-            v-for="(item, index) in request.items"
-            :key="index"
-            class="break-words list-disc ml-4"
-          >
-            <span class="font-bold">{{ item.count }}x</span>
-            {{
-              item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
-            }}
-          </li>
-        </ul>
+    <h3>Handleliste</h3>
+    <ul>
+      <li v-for="(item, index) in request.items" :key="index">
+        <strong>{{ item.count }}x</strong>
+        {{ item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1) }}
+      </li>
+    </ul>
 
-        <div class="p-2">
-          <h1 class="font-bold text-lg">Kontaktinformasjon</h1>
-          <div class="flex">
-            <p class="font-bold">Epost:</p>
-            <div class="ml-2">{{ request.email }}</div>
-          </div>
-          <div class="flex">
-            <p class="font-bold">Telefon:</p>
-            <div class="ml-2">{{ request.phoneNumber }}</div>
-          </div>
-          <div class="flex">
-            <p class="font-bold">Betalingsmåte:</p>
-            <div class="ml-2">{{ request.paymentSolution }}</div>
-          </div>
-        </div>
-
-        <p class="text-lg font-bold p-2">Ankomstbeskrivelse:</p>
-        <div class="p-2 break-words">{{ request.arrivalDescription }}</div>
-      </div>
-    </div>
-  </div>
+    <h3>Ankomstbeskrivelse</h3>
+    <p>{{ request.arrivalDescription }}</p>
+  </section>
 </template>
 
 <script>
@@ -56,6 +46,35 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {
+    getPhoneLink() {
+      return `tel:${this.request.phoneNumber}`;
+    },
+    getEmailLink() {
+      return `mailto:${this.request.email}`;
+    }
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+li {
+  line-height: 1.5rem;
+
+  & > strong {
+    line-height: inherit;
+    display: inline-block;
+    width: 2rem;
+  }
+}
+
+hr {
+  margin: 0;
+}
+
+@media #{$tabletAndUp} {
+  hr {
+    display: none;
+  }
+}
+</style>

@@ -13,12 +13,13 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "firebase": "^7.10.0",
     "mapbox-gl": "^1.8.1",
     "prettier": "^1.19.1",
-    "tailwindcss": "^1.2.0",
     "vue": "^2.6.11",
+    "vue-fragment": "^1.5.1",
     "vue-router": "^3.1.5",
     "vue-select": "^3.9.1",
     "vuex": "^3.1.2"
@@ -47,7 +48,8 @@
     "extends": [
       "plugin:vue/essential",
       "@vue/airbnb",
-      "@vue/eslint-config-prettier"
+      "@vue/eslint-config-prettier",
+      "prettier"
     ],
     "parserOptions": {
       "ecmaVersion": 2020

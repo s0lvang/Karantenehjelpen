@@ -1,5 +1,12 @@
 // vue.config.js
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "@/common/constants.scss";`
+      }
+    }
+  },
   configureWebpack: {
     module: {
       rules: [

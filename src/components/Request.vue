@@ -1,21 +1,25 @@
 <template>
-  <div class="container mx-auto border rounded-lg mt-3">
-    <h3 class="text-2xl p-2">
-      {{ request.address.place_name_no }}
-    </h3>
-    <p class="text-sm p-2">{{ distance.toFixed(2) }} km unna deg</p>
-    <p class="text-xl underline p-2">
+  <div class="request">
+    <div class="heading">
+      <h3>
+        {{ request.address.place_name_no }}
+      </h3>
+      <p>{{ distance.toFixed(2) }} km unna deg</p>
+      <span v-if="userIsAssigned" class="badge">
+        <img src="@/assets/groceries.svg" />
+      </span>
+    </div>
+    <strong>
       Handleliste:
-    </p>
-    <div class="p-2 truncate">
-      {{ getItemNames }}
+    </strong>
+    <div>
+      {{ getItems }}
     </div>
     <Button
       btnText="Se forespørsel"
       @btnClicked="seeMore"
       :btnDisabled="false"
     />
-    <img v-if="userIsAssigned" src="@/assets/groceries.svg" />
   </div>
 </template>
 
@@ -40,8 +44,10 @@ export default {
     }
   },
   computed: {
-    getItemNames() {
-      return this.request.items.map(item => item.itemName).join(", ");
+    getItems() {
+      return this.request.items
+        .map(item => `${item.count}x ${item.itemName}`)
+        .join(", ");
     },
     distance() {
       return coordinateDistance(
@@ -63,8 +69,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
-  height: auto;
-  width: 50px; // TODO: The placement of the icon should be fixed.
+.request {
+  position: relative;
+  overflow: hidden;
+  @include card;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  display: flex;
+}
+
+.badge {
+  background: $color-primary;
+  margin-left: 1rem;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+button {
+  margin: 2rem auto 1rem;
+}
+
+@media #{$tabletAndUp} {
+  .badge {
+    width: 5rem;
+    height: 5rem;
+
+    img {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
 }
 </style>
