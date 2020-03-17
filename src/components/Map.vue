@@ -1,6 +1,17 @@
 <template>
   <div id="map">
-    <h3>{{ address }}</h3>
+    <a
+      target="_blank"
+      class="address"
+      :href="
+        `https://www.google.com/maps/dir/?api=1&destination=${address.replace(
+          / /g,
+          '+'
+        )}&travelmode=driving`
+      "
+    >
+      <p>{{ address }}</p>
+    </a>
   </div>
 </template>
 
@@ -63,15 +74,14 @@ export default {
   margin-left: -50vw;
   height: 20rem !important;
 
-  h3 {
+  a {
     position: absolute;
     background: white;
     width: 100%;
     margin: 0;
     bottom: 0;
-    padding: 0.5rem 2rem;
+    padding: 1rem 2rem;
     z-index: 10;
-    font-size: 1.25rem;
   }
 }
 
@@ -83,11 +93,11 @@ export default {
   #map {
     margin-top: -1 * $vertical-space-large;
 
-    h3 {
+    a {
       width: auto;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       border-top-left-radius: 0.5rem;
       border-top-right-radius: 0.5rem;
     }
