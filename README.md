@@ -27,3 +27,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Deploy
 
 npm run build && firebase deploy
+
+## Credits
+
+Logo made by [Richa @ Noun Project](https://thenounproject.com/ayushi12/collection/set-5/?i=2097590).

@@ -1,14 +1,7 @@
 <template>
-  <div class="btnDiv">
-    <button
-      @click="btnClick"
-      class="button_style"
-      :class="isDanger"
-      :disabled="btnDisabled"
-    >
-      {{ btnText }}
-    </button>
-  </div>
+  <button @click="btnClick" :class="isDanger" :disabled="btnDisabled">
+    {{ btnText }}
+  </button>
 </template>
 
 <script>
@@ -34,34 +27,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btnDiv {
-  display: flex;
-  justify-content: space-around;
-  -moz-box-align: center;
-  align-items: center;
-  margin: 2rem 0px;
-}
-.button_style {
-  background-color: rgb(0, 96, 163);
-  color: rgb(255, 255, 255);
+button {
+  display: block;
+  background: $color-primary;
+  color: $color-text-contrast;
+  padding: 1rem;
   border-radius: 4px;
-  padding: 0.8rem;
-  font-size: 1rem;
-  font-weight: 600;
+  line-height: 1;
   letter-spacing: 1px;
-  display: flex;
-  margin: auto;
   cursor: pointer;
-  &:hover {
-    background-color: rgb(3, 141, 240);
+  font-weight: bold;
+  transition: background 0.2s, opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    background: lighten($color-primary, 10%);
   }
+
   &:disabled {
-    color: #555658;
-    border-color: 1px solid rgb(241, 241, 241);
-    background-color: #ececec;
+    opacity: 0.25;
+    cursor: not-allowed;
   }
+
   &.true {
-    background-color: #df2020;
+    background: $color-danger;
+
+    &:hover {
+      background: lighten($color-danger, 10%);
+    }
   }
 }
 </style>

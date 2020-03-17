@@ -1,13 +1,17 @@
 <template>
-  <section class="container mx-auto">
-    <h3 class="text-3xl pt-4 pl-4">{{ firstHeaderText }}</h3>
-    <section v-for="request in getNotDelivered" :key="request.id" class="p-3">
-      <Request :request="request" />
-    </section>
-    <h3 class="text-3xl pt-4 pl-4">{{ secondHeaderText }}</h3>
-    <section v-for="request in getDelivered" :key="request.id" class="p-3">
-      <Request :request="request" />
-    </section>
+  <section>
+    <h2>{{ firstHeaderText }}</h2>
+    <Request
+      v-for="request in getNotDelivered"
+      :key="request.id"
+      :request="request"
+    />
+    <h2>{{ secondHeaderText }}</h2>
+    <Request
+      v-for="request in getDelivered"
+      :key="request.id"
+      :request="request"
+    />
   </section>
 </template>
 
@@ -43,5 +47,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>
