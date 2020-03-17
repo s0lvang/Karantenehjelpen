@@ -1,8 +1,11 @@
 <template>
   <header id="forBGcolor">
-    <h1 @click="goToStart">
-      Karantenehjelpen
-    </h1>
+    <a class="brand" @click="goToStart">
+      <img src="@/assets/logo.svg" alt="logo" />
+      <h1>
+        Karantenehjelpen
+      </h1>
+    </a>
     <!--<div>
       <button @click="toggle">
         <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -18,6 +21,7 @@
       <a @click="myAssignedRequests">
         Mine oppdrag
       </a>
+      <span class="divider" />
       <a @click="newRequest">
         Ny bestilling
       </a>
@@ -100,7 +104,15 @@ header {
   margin-bottom: 4rem;
 }
 
+img {
+  height: 2.5rem;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 0.5rem;
+}
+
 h1 {
+  display: inline-block;
   font-size: 2rem;
   line-height: 2.5rem;
   margin: 0;
