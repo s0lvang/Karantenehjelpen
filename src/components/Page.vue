@@ -7,8 +7,6 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@import "@/common/constants.scss";
-
 article {
   padding: 0 2rem;
   margin: 0 auto;

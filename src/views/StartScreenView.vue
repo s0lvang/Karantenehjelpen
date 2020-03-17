@@ -48,8 +48,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/common/constants.scss";
-
 section {
   display: grid;
   grid-template-rows: auto auto;

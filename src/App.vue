@@ -31,7 +31,6 @@ export default {
 
 <style lang="scss">
 @import "@/common/base.scss";
-@import "@/common/constants.scss";
 
 #app {
   display: flex;

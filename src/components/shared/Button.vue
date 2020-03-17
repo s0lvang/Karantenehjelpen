@@ -27,8 +27,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/common/constants.scss";
-
 button {
   display: block;
   background: $color-primary;
