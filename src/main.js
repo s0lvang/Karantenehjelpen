@@ -1,4 +1,3 @@
-import AsyncComputed from "vue-async-computed";
 import Vue from "vue";
 
 import vSelect from "vue-select";
@@ -10,7 +9,6 @@ import store from "./store";
 import fb from "./firebaseConfig";
 
 Vue.config.productionTip = false;
-Vue.use(AsyncComputed);
 
 Vue.component("v-select", vSelect);
 

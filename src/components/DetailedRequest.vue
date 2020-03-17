@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      connectedUser: false
+      localRequest: {}
     };
   },
   props: {
@@ -52,25 +52,15 @@ export default {
   },
   methods: {
     getRequest() {
-      return new Promise(resolve => {
-        resolve(
-          this.$store.getters.requests.find(
-            request => request.id === this.$route.params.id
-          )
-        );
-      });
-    }
-  },
-  asyncComputed: {
-    async resolvedValue() {
-      const x = await this.getRequest();
-      if (x.connectedUser) {
-        this.connectedUser = true;
-      }
-      return x.email === this.$store.getters.email;
+      const y = this.$store.getters.requests;
+      const o = this.$route.params.id;
+      this.localRequest = y.find(request => request.id === o);
     }
   },
   computed: {
+    checkConnected() {
+      return this.localRequest.email === this.$store.getters.email;
+    },
     getPhoneLink() {
       return `tel:${this.request.phoneNumber}`;
     },
