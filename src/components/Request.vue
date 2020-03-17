@@ -6,9 +6,7 @@
     <p class="text-xl underline p-2">
       Handleliste:
     </p>
-    <div class="p-2 truncate">
-      {{ getItemNames }}
-    </div>
+    <div class="p-2 truncate" v-html="getItems" />
     <Button
       btnText="Se forespørsel"
       @btnClicked="seeMore"
@@ -38,8 +36,10 @@ export default {
     }
   },
   computed: {
-    getItemNames() {
-      return this.request.items.map(item => item.itemName).join(", ");
+    getItems() {
+      return this.request.items
+        .map(item => `<b>${item.count}x</b> ${item.itemName}`)
+        .join(", ");
     },
     userIsAssigned() {
       return (

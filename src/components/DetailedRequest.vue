@@ -33,11 +33,15 @@
           <h1 class="font-bold text-lg">Kontaktinformasjon</h1>
           <div class="flex">
             <p class="font-bold">Epost:</p>
-            <div class="ml-2">{{ request.email }}</div>
+            <div class="ml-2">
+              <a class="link" :href="getEmailLink">{{ request.email }}</a>
+            </div>
           </div>
           <div class="flex">
             <p class="font-bold">Telefon:</p>
-            <div class="ml-2">{{ request.phoneNumber }}</div>
+            <div class="ml-2">
+              <a class="link" :href="getPhoneLink">{{ request.phoneNumber }}</a>
+            </div>
           </div>
           <div class="flex">
             <p class="font-bold">Betalingsmåte:</p>
@@ -67,12 +71,31 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {
+    getPhoneLink() {
+      return `tel:${this.request.phoneNumber}`;
+    },
+    getEmailLink() {
+      return `mailto:${this.request.email}`;
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .address {
   color: #0060a3;
+}
+
+.link {
+  color: #038df0;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:active {
+  color: #004bac;
 }
 </style>
