@@ -53,6 +53,10 @@ input[type="number"] {
   max-width: 200px;
 }
 
+hr {
+  margin: 3rem 0;
+}
+
 @mixin heading($font-size) {
   $line-height: $font-size + 0.5rem;
 

@@ -1,55 +1,57 @@
 <template>
-  <div class="container">
-    <div v-for="(item, index) in nrOfItems" :key="index">
-      <template v-if="!item.added">
+  <div class="grid">
+    <hr />
+    <h3>Handleliste</h3>
+    <div class="item" v-for="(item, index) in nrOfItems" :key="index">
+      <div class="split-row" v-if="item.added">
+        <div>
+          <strong>Vare:</strong>
+          <p>{{ nrOfItems[index].itemName }}</p>
+        </div>
+        <div>
+          <strong>Antall:</strong>
+          <p>
+            {{ nrOfItems[index].count }}
+          </p>
+        </div>
+        <Button
+          btnText="Slett"
+          @btnClicked="deleteItem(index)"
+          :btnDisabled="false"
+          isDanger="true"
+        />
+      </div>
+
+      <div class="split-row" v-if="!item.added">
         <TextInput
+          v-if="!item.added"
           labelText="Vare"
           placeholderText="Varenavn.."
           @emitInputText="emitInputText"
           :localIndex="index"
         />
-      </template>
-      <section v-if="item.added">
-        <b>Vare:</b>
-        <p>
-          {{ nrOfItems[index].itemName }}
-        </p>
-      </section>
-      <p v-if="item.added">
-        <b>Antall:</b>
-        {{ nrOfItems[index].count }}
-      </p>
-      <div>
-        <p v-if="!item.added">Antall</p>
-        <div v-if="!item.added">
-          <Button
-            btnText="-1"
-            @btnClicked="decrementCount(index)"
-            :btnDisabled="false"
-          />
-          <h3>
-            <b>{{ nrOfItems[index].count }}</b>
-          </h3>
-          <Button
-            btnText="+1"
-            @btnClicked="incrementCount(index)"
-            :btnDisabled="false"
-          />
+        <div>
+          <strong>Antall</strong>
+          <div class="split-row-amount">
+            <Button
+              btnText="-1"
+              @btnClicked="decrementCount(index)"
+              :btnDisabled="false"
+            />
+            <p class="amount">{{ nrOfItems[index].count }}</p>
+            <Button
+              btnText="+1"
+              @btnClicked="incrementCount(index)"
+              :btnDisabled="false"
+            />
+          </div>
         </div>
-      </div>
-      <template v-if="!item.added">
         <Button
           btnText="Legg til"
           @btnClicked="addItem(index)"
           :btnDisabled="false"
         />
-      </template>
-      <Button
-        btnText="Slett"
-        @btnClicked="deleteItem(index)"
-        :btnDisabled="false"
-        isDanger="true"
-      />
+      </div>
     </div>
   </div>
 </template>
@@ -59,7 +61,7 @@ import TextInput from "@/components/shared/TextInput.vue";
 import Button from "@/components/shared/Button.vue";
 
 export default {
-  name: "Item",
+  name: "Items",
   components: {
     TextInput,
     Button
@@ -99,7 +101,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  @include card;
+.item:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.split-row {
+  display: grid;
+  align-items: flex-end;
+  grid-template-columns: 33% 33% auto;
+}
+
+.split-row-amount {
+  display: flex;
+  align-items: center;
+}
+
+.amount {
+  font-size: 2rem;
+  margin: 0 1rem;
+}
+
+button {
+  width: fit-content;
+  justify-self: flex-end;
+}
+
+strong {
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
 }
 </style>

@@ -33,6 +33,7 @@ button {
   color: $color-text-contrast;
   padding: 1rem;
   border-radius: 4px;
+  line-height: 1;
   letter-spacing: 1px;
   cursor: pointer;
   font-weight: bold;

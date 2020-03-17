@@ -45,11 +45,14 @@
     <p class="error" v-if="paymentSolutionError">
       Du må legge til en betalingsløsing!
     </p>
-    <Button
-      btnText="Gå til oppsummering"
-      :btnDisabled="false"
-      @btnClicked="toSummary"
-    />
+    <div>
+      <hr />
+      <Button
+        btnText="Gå til oppsummering"
+        :btnDisabled="false"
+        @btnClicked="toSummary"
+      />
+    </div>
   </section>
 </template>
 

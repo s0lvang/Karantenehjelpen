@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Din Bestilling</h2>
     <DetailedRequest :request="getRequest" />
     <Spinner :showSpinner="showSpinner" />
     <div class="buttons" v-if="!showSpinner">
