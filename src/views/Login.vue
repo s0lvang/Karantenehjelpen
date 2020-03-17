@@ -17,16 +17,8 @@
         </p>
         <h3 class="font-bold text-lg m-3">Følg FHI sine råd!</h3>
         <p class="m-3">Just do it</p>
-        <p class="text-center mt-20 font-bold">Logg inn med Google</p>
-        <div class="flex flex-col">
-          <a @click="socialLogin" class="self-center cursor-pointer">
-            <img
-              alt="Google Logo"
-              src="../assets/google-logo.png"
-              class="h-24"
-            />
-          </a>
-        </div>
+        <LoginButton />
+        <div class="flex flex-col"></div>
       </div>
       <footer
         class="w-full text-center border-t border-grey p-4 pin-b"
@@ -39,25 +31,12 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import LoginButton from "@/components/LoginButton.vue";
 
 export default {
   name: "login",
-  methods: {
-    socialLogin() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(() => {
-          const { currentUser } = firebase.auth();
-          this.$store.dispatch("SET_CURRENT_USER", currentUser);
-          this.$router.replace("home");
-        })
-        .catch(err => {
-          alert(`Oops. ${err.message}`);
-        });
-    }
+  components: {
+    LoginButton
   }
 };
 </script>
