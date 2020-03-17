@@ -1,0 +1,54 @@
+// palette
+$color-primary: #0060a3;
+$color-danger: #df2020;
+$color-background-contrast: #ccc;
+$color-text: #2c3e50;
+$color-text-contrast: white;
+
+// mixin components
+@mixin elevation-soft {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+@mixin elevation-hard {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+@mixin card {
+  border-radius: 4px;
+  padding: 2rem;
+  background: white;
+  @include elevation-hard;
+}
+
+// sizes
+$vertical-space: 2rem;
+$vertical-space-large: 4rem;
+
+// breakpoints
+$sm: 320;
+$md: 756;
+$lg: 1200;
+$xl: 1704;
+
+$minMobileWidth: $sm + 0px;
+$maxMobileWidth: $md - 1px;
+$minTabletWidth: $md + 0px;
+$maxTabletWidth: $lg - 1px;
+$minDesktopWidth: $lg + 0px;
+$maxDesktopWidth: $xl - 1px;
+$minWidescreenWidth: $xl + 0px;
+
+$mobileOnly: "only screen and ( max-width: #{$maxMobileWidth} )";
+$tabletOnly: "only screen and( min-width: #{$minTabletWidth} ) and ( max-width: #{$maxTabletWidth} )";
+$desktopOnly: "only screen and ( min-width: #{$minDesktopWidth} ) and ( max-width: #{$maxDesktopWidth} )";
+$widescreenOnly: "only screen and ( min-width: #{$minWidescreenWidth} )";
+$tabletAndUp: "only screen and ( min-width: #{$minTabletWidth} )";
+$desktopAndUp: "only screen and ( min-width: #{$minDesktopWidth} )";
+$widescreenAndUp: "only screen and ( min-width: #{$minWidescreenWidth} )";
+
+$page-width-tablet: 41rem;
+$page-width-desktop: 52rem;
+$page-width-widescreen: 63rem;

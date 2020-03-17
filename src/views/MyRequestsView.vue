@@ -1,11 +1,11 @@
 <template>
-  <div class="container mx-auto">
+  <section>
     <Requests
       :requests="getMyRequests"
       firstHeaderText="Mine Bestillinger"
       secondHeaderText="Mine Leverte"
     />
-  </div>
+  </section>
 </template>
 
 <script>
@@ -25,5 +25,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

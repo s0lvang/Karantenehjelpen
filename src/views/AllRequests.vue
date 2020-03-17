@@ -1,9 +1,11 @@
 <template>
-  <section class="container mx-auto">
-    <p class="text-3xl pt-4 pl-4">Tilgjengelige oppdrag</p>
-    <section v-for="request in getRequests" :key="request.id" class="p-3">
-      <Request :request="request" />
-    </section>
+  <section>
+    <h2>Tilgjengelige oppdrag</h2>
+    <Request
+      v-for="request in getRequests"
+      :key="request.id"
+      :request="request"
+    />
   </section>
 </template>
 
@@ -29,5 +31,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

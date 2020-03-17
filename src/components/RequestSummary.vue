@@ -1,9 +1,8 @@
 <template>
-  <div class="container mx-auto ">
-    <h2 class="text-3xl text-center">Din Bestilling</h2>
+  <div>
     <DetailedRequest :request="getRequest" />
     <Spinner :showSpinner="showSpinner" />
-    <div v-if="!showSpinner">
+    <div class="buttons" v-if="!showSpinner">
       <Button
         btnText="Send Forespørsel"
         :btnDisabled="false"
@@ -55,3 +54,14 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.buttons {
+  display: flex;
+  margin-top: 2rem;
+
+  & > * + * {
+    margin-left: 1rem;
+  }
+}
+</style>

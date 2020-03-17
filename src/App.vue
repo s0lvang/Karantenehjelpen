@@ -1,34 +1,51 @@
 <template>
   <div id="app">
-    <template v-if="getUser && this.$route.name !== 'StartScreen'">
-      <Menu />
-    </template>
-    <router-view />
+    <Menu />
+    <Page>
+      <router-view />
+    </Page>
+    <footer>
+      <a href="mailto:karantenehjelpen@online.ntnu.no"
+        >karantenehjelpen@online.ntnu.no</a
+      >
+    </footer>
   </div>
 </template>
 
 <script>
 import Menu from "@/components/Menu.vue";
+import Page from "@/components/Page.vue";
 
 export default {
   components: {
-    Menu
-  },
-  computed: {
-    getUser() {
-      return this.$store.getters.currentUser;
-    }
+    Menu,
+    Page
   }
 };
 </script>
 
 <style lang="scss">
+@import "@/common/base.scss";
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  height: 100vh;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+footer {
+  padding: 1rem;
+  margin-top: $vertical-space;
+  background: $color-primary;
+  text-align: center;
+
+  a {
+    color: $color-text-contrast;
+  }
+
+  @media #{$tabletAndUp} {
+    margin-top: $vertical-space-large;
+  }
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
   <section>
     <DetailedRequest :request="getRequest" />
-    <div
-      class="flex flex-col items-center container mx-auto mt-3 extra-information"
-    >
+    <div class="buttons">
       <Button
         v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
@@ -34,10 +32,10 @@
         Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
       </p>
       <section v-if="userOwnsRequest && requestIsTaken">
-        <p class="p-5">
+        <p>
           <b>{{ getRequest.connectedUser.name }}</b> har tatt oppdraget ditt.
         </p>
-        <p class="p-5">
+        <p>
           Du kan nå denne personen på
           <b>{{ getRequest.connectedUser.email }}</b>
         </p>
@@ -174,7 +172,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.extra-information {
-  margin-bottom: 3rem;
+.buttons {
+  display: flex;
+  margin-top: 2rem;
+
+  & > * + * {
+    margin-left: 1rem;
+  }
 }
 </style>

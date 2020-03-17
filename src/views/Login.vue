@@ -1,32 +1,26 @@
 <template>
-  <div class="pt-10 h-full">
-    <div class="flex flex-col h-full">
-      <h1 class="text-4xl m-3 text-center">Karantenehjelpen</h1>
-      <div class="flex-1 mx-auto">
-        <p class="font-bold text-lg m-3">Hva er Karantenehjelpen?</p>
-        <p class="m-3">
-          Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder
-          der man lett kommer nær andre. Da kan det bli veldig vanskelig å få
-          handlet inn.
-          <br />
-          <br />Karantenehjelpen skal hjelpe de som sitter i karantene komme i
-          kontakt med friske folk som ønsker å hjelpe.
-          <br />
-          <br />Vi trenger både folk som er friske og vil stille opp for sine
-          naboer, og tilbyr handlehjelp til de som trenger det mest.
-        </p>
-        <h3 class="font-bold text-lg m-3">Følg FHI sine råd!</h3>
-        <p class="m-3">Just do it</p>
-        <LoginButton />
-      </div>
-      <footer
-        class="w-full text-center border-t border-grey p-4 pin-b"
-        id="forBgColor"
-      >
-        <p>Karantenehjelpen@online.ntnu.no</p>
-      </footer>
-    </div>
-  </div>
+  <section>
+    <h1>Karantenehjelpen</h1>
+    <strong>Hva er Karantenehjelpen?</strong>
+    <p>
+      Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
+      man lett kommer nær andre. Da kan det bli veldig vanskelig å få handlet
+      inn.
+    </p>
+    <p>
+      Karantenehjelpen skal hjelpe de som sitter i karantene komme i kontakt med
+      friske folk som ønsker å hjelpe.
+    </p>
+    <p>
+      Vi trenger både folk som er friske og vil stille opp for sine naboer, og
+      tilbyr handlehjelp til de som trenger det mest.
+    </p>
+    <strong>Følg FHI sine råd!</strong>
+    <p>
+      Just do it
+    </p>
+    <LoginButton />
+  </section>
 </template>
 
 <script>
@@ -41,8 +35,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#forBgColor {
-  background-color: rgb(0, 96, 163);
-  color: white;
+h1 {
+  display: none;
+}
+
+button {
+  margin: 2rem auto;
+}
+
+@media #{$tabletAndUp} {
+  h1 {
+    display: inherit;
+    margin-top: 4rem;
+    text-align: center;
+  }
 }
 </style>

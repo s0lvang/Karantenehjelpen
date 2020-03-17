@@ -12,7 +12,6 @@
         ".vue"
       ]
     },
-    "vetur.validation.template": false,
     "vetur.format.enable": false,
     "javascript.implicitProjectConfig.experimentalDecorators": true,
     "editor.codeActionsOnSave": {

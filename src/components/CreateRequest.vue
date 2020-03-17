@@ -1,76 +1,74 @@
 <template>
-  <div class="container mx-auto">
-    <h1 class="text-3xl pt-4 pl-6">Ny bestilling</h1>
-    <div class="pl-6 mt-5">
-      <AddressInput />
-      <BigTextInput
-        labelText="Ankomstbeskrivelse"
-        placeholderText="F.eks: I smuget bak rammeverkstedet"
-        @change="updateArrivalDescription"
-        :existing="arrivalDesc"
-        class="pr-5"
-      />
-      <NumberInput
-        labelText="Telefonummer (uten landskode)"
-        placeholderText="98765432"
-        @emitNumberInput="updatePhoneNumber"
-        :existing="phoneNr"
-      />
-      <label class="payment-solution-label" for="payment-solution"
-        >Betalingsmetode</label
-      >
-      <v-select
-        id="payment-solution"
-        name="payment-solution"
-        :options="['Vipps', 'Kontant', 'Bankoverføring']"
-        :value="paymentSolution"
-        @input="updatePaymentSolution"
-      />
-    </div>
-    <div v-if="this.items.length >= 1" class="items">
-      <Item
-        @updateItem="addItem"
-        :nrOfItems="items"
-        @addItem="addItem"
-        @deleteItem="deleteItem"
-        @decrementCount="decrementItemCount"
-        @incrementCount="incrementItemCount"
-        @updateName="updateItemName"
-        class="pr-5 pl-5"
-      />
-    </div>
+  <section>
+    <h2>Ny bestilling</h2>
+    <AddressInput />
+    <BigTextInput
+      labelText="Ankomstbeskrivelse"
+      placeholderText="F.eks: I smuget bak rammeverkstedet"
+      @change="updateArrivalDescription"
+      :existing="arrivalDesc"
+    />
+    <NumberInput
+      labelText="Telefonummer (uten landskode)"
+      placeholderText="98765432"
+      @emitNumberInput="updatePhoneNumber"
+      :existing="phoneNr"
+    />
+    <label for="payment-solution">Betalingsmetode</label>
+    <v-select
+      id="payment-solution"
+      name="payment-solution"
+      :options="['Vipps', 'Kontant', 'Bankoverføring']"
+      :value="paymentSolution"
+      @input="updatePaymentSolution"
+    />
+    <Items
+      v-if="this.items.length >= 1"
+      @updateItem="addItem"
+      :nrOfItems="items"
+      @addItem="addItem"
+      @deleteItem="deleteItem"
+      @decrementCount="decrementItemCount"
+      @incrementCount="incrementItemCount"
+      @updateName="updateItemName"
+    />
     <Button
       btnText="Ny vare"
       :btnDisabled="false"
       @btnClicked="renderNewItem"
     />
-    <div class="flex justify-center">
-      <p v-if="errorMsg">Du må legge til alle varene!</p>
-      <p v-if="addressError">Du må legge til en adresse!</p>
-      <p v-if="zeroItemsError">Du må legge til minst en vare!</p>
-      <p v-if="phoneNumberError">Du må legge til en telefonummer!</p>
-      <p v-if="itemNameError">Varen må ha et navn!</p>
-      <p v-if="paymentSolutionError">Du må legge til en betalingsløsing!</p>
+    <p class="error" v-if="errorMsg">Du må legge til alle varene!</p>
+    <p class="error" v-if="addressError">Du må legge til en adresse!</p>
+    <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
+    <p class="error" v-if="phoneNumberError">
+      Du må legge til en Telefonummer!
+    </p>
+    <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
+    <p class="error" v-if="paymentSolutionError">
+      Du må legge til en betalingsløsing!
+    </p>
+    <div>
+      <hr />
+      <Button
+        btnText="Gå til oppsummering"
+        :btnDisabled="false"
+        @btnClicked="toSummary"
+      />
     </div>
-    <Button
-      btnText="Gå til oppsummering"
-      :btnDisabled="false"
-      @btnClicked="toSummary"
-    />
-  </div>
+  </section>
 </template>
 
 <script>
 import Button from "@/components/shared/Button.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
-import Item from "@/components/shared/Item.vue";
+import Items from "@/components/shared/Items.vue";
 import AddressInput from "@/components/AddressInput.vue";
 
 export default {
   name: "CreateRequest",
   components: {
-    Item,
+    Items,
     Button,
     BigTextInput,
     NumberInput,
@@ -198,14 +196,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.payment-solution-label {
-  align-self: flex-start;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75rem;
+section > * + * {
   margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  display: block;
-  color: rgb(0, 96, 163);
+}
+
+.error {
+  text-align: center;
+  color: $color-danger;
 }
 </style>

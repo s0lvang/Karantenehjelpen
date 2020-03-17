@@ -1,39 +1,31 @@
 <template>
-  <div class="pt-10 h-full">
-    <div class="flex flex-col h-full">
-      <div>
-        <p class="text-3xl text-center pb-20">
-          Karantenehjelpen
-        </p>
-      </div>
-      <div class="flex-1 mx-auto">
-        <p class="text-center break-words ml-10 mr-10">
-          Jeg sitter i karantene og trenger hjelp til å handle inn mat
-        </p>
-        <Button
-          btnText="TRENGER HJELP"
-          :btnDisabled="false"
-          @btnClicked="needHelp"
-        />
-        <p class="text-center pt-20 break-words ml-10 mr-10">
-          Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
-        </p>
-        <Button
-          btnText="VIL HJELPE"
-          :btnDisabled="false"
-          @btnClicked="giveHelp"
-        />
-      </div>
-      <footer
-        class="w-full text-center border-t border-grey p-4 pin-b"
-        id="forBgColor"
-      >
-        <p>
-          Karantenehjelpen@online.ntnu.no
-        </p>
-      </footer>
+  <section>
+    <h1>
+      Karantenehjelpen
+    </h1>
+    <div class="role">
+      <h2>Trenger hjelp</h2>
+      <p>
+        Jeg sitter i karantene og trenger hjelp til å handle inn mat
+      </p>
+      <Button
+        btnText="Ny bestilling"
+        :btnDisabled="false"
+        @btnClicked="needHelp"
+      />
     </div>
-  </div>
+    <div class="role">
+      <h2>Ønsker å hjelpe</h2>
+      <p>
+        Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
+      </p>
+      <Button
+        btnText="Til oppdragslisten"
+        :btnDisabled="false"
+        @btnClicked="giveHelp"
+      />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -56,8 +48,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#forBgColor {
-  background-color: rgb(0, 96, 163);
-  color: white;
+h1 {
+  display: none;
+}
+.role {
+  @include card;
+  text-align: center;
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  button {
+    margin: 2rem auto 1rem;
+  }
+}
+
+@media #{$tabletAndUp} {
+  section {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1rem;
+  }
+
+  h1 {
+    display: inherit;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+
+  .role {
+    margin: 0;
+    place-self: start;
+  }
 }
 </style>

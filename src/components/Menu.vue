@@ -1,84 +1,40 @@
 <template>
-  <nav
-    id="forBGcolor"
-    class="flex items-center justify-between flex-wrap bg-black p-6"
-  >
-    <div class="flex items-center flex-no-shrink mr-6 text-white">
-      <a
-        class="font-semibold text-2xl tracking-tight cursor-pointer mr-12"
-        @click="goToStart"
-      >
+  <header id="forBGcolor">
+    <a class="brand" @click="goToStart">
+      <img src="@/assets/logo.svg" alt="logo" />
+      <h1>
         Karantenehjelpen
-      </a>
-    </div>
-    <div class="block sm:hidden">
-      <button
-        @click="toggle"
-        class="flex items-center px-3 py-2 border rounded"
-      >
-        <svg
-          class="fill-current h-3 w-3 bg-white"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <title>Meny</title>
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-        </svg>
-      </button>
-    </div>
-    <div
-      :class="open ? 'block' : 'hidden'"
-      class="w-full flex-grow sm:flex sm:items-center sm:w-auto"
+      </h1>
+    </a>
+    <svg
+      v-if="getUser"
+      @click="toggle"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <div class="text-sm sm:flex-grow">
-        <a
-          @click="toAllRequests"
-          class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer text-xl"
-        >
-          Oppdragslisten
-        </a>
-      </div>
-      <div class="text-sm sm:flex-grow">
-        <a
-          @click="myAssignedRequests"
-          class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer text-xl"
-        >
-          Mine oppdrag
-        </a>
-      </div>
-      <div class="text-sm sm:flex-grow">
-        <a
-          @click="newRequest"
-          class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer text-xl"
-        >
-          Ny bestilling
-        </a>
-      </div>
-      <div class="text-sm sm:flex-grow">
-        <a
-          @click="myRequests"
-          class="no-underline block mt-4 sm:inline-block sm:mt-0 mr-4 text-white
-          cursor-pointer text-xl"
-        >
-          Mine bestillinger
-        </a>
-      </div>
-      <div>
-        <a
-          @click="logout"
-          id="onlyHover"
-          class="no-underline inline-block text-sm px-4 py-2 leading-none border rounded
-                text-white border-white hover:border-transparent
-                hover:text-blue cursor-pointer hover:bg-white mt-4 sm:mt-0"
-        >
-          Logg ut
-        </a>
-      </div>
-    </div>
-  </nav>
+      <title>Meny</title>
+      <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+    </svg>
+    <nav v-if="getUser" :class="open ? 'block' : 'hidden'">
+      <a @click="toAllRequests">
+        Oppdragslisten
+      </a>
+      <a @click="myAssignedRequests">
+        Mine oppdrag
+      </a>
+      <span class="divider" />
+      <a @click="newRequest">
+        Ny bestilling
+      </a>
+      <a @click="myRequests">
+        Mine bestillinger
+      </a>
+      <span class="divider" />
+      <a @click="logout" id="onlyHover">
+        Logg ut
+      </a>
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -135,14 +91,122 @@ export default {
           console.log(`something went wrong ${error.message}`);
         });
     }
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
-#forBGcolor {
-  background-color: #0060a3;
+header {
+  position: relative;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(black, 0.25);
+  margin-bottom: $vertical-space;
 }
-#onlyHover:hover {
-  color: #0060a3;
+
+img {
+  height: 2rem;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 0.5rem;
+}
+
+h1 {
+  display: inline-block;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0;
+}
+
+svg {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  path {
+    fill: $color-text;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+nav {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: white;
+  border-top: 1px solid $color-text;
+  box-shadow: 0 2px 4px rgba(black, 0.25);
+  transform: translateY(100%);
+  z-index: 100;
+
+  & > a {
+    padding: 1rem;
+    margin: 0 0.5rem;
+
+    &:not(:first-child) {
+      border-top: 1px solid $color-background-contrast;
+    }
+  }
+}
+
+.divider {
+  display: inline-block;
+  height: 2px;
+  margin: 0 0.5rem;
+  background: $color-text;
+}
+
+@media #{$tabletAndUp} {
+  header {
+    margin-bottom: $vertical-space-large;
+  }
+  h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  img {
+    height: 2.5rem;
+  }
+}
+
+@media #{$desktopAndUp} {
+  nav,
+  .hidden {
+    display: block;
+    position: static;
+    box-shadow: none;
+    border: none;
+    transform: none;
+    width: inherit;
+
+    & > a {
+      padding: 0;
+
+      &:not(:first-child) {
+        border: none;
+      }
+    }
+  }
+  svg {
+    display: none;
+  }
+  .divider {
+    width: 2px;
+    height: 2rem;
+    margin: -0.5rem 1rem;
+  }
 }
 </style>

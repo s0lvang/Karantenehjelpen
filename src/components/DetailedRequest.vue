@@ -1,59 +1,34 @@
 <template>
-  <div class="container mx-auto mt-3">
-    <div class="flex flex-col items-center">
-      <div>
-        <Map :locationCenter="request.address.center" class />
-        <a
-          target="_blank"
-          class="address"
-          :href="
-            `https://www.google.com/maps/dir/?api=1&destination=${request.address.place_name_no.replace(
-              / /g,
-              '+'
-            )}&travelmode=driving`
-          "
-        >
-          <p class="text-2xl p-2">{{ request.address.place_name_no }}</p>
-        </a>
+  <section>
+    <Map
+      :address="request.address.place_name_no"
+      :locationCenter="request.address.center"
+    />
+    <hr />
+    <h3>
+      Kontaktinformasjon
+    </h3>
+    <p>
+      <strong>Epost: </strong>
+      <a :href="getEmailLink">{{ request.email }}</a>
+    </p>
+    <p>
+      <strong>Telefon: </strong>
+      <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
+    </p>
+    <p><strong>Betalingsmåte: </strong>{{ request.paymentSolution }}</p>
 
-        <ul class="p-2">
-          <li
-            v-for="(item, index) in request.items"
-            :key="index"
-            class="break-words list-disc ml-4"
-          >
-            <span class="font-bold">{{ item.count }}x</span>
-            {{
-              item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1)
-            }}
-          </li>
-        </ul>
+    <h3>Handleliste</h3>
+    <ul>
+      <li v-for="(item, index) in request.items" :key="index">
+        <strong>{{ item.count }}x</strong>
+        {{ item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1) }}
+      </li>
+    </ul>
 
-        <div class="p-2">
-          <h1 class="font-bold text-lg">Kontaktinformasjon</h1>
-          <div class="flex">
-            <p class="font-bold">Epost:</p>
-            <div class="ml-2">
-              <a class="link" :href="getEmailLink">{{ request.email }}</a>
-            </div>
-          </div>
-          <div class="flex">
-            <p class="font-bold">Telefon:</p>
-            <div class="ml-2">
-              <a class="link" :href="getPhoneLink">{{ request.phoneNumber }}</a>
-            </div>
-          </div>
-          <div class="flex">
-            <p class="font-bold">Betalingsmåte:</p>
-            <div class="ml-2">{{ request.paymentSolution }}</div>
-          </div>
-        </div>
-
-        <p class="text-lg font-bold p-2">Ankomstbeskrivelse:</p>
-        <div class="p-2 break-words">{{ request.arrivalDescription }}</div>
-      </div>
-    </div>
-  </div>
+    <h3>Ankomstbeskrivelse</h3>
+    <p>{{ request.arrivalDescription }}</p>
+  </section>
 </template>
 
 <script>
@@ -83,19 +58,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.address {
-  color: #0060a3;
+li {
+  line-height: 1.5rem;
+
+  & > strong {
+    line-height: inherit;
+    display: inline-block;
+    width: 2rem;
+  }
 }
 
-.link {
-  color: #038df0;
+hr {
+  margin: 0;
 }
 
-.link:hover {
-  text-decoration: underline;
-}
-
-.link:active {
-  color: #004bac;
+@media #{$tabletAndUp} {
+  hr {
+    display: none;
+  }
 }
 </style>
