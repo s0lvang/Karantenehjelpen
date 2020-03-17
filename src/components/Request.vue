@@ -1,20 +1,16 @@
 <template>
   <div class="request">
-    <div class="heading">
-      <h3>
-        {{ request.address.place_name_no }}
-      </h3>
-      <p v-if="showDistance">{{ distance.toFixed(2) }} km unna deg</p>
-      <span v-if="userIsAssigned" class="badge">
-        <img src="@/assets/groceries.svg" />
-      </span>
-    </div>
+    <h3>
+      {{ request.address.place_name_no }}
+    </h3>
+    <p v-if="showDistance">{{ distance.toFixed(2) }} km unna deg</p>
     <strong>
       Handleliste:
     </strong>
     <div>
       {{ getItems }}
     </div>
+    <info v-if="userIsAssigned">Du har tatt dette oppdraget. Løp og kjøp!</info>
     <Button
       btnText="Se forespørsel"
       @btnClicked="seeMore"
@@ -25,6 +21,8 @@
 
 <script>
 import Button from "@/components/shared/Button.vue";
+import Info from "@/components/shared/Info.vue";
+
 import coordinateDistance from "@/helpers/coord";
 
 export default {
@@ -36,7 +34,8 @@ export default {
     }
   },
   components: {
-    Button
+    Button,
+    Info
   },
   methods: {
     seeMore() {
@@ -87,45 +86,7 @@ h3 {
   margin-bottom: 0;
 }
 
-.heading {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  p {
-    display: block;
-    width: 100%;
-    margin-bottom: 1em;
-  }
-}
-
-.badge {
-  background: $color-primary;
-  margin-left: 1rem;
-  width: 3rem;
-  height: 3rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-
-  img {
-    width: 2rem;
-    height: 2rem;
-  }
-}
-
 button {
-  margin: 2rem auto 1rem;
-}
-
-@media #{$tabletAndUp} {
-  .badge {
-    width: 5rem;
-    height: 5rem;
-
-    img {
-      width: 3rem;
-      height: 3rem;
-    }
-  }
+  margin: 1rem auto;
 }
 </style>
