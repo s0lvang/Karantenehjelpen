@@ -7,7 +7,7 @@
         type="text"
         name="address_input"
         :placeholder="this.checkAddress"
-        :class="inEdit"
+        :class="inEdit ? 'isEdit' : ''"
       />
       <Spinner :showSpinner="showSpinner" />
     </div>
@@ -38,7 +38,7 @@ export default {
   },
   props: {
     existing: String,
-    inEdit: String
+    inEdit: Boolean
   },
   data() {
     return {
@@ -104,8 +104,10 @@ export default {
 }
 input[type="text"] {
   max-width: none;
-  &.true {
-    opacity: 1;
+  &.isEdit {
+    &::placeholder {
+      opacity: 1;
+    }
   }
 }
 .suggestions {

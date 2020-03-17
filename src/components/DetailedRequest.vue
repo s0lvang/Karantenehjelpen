@@ -33,13 +33,11 @@
 
 <script>
 import Map from "@/components/Map.vue";
-import Button from "@/components/shared/Button.vue";
 
 export default {
   name: "DetailedRequest",
   components: {
-    Map,
-    Button
+    Map
   },
   data() {
     return {
@@ -53,9 +51,6 @@ export default {
     }
   },
   methods: {
-    goToEdit() {
-      this.$router.push(`/edit/${this.request.id}`);
-    },
     getRequest() {
       return new Promise(resolve => {
         resolve(

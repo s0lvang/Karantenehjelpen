@@ -1,11 +1,10 @@
 <template>
   <div>
-    <Spinner :showSpinner="showSpinner" />
-    <div v-if="!showSpinner">
+    <div>
       <div class="pl-6 mt-5">
         <AddressInput
           :existing="this.address.place_name_no"
-          :inEdit="checkEditForClass"
+          :inEdit="checkEdit"
         />
         <BigTextInput
           labelText="Ankomstbeskrivelse"
@@ -43,10 +42,6 @@
           class="pr-5 pl-5"
         />
       </div>
-      {{ this.address }}<br />
-      {{ this.arrivalDesc }}<br />
-      {{ this.phoneNr }}<br />
-      {{ this.paymentSolution }}
       <Button
         btnText="Ny vare"
         :btnDisabled="false"
@@ -76,7 +71,6 @@ import BigTextInput from "@/components/shared/BigTextInput.vue";
 import NumberInput from "@/components/shared/NumberInput.vue";
 import Items from "@/components/shared/Items.vue";
 import AddressInput from "@/components/AddressInput.vue";
-import Spinner from "@/components/shared/Spinner.vue";
 
 export default {
   name: "EditRequestView",
@@ -85,8 +79,7 @@ export default {
     Button,
     BigTextInput,
     NumberInput,
-    AddressInput,
-    Spinner
+    AddressInput
   },
   data() {
     return {
@@ -102,7 +95,8 @@ export default {
       arrivalDesc: "",
       paymentSolution: "",
       id: "",
-      showSpinner: false
+      showSpinner: false,
+      request: {}
     };
   },
   methods: {
@@ -182,87 +176,40 @@ export default {
       } else {
         this.zeroItemsError = true;
       }
-    }
-  },
-  asyncComputed: {
-    // getRequest() {
-    //   console.log("skjer dette først?");
-    // },
-    getContent: {
-      get() {
-        // const x = this.$store.getters.requests.find(
-        //   request => request.id === this.$route.params.id
-        // );
-        console.log("oops");
-        return new Promise((resolve, reject) => {
-          setTimeout(
-            () =>
-              resolve(
-                this.$store.getters.requests.find(
-                  request => request.id === this.$route.params.id
-                )
-              ),
-            1000
-          );
-        });
-      },
-      default: "no"
-      // default: "Loading"
     },
-    async resolvedValue() {
-      this.showSpinner = true;
-      console.log("kallt");
-      if (!this.checkEdit) {
+    populate() {
+      if (this.checkEdit) {
         this.showSpinner = false;
+        this.id = this.request.id;
+        this.items = this.request.items;
+        this.address = this.request.address;
+        this.phoneNr = this.request.phoneNumber;
+        this.arrivalDesc = this.request.arrivalDescription;
+        this.paymentSolution = this.request.paymentSolution;
+      } else {
         this.items = this.getItems;
         this.address = this.getAddress;
         this.phoneNr = this.getPhoneNumber;
         this.arrivalDesc = this.getArrivalDescription;
         this.paymentSolution = this.getPaymentSolution;
-        return false;
       }
-      const x = await this.getContent;
-      if (x === "no") {
-        return false;
-      }
-      this.showSpinner = false;
-      this.id = x.id;
-      this.items = x.items;
-      this.address = x.address;
-      this.phoneNr = x.phoneNumber;
-      this.arrivalDesc = x.arrivalDescription;
-      this.paymentSolution = x.paymentSolution;
-
-      return x.email === this.$store.getters.email;
+    },
+    init() {
+      const y = this.$store.getters.requests;
+      const o = this.$route.params.id;
+      this.request = y.find(request => request.id === o);
+      this.populate();
     }
-    // get() {
-    //   return get(this.$store.getters.currentUser).then(
-    //     request => request.id === this.$route.params.id
-    //   );
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(() =>
-    //     resolve(
-    //       this.$getters.currentUser.find(
-    //         request => request.id === this.$route.params.id
-    //       ),
-    //       1000
-    //     )
-    //   );
-    // });
-    // }
   },
   computed: {
     checkEdit() {
-      if (this.$route.name === "EditRequest") {
+      if (
+        this.$route.name === "EditRequest" &&
+        this.request.email === this.$store.getters.email
+      ) {
         return true;
       }
       return false;
-    },
-    checkEditForClass() {
-      if (this.$route.name === "EditRequest") {
-        return "true";
-      }
-      return "false";
     },
     getArrivalDescription() {
       return this.$store.getters.arrivalDescription;
@@ -278,7 +225,13 @@ export default {
     },
     getPaymentSolution() {
       return this.$store.getters.paymentSolution;
+    },
+    checkIfEdit() {
+      return this.request.email === this.$store.getters.email;
     }
+  },
+  mounted() {
+    this.init();
   }
 };
 </script>

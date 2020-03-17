@@ -4,6 +4,13 @@
     <div class="buttons">
       <Button
         v-if="userOwnsRequest"
+        btnText="Endre"
+        :btnDisabled="false"
+        @btnClicked="goToEdit"
+      />
+
+      <Button
+        v-if="userOwnsRequest"
         :btnText="getDeliveredButtonText"
         :btnDisabled="false"
         @btnClicked="markAsDelivered"
@@ -98,6 +105,9 @@ export default {
     }
   },
   methods: {
+    goToEdit() {
+      this.$router.push(`/edit/${this.getRequest.id}`);
+    },
     notifyUserThatOrderIsComplete() {
       sms(
         this.getRequest.phoneNumber,
