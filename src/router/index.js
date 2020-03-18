@@ -8,6 +8,7 @@ import RequestView from "@/views/RequestView.vue"; // eslint-disable
 import MyRequestsView from "@/views/MyRequestsView.vue"; // eslint-disable
 import MyAssignedRequestsView from "@/views/MyAssignedRequestsView.vue"; // eslint-disable
 import EditRequestView from "@/views/EditRequestView.vue";
+import MyPageView from "@/views/MyPageView.vue";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
@@ -75,6 +76,14 @@ const routes = [
     path: "/edit/:id",
     name: "EditRequest",
     component: EditRequestView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/my-page",
+    name: "MyPage",
+    component: MyPageView,
     meta: {
       requiresAuth: true
     }
