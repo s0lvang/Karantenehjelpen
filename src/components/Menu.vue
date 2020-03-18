@@ -58,6 +58,14 @@
       <span class="divider" />
       <a
         tabIndex="0"
+        @click="myPage"
+        v-on:keyup.enter="myPage"
+        v-on:keyup.space="myPage"
+      >
+        Min side
+      </a>
+      <a
+        tabIndex="0"
         @click="logout"
         v-on:keyup.enter="logout"
         v-on:keyup.space="logout"
@@ -106,6 +114,12 @@ export default {
     newRequest() {
       if (this.$route.name !== "CreateRequest") {
         this.$router.push("/create-request");
+      }
+      this.close();
+    },
+    myPage() {
+      if (this.$route.name !== "MyPage") {
+        this.$router.push("/my-page");
       }
       this.close();
     },
