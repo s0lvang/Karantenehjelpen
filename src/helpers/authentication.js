@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
-const loginUser = context => {
+export const authenticateUser = context => {
   const { currentUser } = firebase.auth();
   fb.additionalUserInfoCollection
     .doc(currentUser.uid)
@@ -29,9 +29,39 @@ const loginUser = context => {
               phoneNumber: dialog.data
             });
             context.$router.replace("home");
+          })
+          .catch(() => {
+            firebase
+              .auth()
+              .signOut()
+              .then(() => {
+                this.$store.dispatch("SET_CURRENT_USER", null);
+              })
+              .catch(error => {
+                console.log(`something went wrong ${error.message}`);
+              });
           });
       }
     });
 };
 
-export default loginUser;
+export const getErrorMessage = errorCode => {
+  switch (errorCode) {
+    case "auth/invalid-password":
+      return "Passordet er feil!";
+    case "auth/invalid-email":
+      return "Formatet på mailen er feil!";
+    case "auth/wrong-password":
+      return "Passordet er feil";
+    case "auth/weak-password":
+      return "Passordet må inneholde minst 6 tegn";
+    case "auth/email-already-in-use":
+      return "Mailen skrevet inn er allerede i bruk";
+    case "auth/maximum-user-count-exceeded":
+      return "For mange login forsøk, prøv igjen senere";
+    case "auth/user-not-found":
+      return "Vi finner ingen bruker lenket til denne mailen";
+    default:
+      return `Ukjent errorkode: ${errorCode}`;
+  }
+};

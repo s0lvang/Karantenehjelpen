@@ -25,19 +25,19 @@
     </p>
     <GoogleLoginButton />
     <hr class="hr-text" data-content="OR" />
-    <LoginField />
+    <LoginArea />
   </section>
 </template>
 
 <script>
 import GoogleLoginButton from "@/components/GoogleLoginButton.vue";
-import LoginField from "@/components/LoginField.vue";
+import LoginArea from "@/components/LoginArea.vue";
 
 export default {
   name: "login",
   components: {
     GoogleLoginButton,
-    LoginField
+    LoginArea
   }
 };
 </script>
