@@ -1,5 +1,5 @@
 @import "@/assets/reset.scss";
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro|Source+Serif+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro|Source+Serif+Pro|Material+Icons+Outlined");
 
 html,
 body {
@@ -21,8 +21,18 @@ a {
   cursor: pointer;
   text-decoration: none;
 
+  &:link,
+  &:visited {
+    color: $color-primary;
+  }
+
   &:hover {
+    color: darken($color-primary, 10%);
     text-decoration: underline;
+  }
+
+  &:active {
+    color: darken($color-primary, 20%);
   }
 }
 

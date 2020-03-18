@@ -9,14 +9,14 @@
       Kontaktinformasjon
     </h3>
     <p>
-      <strong>Epost: </strong>
+      <icon name="email" />
       <a :href="getEmailLink">{{ request.email }}</a>
     </p>
     <p>
-      <strong>Telefon: </strong>
+      <icon name="phone" />
       <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
     </p>
-    <p><strong>Betalingsmåte: </strong>{{ request.paymentSolution }}</p>
+    <p><icon name="credit_card" /> {{ request.paymentSolution }}</p>
 
     <h3>Handleliste</h3>
     <ul>
@@ -33,11 +33,13 @@
 
 <script>
 import Map from "@/components/Map.vue";
+import Icon from "@/components/shared/Icon.vue";
 
 export default {
   name: "DetailedRequest",
   components: {
-    Map
+    Map,
+    Icon
   },
   data() {
     return {
@@ -84,6 +86,10 @@ li {
 
 hr {
   margin: 0;
+}
+
+p > i {
+  width: 2rem;
 }
 
 @media #{$tabletAndUp} {

@@ -30,7 +30,7 @@
       />
       <Button
         btnText="Jeg har levert ordren"
-        v-if="userIsAssigned"
+        v-if="userIsAssigned && !getRequest.delivered"
         :btnDisabled="userIsNotifiedAboutCompletedOrder"
         @btnClicked="notifyUserThatOrderIsComplete"
       />
