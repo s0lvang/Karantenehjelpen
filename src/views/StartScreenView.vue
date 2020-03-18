@@ -1,8 +1,5 @@
 <template>
   <section>
-    <h1>
-      Karantenehjelpen
-    </h1>
     <div class="role">
       <h2>Trenger hjelp</h2>
       <p>
@@ -58,9 +55,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  display: none;
-}
 .role {
   @include card;
   &:not(:last-child) {
@@ -84,15 +78,8 @@ ol {
 @media #{$tabletAndUp} {
   section {
     display: grid;
-    grid-template-rows: auto auto;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1rem;
-  }
-
-  h1 {
-    display: inherit;
-    text-align: center;
-    grid-column: 1 / -1;
   }
 
   .role {
