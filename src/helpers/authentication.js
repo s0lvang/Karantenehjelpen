@@ -2,6 +2,7 @@ import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
 export const authenticateUser = context => {
+  console.log(context);
   const { currentUser } = firebase.auth();
   fb.additionalUserInfoCollection
     .doc(currentUser.uid)
@@ -35,7 +36,7 @@ export const authenticateUser = context => {
               .auth()
               .signOut()
               .then(() => {
-                this.$store.dispatch("SET_CURRENT_USER", null);
+                context.$store.dispatch("SET_CURRENT_USER", null);
               })
               .catch(error => {
                 console.log(`something went wrong ${error.message}`);
@@ -57,7 +58,7 @@ export const getErrorMessage = errorCode => {
       return "Passordet må inneholde minst 6 tegn";
     case "auth/email-already-in-use":
       return "Mailen skrevet inn er allerede i bruk";
-    case "auth/maximum-user-count-exceeded":
+    case "auth/too-many-requests":
       return "For mange login forsøk, prøv igjen senere";
     case "auth/user-not-found":
       return "Vi finner ingen bruker lenket til denne mailen";

@@ -9,7 +9,7 @@
 
 <script>
 import firebase from "firebase";
-import authenticateUser from "@/helpers/authentication";
+import { authenticateUser } from "@/helpers/authentication";
 
 export default {
   name: "GoogleLoginButton",
