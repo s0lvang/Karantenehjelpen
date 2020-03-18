@@ -1,7 +1,9 @@
 <template>
   <section>
     <h1 class="title">Karantenehjelpen</h1>
-    <LoginButton />
+    <GoogleLoginButton />
+    <hr class="hr-text" data-content="OR" />
+    <LoginArea />
     <strong>Hva er Karantenehjelpen?</strong>
     <p>
       Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
@@ -24,9 +26,6 @@
         >Se her for mer informasjon.</a
       >
     </p>
-    <GoogleLoginButton />
-    <hr class="hr-text" data-content="OR" />
-    <LoginArea />
   </section>
 </template>
 
