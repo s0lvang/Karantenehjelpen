@@ -62,7 +62,7 @@
         v-on:keyup.enter="myPage"
         v-on:keyup.space="myPage"
       >
-        Min Side
+        Min side
       </a>
       <a
         tabIndex="0"

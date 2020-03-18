@@ -10,7 +10,7 @@
       />
       <Button
         @btnClicked="updatePhoneNumber"
-        btnText="Oppdater Telefonnummer"
+        btnText="Oppdater telefonnummer"
         :btnDisabled="false"
       />
     </section>
@@ -123,11 +123,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
 .wrapper > section + section {
   margin-top: 3rem;
 }
