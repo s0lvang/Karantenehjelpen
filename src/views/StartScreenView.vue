@@ -9,9 +9,9 @@
         Jeg sitter i karantene og trenger hjelp til å handle inn mat.
       </p>
       <ol>
-        <li>Legg inn din ordre</li>
-        <li>Vent på at noen foretar din handel</li>
-        <li>Plukk opp dine varer og betal</li>
+        <li>Legg inn din ordre.</li>
+        <li>Vent på at noen foretar din handel.</li>
+        <li>Plukk opp dine varer og betal.</li>
       </ol>
       <Button
         btnText="Legg inn ny bestilling"
@@ -25,8 +25,8 @@
         Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
       </p>
       <ol>
-        <li>Velg et oppdrag</li>
-        <li>Handle varene</li>
+        <li>Velg et oppdrag.</li>
+        <li>Handle varene.</li>
         <li>Lever på døra, men hold avstand!</li>
       </ol>
       <Button

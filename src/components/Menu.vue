@@ -212,6 +212,7 @@ nav {
     width: inherit;
     color: inherit;
     height: auto;
+    background: transparent;
 
     &.hidden {
       max-height: none;
@@ -219,6 +220,10 @@ nav {
 
     & > a {
       padding: 0;
+
+      &:hover {
+        color: $color-text;
+      }
 
       &:not(:first-child) {
         border: none;
