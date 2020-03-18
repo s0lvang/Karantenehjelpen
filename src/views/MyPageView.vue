@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h1>Min side</h1>
+  <section class="wrapper">
+    <h2>Min side</h2>
     <section>
       <NumberInput
         labelText="Telefonnummer (uten landskode)"
@@ -15,9 +15,10 @@
       />
     </section>
     <section>
+      <h3>Ønsker du å slette brukeren din?</h3>
       <p>
-        Hvis du sletter brukeren, slettes alle åpne bestillinger, du fjernes fra
-        åpne oppdrag og all personInfo vi har på deg
+        Hvis du sletter brukeren din, slettes alle åpne bestillinger, du fjernes
+        fra åpne oppdrag og all persondata vi har fått fra deg.
       </p>
       <Button
         @btnClicked="deleteMe"
@@ -122,46 +123,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  display: none;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
-.role {
-  @include card;
-  &:not(:last-child) {
-    margin-bottom: 2rem;
-  }
-  button {
-    margin: 1rem auto 0rem;
-  }
-  h2 {
-    text-align: center;
-  }
+.wrapper > section + section {
+  margin-top: 3rem;
 }
 
-ol {
-  text-align: left;
-  list-style-type: decimal;
-  padding-left: 1rem;
+section > * + * {
   margin-top: 1rem;
-}
-
-@media #{$tabletAndUp} {
-  section {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 1rem;
-  }
-
-  h1 {
-    display: inherit;
-    text-align: center;
-    grid-column: 1 / -1;
-  }
-
-  .role {
-    margin: 0;
-    place-self: start;
-  }
 }
 </style>
