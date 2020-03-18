@@ -30,6 +30,9 @@
         Mine bestillinger
       </a>
       <span class="divider" />
+      <a @click="myPage" id="onlyHover">
+        Min Side
+      </a>
       <a @click="logout" id="onlyHover">
         Logg ut
       </a>
@@ -75,6 +78,12 @@ export default {
     newRequest() {
       if (this.$route.name !== "CreateRequest") {
         this.$router.push("/create-request");
+      }
+      this.close();
+    },
+    myPage() {
+      if (this.$route.name !== "MyPage") {
+        this.$router.push("/my-page");
       }
       this.close();
     },
