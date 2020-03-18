@@ -78,7 +78,8 @@ button {
   background: white;
   @include elevation-soft;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: inherit;
+
   font-weight: 600;
   display: flex;
   margin: auto;
@@ -90,6 +91,16 @@ button {
   &:hover {
     color: rgba(black, 0.75);
     @include elevation-hard;
+  }
+}
+@media #{$desktopAndUp} {
+  button {
+    padding-right: 1rem;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
   }
 }
 </style>
