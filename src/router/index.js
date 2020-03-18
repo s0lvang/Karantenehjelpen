@@ -7,6 +7,7 @@ import StartScreenView from "@/views/StartScreenView.vue";
 import RequestView from "@/views/RequestView.vue"; // eslint-disable
 import MyRequestsView from "@/views/MyRequestsView.vue"; // eslint-disable
 import MyAssignedRequestsView from "@/views/MyAssignedRequestsView.vue"; // eslint-disable
+import EditRequestView from "@/views/EditRequestView.vue";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
@@ -66,6 +67,14 @@ const routes = [
     path: "/request/:id",
     name: "Request",
     component: RequestView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/edit/:id",
+    name: "EditRequest",
+    component: EditRequestView,
     meta: {
       requiresAuth: true
     }

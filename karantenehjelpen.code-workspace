@@ -1,9 +1,7 @@
 {
-  "folders": [
-    {
-      "path": "."
-    }
-  ],
+  "folders": [{
+    "path": "."
+  }],
   "settings": {
     "eslint.options": {
       "extensions": [

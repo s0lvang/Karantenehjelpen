@@ -99,7 +99,6 @@ fb.auth.onAuthStateChanged(user => {
       .doc(user.uid)
       .get()
       .then(userInfo => {
-        console.log(userInfo.data());
         store.commit("SET_CURRENT_USER", { ...user, ...userInfo.data() });
       })
       .catch(() =>

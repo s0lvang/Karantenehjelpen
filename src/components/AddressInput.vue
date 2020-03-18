@@ -6,7 +6,8 @@
         v-model="locationInput"
         type="text"
         name="address_input"
-        placeholder="Kongens slott"
+        :placeholder="this.checkAddress"
+        :class="inEdit ? 'isEdit' : ''"
       />
       <Spinner :showSpinner="showSpinner" />
     </div>
@@ -34,6 +35,10 @@ export default {
   name: "AddressInput",
   components: {
     Spinner
+  },
+  props: {
+    existing: String,
+    inEdit: Boolean
   },
   data() {
     return {
@@ -84,6 +89,11 @@ export default {
       this.showList = false;
       this.$store.dispatch("SET_ADDRESS", location);
     }
+  },
+  computed: {
+    checkAddress() {
+      return this.existing || "Kongens slott";
+    }
   }
 };
 </script>
@@ -94,6 +104,11 @@ export default {
 }
 input[type="text"] {
   max-width: none;
+  &.isEdit {
+    &::placeholder {
+      opacity: 1;
+    }
+  }
 }
 .suggestions {
   border: 1px solid $color-background-contrast;

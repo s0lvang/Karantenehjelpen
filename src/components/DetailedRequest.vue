@@ -41,14 +41,28 @@ export default {
     Map,
     Icon
   },
+  data() {
+    return {
+      localRequest: {}
+    };
+  },
   props: {
     request: {
       type: Object,
       required: true
     }
   },
-  methods: {},
+  methods: {
+    getRequest() {
+      const y = this.$store.getters.requests;
+      const o = this.$route.params.id;
+      this.localRequest = y.find(request => request.id === o);
+    }
+  },
   computed: {
+    checkConnected() {
+      return this.localRequest.email === this.$store.getters.email;
+    },
     getPhoneLink() {
       return `tel:${this.request.phoneNumber}`;
     },

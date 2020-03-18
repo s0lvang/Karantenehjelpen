@@ -1,13 +1,16 @@
 <template>
-  <section>
-    <CreateEditRequest v-if="step === 1" @toSummary="toSummary" />
-    <RequestSummary
-      v-if="step === 2"
-      @goBack="goBack"
-      @createRequest="createRequest"
-      :showSpinner="showSpinner"
-    />
-  </section>
+  <div class="container mx-auto">
+    <template v-if="step === 1">
+      <CreateEditRequest @toSummary="toSummary" />
+    </template>
+    <template v-if="step === 2">
+      <RequestSummary
+        @goBack="goBack"
+        @createRequest="createRequest"
+        :showSpinner="showSpinner"
+      />
+    </template>
+  </div>
 </template>
 
 <script>
@@ -16,7 +19,7 @@ import RequestSummary from "@/components/RequestSummary.vue";
 import fb from "@/firebaseConfig.js";
 
 export default {
-  name: "CreateRequestView",
+  name: "EditRequestView",
   components: {
     CreateEditRequest,
     RequestSummary
@@ -33,10 +36,8 @@ export default {
       fb.usersCollection
         .doc(this.$store.getters.id)
         .collection("requests")
-        .add({
-          createdOn: new Date(),
-          ...request
-        })
+        .doc(this.$route.params.id)
+        .update(request)
         .then(() => {
           this.$store.dispatch("SET_ADDRESS", "");
           this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", "");
