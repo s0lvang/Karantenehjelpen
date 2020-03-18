@@ -2,7 +2,6 @@
   <section>
     <template v-if="userOwnsRequest || this.$route.name === 'CreateRequest'">
       <h2>{{ userOwnsRequest ? "Endre bestilling" : "Ny bestilling" }}</h2>
-      <br />
       <AddressInput
         :existing="this.address.place_name_no"
         :inEdit="checkEdit"
