@@ -81,6 +81,7 @@ export default {
 
   a {
     display: flex;
+    align-items: center;
     position: absolute;
     background: white;
     width: 100%;
@@ -88,6 +89,7 @@ export default {
     bottom: 0;
     padding: 1rem 2rem;
     z-index: 10;
+    font-size: 1.25rem;
 
     i {
       margin-right: 0.25rem;
