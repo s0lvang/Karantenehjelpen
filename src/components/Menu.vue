@@ -150,7 +150,7 @@ nav {
   color: white;
   transform: translateY(100%);
   z-index: 100;
-  height: calc(100vh - 4.5rem);
+  height: calc(100vh - 4rem);
   transition: max-height 1s ease-out, backdrop-filter 1s ease-out,
     background 1s ease-out;
 
@@ -162,7 +162,7 @@ nav {
 
   &.block {
     background: rgba(black, 0.4);
-    max-height: calc(100vh - 4.5rem);
+    max-height: calc(100vh - 4rem);
     backdrop-filter: blur(10px);
   }
 
@@ -170,6 +170,10 @@ nav {
     font-size: 1.5rem;
     padding: 1rem;
     margin: 0 0.5rem;
+
+    &:hover {
+      color: white;
+    }
   }
 }
 
@@ -187,6 +191,14 @@ nav {
   }
   img {
     height: 2.5rem;
+  }
+
+  nav {
+    height: calc(100vh - 4.5rem);
+
+    &.block {
+      max-height: calc(100vh - 4.5rem);
+    }
   }
 }
 
