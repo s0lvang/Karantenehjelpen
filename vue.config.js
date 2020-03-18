@@ -7,9 +7,6 @@ module.exports = {
       }
     }
   },
-  devServer: {
-    disableHostCheck: true
-  },
   configureWebpack: {
     module: {
       rules: [
