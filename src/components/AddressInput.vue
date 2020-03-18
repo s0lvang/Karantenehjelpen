@@ -87,6 +87,7 @@ export default {
     selectedLocation(location) {
       this.locationInput = location.place_name_no;
       this.showList = false;
+      this.$emit("addressUpdate", location);
       this.$store.dispatch("SET_ADDRESS", location);
     }
   },

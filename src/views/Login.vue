@@ -1,6 +1,7 @@
 <template>
   <section>
     <h1 class="title">Karantenehjelpen</h1>
+    <LoginButton />
     <strong>Hva er Karantenehjelpen?</strong>
     <p>
       Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
@@ -44,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .title {
+  margin-top: 3rem;
   text-align: center;
 }
 
