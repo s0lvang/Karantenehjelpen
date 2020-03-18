@@ -135,13 +135,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+$contentSize: 2rem;
+$contentSize-large: 2.5rem;
 header {
   position: relative;
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: ($headerHeight - $contentSize) / 2 2rem;
   box-shadow: 0 2px 4px rgba(black, 0.25);
 }
 
@@ -170,23 +172,19 @@ svg {
 }
 
 nav {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   width: 100%;
   left: 0;
-  bottom: 0;
+  top: $headerHeight;
   color: white;
-  transform: translateY(100%);
   z-index: 100;
-  height: calc(100vh - 4rem);
-  transition: max-height 1s ease-out, backdrop-filter 1s ease-out,
-    background 1s ease-out;
+  height: calc(100vh - #{$headerHeight});
+  transition: background 0.25s;
 
   &.hidden {
     background: transparent;
-    max-height: 0px;
-    backdrop-filter: none;
 
     & > a {
       display: none;
@@ -194,15 +192,14 @@ nav {
   }
 
   &.block {
-    background: rgba(black, 0.4);
-    max-height: calc(100vh - 4rem);
-    backdrop-filter: blur(10px);
+    background: $color-primary;
   }
 
   & > a {
     font-size: 1.5rem;
     padding: 1rem;
     margin: 0 0.5rem;
+    border-bottom: 1px solid white;
 
     &:hover {
       color: white;
@@ -215,20 +212,20 @@ nav {
 }
 
 @media #{$tabletAndUp} {
+  header {
+    padding: ($headerHeight-large - $contentSize-large) / 2 2rem;
+  }
   h1 {
-    font-size: 2rem;
     line-height: 2.5rem;
+    font-size: 2rem;
   }
   img {
     height: 2.5rem;
   }
 
   nav {
+    top: $headerHeight-large;
     height: calc(100vh - 4.5rem);
-
-    &.block {
-      max-height: calc(100vh - 4.5rem);
-    }
   }
 }
 

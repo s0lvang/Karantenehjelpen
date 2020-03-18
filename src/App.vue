@@ -4,22 +4,20 @@
     <Page>
       <router-view />
     </Page>
-    <footer>
-      <a href="mailto:karantenehjelpen@online.ntnu.no"
-        >karantenehjelpen@online.ntnu.no</a
-      >
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Menu from "@/components/Menu.vue";
 import Page from "@/components/Page.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     Menu,
-    Page
+    Page,
+    Footer
   },
   computed: {
     getUser() {
@@ -37,20 +35,5 @@ export default {
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
-}
-
-footer {
-  padding: 1rem;
-  background: $color-primary;
-  text-align: center;
-
-  a:link,
-  a:visited {
-    color: $color-text-contrast;
-  }
-
-  a:focus {
-    @include outline-contrast;
-  }
 }
 </style>
