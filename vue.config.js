@@ -7,6 +7,9 @@ module.exports = {
       }
     }
   },
+  devServer: {
+    disableHostCheck: true
+  },
   configureWebpack: {
     module: {
       rules: [
@@ -20,5 +23,13 @@ module.exports = {
         }
       ]
     }
+  },
+  pwa: {
+    name: "Karantenehjelpen",
+    themeColor: "#0060a3",
+    msTileColor: "#0060a3",
+    appleMobileWebAppCapable: "yes",
+    appleMobileWebAppStatusBarStyle: "black",
+    workboxPluginMode: "GenerateSW"
   }
 };
