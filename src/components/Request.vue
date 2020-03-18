@@ -3,7 +3,7 @@
     <h3>
       {{ request.address.place_name_no }}
     </h3>
-    <p v-if="showDistance">{{ distance.toFixed(2) }} km unna deg</p>
+    <p v-if="showDistance">{{ distance | asUnit }} unna deg</p>
     <strong>
       Handleliste:
     </strong>
@@ -40,6 +40,19 @@ export default {
   methods: {
     seeMore() {
       this.$router.push(`/request/${this.request.id}`);
+    }
+  },
+  filters: {
+    asUnit(distance) {
+      let value = distance.toFixed(1);
+      let unit = `km`;
+      if (value < 1) {
+        unit = `m`;
+        value = (value < 0.1 ? distance.toFixed(2) : value) * 1000;
+      } else if (value % 1 === 0) {
+        value = Math.trunc(value);
+      }
+      return `${value} ${unit}`;
     }
   },
   computed: {
