@@ -3,7 +3,7 @@
     <DetailedRequest :request="getRequest" />
     <div class="buttons">
       <Button
-        v-if="userOwnsRequest"
+        v-if="userOwnsRequest && !this.getRequest.connectedUser"
         btnText="Endre"
         :btnDisabled="false"
         @btnClicked="goToEdit"
