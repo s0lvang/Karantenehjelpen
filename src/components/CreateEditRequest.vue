@@ -1,59 +1,67 @@
 <template>
   <section>
-    <h2>Bestilling</h2>
-    <AddressInput :existing="this.address.place_name_no" :inEdit="checkEdit" />
-    <BigTextInput
-      labelText="Ankomstbeskrivelse"
-      placeholderText="F.eks: I smuget bak rammeverkstedet"
-      @change="updateArrivalDescription"
-      :existing="arrivalDesc"
-    />
-    <NumberInput
-      labelText="Telefonnummer (uten landskode)"
-      placeholderText="98765432"
-      @emitNumberInput="updatePhoneNumber"
-      :existing="phoneNr"
-    />
-    <label for="payment-solution">Betalingsmetode</label>
-    <v-select
-      id="payment-solution"
-      name="payment-solution"
-      :options="['Vipps', 'Kontant', 'Bankoverføring']"
-      :value="paymentSolution"
-      @input="updatePaymentSolution"
-    />
-    <Items
-      v-if="this.items.length >= 1"
-      @updateItem="addItem"
-      :nrOfItems="items"
-      @addItem="addItem"
-      @deleteItem="deleteItem"
-      @decrementCount="decrementItemCount"
-      @incrementCount="incrementItemCount"
-      @updateName="updateItemName"
-    />
-    <Button
-      btnText="Ny vare"
-      :btnDisabled="false"
-      @btnClicked="renderNewItem"
-    />
-    <p class="error" v-if="errorMsg">Du må legge til alle varene!</p>
-    <p class="error" v-if="addressError">Du må legge til en adresse!</p>
-    <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
-    <p class="error" v-if="phoneNumberError">
-      Du må legge til et telefonnummer!
-    </p>
-    <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
-    <p class="error" v-if="paymentSolutionError">
-      Du må legge til en betalingsløsing!
-    </p>
-    <div>
-      <hr />
-      <Button
-        btnText="Gå til oppsummering"
-        :btnDisabled="false"
-        @btnClicked="toSummary"
+    <template v-if="userOwnsRequest || this.$route.name === 'CreateRequest'">
+      <h2>{{ userOwnsRequest ? "Endre bestilling" : "Ny bestilling" }}</h2>
+      <AddressInput
+        :existing="this.address.place_name_no"
+        :inEdit="checkEdit"
       />
+      <BigTextInput
+        labelText="Ankomstbeskrivelse"
+        placeholderText="F.eks: I smuget bak rammeverkstedet"
+        @change="updateArrivalDescription"
+        :existing="arrivalDesc"
+      />
+      <NumberInput
+        labelText="Telefonnummer (uten landskode)"
+        placeholderText="98765432"
+        @emitNumberInput="updatePhoneNumber"
+        :existing="phoneNr"
+      />
+      <label for="payment-solution">Betalingsmetode</label>
+      <v-select
+        id="payment-solution"
+        name="payment-solution"
+        :options="['Vipps', 'Kontant', 'Bankoverføring']"
+        :value="paymentSolution"
+        @input="updatePaymentSolution"
+      />
+      <Items
+        v-if="this.items.length >= 1"
+        @updateItem="addItem"
+        :nrOfItems="items"
+        @addItem="addItem"
+        @deleteItem="deleteItem"
+        @decrementCount="decrementItemCount"
+        @incrementCount="incrementItemCount"
+        @updateName="updateItemName"
+      />
+      <Button
+        btnText="Ny vare"
+        :btnDisabled="false"
+        @btnClicked="renderNewItem"
+      />
+      <p class="error" v-if="errorMsg">Du må legge til alle varene!</p>
+      <p class="error" v-if="addressError">Du må legge til en adresse!</p>
+      <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
+      <p class="error" v-if="phoneNumberError">
+        Du må legge til et telefonnummer!
+      </p>
+      <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
+      <p class="error" v-if="paymentSolutionError">
+        Du må legge til en betalingsløsing!
+      </p>
+      <div>
+        <hr />
+        <Button
+          btnText="Gå til oppsummering"
+          :btnDisabled="false"
+          @btnClicked="toSummary"
+        />
+      </div>
+    </template>
+    <div v-else>
+      Du kan ikke endre andres bestillinger!
     </div>
   </section>
 </template>
@@ -204,6 +212,9 @@ export default {
         return true;
       }
       return false;
+    },
+    userOwnsRequest() {
+      return this.request && this.request.email === this.$store.getters.email;
     },
     getArrivalDescription() {
       return this.$store.getters.arrivalDescription;
