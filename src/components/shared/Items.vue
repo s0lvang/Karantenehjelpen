@@ -34,13 +34,13 @@
           <strong>Antall</strong>
           <div class="split-row-amount">
             <Button
-              btnText="-1"
+              btnText="-"
               @btnClicked="decrementCount(index)"
               :btnDisabled="false"
             />
             <p class="amount">{{ nrOfItems[index].count }}</p>
             <Button
-              btnText="+1"
+              btnText="+"
               @btnClicked="incrementCount(index)"
               :btnDisabled="false"
             />
@@ -118,7 +118,7 @@ export default {
 }
 
 .amount {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 0 1rem;
 }
 

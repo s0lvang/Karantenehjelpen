@@ -8,8 +8,8 @@
       inn.
     </p>
     <p>
-      Karantenehjelpen skal hjelpe de som sitter i karantene å komme i kontakt med
-      friske folk som ønsker å hjelpe.
+      Karantenehjelpen skal hjelpe de som sitter i karantene å komme i kontakt
+      med friske folk som ønsker å hjelpe.
     </p>
     <p>
       Vi trenger både folk som er friske og vil stille opp for sine naboer, og
@@ -17,7 +17,11 @@
     </p>
     <strong>Følg FHI sine råd!</strong>
     <p>
-      Just do it
+      Hold avstand til hverandre, prøv å unngå å ta deg selv i ansiktet, og
+      praktiser god håndhygiene.
+      <a href="https://www.fhi.no/sv/smittsomme-sykdommer/corona/"
+        >Se her for mer informasjon.</a
+      >
     </p>
     <LoginButton />
   </section>

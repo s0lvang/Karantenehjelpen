@@ -6,10 +6,15 @@
     <div class="role">
       <h2>Trenger hjelp</h2>
       <p>
-        Jeg sitter i karantene og trenger hjelp til å handle inn mat
+        Jeg sitter i karantene og trenger hjelp til å handle inn mat.
       </p>
+      <ol>
+        <li>Legg inn din ordre.</li>
+        <li>Vent på at noen foretar din handel.</li>
+        <li>Plukk opp dine varer og betal.</li>
+      </ol>
       <Button
-        btnText="Ny bestilling"
+        btnText="Legg inn ny bestilling"
         :btnDisabled="false"
         @btnClicked="needHelp"
       />
@@ -19,8 +24,13 @@
       <p>
         Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
       </p>
+      <ol>
+        <li>Velg et oppdrag.</li>
+        <li>Handle varene.</li>
+        <li>Lever på døra, men hold avstand!</li>
+      </ol>
       <Button
-        btnText="Til oppdragslisten"
+        btnText="Hjelp andre med å handle"
         :btnDisabled="false"
         @btnClicked="giveHelp"
       />
@@ -53,13 +63,22 @@ h1 {
 }
 .role {
   @include card;
-  text-align: center;
   &:not(:last-child) {
     margin-bottom: 2rem;
   }
   button {
-    margin: 2rem auto 1rem;
+    margin: 1rem auto 0rem;
   }
+  h2 {
+    text-align: center;
+  }
+}
+
+ol {
+  text-align: left;
+  list-style-type: decimal;
+  padding-left: 1rem;
+  margin-top: 1rem;
 }
 
 @media #{$tabletAndUp} {

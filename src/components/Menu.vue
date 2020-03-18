@@ -51,34 +51,38 @@ export default {
     toggle() {
       this.open = !this.open;
     },
+    close() {
+      this.open = false;
+    },
     myRequests() {
       if (this.$route.name !== "MyRequests") {
         this.$router.push("/my-requests");
       }
-      this.toggle();
+      this.close();
     },
     myAssignedRequests() {
       if (this.$route.name !== "MyAssignedRequests") {
         this.$router.push("/my-assigned-requests");
       }
-      this.toggle();
+      this.close();
     },
     toAllRequests() {
       if (this.$route.name !== "AllRequests") {
         this.$router.push("/all-requests");
       }
-      this.toggle();
+      this.close();
     },
     newRequest() {
       if (this.$route.name !== "CreateRequest") {
         this.$router.push("/create-request");
       }
-      this.toggle();
+      this.close();
     },
     goToStart() {
       if (this.$route.name !== "StartScreen") {
         this.$router.push("/start-screen");
       }
+      this.close();
     },
     logout() {
       fb.auth()
@@ -166,6 +170,10 @@ nav {
     font-size: 1.5rem;
     padding: 1rem;
     margin: 0 0.5rem;
+
+    &:hover {
+      color: white;
+    }
   }
 }
 
@@ -184,6 +192,14 @@ nav {
   img {
     height: 2.5rem;
   }
+
+  nav {
+    height: calc(100vh - 4.5rem);
+
+    &.block {
+      max-height: calc(100vh - 4.5rem);
+    }
+  }
 }
 
 @media #{$desktopAndUp} {
@@ -196,6 +212,7 @@ nav {
     width: inherit;
     color: inherit;
     height: auto;
+    background: transparent;
 
     &.hidden {
       max-height: none;
@@ -203,6 +220,10 @@ nav {
 
     & > a {
       padding: 0;
+
+      &:hover {
+        color: $color-text;
+      }
 
       &:not(:first-child) {
         border: none;
@@ -218,6 +239,11 @@ nav {
     width: 2px;
     height: 2rem;
     margin: -0.5rem 1rem;
+
+    &:first-of-type {
+      background: $color-background-contrast;
+      margin: -0.5rem 0.5rem;
+    }
   }
 }
 </style>
