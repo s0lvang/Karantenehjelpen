@@ -10,13 +10,14 @@ export default {};
 article {
   width: 100%;
   padding: 0 2rem;
-  margin: 0 auto;
+  margin: $vertical-space auto;
   flex: 1;
 }
 
 @media #{$tabletAndUp} {
   article {
     max-width: $page-width-tablet;
+    margin: $vertical-space-large auto;
   }
 }
 

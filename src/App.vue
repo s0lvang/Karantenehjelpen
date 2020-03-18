@@ -1,25 +1,28 @@
 <template>
   <div id="app">
-    <Menu />
+    <Menu v-if="getUser" />
     <Page>
       <router-view />
     </Page>
-    <footer>
-      <a href="mailto:karantenehjelpen@online.ntnu.no"
-        >karantenehjelpen@online.ntnu.no</a
-      >
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Menu from "@/components/Menu.vue";
 import Page from "@/components/Page.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     Menu,
-    Page
+    Page,
+    Footer
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
   }
 };
 </script>
@@ -32,21 +35,5 @@ export default {
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
-}
-
-footer {
-  padding: 1rem;
-  margin-top: $vertical-space;
-  background: $color-primary;
-  text-align: center;
-
-  a:link,
-  a:visited {
-    color: $color-text-contrast;
-  }
-
-  @media #{$tabletAndUp} {
-    margin-top: $vertical-space-large;
-  }
 }
 </style>

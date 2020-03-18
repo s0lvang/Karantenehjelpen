@@ -2,7 +2,7 @@
   <div>
     <label for="number-input">{{ labelText }}</label>
     <input
-      type="number"
+      type="tel"
       name="number-input"
       @input="emitNumberInput"
       :placeholder="placeholderText"

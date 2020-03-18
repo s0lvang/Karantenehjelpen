@@ -4,7 +4,7 @@
     <Spinner :showSpinner="showSpinner" />
     <div class="buttons" v-if="!showSpinner">
       <Button
-        btnText="Send forespørsel"
+        :btnText="checkPath"
         :btnDisabled="false"
         @btnClicked="createRequest"
       />
@@ -50,6 +50,12 @@ export default {
         delivered: false,
         connectedUser: null
       };
+    },
+    checkPath() {
+      if (this.$route.name === "EditRequest") {
+        return "Endre bestilling";
+      }
+      return "Send forespørsel";
     }
   }
 };
