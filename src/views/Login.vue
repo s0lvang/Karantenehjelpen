@@ -23,17 +23,20 @@
         >Se her for mer informasjon.</a
       >
     </p>
+    <LoginField />
     <LoginButton />
   </section>
 </template>
 
 <script>
 import LoginButton from "@/components/LoginButton.vue";
+import LoginField from "@/components/LoginField.vue";
 
 export default {
   name: "login",
   components: {
-    LoginButton
+    LoginButton,
+    LoginField
   }
 };
 </script>
