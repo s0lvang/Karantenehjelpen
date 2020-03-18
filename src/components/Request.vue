@@ -3,7 +3,7 @@
     <h3>
       {{ request.address.place_name_no }}
     </h3>
-    <p v-if="showDistance">{{ distance | roundDistance }} unna deg</p>
+    <p v-if="showDistance">{{ distance | asMetric }} unna deg</p>
     <strong>
       Handleliste:
     </strong>
@@ -43,7 +43,7 @@ export default {
     }
   },
   filters: {
-    roundDistance(distance) {
+    asMetric(distance) {
       let metric;
       let numerical;
       if (distance < 0.95) {
