@@ -1,5 +1,12 @@
 <template>
   <section>
+    <AllRequestsMap
+      :requests="getRequests"
+      :locationCenter="[
+        this.$store.getters.location.longitude || 10.395053, // Trondheim as fallback
+        this.$store.getters.location.latitude || 63.41002
+      ]"
+    />
     <h2>Tilgjengelige oppdrag</h2>
     <section v-if="getRequests.length">
       <Request
@@ -9,19 +16,21 @@
       />
     </section>
     <p v-if="!getRequests.length">
-      Ingen tilgjengelige oppdrag akkurat nå...
+      Ingen tilgjengelige oppdrag akkurat nå…
     </p>
   </section>
 </template>
 
 <script>
 import Request from "@/components/Request.vue";
+import AllRequestsMap from "@/components/AllRequestsMap.vue";
 import coordinateDistance from "@/helpers/coord";
 
 export default {
   name: "MyRequests",
   components: {
-    Request
+    Request,
+    AllRequestsMap
   },
   computed: {
     getRequests() {
