@@ -12,12 +12,6 @@
         @change="updateArrivalDescription"
         :existing="arrivalDesc"
       />
-      <PhoneNumberInput
-        labelText="Telefonnummer (uten landskode)"
-        placeholderText="98765432"
-        @emitNumberInput="updatePhoneNumber"
-        :existing="phoneNr"
-      />
       <label for="payment-solution">Betalingsmetode</label>
       <v-select
         id="payment-solution"
@@ -44,9 +38,6 @@
       <p class="error" v-if="nonAddedItem">Du må legge til alle varene!</p>
       <p class="error" v-if="addressError">Du må legge til en adresse!</p>
       <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
-      <p class="error" v-if="phoneNumberError">
-        Du må legge til et telefonnummer!
-      </p>
       <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
       <p class="error" v-if="paymentSolutionError">
         Du må legge til en betalingsløsing!
@@ -70,7 +61,6 @@
 /* eslint-disable no-unused-vars */
 import Button from "@/components/shared/Button.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
-import PhoneNumberInput from "@/components/shared/PhoneNumberInput.vue";
 import Items from "@/components/shared/Items.vue";
 import AddressInput from "@/components/AddressInput.vue";
 
@@ -80,20 +70,17 @@ export default {
     Items,
     Button,
     BigTextInput,
-    PhoneNumberInput,
     AddressInput
   },
   data() {
     return {
       nonAddedItem: false,
       addressError: false,
-      phoneNumberError: false,
       zeroItemsError: false,
       itemNameError: false,
       paymentSolutionError: false,
       items: [],
       address: {},
-      phoneNr: "",
       arrivalDesc: "",
       paymentSolution: "",
       id: "",
@@ -102,11 +89,6 @@ export default {
     };
   },
   methods: {
-    updatePhoneNumber(event) {
-      const { value } = event.target;
-      this.phoneNumberError = false;
-      this.phoneNr = value.replace(/\+47/g, "").replace(/ /g, "");
-    },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
     },
@@ -149,19 +131,17 @@ export default {
     },
     toSummary() {
       const itemsMapped = this.items.map(item => item.added);
-      const localAddress = this.getAddress;
       if (this.paymentSolution.length <= 0) {
         this.paymentSolutionError = true;
       } else if (!itemsMapped.every(Boolean)) {
         this.nonAddedItem = true;
       } else if (itemsMapped.length === 0) {
         this.zeroItemsError = true;
-      } else if (Object.keys(localAddress).length === 0) {
+      } else if (Object.keys(this.address).length === 0) {
         this.addressError = true;
       } else {
-        this.$store.dispatch("SET_ADDRESS", localAddress);
+        this.$store.dispatch("SET_ADDRESS", this.address);
         this.$store.dispatch("SET_ITEMS", this.items);
-        this.$store.dispatch("SET_PHONE_NUMBER_INPUT", this.phoneNr);
         this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
         this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
         this.$emit("toSummary");
@@ -173,13 +153,11 @@ export default {
         this.id = this.request.id;
         this.items = this.request.items;
         this.address = this.request.address;
-        this.phoneNr = this.request.phoneNumber;
         this.arrivalDesc = this.request.arrivalDescription;
         this.paymentSolution = this.request.paymentSolution;
       } else {
         this.items = this.getItems;
         this.address = this.getAddress;
-        this.phoneNr = this.getPhoneNumber;
         this.arrivalDesc = this.getArrivalDescription;
         this.paymentSolution = this.getPaymentSolution;
       }
@@ -212,9 +190,6 @@ export default {
     },
     getItems() {
       return this.$store.getters.items;
-    },
-    getPhoneNumber() {
-      return this.$store.getters.phoneNumber;
     },
     getPaymentSolution() {
       return this.$store.getters.paymentSolution;
