@@ -3,7 +3,7 @@
     <h3>
       {{ request.address.place_name_no }}
     </h3>
-    <p v-if="showDistance">{{ distance | asMetric }} unna deg</p>
+    <p v-if="showDistance">{{ distance | asUnit }} unna deg</p>
     <strong>
       Handleliste:
     </strong>
@@ -43,17 +43,16 @@ export default {
     }
   },
   filters: {
-    asMetric(distance) {
-      let metric;
-      let numerical;
-      if (distance < 0.95) {
-        metric = "m";
-        numerical = Math.round(distance * 10) * 100;
-      } else {
-        metric = "km";
-        numerical = Math.round(distance);
+    asUnit(distance) {
+      let value = distance.toFixed(1);
+      let unit = `km`;
+      if (value < 1) {
+        unit = `m`;
+        value = (value < 0.1 ? distance.toFixed(2) : value) * 1000;
+      } else if (value % 1 === 0) {
+        value = Math.trunc(value);
       }
-      return `${numerical} ${metric}`;
+      return `${value} ${unit}`;
     }
   },
   computed: {
