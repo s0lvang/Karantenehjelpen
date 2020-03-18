@@ -45,11 +45,9 @@ footer {
   svg {
     margin-left: 0.5rem;
     fill: #ffffff;
-    transition: filter 0.4s;
 
     &:hover {
-      filter: brightness(0.4);
-      opacity: 1;
+      opacity: 0.7;
     }
   }
 }
