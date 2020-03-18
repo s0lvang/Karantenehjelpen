@@ -23,19 +23,20 @@
         >Se her for mer informasjon.</a
       >
     </p>
+    <GoogleLoginButton />
+    <hr class="hr-text" data-content="OR" />
     <LoginField />
-    <LoginButton />
   </section>
 </template>
 
 <script>
-import LoginButton from "@/components/LoginButton.vue";
+import GoogleLoginButton from "@/components/GoogleLoginButton.vue";
 import LoginField from "@/components/LoginField.vue";
 
 export default {
   name: "login",
   components: {
-    LoginButton,
+    GoogleLoginButton,
     LoginField
   }
 };
@@ -55,6 +56,39 @@ button {
     display: inherit;
     margin-top: 4rem;
     text-align: center;
+  }
+}
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.5;
+  &:before {
+    content: "";
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: "Eller";
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 0.5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #fcfcfa;
   }
 }
 </style>

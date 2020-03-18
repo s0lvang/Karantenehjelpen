@@ -12,7 +12,7 @@ import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
 export default {
-  name: "LoginButton",
+  name: "GoogleLoginButton",
   methods: {
     socialLogin() {
       const provider = new firebase.auth.GoogleAuthProvider();
