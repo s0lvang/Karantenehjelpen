@@ -47,7 +47,7 @@ label {
 }
 
 input[type="text"],
-input[type="number"],
+input[type="tel"],
 textarea {
   width: 100%;
   color: $color-text;
@@ -58,7 +58,7 @@ textarea {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="tel"] {
   max-width: 200px;
 }
 
