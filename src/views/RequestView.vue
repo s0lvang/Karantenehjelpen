@@ -109,18 +109,24 @@ export default {
       this.$router.push(`/edit/${this.getRequest.id}`);
     },
     notifyUserThatOrderIsComplete() {
-      sms(
-        this.getRequest.phoneNumber,
-        `${
-          this.$store.getters.name
-        } påstår å ha levert din ordre på: \n\n${printItemNames(
-          this.getRequest.items
-        )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/my-requests.`
-      );
-      this.userIsNotifiedAboutCompletedOrder = true;
-      alert(
-        "Kunden har blitt varslet om at du har levert varene. Vennligst tillat opptil en halvtime før kunden har markert oppdraget som utført."
-      );
+      this.$dialog
+        .confirm(
+          "Dette vil sende en purremelding til kunden, er du sikker på at du vil sende den?"
+        )
+        .then(() => {
+          sms(
+            this.getRequest.phoneNumber,
+            `${
+              this.$store.getters.name
+            } påstår å ha levert din ordre på: \n\n${printItemNames(
+              this.getRequest.items
+            )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/my-requests.`
+          );
+          this.userIsNotifiedAboutCompletedOrder = true;
+          alert(
+            "Kunden har blitt varslet om at du har levert varene. Vennligst tillat opptil en halvtime før kunden har markert oppdraget som utført."
+          );
+        });
     },
     markAsDelivered() {
       fb.usersCollection
@@ -134,12 +140,17 @@ export default {
         .catch(error => console.log(error));
     },
     deleteRequest() {
-      fb.usersCollection
-        .doc(this.$store.getters.id)
-        .collection("requests")
-        .doc(this.$route.params.id)
-        .delete()
-        .then(() => this.$router.push("/my-requests"))
+      this.$dialog
+        .confirm("Er du sikker på at du vil slette bestillingen")
+        .then(() => {
+          fb.usersCollection
+            .doc(this.$store.getters.id)
+            .collection("requests")
+            .doc(this.$route.params.id)
+            .delete()
+            .then(() => this.$router.push("/my-requests"))
+            .catch(error => console.log(error));
+        })
         .catch(error => console.log(error));
     },
     connectUserToRequest() {
