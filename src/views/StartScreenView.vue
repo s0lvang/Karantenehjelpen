@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="role">
-      <h3>Trenger hjelp</h3>
+      <h2>Trenger hjelp</h2>
       <p>
         Jeg sitter i karantene og trenger hjelp til å handle inn mat.
       </p>
@@ -17,7 +17,7 @@
       />
     </div>
     <div class="role">
-      <h3>Ønsker å hjelpe</h3>
+      <h2>Ønsker å hjelpe</h2>
       <p>
         Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
       </p>
@@ -63,7 +63,7 @@ export default {
   button {
     margin: 1rem auto 0rem;
   }
-  h3 {
+  h2 {
     text-align: center;
   }
 }
