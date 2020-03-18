@@ -153,13 +153,15 @@ export default {
 $contentSize: 2rem;
 $contentSize-large: 2.5rem;
 header {
-  position: relative;
+  position: sticky;
+  top: 0;
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: ($headerHeight - $contentSize) / 2 2rem;
   box-shadow: 0 2px 4px rgba(black, 0.25);
+  z-index: 200;
 }
 
 img {
