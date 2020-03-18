@@ -4,22 +4,20 @@
     <Page>
       <router-view />
     </Page>
-    <footer>
-      <a href="mailto:karantenehjelpen@online.ntnu.no"
-        >karantenehjelpen@online.ntnu.no</a
-      >
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Menu from "@/components/Menu.vue";
 import Page from "@/components/Page.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     Menu,
-    Page
+    Page,
+    Footer
   }
 };
 </script>
@@ -39,6 +37,9 @@ footer {
   margin-top: $vertical-space;
   background: $color-primary;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
   a:link,
   a:visited {
@@ -47,6 +48,9 @@ footer {
 
   @media #{$tabletAndUp} {
     margin-top: $vertical-space-large;
+  }
+  img {
+    margin-left: 0.5rem;
   }
 }
 </style>
