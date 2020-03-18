@@ -49,7 +49,7 @@ footer {
 
     &:hover {
       filter: brightness(0.4);
-      fill: #1b1f23;
+      opacity: 1;
     }
   }
 }
