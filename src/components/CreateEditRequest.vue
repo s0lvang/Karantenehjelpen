@@ -2,6 +2,7 @@
   <section>
     <template v-if="userOwnsRequest || this.$route.name === 'CreateRequest'">
       <h2>{{ userOwnsRequest ? "Endre bestilling" : "Ny bestilling" }}</h2>
+      <br />
       <AddressInput
         :existing="this.address.place_name_no"
         :inEdit="checkEdit"
@@ -41,7 +42,7 @@
         :btnDisabled="false"
         @btnClicked="renderNewItem"
       />
-      <p class="error" v-if="errorMsg">Du må legge til alle varene!</p>
+      <p class="error" v-if="nonAddedItem">Du må legge til alle varene!</p>
       <p class="error" v-if="addressError">Du må legge til en adresse!</p>
       <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
       <p class="error" v-if="phoneNumberError">
@@ -85,7 +86,7 @@ export default {
   },
   data() {
     return {
-      errorMsg: false,
+      nonAddedItem: false,
       addressError: false,
       phoneNumberError: false,
       zeroItemsError: false,
@@ -102,11 +103,6 @@ export default {
     };
   },
   methods: {
-    updateAddress(event) {
-      const { value } = event.target;
-      this.addressError = false;
-      this.address = value;
-    },
     updatePhoneNumber(event) {
       const { value } = event.target;
       this.phoneNumberError = false;
@@ -121,12 +117,12 @@ export default {
     },
     deleteItem(index) {
       this.items.splice(index, 1);
-      this.errorMsg = false;
+      this.nonAddedItem = false;
     },
     addItem(index) {
       if (this.items[index].itemName.length > 0) {
         this.items[index].added = true;
-        this.errorMsg = false;
+        this.nonAddedItem = false;
       } else {
         this.itemNameError = true;
       }
@@ -137,7 +133,7 @@ export default {
         count: 1,
         added: false
       });
-      this.errorMsg = false;
+      this.nonAddedItem = false;
       this.zeroItemsError = false;
     },
     updateItemName(input, index) {
@@ -154,29 +150,22 @@ export default {
     },
     toSummary() {
       const itemsMapped = this.items.map(item => item.added);
+      const localAddress = this.getAddress;
       if (this.paymentSolution.length <= 0) {
         this.paymentSolutionError = true;
-        return;
-      }
-      if (itemsMapped.length > 0 && itemsMapped.every(Boolean)) {
-        const localAddress = this.getAddress || this.address;
-        if (
-          localAddress.place_name_no !== undefined &&
-          localAddress.place_name_no.length > 1
-        ) {
-          this.$store.dispatch("SET_ADDRESS", localAddress);
-          this.$store.dispatch("SET_ITEMS", this.items);
-          this.$store.dispatch("SET_PHONE_NUMBER_INPUT", this.phoneNr);
-          this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
-          this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
-          this.$emit("toSummary");
-        } else {
-          this.addressError = true;
-        }
       } else if (!itemsMapped.every(Boolean)) {
-        this.errorMsg = true;
-      } else {
+        this.nonAddedItem = true;
+      } else if (itemsMapped.length === 0) {
         this.zeroItemsError = true;
+      } else if (Object.keys(localAddress).length === 0) {
+        this.addressError = true;
+      } else {
+        this.$store.dispatch("SET_ADDRESS", localAddress);
+        this.$store.dispatch("SET_ITEMS", this.items);
+        this.$store.dispatch("SET_PHONE_NUMBER_INPUT", this.phoneNr);
+        this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
+        this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
+        this.$emit("toSummary");
       }
     },
     populate() {
@@ -226,7 +215,7 @@ export default {
       return this.$store.getters.items;
     },
     getPhoneNumber() {
-      return this.$store.getters.phoneNumberInput;
+      return this.$store.getters.phoneNumber;
     },
     getPaymentSolution() {
       return this.$store.getters.paymentSolution;
