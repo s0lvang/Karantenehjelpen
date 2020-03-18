@@ -1,5 +1,9 @@
 <template>
-  <button @click="btnClick" :class="isDanger" :disabled="btnDisabled">
+  <button
+    @click="btnClick"
+    :class="isDanger ? 'isDanger' : ''"
+    :disabled="btnDisabled"
+  >
     {{ btnText }}
   </button>
 </template>
@@ -48,7 +52,11 @@ button {
     cursor: not-allowed;
   }
 
-  &.true {
+  &:focus {
+    @include outline;
+  }
+
+  &.isDanger {
     background: $color-danger;
 
     &:hover {

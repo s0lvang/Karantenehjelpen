@@ -34,6 +34,10 @@ a {
   &:active {
     color: darken($color-primary, 20%);
   }
+
+  &:focus {
+    @include outline;
+  }
 }
 
 img {

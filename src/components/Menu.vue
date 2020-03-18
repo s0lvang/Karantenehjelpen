@@ -1,6 +1,12 @@
 <template>
   <header>
-    <a class="brand" @click="goToStart">
+    <a
+      tabIndex="0"
+      class="brand"
+      @click="goToStart"
+      v-on:keyup.enter="goToStart"
+      v-on:keyup.space="goToStart"
+    >
       <img src="@/assets/logo.svg" alt="logo" />
       <h1>
         Karantenehjelpen
@@ -16,21 +22,46 @@
       <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
     </svg>
     <nav v-if="getUser" :class="open ? 'block' : 'hidden'">
-      <a @click="toAllRequests">
+      <a
+        tabIndex="0"
+        @click="toAllRequests"
+        v-on:keyup.enter="toAllRequests"
+        v-on:keyup.space="toAllRequests"
+      >
         Oppdragslisten
       </a>
-      <a @click="myAssignedRequests">
+      <a
+        tabIndex="0"
+        @click="myAssignedRequests"
+        v-on:keyup.enter="myAssignedRequests"
+        v-on:keyup.space="myAssignedRequests"
+      >
         Mine oppdrag
       </a>
       <span class="divider" />
-      <a @click="newRequest">
+      <a
+        tabIndex="0"
+        @click="newRequest"
+        v-on:keyup.enter="newRequest"
+        v-on:keyup.space="newRequest"
+      >
         Ny bestilling
       </a>
-      <a @click="myRequests">
+      <a
+        tabIndex="0"
+        @click="myRequests"
+        v-on:keyup.enter="myRequests"
+        v-on:keyup.space="myRequests"
+      >
         Mine bestillinger
       </a>
       <span class="divider" />
-      <a @click="logout" id="onlyHover">
+      <a
+        tabIndex="0"
+        @click="logout"
+        v-on:keyup.enter="logout"
+        v-on:keyup.space="logout"
+      >
         Logg ut
       </a>
     </nav>
@@ -145,7 +176,6 @@ nav {
   width: 100%;
   left: 0;
   bottom: 0;
-  overflow: hidden;
   color: white;
   transform: translateY(100%);
   z-index: 100;
@@ -157,6 +187,10 @@ nav {
     background: transparent;
     max-height: 0px;
     backdrop-filter: none;
+
+    & > a {
+      display: none;
+    }
   }
 
   &.block {
@@ -212,6 +246,10 @@ nav {
 
     &.hidden {
       max-height: none;
+
+      & > a {
+        display: inline-block;
+      }
     }
 
     & > a {

@@ -48,5 +48,9 @@ footer {
   a:visited {
     color: $color-text-contrast;
   }
+
+  a:focus {
+    @include outline-contrast;
+  }
 }
 </style>
