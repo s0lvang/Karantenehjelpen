@@ -77,7 +77,9 @@ export default {
         ...this.$store.getters.currentUser,
         phoneNumber: this.phoneNumberInput
       });
+      this.$dialog.alert("Nummeret ditt er oppdatert!");
     },
+
     deleteMe() {
       this.$dialog
         .confirm(
