@@ -3,7 +3,7 @@
     <Requests
       :requests="getMyRequests"
       firstHeaderText="Mine Bestillinger"
-      secondHeaderText="Mine Leverte"
+      secondHeaderText="Mine Fullførte Bestillinger"
     />
   </section>
 </template>

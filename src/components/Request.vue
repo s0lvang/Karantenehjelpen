@@ -10,7 +10,9 @@
     <div>
       {{ getItems }}
     </div>
-    <info v-if="userIsAssigned">Du har tatt dette oppdraget. Løp og kjøp!</info>
+    <info v-if="userIsAssigned && !request.delivered"
+      >Du har tatt dette oppdraget. Løp og kjøp!</info
+    >
     <Button
       btnText="Se forespørsel"
       @btnClicked="seeMore"

@@ -22,29 +22,33 @@
   </footer>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/common/base.scss";
 
 footer {
   padding: 1rem;
-  margin-top: $vertical-space;
   background: $color-primary;
   text-align: center;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
 
   a:link,
   a:visited {
     color: $color-text-contrast;
   }
+  a:focus {
+    @include outline-contrast;
+  }
 
   @media #{$tabletAndUp} {
     margin-top: $vertical-space-large;
   }
   svg {
-    margin-left: 0.5rem;
+    margin-left: 1rem;
     fill: #ffffff;
+    transition: opacity 0.2s;
 
     &:hover {
       opacity: 0.7;

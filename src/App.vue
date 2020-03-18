@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu />
+    <Menu v-if="getUser" />
     <Page>
       <router-view />
     </Page>
@@ -18,6 +18,11 @@ export default {
     Menu,
     Page,
     Footer
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
   }
 };
 </script>
@@ -30,27 +35,5 @@ export default {
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
-}
-
-footer {
-  padding: 1rem;
-  margin-top: $vertical-space;
-  background: $color-primary;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-
-  a:link,
-  a:visited {
-    color: $color-text-contrast;
-  }
-
-  @media #{$tabletAndUp} {
-    margin-top: $vertical-space-large;
-  }
-  img {
-    margin-left: 0.5rem;
-  }
 }
 </style>
