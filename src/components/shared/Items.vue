@@ -3,28 +3,8 @@
     <hr />
     <h3>Handleliste</h3>
     <div class="item" v-for="(item, index) in nrOfItems" :key="index">
-      <div class="split-row" v-if="item.added">
-        <div>
-          <strong>Vare:</strong>
-          <p>{{ nrOfItems[index].itemName }}</p>
-        </div>
-        <div>
-          <strong>Antall:</strong>
-          <p>
-            {{ nrOfItems[index].count }}
-          </p>
-        </div>
-        <Button
-          btnText="Slett"
-          @btnClicked="deleteItem(index)"
-          :btnDisabled="false"
-          isDanger="true"
-        />
-      </div>
-
-      <div class="split-row" v-if="!item.added">
+      <div class="split-row">
         <TextInput
-          v-if="!item.added"
           labelText="Vare"
           placeholderText="Varenavn.."
           @emitInputText="emitInputText"
@@ -47,9 +27,10 @@
           </div>
         </div>
         <Button
-          btnText="Legg til"
-          @btnClicked="addItem(index)"
+          btnText="Slett"
+          @btnClicked="deleteItem(index)"
           :btnDisabled="false"
+          isDanger="true"
         />
       </div>
     </div>
@@ -80,9 +61,6 @@ export default {
     }
   },
   methods: {
-    addItem(index) {
-      this.$emit("addItem", index);
-    },
     deleteItem(index) {
       this.$emit("deleteItem", index);
     },
