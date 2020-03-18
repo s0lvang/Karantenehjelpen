@@ -1,12 +1,10 @@
 <template>
-  <div class="btnDiv">
-    <button @click="socialLogin()" class="button_style">
-      <img alt="Google Logo" src="../assets/google-logo.svg" />
-      <span id="btnText">
-        Logg inn med google
-      </span>
-    </button>
-  </div>
+  <button @click="socialLogin()" class="button_style">
+    <img alt="Google Logo" src="../assets/google-logo.svg" />
+    <span>
+      Logg inn med Google
+    </span>
+  </button>
 </template>
 
 <script>
@@ -73,30 +71,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btnDiv {
+button {
   display: flex;
-  justify-content: space-around;
-  -moz-box-align: center;
   align-items: center;
-  margin: 2rem 0px;
-}
-.button_style {
-  background-color: rgb(0, 96, 163);
-  color: rgb(255, 255, 255);
+  color: rgba(black, 0.5);
+  background: white;
+  @include elevation-soft;
   border-radius: 4px;
   font-size: 1rem;
   font-weight: 600;
   display: flex;
   margin: auto;
   cursor: pointer;
-  &:hover {
-    background-color: rgb(3, 141, 240);
-  }
+  padding-right: 8px;
 
-  #btnText {
-    display: flex;
-    align-items: center;
-    padding: 0 0.5rem;
+  transition: color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    color: rgba(black, 0.75);
+    @include elevation-hard;
   }
 }
 </style>
