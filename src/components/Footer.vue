@@ -3,7 +3,7 @@
     <a href="mailto:karantenehjelpen@online.ntnu.no"
       >karantenehjelpen@online.ntnu.no</a
     >
-    <a href="https://github.com/s0lvang/karantenehjelpen">
+    <a href="https://github.com/s0lvang/karantenehjelpen" target="_blank">
       <svg
         width="32"
         height="32"
