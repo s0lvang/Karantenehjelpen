@@ -1,11 +1,16 @@
 <template>
   <section>
     <h2>Tilgjengelige oppdrag</h2>
-    <Request
-      v-for="request in getRequests"
-      :key="request.id"
-      :request="request"
-    />
+    <section v-if="getRequests.length">
+      <Request
+        v-for="request in getRequests"
+        :key="request.id"
+        :request="request"
+      />
+    </section>
+    <p v-if="!getRequests.length">
+      Ingen tilgjengelige oppdrag akkurat nå...
+    </p>
   </section>
 </template>
 
