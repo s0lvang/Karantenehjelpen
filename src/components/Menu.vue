@@ -112,7 +112,6 @@ header {
   justify-content: space-between;
   padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(black, 0.25);
-  margin-bottom: $vertical-space;
 }
 
 img {
@@ -182,9 +181,6 @@ nav {
 }
 
 @media #{$tabletAndUp} {
-  header {
-    margin-bottom: $vertical-space-large;
-  }
   h1 {
     font-size: 2rem;
     line-height: 2.5rem;

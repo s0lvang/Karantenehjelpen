@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu />
+    <Menu v-if="getUser" />
     <Page>
       <router-view />
     </Page>
@@ -20,6 +20,11 @@ export default {
   components: {
     Menu,
     Page
+  },
+  computed: {
+    getUser() {
+      return this.$store.getters.currentUser;
+    }
   }
 };
 </script>
@@ -36,17 +41,12 @@ export default {
 
 footer {
   padding: 1rem;
-  margin-top: $vertical-space;
   background: $color-primary;
   text-align: center;
 
   a:link,
   a:visited {
     color: $color-text-contrast;
-  }
-
-  @media #{$tabletAndUp} {
-    margin-top: $vertical-space-large;
   }
 }
 </style>

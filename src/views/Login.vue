@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Karantenehjelpen</h1>
+    <h2 class="title">Karantenehjelpen</h2>
     <strong>Hva er Karantenehjelpen?</strong>
     <p>
       Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
+.title {
   display: none;
 }
 
@@ -48,9 +48,8 @@ button {
 }
 
 @media #{$tabletAndUp} {
-  h1 {
+  .title {
     display: inherit;
-    margin-top: 4rem;
     text-align: center;
   }
 }

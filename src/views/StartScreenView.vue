@@ -1,10 +1,7 @@
 <template>
   <section>
-    <h1>
-      Karantenehjelpen
-    </h1>
     <div class="role">
-      <h2>Trenger hjelp</h2>
+      <h3>Trenger hjelp</h3>
       <p>
         Jeg sitter i karantene og trenger hjelp til å handle inn mat.
       </p>
@@ -20,7 +17,7 @@
       />
     </div>
     <div class="role">
-      <h2>Ønsker å hjelpe</h2>
+      <h3>Ønsker å hjelpe</h3>
       <p>
         Jeg er frisk og vil gjerne hjelpe noen som trenger handlehjelp
       </p>
@@ -58,9 +55,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  display: none;
-}
 .role {
   @include card;
   &:not(:last-child) {
@@ -69,7 +63,7 @@ h1 {
   button {
     margin: 1rem auto 0rem;
   }
-  h2 {
+  h3 {
     text-align: center;
   }
 }
@@ -84,15 +78,8 @@ ol {
 @media #{$tabletAndUp} {
   section {
     display: grid;
-    grid-template-rows: auto auto;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1rem;
-  }
-
-  h1 {
-    display: inherit;
-    text-align: center;
-    grid-column: 1 / -1;
   }
 
   .role {
