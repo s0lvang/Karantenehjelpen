@@ -12,7 +12,7 @@
         @change="updateArrivalDescription"
         :existing="arrivalDesc"
       />
-      <NumberInput
+      <PhoneNumberInput
         labelText="Telefonnummer (uten landskode)"
         placeholderText="98765432"
         @emitNumberInput="updatePhoneNumber"
@@ -70,7 +70,7 @@
 /* eslint-disable no-unused-vars */
 import Button from "@/components/shared/Button.vue";
 import BigTextInput from "@/components/shared/BigTextInput.vue";
-import NumberInput from "@/components/shared/NumberInput.vue";
+import PhoneNumberInput from "@/components/shared/PhoneNumberInput.vue";
 import Items from "@/components/shared/Items.vue";
 import AddressInput from "@/components/AddressInput.vue";
 
@@ -80,7 +80,7 @@ export default {
     Items,
     Button,
     BigTextInput,
-    NumberInput,
+    PhoneNumberInput,
     AddressInput
   },
   data() {

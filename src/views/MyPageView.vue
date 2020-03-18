@@ -2,7 +2,7 @@
   <section class="wrapper">
     <h2>Min side</h2>
     <section>
-      <NumberInput
+      <PhoneNumberInput
         labelText="Telefonnummer (uten landskode)"
         placeholderText="98765432"
         @emitNumberInput="updatePhoneNumberInput"
@@ -32,7 +32,7 @@
 
 <script>
 import Button from "@/components/shared/Button.vue";
-import NumberInput from "@/components/shared/NumberInput.vue";
+import PhoneNumberInput from "@/components/shared/PhoneNumberInput.vue";
 import fb from "@/firebaseConfig.js";
 import firebase from "firebase";
 
@@ -40,7 +40,7 @@ export default {
   name: "MyPage",
   components: {
     Button,
-    NumberInput
+    PhoneNumberInput
   },
   data() {
     return {

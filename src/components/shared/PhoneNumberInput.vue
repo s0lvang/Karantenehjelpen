@@ -8,6 +8,7 @@
       :placeholder="placeholderText"
       :value="existing"
       min="1"
+      pattern="[0-9]"
     />
   </div>
 </template>
@@ -15,8 +16,17 @@
 <script lang="ts">
 import Vue from "vue";
 
+function checkPhone(phone) {
+  const phoneRegex = /[0-9]{8}/g;
+  if (phoneRegex.test(phone)) {
+    return true;
+  }
+
+  return false;
+}
+
 export default Vue.extend({
-  name: "NumberInput",
+  name: "PhoneNumberInput",
   props: {
     labelText: {
       type: String,
@@ -30,7 +40,7 @@ export default Vue.extend({
   },
   methods: {
     emitNumberInput(event) {
-      this.$emit("emitNumberInput", event);
+      this.$emit("emitNumberInput", event, checkPhone(event.target));
     }
   }
 });
