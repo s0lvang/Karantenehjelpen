@@ -6,12 +6,13 @@
         labelText="Telefonnummer (uten landskode)"
         placeholderText="98765432"
         @emitNumberInput="updatePhoneNumberInput"
+        @emitButton="checkButton"
         :existing="phoneNumberInput"
       />
       <Button
         @btnClicked="updatePhoneNumber"
         btnText="Oppdater telefonnummer"
-        :btnDisabled="false"
+        :btnDisabled="buttonDisabled"
       />
     </section>
     <section>
@@ -44,19 +45,23 @@ export default {
   },
   data() {
     return {
-      phoneNumberInput: ""
+      phoneNumberInput: "",
+      buttonDisabled: true
     };
   },
-  computed: {},
   mounted() {
     this.phoneNumberInput =
       this.$store.getters.phoneNumber || this.$store.getters.phoneNumberInput;
   },
   methods: {
+    checkButton(val) {
+      this.buttonDisabled = val;
+    },
     updatePhoneNumberInput(event) {
       const { value } = event.target;
-      this.phoneNumberInput = value.replace(/\+47/g, "").replace(/ /g, "");
+      this.phoneNumberInput = value;
     },
+
     updatePhoneNumber() {
       fb.additionalUserInfoCollection
         .doc(this.$store.getters.id)

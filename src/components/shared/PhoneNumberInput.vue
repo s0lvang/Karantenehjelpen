@@ -7,25 +7,13 @@
       @input="emitNumberInput"
       :placeholder="placeholderText"
       :value="existing"
-      min="1"
-      pattern="[0-9]"
+      maxlength="8"
     />
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-
-function checkPhone(phone) {
-  const phoneRegex = /[0-9]{8}/g;
-  if (phoneRegex.test(phone)) {
-    return true;
-  }
-
-  return false;
-}
-
-export default Vue.extend({
+<script>
+export default {
   name: "PhoneNumberInput",
   props: {
     labelText: {
@@ -40,10 +28,22 @@ export default Vue.extend({
   },
   methods: {
     emitNumberInput(event) {
-      this.$emit("emitNumberInput", event, checkPhone(event.target));
+      if (this.checkPhone(event.target.value)) {
+        this.$emit("emitButton", false);
+        this.$emit("emitNumberInput", event);
+      } else {
+        this.$emit("emitButton", true);
+      }
+    },
+    checkPhone(phone) {
+      const phoneRegex = /[0-9]{8}/g;
+      if (phoneRegex.test(phone)) {
+        return true;
+      }
+      return false;
     }
   }
-});
+};
 </script>
 
 <style lang="scss" scoped>
