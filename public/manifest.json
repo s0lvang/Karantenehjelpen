@@ -1,7 +1,7 @@
 {
   "name": "Karantenehjelpen",
   "short_name": "Karantenehjelpen",
-  "description": "Motta hjelp til å handle hvis du er i karantene. Hjelp de som sitter i karantene med å handle",
+  "description": "Motta hjelp til å handle hvis du er i karantene, eller hjelp de som sitter i karantene med å handle.",
   "icons": [
     {
       "src": "/icon-192.png",
