@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="container">
+  <div class="container">
+    <div class="formContainer">
       <form>
         <div class="inputContainer">
           <label for="email">Epostaddresse</label>
@@ -84,6 +84,10 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  margin-bottom: 3rem;
+}
+
+.formContainer {
   display: flex;
   justify-content: center;
 }
