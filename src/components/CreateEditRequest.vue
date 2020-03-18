@@ -126,12 +126,6 @@ export default {
     toSummary() {
       const filteredItems = this.items.filter(i => i.itemName.length > 0);
 
-      /**
-       * We will populate the local address state with the state from Vuex, as
-       * I can't see where this is updated locally.
-       */
-      this.address = this.getAddress;
-
       if (this.paymentSolution.length <= 0) {
         this.paymentSolutionError = true;
       } else if (filteredItems.length === 0) {
