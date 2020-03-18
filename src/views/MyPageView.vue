@@ -2,6 +2,23 @@
   <section>
     <h1>Min side</h1>
     <section>
+      <NumberInput
+        labelText="Telefonnummer (uten landskode)"
+        placeholderText="98765432"
+        @emitNumberInput="updatePhoneNumberInput"
+        :existing="phoneNumberInput"
+      />
+      <Button
+        @btnClicked="updatePhoneNumber"
+        btnText="Oppdater Telefonnummer"
+        :btnDisabled="false"
+      />
+    </section>
+    <section>
+      <p>
+        Hvis du sletter brukeren, slettes alle åpne bestillinger, du fjernes fra
+        åpne oppdrag og all personInfo vi har på deg
+      </p>
       <Button
         @btnClicked="deleteMe"
         btnText="Slett meg"
@@ -14,17 +31,53 @@
 
 <script>
 import Button from "@/components/shared/Button.vue";
+import NumberInput from "@/components/shared/NumberInput.vue";
 import fb from "@/firebaseConfig.js";
 import firebase from "firebase";
 
 export default {
   name: "MyPage",
   components: {
-    Button
+    Button,
+    NumberInput
+  },
+  data() {
+    return {
+      phoneNumberInput: ""
+    };
+  },
+  computed: {},
+  mounted() {
+    this.phoneNumberInput =
+      this.$store.getters.phoneNumber || this.$store.getters.phoneNumberInput;
   },
   methods: {
+    updatePhoneNumberInput(event) {
+      const { value } = event.target;
+      this.phoneNumberInput = value.replace(/\+47/g, "").replace(/ /g, "");
+    },
+    updatePhoneNumber() {
+      fb.additionalUserInfoCollection
+        .doc(this.$store.getters.id)
+        .update({ phoneNumber: this.phoneNumberInput });
+      this.$store.getters.requests.forEach(request => {
+        fb.usersCollection
+          .doc(request.uid)
+          .collection("requests")
+          .doc(request.id)
+          .update({
+            connectedUser: {
+              phoneNumber: this.phoneNumberInput,
+              name: this.$store.getters.name
+            }
+          });
+      });
+      this.$store.dispatch("SET_CURRENT_USER", {
+        ...this.$store.getters.currentUser,
+        phoneNumber: this.phoneNumberInput
+      });
+    },
     deleteMe() {
-      console.log("yolo");
       this.$dialog
         .confirm(
           "Dette vil slette brukeren din og alle dine oppdrag er du sikker på at du ønsker å slette deg selv"
@@ -39,7 +92,9 @@ export default {
                 .delete();
             } else if (
               request.connectedUser &&
-              request.connectedUser.email === this.$store.getters.email
+              (request.connectedUser.email === this.$store.getters.email ||
+                request.connectedUser.phoneNumber ===
+                  this.$store.getters.phoneNumber)
             ) {
               fb.usersCollection
                 .doc(request.uid)
@@ -61,9 +116,6 @@ export default {
               console.log(`something went wrong ${error.message}`);
             });
         });
-    },
-    giveHelp() {
-      this.$router.push("all-requests");
     }
   }
 };
