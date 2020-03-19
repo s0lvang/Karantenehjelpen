@@ -1,12 +1,12 @@
-name: Continuous Deployment
+name: Continuous Deployment to Developement Instance
 
 on:
   release:
-    types: [published, edited]
+    types: [prereleased, edited]
 
 jobs:
   deploy:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,14 +21,14 @@ jobs:
       - run: npm install
       - run: npm run build
         env:
-          VUE_APP_MAPBOX_TOKEN: ${{ secrets.PROD_MAPBOX_TOKEN }}
-          VUE_APP_FIREBASE_CONFIG: ${{ secrets.PROD_FIREBASE_CONFIG }}
-          VUE_APP_ACCOUNT_SID: ${{ secrets.PROD_ACCOUNT_SID }}
-          VUE_APP_AUTH_TOKEN: ${{ secrets.PROD_AUTH_TOKEN }}
+          VUE_APP_MAPBOX_TOKEN: ${{ secrets.TEST_MAPBOX_TOKEN }}
+          VUE_APP_FIREBASE_CONFIG: ${{ secrets.TEST_FIREBASE_CONFIG }}
+          VUE_APP_ACCOUNT_SID: ${{ secrets.TEST_ACCOUNT_SID }}
+          VUE_APP_AUTH_TOKEN: ${{ secrets.TEST_AUTH_TOKEN }}
       - name: Deploy to firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_ID: karantenehjelpen
+          PROJECT_ID: karantenehjelpen-test
