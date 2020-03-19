@@ -6,11 +6,15 @@
     />
     <hr />
     <h3>Kontaktinformasjon</h3>
-    <p v-if="isMyRequest">
+    <p v-if="isMyRequest || isMe">
+      <icon name="account_circle" />
+      <span>{{ request.name }}</span>
+    </p>
+    <p v-if="isMyRequest || isMe">
       <icon name="email" />
       <a :href="getEmailLink">{{ request.email }}</a>
     </p>
-    <p v-if="isMyRequest">
+    <p v-if="isMyRequest || isMe">
       <icon name="phone" />
       <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
       <span v-if="isMe">
