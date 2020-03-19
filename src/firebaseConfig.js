@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 
 import "firebase/auth";
+import "firebase/firestore";
 
 firebase.initializeApp(JSON.parse(process.env.VUE_APP_FIREBASE_CONFIG));
 

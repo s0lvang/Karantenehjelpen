@@ -34,8 +34,8 @@
 <script>
 import Button from "@/components/shared/Button.vue";
 import PhoneNumberInput from "@/components/shared/PhoneNumberInput.vue";
+import firebase from "firebase/app";
 import fb from "@/firebaseConfig.js";
-import firebase from "firebase";
 
 export default {
   name: "MyPage",

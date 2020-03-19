@@ -32,7 +32,7 @@
 <script>
 import GoogleLoginButton from "@/components/GoogleLoginButton.vue";
 import LoginArea from "@/components/LoginArea.vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { handleSignedIn } from "@/helpers/auth";
 
 export default {

@@ -1,15 +1,26 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "@/views/Login.vue";
-import AllRequests from "@/views/AllRequests.vue";
-import CreateRequestView from "@/views/CreateRequestView.vue";
-import StartScreenView from "@/views/StartScreenView.vue";
-import RequestView from "@/views/RequestView.vue"; // eslint-disable
-import MyRequestsView from "@/views/MyRequestsView.vue"; // eslint-disable
-import MyAssignedRequestsView from "@/views/MyAssignedRequestsView.vue"; // eslint-disable
-import EditRequestView from "@/views/EditRequestView.vue";
-import MyPageView from "@/views/MyPageView.vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
+
+const Login = () => import(/* webpackChunkName: "main" */ "@/views/Login.vue");
+const AllRequests = () =>
+  import(/* webpackChunkName: "requests" */ "@/views/AllRequests.vue");
+const CreateRequestView = () =>
+  import(/* webpackChunkName: "requests" */ "@/views/CreateRequestView.vue");
+const StartScreenView = () =>
+  import(/* webpackChunkName: "requests" */ "@/views/StartScreenView.vue");
+const RequestView = () =>
+  import(/* webpackChunkName: "requests" */ "@/views/RequestView.vue");
+const MyRequestsView = () =>
+  import(/* webpackChunkName: "requests" */ "@/views/MyRequestsView.vue");
+const MyAssignedRequestsView = () =>
+  import(
+    /* webpackChunkName: "requests" */ "@/views/MyAssignedRequestsView.vue"
+  );
+const EditRequestView = () =>
+  import(/* webpackChunkName: "requests" */ "@/views/EditRequestView.vue");
+const MyPageView = () =>
+  import(/* webpackChunkName: "profile" */ "@/views/MyPageView.vue");
 
 Vue.use(VueRouter);
 
