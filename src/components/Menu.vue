@@ -135,6 +135,7 @@ export default {
         .then(() => {
           this.$store.dispatch("SET_CURRENT_USER", null);
           this.$router.push("/login");
+          this.close();
         })
         .catch(error => {
           console.log(`something went wrong ${error.message}`);

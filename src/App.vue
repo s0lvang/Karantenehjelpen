@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu v-if="getUser" />
+    <Menu />
     <Page>
       <router-view />
     </Page>
@@ -18,11 +18,6 @@ export default {
     Menu,
     Page,
     Footer
-  },
-  computed: {
-    getUser() {
-      return this.$store.getters.currentUser;
-    }
   }
 };
 </script>
