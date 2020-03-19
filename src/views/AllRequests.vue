@@ -1,14 +1,16 @@
 <template>
   <section>
-    <h2>Tilgjengelige oppdrag</h2>
-    <button
-      @click="mapEnabled = !mapEnabled"
-      class="toggle-map"
-      :data-enabled="mapEnabled"
-    >
-      <icon name="map" />
-      {{ mapEnabled ? "Skjul" : "Vis" }} kart
-    </button>
+    <div class="header-flex">
+      <h2>Tilgjengelige oppdrag</h2>
+      <button
+        @click="mapEnabled = !mapEnabled"
+        class="toggle-map"
+        :data-enabled="mapEnabled"
+      >
+        <icon name="map" />
+        {{ mapEnabled ? "Skjul" : "Vis" }} kart
+      </button>
+    </div>
     <section v-if="getRequests.length && this.mapEnabled">
       <AllRequestsMap
         :requests="getRequests"
@@ -90,26 +92,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 button.toggle-map {
-  --blue: #0061a8;
-  --light-blue: #007ed6;
+  --blue: #{$color-primary};
+  --light-blue: lighten(#{$color-primary}, 10%);
 
   -webkit-appearance: none;
 
   background: none;
-  color: #273e52;
+  color: $color-text;
 
   border-radius: 4px;
-  border: 3px solid var(--blue);
+  border: 2px solid var(--blue);
 
   cursor: pointer;
 
-  font-size: 1rem;
+  padding: 0.25rem 1rem;
 
-  margin-bottom: 1em;
-  padding: 0.2rem 1rem;
-
-  transition: background 0.2s, opacity 0.2s, border-color 0.2s;
+  transition: background 0.35s, border-color 0.35s;
 
   & * {
     vertical-align: center;
