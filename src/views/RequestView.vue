@@ -22,7 +22,10 @@
         @btnClicked="deleteRequest"
       />
       <Button
-        v-if="(!userOwnsRequest && !requestIsTaken) || userIsAssigned"
+        v-if="
+          (!userOwnsRequest && !requestIsTaken) ||
+            (userIsAssigned && !this.getRequest.delivered)
+        "
         :btnText="getAssignedButtonText"
         :btnDisabled="false"
         @btnClicked="connectUserToRequest"
@@ -33,7 +36,7 @@
         :btnDisabled="userIsNotifiedAboutCompletedOrder"
         @btnClicked="notifyUserThatOrderIsComplete"
       />
-      <p v-if="userIsAssigned" class>
+      <p v-if="userIsAssigned && !this.getRequest.delivered" class>
         Du har tatt dette oppdraget, det betyr at ingen andre kan se det lengre.
         Hvis du ikke har mulighet til å gjennomføre, gi det fra deg.
       </p>
