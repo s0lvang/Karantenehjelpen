@@ -74,8 +74,8 @@ export default {
 button {
   display: flex;
   align-items: center;
-  color: rgba(black, 0.5);
-  background: white;
+  color: white;
+  background: #4286f5;
   @include elevation-soft;
   border-radius: 4px;
   font-size: inherit;
@@ -89,8 +89,12 @@ button {
   transition: color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    color: rgba(black, 0.75);
     @include elevation-hard;
+  }
+
+  img {
+    background: white;
+    margin-right: 1rem;
   }
 }
 @media #{$desktopAndUp} {

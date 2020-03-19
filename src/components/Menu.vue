@@ -201,6 +201,7 @@ nav {
 
   &.hidden {
     background: transparent;
+    height: 0;
 
     & > a {
       display: none;
@@ -258,7 +259,7 @@ nav {
     background: transparent;
 
     &.hidden {
-      max-height: none;
+      height: auto;
 
       & > a {
         display: inline-block;

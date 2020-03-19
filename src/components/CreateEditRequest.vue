@@ -5,6 +5,7 @@
       <AddressInput
         :existing="this.address.place_name_no"
         :inEdit="checkEdit"
+        @addressUpdate="updateAddress"
       />
       <BigTextInput
         labelText="Ankomstbeskrivelse"
@@ -89,6 +90,9 @@ export default {
     };
   },
   methods: {
+    updateAddress(value) {
+      this.address = value;
+    },
     updateArrivalDescription(value) {
       this.arrivalDesc = value;
     },
