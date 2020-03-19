@@ -96,7 +96,8 @@ export default {
           await fb
             .signInWithEmailLink(email, url)
             .then(() => handleSignedIn(this, fb.currentUser))
-            .then(() => window.localStorage.removeItem("emailForSignIn"));
+            .then(() => window.localStorage.removeItem("emailForSignIn"))
+            .then(() => this.error = null);
         }
       } catch (err) {
         this.error = err.code;
