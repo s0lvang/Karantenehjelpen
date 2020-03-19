@@ -3,7 +3,14 @@
     <h3>
       {{ request.address.place_name_no }}
     </h3>
-    <p v-if="showDistance">{{ distance | asUnit }} unna deg</p>
+    <p v-if="showDistance">
+      <icon name="place" />
+      {{ distance | asUnit }} unna deg
+    </p>
+    <p>
+      <icon name="schedule" />
+      {{ getFormattedCreatedOn }}
+    </p>
     <strong v-if="request.items.length">
       Handleliste:
     </strong>
@@ -31,9 +38,11 @@
 
 <script>
 import Button from "@/components/shared/Button.vue";
+import Icon from "@/components/shared/Icon.vue";
 import Info from "@/components/shared/Info.vue";
 
 import coordinateDistance from "@/helpers/coord";
+import formatDateTime from "@/helpers/datetime";
 
 export default {
   name: "Request",
@@ -45,6 +54,7 @@ export default {
   },
   components: {
     Button,
+    Icon,
     Info
   },
   methods: {
@@ -88,6 +98,10 @@ export default {
         this.request.connectedUser &&
         this.request.connectedUser.email === this.$store.getters.email
       );
+    },
+    getFormattedCreatedOn() {
+      const { createdOn } = this.request;
+      return createdOn && formatDateTime(createdOn.toDate());
     }
   }
 };
