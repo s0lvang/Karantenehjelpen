@@ -5,9 +5,7 @@
       :locationCenter="request.address.center"
     />
     <hr />
-    <h3>
-      Kontaktinformasjon
-    </h3>
+    <h3>Kontaktinformasjon</h3>
     <p>
       <icon name="email" />
       <a :href="getEmailLink">{{ request.email }}</a>
@@ -15,10 +13,21 @@
     <p>
       <icon name="phone" />
       <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
-      Du kan endre ditt telefonnummer på <a href="/my-page">Min side</a>
+      Du kan endre ditt telefonnummer på
+      <a href="/my-page">Min side</a>
     </p>
-    <p><icon name="credit_card" /> {{ request.paymentSolution }}</p>
-    <p><icon name="directions_walk" />{{ request.arrivalDescription }}</p>
+    <p>
+      <icon name="credit_card" />
+      {{ request.paymentSolution }}
+    </p>
+    <p v-if="request.createdOn">
+      <icon name="schedule" />
+      {{ getFormattedCreatedOn }}
+    </p>
+    <p>
+      <icon name="directions_walk" />
+      {{ request.arrivalDescription }}
+    </p>
 
     <h3 v-if="request.items.length">Handleliste</h3>
     <ul v-if="request.items.length">
@@ -28,18 +37,16 @@
       </li>
     </ul>
 
-    <h3 v-if="request.otherNeed">
-      Annen henvendelse
-    </h3>
-    <p v-if="request.otherNeed">
-      {{ request.otherNeed }}
-    </p>
+    <h3 v-if="request.otherNeed">Annen henvendelse</h3>
+    <p v-if="request.otherNeed">{{ request.otherNeed }}</p>
   </section>
 </template>
 
 <script>
 import Map from "@/components/Map.vue";
 import Icon from "@/components/shared/Icon.vue";
+
+import formatDateTime from "@/helpers/datetime";
 
 export default {
   name: "DetailedRequest",
@@ -74,6 +81,10 @@ export default {
     },
     getEmailLink() {
       return `mailto:${this.request.email}`;
+    },
+    getFormattedCreatedOn() {
+      const { createdOn } = this.request;
+      return createdOn && formatDateTime(createdOn.toDate());
     }
   }
 };
