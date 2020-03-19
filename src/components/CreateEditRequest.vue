@@ -35,9 +35,18 @@
         @btnClicked="addItem()"
         :btnDisabled="false"
       />
+      <hr />
+      <BigTextInput
+        labelText="Andre henvendelser"
+        placeholderText="Jeg trenger hjelp til noe annet enn handling"
+        @change="updateOtherNeed"
+        :existing="otherNeed"
+      />
 
       <p class="error" v-if="addressError">Du må legge til en adresse!</p>
-      <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
+      <p class="error" v-if="itemsOrOtherNeeds">
+        Du må legge til minst en vare eller annen henvendelse!
+      </p>
       <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
       <p class="error" v-if="paymentSolutionError">
         Du må legge til en betalingsløsing!
@@ -75,7 +84,7 @@ export default {
   data() {
     return {
       addressError: false,
-      zeroItemsError: false,
+      itemsOrOtherNeeds: false,
       itemNameError: false,
       paymentSolutionError: false,
       items: [],
@@ -84,10 +93,15 @@ export default {
       paymentSolution: "",
       id: "",
       showSpinner: false,
-      request: {}
+      request: {},
+      otherNeed: ""
     };
   },
   methods: {
+    updateOtherNeed(value) {
+      this.itemsOrOtherNeeds = false;
+      this.otherNeed = value;
+    },
     updateAddress(value) {
       this.address = value;
     },
@@ -109,7 +123,7 @@ export default {
         itemName: "",
         count: 1
       });
-      this.zeroItemsError = false;
+      this.itemsOrOtherNeeds = false;
     },
     updateItemName(input, index) {
       this.itemNameError = false;
@@ -128,11 +142,12 @@ export default {
 
       if (this.paymentSolution.length <= 0) {
         this.paymentSolutionError = true;
-      } else if (filteredItems.length === 0) {
-        this.zeroItemsError = true;
+      } else if (filteredItems.length === 0 && this.otherNeed === "") {
+        this.itemsOrOtherNeeds = true;
       } else if (Object.keys(this.address).length === 0) {
         this.addressError = true;
       } else {
+        this.$store.dispatch("SET_OTHER_NEED", this.otherNeed);
         this.$store.dispatch("SET_ADDRESS", this.address);
         this.$store.dispatch("SET_ITEMS", filteredItems);
         this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
@@ -146,6 +161,7 @@ export default {
         this.id = this.request.id;
         this.items = this.request.items;
         this.address = this.request.address;
+        this.otherNeed = this.request.otherNeed;
         this.arrivalDesc = this.request.arrivalDescription;
         this.paymentSolution = this.request.paymentSolution;
       } else {
@@ -160,6 +176,7 @@ export default {
                 }
               ];
         this.address = this.getAddress;
+        this.otherNeed = this.getOtherNeed;
         this.arrivalDesc = this.getArrivalDescription;
         this.paymentSolution = this.getPaymentSolution;
       }
@@ -180,6 +197,9 @@ export default {
         return true;
       }
       return false;
+    },
+    getOtherNeed() {
+      return this.$store.getters.otherNeed;
     },
     userOwnsRequest() {
       return this.request && this.request.email === this.$store.getters.email;

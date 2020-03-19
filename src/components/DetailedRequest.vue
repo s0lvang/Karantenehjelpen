@@ -18,6 +18,7 @@
       Du kan endre ditt telefonnummer på 'Min side'
     </p>
     <p><icon name="credit_card" /> {{ request.paymentSolution }}</p>
+    <p><icon name="directions_walk" />{{ request.arrivalDescription }}</p>
 
     <h3>Handleliste</h3>
     <ul>
@@ -27,8 +28,8 @@
       </li>
     </ul>
 
-    <h3>Ankomstbeskrivelse</h3>
-    <p>{{ request.arrivalDescription }}</p>
+    <h3>Annen henvendelse</h3>
+    <p>{{ request.otherNeed }}</p>
   </section>
 </template>
 
