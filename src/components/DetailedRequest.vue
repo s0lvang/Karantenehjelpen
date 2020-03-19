@@ -28,8 +28,12 @@
       </li>
     </ul>
 
-    <h3 v-if="request.otherNeed.length !== 0">Annen henvendelse</h3>
-    <p v-if="request.otherNeed.length !== 0">{{ request.otherNeed }}</p>
+    <h3 v-if="request.otherNeed && request.otherNeed.length !== 0">
+      Annen henvendelse
+    </h3>
+    <p v-if="request.otherNeed && request.otherNeed.length !== 0">
+      {{ request.otherNeed }}
+    </p>
   </section>
 </template>
 
