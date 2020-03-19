@@ -80,7 +80,8 @@ export default {
             .update({
               connectedUser: {
                 phoneNumber: this.phoneNumberInput,
-                name: this.$store.getters.name
+                name: this.$store.getters.name,
+                email: this.$store.getters.email
               }
             });
         });
