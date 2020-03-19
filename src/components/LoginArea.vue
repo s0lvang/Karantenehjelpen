@@ -82,9 +82,9 @@ export default {
             // If the user opens the link on another device
             email = this.$dialog.prompt(
               {
-                title: "Telefonnummer",
-                body: "Skriv inn telefonnummeret ditt uten landskode",
-                promptHelp: `Skriv ditt telefonnummer i boksen under og trykk "[+:okText]"`
+                title: "Epostadresse",
+                body: "Skriv inn epostadressen din",
+                promptHelp: `Skriv din epostadresse i boksen under og trykk "[+:okText]"`
               },
               {
                 okText: "Fortsett",
