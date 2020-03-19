@@ -102,7 +102,22 @@ export default {
 }
 
 #all-requests-map {
-  height: 50vh;
+  margin: 1em auto 2em;
+  position: relative;
+  height: 65vh;
+  z-index: 1000;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+}
+
+@media #{$tabletAndUp} {
+  #all-requests-map {
+    position: relative;
+    margin-left: 0;
+    left: unset;
+    width: 100%;
+  }
 }
 
 path,
