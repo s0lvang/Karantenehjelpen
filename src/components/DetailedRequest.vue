@@ -20,18 +20,18 @@
     <p><icon name="credit_card" /> {{ request.paymentSolution }}</p>
     <p><icon name="directions_walk" />{{ request.arrivalDescription }}</p>
 
-    <h3 v-if="request.items.length !== 0">Handleliste</h3>
-    <ul v-if="request.items.length !== 0">
+    <h3 v-if="request.items.length">Handleliste</h3>
+    <ul v-if="request.items.length">
       <li v-for="(item, index) in request.items" :key="index">
         <strong>{{ item.count }}x</strong>
         {{ item.itemName.charAt(0).toUpperCase() + item.itemName.substring(1) }}
       </li>
     </ul>
 
-    <h3 v-if="request.otherNeed && request.otherNeed.length !== 0">
+    <h3 v-if="request.otherNeed">
       Annen henvendelse
     </h3>
-    <p v-if="request.otherNeed && request.otherNeed.length !== 0">
+    <p v-if="request.otherNeed">
       {{ request.otherNeed }}
     </p>
   </section>

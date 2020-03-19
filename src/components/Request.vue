@@ -4,16 +4,16 @@
       {{ request.address.place_name_no }}
     </h3>
     <p v-if="showDistance">{{ distance | asUnit }} unna deg</p>
-    <strong v-if="request.items.length !== 0">
+    <strong v-if="request.items.length">
       Handleliste:
     </strong>
-    <div v-if="request.items.length !== 0">
+    <div v-if="request.items.length">
       {{ getItems }}
     </div>
-    <strong v-if="request.otherNeed && request.otherNeed.length !== 0">
+    <strong v-if="request.otherNeed">
       Henvendelse:
     </strong>
-    <div v-if="request.otherNeed && request.otherNeed.length !== 0">
+    <div v-if="request.otherNeed">
       <p class="other-need">
         {{ request.otherNeed }}
       </p>
