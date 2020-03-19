@@ -51,7 +51,10 @@ export default {
       const actionCodeSettings = {
         // URL you want to redirect back to. The domain (www.example.com) for this
         // URL must be whitelisted in the Firebase Console.
-        url: "http://localhost:8080/login",
+        url:
+          process.env.NODE_ENV === "PRODUCTION"
+            ? "https://karantenehjelpen.no/login"
+            : "http://localhost:8080/login",
         // This must be true.
         handleCodeInApp: true,
         lang: "no"
