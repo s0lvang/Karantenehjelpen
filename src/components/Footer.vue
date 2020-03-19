@@ -34,6 +34,10 @@ footer {
   align-items: center;
   width: 100%;
 
+  a {
+    margin: 0 0.5rem;
+  }
+
   a:link,
   a:visited {
     color: $color-text-contrast;
@@ -46,9 +50,9 @@ footer {
     margin-top: $vertical-space-large;
   }
   svg {
-    margin-left: 1rem;
     fill: #ffffff;
     transition: opacity 0.2s;
+    vertical-align: middle;
 
     &:hover {
       opacity: 0.7;
