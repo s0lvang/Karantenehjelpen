@@ -80,7 +80,7 @@ export default {
           let email = window.localStorage.getItem("emailForSignIn");
           if (!email) {
             // If the user opens the link on another device
-            email = this.$dialog.prompt(
+            awaitemail = await this.$dialog.prompt(
               {
                 title: "Epostadresse",
                 body: "Skriv inn epostadressen din",
