@@ -28,12 +28,46 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
+import handleSignedIn from "@/helpers/auth";
+
 import LoginButton from "@/components/LoginButton.vue";
 
 export default {
   name: "login",
   components: {
     LoginButton
+  },
+  methods: {
+    googleSetUpSignInCompleteListener() {
+      firebase
+        .auth()
+        .getRedirectResult()
+        .then(result => {
+          const { user } = result;
+          if (user) {
+            handleSignedIn(this, user);
+          }
+        })
+        .catch(error => {
+          console.log(`something went wrong ${error.message}`);
+          /* TODO: We should have a handler here for when we add Vipps etc
+          if (errorCode === "auth/account-exists-with-different-credential") {
+            alert(
+              "You have already signed up with a different auth provider for that email."
+            );
+            // If you are using multiple auth providers on your app you should handle linking
+            // the user's accounts here.
+          } else {
+            console.error(error);
+          }
+          */
+        });
+    }
+  },
+  created() {
+    this.googleSetUpSignInCompleteListener();
   }
 };
 </script>

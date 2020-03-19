@@ -92,7 +92,7 @@ const store = new Vuex.Store({
   }
 });
 
-// Firebase auth state change
+// Firebase auth state change, login and logout
 fb.auth.onAuthStateChanged(user => {
   if (user) {
     fb.additionalUserInfoCollection
