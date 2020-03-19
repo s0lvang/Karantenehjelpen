@@ -66,18 +66,24 @@ export default {
       fb.additionalUserInfoCollection
         .doc(this.$store.getters.id)
         .update({ phoneNumber: this.phoneNumberInput });
-      this.$store.getters.requests.forEach(request => {
-        fb.usersCollection
-          .doc(request.uid)
-          .collection("requests")
-          .doc(request.id)
-          .update({
-            connectedUser: {
-              phoneNumber: this.phoneNumberInput,
-              name: this.$store.getters.name
-            }
-          });
-      });
+      this.$store.getters.requests
+        .filter(
+          request =>
+            request.connectedUser &&
+            request.connectedUser.email === this.$store.getters.email
+        )
+        .forEach(request => {
+          fb.usersCollection
+            .doc(request.uid)
+            .collection("requests")
+            .doc(request.id)
+            .update({
+              connectedUser: {
+                phoneNumber: this.phoneNumberInput,
+                name: this.$store.getters.name
+              }
+            });
+        });
       this.$store.dispatch("SET_CURRENT_USER", {
         ...this.$store.getters.currentUser,
         phoneNumber: this.phoneNumberInput
