@@ -1,6 +1,25 @@
 <template>
   <section>
-    <h2>Tilgjengelige oppdrag</h2>
+    <div class="header-flex">
+      <h2>Tilgjengelige oppdrag</h2>
+      <button
+        @click="mapEnabled = !mapEnabled"
+        class="toggle-map"
+        :data-enabled="mapEnabled"
+      >
+        <icon name="map" />
+        {{ mapEnabled ? "Skjul" : "Vis" }} kart
+      </button>
+    </div>
+    <section v-if="getRequests.length && this.mapEnabled">
+      <AllRequestsMap
+        :requests="getRequests"
+        :locationCenter="[
+          this.$store.getters.location.longitude || 10.395053, // Trondheim as fallback
+          this.$store.getters.location.latitude || 63.41002
+        ]"
+      />
+    </section>
     <section v-if="getRequests.length">
       <Request
         v-for="request in getRequests"
@@ -9,19 +28,28 @@
       />
     </section>
     <p v-if="!getRequests.length">
-      Ingen tilgjengelige oppdrag akkurat nå...
+      Ingen tilgjengelige oppdrag akkurat nå…
     </p>
   </section>
 </template>
 
 <script>
 import Request from "@/components/Request.vue";
+import AllRequestsMap from "@/components/AllRequestsMap.vue";
 import coordinateDistance from "@/helpers/coord";
+import Icon from "@/components/shared/Icon.vue";
 
 export default {
   name: "MyRequests",
   components: {
-    Request
+    Request,
+    AllRequestsMap,
+    Icon
+  },
+  data() {
+    return {
+      mapEnabled: false
+    };
   },
   computed: {
     getRequests() {
@@ -62,3 +90,49 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+button.toggle-map {
+  --blue: #{$color-primary};
+  --light-blue: #{lighten($color-primary, 10%)};
+
+  -webkit-appearance: none;
+
+  background: none;
+  color: $color-text;
+
+  border-radius: 4px;
+  border: 2px solid var(--blue);
+
+  cursor: pointer;
+
+  padding: 0.25rem 1rem;
+
+  transition: background 0.35s, border-color 0.35s;
+
+  & * {
+    vertical-align: center;
+  }
+
+  &:hover,
+  &[data-enabled="true"] {
+    background: var(--blue);
+    color: white;
+  }
+
+  &[data-enabled="true"]:hover {
+    background: var(--light-blue);
+    border-color: var(--light-blue);
+  }
+}
+
+section + section {
+  margin-top: 1em;
+}
+</style>
