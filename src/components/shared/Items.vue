@@ -2,13 +2,18 @@
   <div class="grid">
     <hr />
     <h3>Handleliste</h3>
-    <div class="item" v-for="(item, index) in nrOfItems" :key="index">
+    <div
+      class="item"
+      v-for="(item, index) in nrOfItems"
+      :key="`${item}-${index}`"
+    >
       <div class="split-row">
         <TextInput
           labelText="Vare"
           placeholderText="Varenavn.."
           @emitInputText="emitInputText"
           :localIndex="index"
+          :existing="item.itemName"
         />
         <div>
           <strong>Antall</strong>
