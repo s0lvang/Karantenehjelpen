@@ -100,7 +100,7 @@ export default {
 
 button.toggle-map {
   --blue: #{$color-primary};
-  --light-blue: lighten(#{$color-primary}, 10%);
+  --light-blue: #{lighten($color-primary, 10%)};
 
   -webkit-appearance: none;
 
