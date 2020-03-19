@@ -35,9 +35,10 @@
 
 <script>
 import Request from "@/components/Request.vue";
-import AllRequestsMap from "@/components/AllRequestsMap.vue";
 import coordinateDistance from "@/helpers/coord";
 import Icon from "@/components/shared/Icon.vue";
+
+const AllRequestsMap = () => import("@/components/AllRequestsMap.vue");
 
 export default {
   name: "MyRequests",

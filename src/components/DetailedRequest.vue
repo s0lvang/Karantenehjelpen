@@ -49,10 +49,11 @@
 </template>
 
 <script>
-import Map from "@/components/Map.vue";
 import Icon from "@/components/shared/Icon.vue";
 
 import formatDateTime from "@/helpers/datetime";
+
+const Map = () => import("@/components/Map.vue");
 
 export default {
   name: "DetailedRequest",
