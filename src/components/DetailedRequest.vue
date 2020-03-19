@@ -15,7 +15,7 @@
     <p>
       <icon name="phone" />
       <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
-      Du kan endre ditt telefonnummer på 'Min side'
+      Du kan endre ditt telefonnummer på <a href="/my-page">Min side</a>
     </p>
     <p><icon name="credit_card" /> {{ request.paymentSolution }}</p>
 
