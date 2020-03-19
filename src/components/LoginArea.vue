@@ -26,7 +26,11 @@
 
 <script>
 import firebase from "firebase";
-import { authenticateUser, getErrorMessage } from "@/helpers/authentication";
+import {
+  authenticateUser,
+  getErrorMessage,
+  getRedirectUrl
+} from "@/helpers/authentication";
 import Button from "@/components/shared/Button.vue";
 
 export default {
@@ -51,15 +55,14 @@ export default {
       const actionCodeSettings = {
         // URL you want to redirect back to. The domain (www.example.com) for this
         // URL must be whitelisted in the Firebase Console.
-        url:
-          process.env.NODE_ENV === "PRODUCTION"
-            ? "https://karantenehjelpen.no/login"
-            : "http://localhost:8080/login",
+        url: getRedirectUrl(
+          process.env.NODE_ENV,
+          firebase.app().options.projectId
+        ),
         // This must be true.
         handleCodeInApp: true,
         lang: "no"
       };
-
       firebase
         .auth()
         .sendSignInLinkToEmail(this.email, actionCodeSettings)
