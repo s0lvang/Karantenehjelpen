@@ -6,6 +6,20 @@
 import Mapbox from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+// https://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+function escapeHtml(unsafe) {
+  if (typeof unsafe !== "string") {
+    return unsafe;
+  }
+
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 export default {
   name: "AllRequestsMap",
   data() {
@@ -48,18 +62,19 @@ export default {
       this.markers = locs.map(c => {
         const m = new Mapbox.Marker();
         // Create a popup and attach
-        console.log(c.address.center);
         m.setLngLat(c.address.center);
         m.addTo(this.map);
-
-        const el = m.getElement();
-        el.addEventListener("click", () => console.log("ok"));
 
         const popup = new Mapbox.Popup();
         popup.setHTML(`
         <strong>Handleliste</strong>
         <ul>
-            ${c.items.map(i => `<li>${i.count}x ${i.itemName}</li>`).join("")}
+            ${c.items
+              .map(
+                i =>
+                  `<li>${escapeHtml(i.count)}x ${escapeHtml(i.itemName)}</li>`
+              )
+              .join("")}
         </ul>
         <br>
         <a href="/request/${c.id}">Gå til annonse</a>
