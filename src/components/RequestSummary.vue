@@ -41,6 +41,7 @@ export default {
       return {
         email: this.$store.getters.email,
         name: this.$store.getters.name,
+        otherNeed: this.$store.getters.otherNeed,
         phoneNumber: this.$store.getters.phoneNumber,
         address: this.$store.getters.address,
         arrivalDescription: this.$store.getters.arrivalDescription,

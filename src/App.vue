@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu v-if="getUser" />
+    <Menu v-if="shouldDisplayMenu" />
     <Page>
       <router-view />
     </Page>
@@ -20,8 +20,8 @@ export default {
     Footer
   },
   computed: {
-    getUser() {
-      return this.$store.getters.currentUser;
+    shouldDisplayMenu() {
+      return this.$route.path !== "/login";
     }
   }
 };
