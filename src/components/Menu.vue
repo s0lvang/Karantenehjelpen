@@ -159,7 +159,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: ($headerHeight - $contentSize) / 2 2rem;
-  box-shadow: 0 2px 4px rgba(black, 0.25);
+  box-shadow: 0 2px 4px rgba($color-text, 0.25);
 }
 
 img {

@@ -33,3 +33,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+textarea {
+  resize: vertical;
+}
+</style>

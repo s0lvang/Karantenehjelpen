@@ -1,7 +1,9 @@
 <template>
   <section>
     <h1 class="title">Karantenehjelpen</h1>
-    <LoginButton />
+    <GoogleLoginButton />
+    <hr class="hr-text" data-content="OR" />
+    <LoginArea />
     <strong>Hva er Karantenehjelpen?</strong>
     <p>
       Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
@@ -28,16 +30,16 @@
 </template>
 
 <script>
+import GoogleLoginButton from "@/components/GoogleLoginButton.vue";
+import LoginArea from "@/components/LoginArea.vue";
 import firebase from "firebase";
-
-import handleSignedIn from "@/helpers/auth";
-
-import LoginButton from "@/components/LoginButton.vue";
+import { handleSignedIn } from "@/helpers/auth";
 
 export default {
   name: "login",
   components: {
-    LoginButton
+    GoogleLoginButton,
+    LoginArea
   },
   methods: {
     googleSetUpSignInCompleteListener() {
@@ -80,5 +82,46 @@ export default {
 
 button {
   margin: 2rem auto;
+}
+
+@media #{$tabletAndUp} {
+  h1 {
+    display: inherit;
+    margin-top: 4rem;
+    text-align: center;
+  }
+}
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.5;
+  &:before {
+    content: "";
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: "Eller";
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 0.5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #fcfcfa;
+  }
 }
 </style>

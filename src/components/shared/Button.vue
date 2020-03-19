@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="btnClick"
+    @click.prevent="btnClick"
     :class="isDanger ? 'isDanger' : ''"
     :disabled="btnDisabled"
   >

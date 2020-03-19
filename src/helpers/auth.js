@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
-export default (context, user) => {
+export const handleSignedIn = (context, user) => {
   fb.additionalUserInfoCollection
     .doc(user.uid)
     .get()
@@ -59,4 +59,23 @@ export default (context, user) => {
           });
       }
     });
+};
+
+export const getErrorMessage = errorCode => {
+  switch (errorCode) {
+    case "auth/invalid-password":
+      return "Passordet er feil!";
+    case "auth/invalid-email":
+      return "Formatet på mailen er feil!";
+    case "auth/email-already-in-use":
+      return "Mailen skrevet inn er allerede i bruk";
+    case "auth/too-many-requests":
+      return "For mange login forsøk, prøv igjen senere";
+    default:
+      return `Ukjent errorkode: ${errorCode}`;
+  }
+};
+
+export const getRedirectUrl = () => {
+  return `${window.location.origin}/login`;
 };
