@@ -9,7 +9,8 @@ import MyRequestsView from "@/views/MyRequestsView.vue"; // eslint-disable
 import MyAssignedRequestsView from "@/views/MyAssignedRequestsView.vue"; // eslint-disable
 import EditRequestView from "@/views/EditRequestView.vue";
 import MyPageView from "@/views/MyPageView.vue";
-import firebase from "firebase";
+
+import store from "@/store/index";
 
 Vue.use(VueRouter);
 
@@ -97,7 +98,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const { currentUser } = firebase.auth();
+  const { currentUser } = store.getters;
   if (requiresAuth && !currentUser) {
     next("/login");
   } else if (requiresAuth && currentUser) {
