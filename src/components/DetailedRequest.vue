@@ -24,7 +24,7 @@
       <icon name="schedule" />
       {{ getFormattedCreatedOn }}
     </p>
-    <p>
+    <p v-if="request.arrivalDescription">
       <icon name="directions_walk" />
       {{ request.arrivalDescription }}
     </p>
