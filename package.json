@@ -15,6 +15,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "date-fns": "^2.11.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "firebase": "^7.10.0",

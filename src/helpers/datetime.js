@@ -1,14 +1,9 @@
-const LOCALE = "nb-NO";
+import { formatDistanceToNow } from "date-fns";
+import { nb } from "date-fns/locale";
 
 export default function formatDateTime(date) {
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric"
-  };
-  const formatter = new Intl.DateTimeFormat(LOCALE, options);
-  return formatter.format(date);
+  return `${formatDistanceToNow(date, { locale: nb }).replace(
+    "omtrent",
+    ""
+  )} siden`;
 }
