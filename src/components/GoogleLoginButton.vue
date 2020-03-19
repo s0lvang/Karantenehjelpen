@@ -1,5 +1,5 @@
 <template>
-  <button @click="socialLogin()" class="button_style">
+  <button @click="signInWithGoogle()" class="button_style">
     <img alt="Google Logo" src="../assets/google-logo.svg" />
     <span>
       Logg inn med Google
@@ -9,20 +9,13 @@
 
 <script>
 import firebase from "firebase";
-import { authenticateUser } from "@/helpers/authentication";
 
 export default {
-  name: "GoogleLoginButton",
+  name: "LoginButton",
   methods: {
-    socialLogin() {
+    signInWithGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(() => authenticateUser(this))
-        .catch(err => {
-          alert(`Oops. ${err.message}`);
-        });
+      firebase.auth().signInWithRedirect(provider);
     }
   }
 };

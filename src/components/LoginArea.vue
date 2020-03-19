@@ -27,10 +27,10 @@
 <script>
 import firebase from "firebase";
 import {
-  authenticateUser,
+  handleSignedIn,
   getErrorMessage,
   getRedirectUrl
-} from "@/helpers/authentication";
+} from "@/helpers/auth";
 import Button from "@/components/shared/Button.vue";
 
 export default {
@@ -87,7 +87,7 @@ export default {
           }
           await fb
             .signInWithEmailLink(email, url)
-            .then(() => authenticateUser(this))
+            .then(() => handleSignedIn(this, fb.currentUser))
             .then(() => window.localStorage.removeItem("emailForSignIn"));
         }
       } catch (err) {

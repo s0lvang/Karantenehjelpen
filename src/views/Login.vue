@@ -33,10 +33,7 @@
 import GoogleLoginButton from "@/components/GoogleLoginButton.vue";
 import LoginArea from "@/components/LoginArea.vue";
 import firebase from "firebase";
-
-import handleSignedIn from "@/helpers/auth";
-
-import LoginButton from "@/components/LoginButton.vue";
+import { handleSignedIn } from "@/helpers/auth";
 
 export default {
   name: "login",
