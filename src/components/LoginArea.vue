@@ -66,7 +66,7 @@ export default {
         .then(() => {
           window.localStorage.setItem("emailForSignIn", this.email);
           this.sentMail = true;
-          this.error = null;
+          this.errorCode = null;
         })
         .catch(err => {
           this.errorCode = err.code;
@@ -100,7 +100,7 @@ export default {
             .then(() => window.localStorage.removeItem("emailForSignIn"))
         }
       } catch (err) {
-        this.error = err.code;
+        this.errorCode = err.code;
       }
     };
     await login(window.location.href);
