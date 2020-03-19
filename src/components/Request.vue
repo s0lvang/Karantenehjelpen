@@ -4,11 +4,19 @@
       {{ request.address.place_name_no }}
     </h3>
     <p v-if="showDistance">{{ distance | asUnit }} unna deg</p>
-    <strong>
+    <strong v-if="request.items.length">
       Handleliste:
     </strong>
-    <div>
+    <div v-if="request.items.length">
       {{ getItems }}
+    </div>
+    <strong v-if="request.otherNeed">
+      Henvendelse:
+    </strong>
+    <div v-if="request.otherNeed">
+      <p class="other-need">
+        {{ request.otherNeed }}
+      </p>
     </div>
     <info v-if="userIsAssigned && !request.delivered"
       >Du har tatt dette oppdraget. Løp og kjøp!</info
@@ -103,5 +111,20 @@ h3 {
 
 button {
   margin: 1rem auto;
+}
+.other-need {
+  height: 5rem;
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1.2em;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  }
 }
 </style>
