@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
-export default (context, user) => {
+export const handleSignedIn = (context, user) => {
   fb.additionalUserInfoCollection
     .doc(user.uid)
     .get()
@@ -14,12 +14,29 @@ export default (context, user) => {
         context.$router.replace("home");
       } else {
         context.$dialog
-          .prompt({
-            title: "Telefonnummer",
-            body: "Skriv inn telefonnummeret ditt uten landskode",
-            promptHelp: ""
-          })
+          .prompt(
+            {
+              title: "Telefonnummer",
+              body: "Skriv inn telefonnummeret ditt uten landskode",
+              promptHelp: `Skriv ditt telefonnummer i boksen under og trykk "[+:okText]"`
+            },
+            {
+              okText: "Fortsett",
+              cancelText: "Lukk",
+              customClass: "phone-prompt"
+            }
+          )
           .then(dialog => {
+            // 8:  92848870
+            // 10: 928 48 870
+            // 11: 92 84 88 70
+            if (!/^[\d\s]{8,11}$/g.test(dialog.data)) {
+              context.$dialog.alert(
+                "Vennligst logg inn på nytt og skriv ditt telefonnummer uten landskode. E.g. 99988777."
+              );
+              throw new Error("Feil format på telefonnummer.");
+            }
+
             fb.additionalUserInfoCollection
               .doc(user.uid)
               .set({ phoneNumber: dialog.data });
@@ -42,4 +59,23 @@ export default (context, user) => {
           });
       }
     });
+};
+
+export const getErrorMessage = errorCode => {
+  switch (errorCode) {
+    case "auth/invalid-password":
+      return "Passordet er feil!";
+    case "auth/invalid-email":
+      return "Formatet på mailen er feil!";
+    case "auth/email-already-in-use":
+      return "Mailen skrevet inn er allerede i bruk";
+    case "auth/too-many-requests":
+      return "For mange login forsøk, prøv igjen senere";
+    default:
+      return `Ukjent errorkode: ${errorCode}`;
+  }
+};
+
+export const getRedirectUrl = () => {
+  return `${window.location.origin}/login`;
 };

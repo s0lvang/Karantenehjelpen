@@ -231,6 +231,11 @@ section > * + * {
   margin-top: 1rem;
 }
 
+#payment-solution {
+  border: none;
+  @include elevation-soft;
+}
+
 .error {
   text-align: center;
   color: $color-danger;
