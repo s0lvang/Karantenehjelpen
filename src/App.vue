@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Menu />
+    <Menu v-if="shouldDisplayMenu" />
     <Page>
       <router-view />
     </Page>
@@ -18,6 +18,11 @@ export default {
     Menu,
     Page,
     Footer
+  },
+  computed: {
+    shouldDisplayMenu() {
+      return this.$route.path !== "/login";
+    }
   }
 };
 </script>
