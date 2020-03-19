@@ -81,23 +81,25 @@ export default {
           let email = window.localStorage.getItem("emailForSignIn");
           if (!email) {
             // If the user opens the link on another device
-            email = await this.$dialog.prompt(
-              {
-                title: "Epostadresse",
-                body: "Skriv inn epostadressen din",
-                promptHelp: `Skriv din epostadresse i boksen under og trykk "[+:okText]"`
-              },
-              {
-                okText: "Fortsett",
-                cancelText: "Lukk",
-                customClass: "phone-prompt"
-              }
-            ).then(dialog => dialog.data);
+            email = await this.$dialog
+              .prompt(
+                {
+                  title: "Epostadresse",
+                  body: "Skriv inn epostadressen din",
+                  promptHelp: `Skriv din epostadresse i boksen under og trykk "[+:okText]"`
+                },
+                {
+                  okText: "Fortsett",
+                  cancelText: "Lukk",
+                  customClass: "phone-prompt"
+                }
+              )
+              .then(dialog => dialog.data);
           }
           await fb
             .signInWithEmailLink(email, url)
             .then(() => handleSignedIn(this, fb.currentUser))
-            .then(() => window.localStorage.removeItem("emailForSignIn"))
+            .then(() => window.localStorage.removeItem("emailForSignIn"));
         }
       } catch (err) {
         this.errorCode = err.code;
