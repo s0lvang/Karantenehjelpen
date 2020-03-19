@@ -2,7 +2,7 @@
   <div class="container">
     <label for="text-input">{{ labelText }}</label>
     <input
-      type="text"
+      :type="inputType"
       name="text-input"
       @input="emitInputText"
       :placeholder="placeholderText"
@@ -27,6 +27,12 @@ export default {
       type: Number,
       required: false
     },
+    inputType: {
+      type: String,
+      default: "text",
+      required: false
+    },
+
     existing: String
   },
   methods: {
