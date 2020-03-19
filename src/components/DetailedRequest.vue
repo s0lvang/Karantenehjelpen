@@ -6,15 +6,17 @@
     />
     <hr />
     <h3>Kontaktinformasjon</h3>
-    <p>
+    <p v-if="isMyRequest">
       <icon name="email" />
       <a :href="getEmailLink">{{ request.email }}</a>
     </p>
-    <p>
+    <p v-if="isMyRequest">
       <icon name="phone" />
       <a :href="getPhoneLink">{{ request.phoneNumber }}</a>
-      Du kan endre ditt telefonnummer på
-      <a href="/my-page">Min side</a>
+      <span v-if="isMe">
+        Du kan endre ditt telefonnummer på
+        <a href="/my-page">Min side</a>
+      </span>
     </p>
     <p>
       <icon name="credit_card" />
@@ -24,7 +26,7 @@
       <icon name="schedule" />
       {{ getFormattedCreatedOn }}
     </p>
-    <p>
+    <p v-if="request.arrivalDescription">
       <icon name="directions_walk" />
       {{ request.arrivalDescription }}
     </p>
@@ -85,6 +87,16 @@ export default {
     getFormattedCreatedOn() {
       const { createdOn } = this.request;
       return createdOn && formatDateTime(createdOn.toDate());
+    },
+    isMyRequest() {
+      if (!this.request.connectedUser) {
+        return false;
+      }
+
+      return this.request.connectedUser.email === this.$store.getters.email;
+    },
+    isMe() {
+      return this.request.email === this.$store.getters.email;
     }
   }
 };
