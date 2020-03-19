@@ -22,7 +22,6 @@
         @input="updatePaymentSolution"
       />
       <Items
-        v-if="this.items.length >= 1"
         @updateItem="addItem"
         :nrOfItems="items"
         @addItem="addItem"
@@ -32,11 +31,11 @@
         @updateName="updateItemName"
       />
       <Button
-        btnText="Ny vare"
+        btnText="Legg til en ny vare"
+        @btnClicked="addItem()"
         :btnDisabled="false"
-        @btnClicked="renderNewItem"
       />
-      <p class="error" v-if="nonAddedItem">Du må legge til alle varene!</p>
+
       <p class="error" v-if="addressError">Du må legge til en adresse!</p>
       <p class="error" v-if="zeroItemsError">Du må legge til minst en vare!</p>
       <p class="error" v-if="itemNameError">Varen må ha et navn!</p>
@@ -75,7 +74,6 @@ export default {
   },
   data() {
     return {
-      nonAddedItem: false,
       addressError: false,
       zeroItemsError: false,
       itemNameError: false,
@@ -102,23 +100,15 @@ export default {
     },
     deleteItem(index) {
       this.items.splice(index, 1);
-      this.nonAddedItem = false;
     },
     addItem(index) {
-      if (this.items[index].itemName.length > 0) {
-        this.items[index].added = true;
-        this.nonAddedItem = false;
-      } else {
-        this.itemNameError = true;
-      }
+      this.renderNewItem();
     },
     renderNewItem() {
       this.items.push({
         itemName: "",
-        count: 1,
-        added: false
+        count: 1
       });
-      this.nonAddedItem = false;
       this.zeroItemsError = false;
     },
     updateItemName(input, index) {
@@ -134,18 +124,17 @@ export default {
       }
     },
     toSummary() {
-      const itemsMapped = this.items.map(item => item.added);
+      const filteredItems = this.items.filter(i => i.itemName.length > 0);
+
       if (this.paymentSolution.length <= 0) {
         this.paymentSolutionError = true;
-      } else if (!itemsMapped.every(Boolean)) {
-        this.nonAddedItem = true;
-      } else if (itemsMapped.length === 0) {
+      } else if (filteredItems.length === 0) {
         this.zeroItemsError = true;
       } else if (Object.keys(this.address).length === 0) {
         this.addressError = true;
       } else {
         this.$store.dispatch("SET_ADDRESS", this.address);
-        this.$store.dispatch("SET_ITEMS", this.items);
+        this.$store.dispatch("SET_ITEMS", filteredItems);
         this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", this.arrivalDesc);
         this.$store.dispatch("SET_PAYMENT_SOLUTION", this.paymentSolution);
         this.$emit("toSummary");
@@ -160,7 +149,16 @@ export default {
         this.arrivalDesc = this.request.arrivalDescription;
         this.paymentSolution = this.request.paymentSolution;
       } else {
-        this.items = this.getItems;
+        this.items =
+          this.getItems.length > 0
+            ? this.getItems
+            : [
+                {
+                  itemName: "",
+                  count: 1,
+                  added: false
+                }
+              ];
         this.address = this.getAddress;
         this.arrivalDesc = this.getArrivalDescription;
         this.paymentSolution = this.getPaymentSolution;
