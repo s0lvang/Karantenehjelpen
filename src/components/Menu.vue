@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import fb from "firebase";
+import firebase from "firebase/app";
 
 export default {
   name: "Menu",
@@ -130,7 +130,8 @@ export default {
       this.close();
     },
     logout() {
-      fb.auth()
+      firebase
+        .auth()
         .signOut()
         .then(() => {
           this.$store.dispatch("SET_CURRENT_USER", null);
