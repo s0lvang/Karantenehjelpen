@@ -55,10 +55,7 @@ export default {
       const actionCodeSettings = {
         // URL you want to redirect back to. The domain (www.example.com) for this
         // URL must be whitelisted in the Firebase Console.
-        url: getRedirectUrl(
-          process.env.NODE_ENV,
-          firebase.app().options.projectId
-        ),
+        url: getRedirectUrl(),
         // This must be true.
         handleCodeInApp: true,
         lang: "no"

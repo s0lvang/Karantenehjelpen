@@ -59,15 +59,6 @@ export const getErrorMessage = errorCode => {
   }
 };
 
-export const getRedirectUrl = (buildState, projectid) => {
-  let url;
-  if (buildState === "production") {
-    url =
-      projectid === "karantenehjelpen-test"
-        ? "https://karantenehjelpen-test.firebaseapp.com/login"
-        : "https://www.karantenehjelpen.no/login";
-  } else {
-    url = "http://localhost:8080/login";
-  }
-  return url;
+export const getRedirectUrl = () => {
+  return `${window.location.origin}/login`;
 };
