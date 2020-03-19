@@ -14,9 +14,11 @@ const store = new Vuex.Store({
     items: [],
     requests: [],
     geolocation: {},
-    showDistance: false
+    showDistance: false,
+    otherNeed: ""
   },
   getters: {
+    otherNeed: state => state.otherNeed,
     currentUser: state => state.currentUser,
     name: state => (state.currentUser ? state.currentUser.displayName : null),
     email: state => (state.currentUser ? state.currentUser.email : null),
@@ -33,6 +35,9 @@ const store = new Vuex.Store({
     showDistance: state => state.showDistance
   },
   mutations: {
+    SET_OTHER_NEED(state, val) {
+      state.otherNeed = val;
+    },
     SET_CURRENT_USER(state, val) {
       state.currentUser = val;
     },
@@ -62,6 +67,9 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SET_OTHER_NEED: (context, payload) => {
+      context.commit("SET_OTHER_NEED", payload);
+    },
     SET_CURRENT_USER: (context, payload) => {
       context.commit("SET_CURRENT_USER", payload);
     },
@@ -92,7 +100,7 @@ const store = new Vuex.Store({
   }
 });
 
-// Firebase auth state change
+// Firebase auth state change, login and logout
 fb.auth.onAuthStateChanged(user => {
   if (user) {
     fb.additionalUserInfoCollection

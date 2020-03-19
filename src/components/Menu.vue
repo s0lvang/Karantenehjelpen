@@ -135,6 +135,7 @@ export default {
         .then(() => {
           this.$store.dispatch("SET_CURRENT_USER", null);
           this.$router.push("/login");
+          this.close();
         })
         .catch(error => {
           console.log(`something went wrong ${error.message}`);
@@ -152,15 +153,13 @@ export default {
 $contentSize: 2rem;
 $contentSize-large: 2.5rem;
 header {
-  position: sticky;
-  top: 0;
+  position: relative;
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: ($headerHeight - $contentSize) / 2 2rem;
   box-shadow: 0 2px 4px rgba(black, 0.25);
-  z-index: 200;
 }
 
 img {

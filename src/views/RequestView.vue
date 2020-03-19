@@ -119,7 +119,9 @@ export default {
               this.$store.getters.name
             } påstår å ha levert din ordre på: \n\n${printItemNames(
               this.getRequest.items
-            )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/my-requests.`
+            )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/request/${
+              this.getRequest.id
+            }.`
           );
           this.userIsNotifiedAboutCompletedOrder = true;
           alert(
