@@ -66,6 +66,7 @@ export default {
         .then(() => {
           window.localStorage.setItem("emailForSignIn", this.email);
           this.sentMail = true;
+          this.error = null;
         })
         .catch(err => {
           this.errorCode = err.code;
@@ -97,7 +98,6 @@ export default {
             .signInWithEmailLink(email, url)
             .then(() => handleSignedIn(this, fb.currentUser))
             .then(() => window.localStorage.removeItem("emailForSignIn"))
-            .then(() => this.error = null);
         }
       } catch (err) {
         this.error = err.code;
