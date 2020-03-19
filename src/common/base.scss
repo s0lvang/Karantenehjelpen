@@ -126,3 +126,27 @@ em {
   line-height: 2.5rem;
   font-style: italic;
 }
+
+p {
+  word-break: break-all;
+}
+
+.phone-prompt label {
+  display: none;
+}
+
+.dg-container .dg-btn--cancel {
+  background: #E02021;
+}
+
+.dg-container .dg-btn--ok {
+  background: #0098DF;
+  color: white;
+}
+
+.dg-container input {
+   display: block;
+
+   width: 100%;
+   max-width: 100%;
+}

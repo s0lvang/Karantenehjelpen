@@ -14,12 +14,29 @@ export const handleSignedIn = (context, user) => {
         context.$router.replace("home");
       } else {
         context.$dialog
-          .prompt({
-            title: "Telefonnummer",
-            body: "Skriv inn telefonnummeret ditt uten landskode",
-            promptHelp: ""
-          })
+          .prompt(
+            {
+              title: "Telefonnummer",
+              body: "Skriv inn telefonnummeret ditt uten landskode",
+              promptHelp: `Skriv ditt telefonnummer i boksen under og trykk "[+:okText]"`
+            },
+            {
+              okText: "Fortsett",
+              cancelText: "Lukk",
+              customClass: "phone-prompt"
+            }
+          )
           .then(dialog => {
+            // 8:  92848870
+            // 10: 928 48 870
+            // 11: 92 84 88 70
+            if (!/^[\d\s]{8,11}$/g.test(dialog.data)) {
+              context.$dialog.alert(
+                "Vennligst logg inn på nytt og skriv ditt telefonnummer uten landskode. E.g. 99988777."
+              );
+              throw new Error("Feil format på telefonnummer.");
+            }
+
             fb.additionalUserInfoCollection
               .doc(user.uid)
               .set({ phoneNumber: dialog.data });
