@@ -1,8 +1,29 @@
 import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
-export const handleSignedIn = (context, user) => {
-  fb.additionalUserInfoCollection
+export const handleSignedIn = async(context, user) => {
+  if (!user.displayName) {
+    await context.$dialog
+      .prompt(
+        {
+          title: "Navn",
+          body: "Skriv inn navnet ditt",
+          promptHelp: `Skriv ditt navn i boksen under og trykk "[+:okText]"`
+        },
+        {
+          okText: "Fortsett",
+          cancelText: "Lukk",
+          customClass: "phone-prompt"
+        }
+      )
+      .then(dialog => {
+        if (!dialog.data) {
+          throw new Error("Venligst skriv inn et navn");
+        }
+        user.updateProfile({ displayName: user.data });
+      });
+  }
+  await fb.additionalUserInfoCollection
     .doc(user.uid)
     .get()
     .then(userInfo => {
