@@ -4,32 +4,23 @@
       <form>
         <div class="inputContainer">
           <label for="email">Epostaddresse</label>
-          <input id="email" type="email" v-model="form.email" />
-        </div>
-        <div class="inputContainer">
-          <label for="password">Passord</label>
-          <input id="password" type="password" v-model="form.password" />
+          <input id="email" type="email" v-model="email" />
         </div>
         <div class="authContainer">
           <Button
-            btnText="Login"
+            btnText="Send login-lenke"
             class="authBtn"
             :btnDisabled="false"
-            @btnClicked="login"
-            required
-          />
-          <Button
-            type="submit"
             @btnClicked="register"
-            btnText="Lag bruker"
-            class="authBtn"
-            id="signinBtn"
-            :btnDisabled="false"
+            required
           />
         </div>
       </form>
     </div>
     <p class="error" v-if="errorCode">{{ errorMessage }}</p>
+    <p class="success" v-if="sentMail">
+      Sjekk eposten din for lenke å logge inn med!
+    </p>
   </div>
 </template>
 
@@ -42,11 +33,9 @@ export default {
   name: "LoginArea",
   data() {
     return {
-      form: {
-        email: "",
-        password: ""
-      },
-      errorCode: null
+      email: "",
+      errorCode: null,
+      sentMail: false
     };
   },
   components: {
@@ -59,25 +48,47 @@ export default {
   },
   methods: {
     register() {
+      const actionCodeSettings = {
+        // URL you want to redirect back to. The domain (www.example.com) for this
+        // URL must be whitelisted in the Firebase Console.
+        url: "http://localhost:8080/login",
+        // This must be true.
+        handleCodeInApp: true,
+        lang: "no"
+      };
+
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(() => authenticateUser(this))
-        .catch(err => {
-          this.errorCode = err.code;
-        });
-    },
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
+        .sendSignInLinkToEmail(this.email, actionCodeSettings)
         .then(() => {
-          authenticateUser(this);
+          window.localStorage.setItem("emailForSignIn", this.email);
+          this.sentMail = true;
         })
         .catch(err => {
           this.errorCode = err.code;
         });
     }
+  },
+  async beforeMount() {
+    const login = async url => {
+      try {
+        const fb = firebase.auth();
+        if (fb.isSignInWithEmailLink(url)) {
+          let email = window.localStorage.getItem("emailForSignIn");
+          if (!email) {
+            // If the user opens the link on another device
+            email = window.prompt("Skriv inn epostadressen din");
+          }
+          await fb
+            .signInWithEmailLink(email, url)
+            .then(() => authenticateUser(this))
+            .then(() => window.localStorage.removeItem("emailForSignIn"));
+        }
+      } catch (err) {
+        this.error = err.code;
+      }
+    };
+    await login(window.location.href);
   }
 };
 </script>
@@ -131,5 +142,10 @@ export default {
 .error {
   text-align: center;
   color: $color-danger;
+}
+
+.success {
+  text-align: center;
+  color: #066f06;
 }
 </style>

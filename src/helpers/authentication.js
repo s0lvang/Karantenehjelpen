@@ -52,16 +52,10 @@ export const getErrorMessage = errorCode => {
       return "Passordet er feil!";
     case "auth/invalid-email":
       return "Formatet på mailen er feil!";
-    case "auth/wrong-password":
-      return "Passordet er feil";
-    case "auth/weak-password":
-      return "Passordet må inneholde minst 6 tegn";
     case "auth/email-already-in-use":
       return "Mailen skrevet inn er allerede i bruk";
     case "auth/too-many-requests":
       return "For mange login forsøk, prøv igjen senere";
-    case "auth/user-not-found":
-      return "Vi finner ingen bruker lenket til denne mailen";
     default:
       return `Ukjent errorkode: ${errorCode}`;
   }
