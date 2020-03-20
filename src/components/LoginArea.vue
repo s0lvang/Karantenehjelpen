@@ -19,14 +19,15 @@
     </div>
     <p class="error" v-if="errorCode">{{ errorMessage }}</p>
     <p class="success" v-if="sentMail">
-      Sjekk eposten din for lenke å logge inn med!
+      En lenke du kan logge inn med har blitt sendt til {{ email }} <br />
+      Mailen kan ta et par minuter. Husk også å sjekk spam/søppeldunken!
     </p>
   </div>
 </template>
 
 <script>
 import { getErrorMessage, handleSignedIn } from "@/helpers/auth";
-import { registerWithEmail, login } from "@/services/firebase";
+import { registerWithEmail, login, isAuthLink } from "@/services/firebase";
 import Button from "@/components/shared/Button.vue";
 
 export default {
@@ -43,7 +44,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      return getErrorMessage(this.errorCode);
+      return getErrorMessage(this.errorCode, isAuthLink(window.location.href));
     }
   },
   methods: {
