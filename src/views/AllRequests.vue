@@ -11,6 +11,10 @@
         {{ mapEnabled ? "Skjul" : "Vis" }} kart
       </button>
     </div>
+    <small
+      >{{ delivered === null ? "Laster antall" : delivered }} fullførte
+      oppdrag{{ delivered === null ? "..." : "" }}</small
+    >
     <section v-if="getRequests.length && this.mapEnabled">
       <AllRequestsMap
         :requests="getRequests"
@@ -38,9 +42,10 @@ import Request from "@/components/Request.vue";
 import AllRequestsMap from "@/components/AllRequestsMap.vue";
 import coordinateDistance from "@/helpers/coord";
 import Icon from "@/components/shared/Icon.vue";
+import { getDelivered } from "@/services/firebase";
 
 export default {
-  name: "MyRequests",
+  name: "AllRequests",
   components: {
     Request,
     AllRequestsMap,
@@ -48,7 +53,8 @@ export default {
   },
   data() {
     return {
-      mapEnabled: false
+      mapEnabled: false,
+      delivered: null
     };
   },
   computed: {
@@ -87,6 +93,11 @@ export default {
           )
       );
     }
+  },
+  mounted() {
+    getDelivered(count => {
+      this.delivered = count;
+    });
   }
 };
 </script>
@@ -96,6 +107,13 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+small {
+  margin-top: -0.7rem;
+  margin-bottom: 1rem;
+  display: block;
+  color: gray;
 }
 
 button.toggle-map {

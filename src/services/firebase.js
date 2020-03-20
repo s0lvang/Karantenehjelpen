@@ -130,3 +130,15 @@ export const deleteUser = (userId, callback = () => { }) => {
 
   callback();
 };
+
+export const getDelivered = async (callback = () => { }) => {
+  const resp = await fb
+    .firestore()
+    .collectionGroup("requests")
+    .where("delivered", "==", true)
+    .get();
+
+  console.log(resp.docs);
+
+  callback(resp.docs.length);
+};
