@@ -4,7 +4,7 @@
     <section>
       <PhoneNumberInput
         labelText="Telefonnummer (uten landskode)"
-        placeholderText="98765432"
+        placeholderText="00000000"
         @emitNumberInput="updatePhoneNumberInput"
         @emitButton="checkButton"
         :existing="phoneNumberInput"
