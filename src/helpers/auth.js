@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
-export const handleSignedIn = async(context, user) => {
+export const handleSignedIn = async (context, user) => {
   if (!user.displayName) {
     await context.$dialog
       .prompt(
