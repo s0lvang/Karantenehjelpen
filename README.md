@@ -11,6 +11,7 @@
       <img src="https://img.shields.io/github/commits-since/s0lvang/Karantenehjelpen/latest?label=commits%20to%20be%20deployed&style=flat-square" alt="Commits since a release" /></a>
   <a href="https://github.com/s0lvang/Karantenehjelpen/issues">
       <img src="https://img.shields.io/github/issues-closed/s0lvang/Karantenehjelpen?style=flat-square" alt="Issues clossed"></a>
+    <h4 align="center"><a href="https://karantenehjelpen.no/">Nettside</a> | <a href="./CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/s0lvang/Karantenehjelpen/issues">Bug-rapport</a> | <a href="mailto:karantenehjelpen@online.ntnu.no">Kontakt</a></h4>
 </p>
 
 [**Karantenehjelpen**](https://karantenehjelpen.no) er en nettside for å hjelpe folk som sitter i karantene, til å komme i kontakt med folk som kan hjelpe de.
@@ -28,31 +29,48 @@ Hold avstand til hverandre, prøv å unngå å ta deg selv i ansiktet, og prakti
 Her kan vi se et bilde av startsiden vår:
 
 ![Bilde av startside](/src/assets/startside.jpg)
+
 <!-- Kanskje bytt ut bildet med en kul GIF -->
 
 ## Bidra
 
-Karantenehjelpen er et open-source prosjekt og derfor vil vi gjerne ønske dere velkommen til å bidra gjennom issues og pull requester. Ta gjerne en titt på våre [bidragsretningslinjer]()
+Karantenehjelpen er et open-source prosjekt og derfor vil vi gjerne ønske dere velkommen til å bidra gjennom issues og pull requester. Ta gjerne en titt på våre [bidragsretningslinjer](./CONTRIBUTING.md)
 
-<!-- Skrive noe mer inspirerende her? -->
+<!-- Skrive noe mer inspirerende her Kanskje noe om dugnad? -->
 
-## Utvikling og oppsett
+## Utvikling og Oppsett
 
-Det er mulig å sette opp prosjektet
+Teknologistacken vår består av **Vue** i frontenden og **Firebase** som en løsning for blant annet autentisering, databasehåndtering, hosting osv.
 
-TODO:
+For å kunne kjøre opp nettsiden til å kjøre opp lokalt så trenger du:
 
+- Node.js og Npm
+- Sette envoriment variabler til Firebase.
+  - For å få all funksjonalitet (SMS og Kartet) til siden opp så kreves også envoriment variabler til Twilio og Mapbox
+
+Her kan du finne et eksempel på en [.env fil](./envexample). Vi kan tilby en liten testdatabase dere kan bruke.
+
+<!-- Skriv noe om plis ikke fuck firebaseinstansen opp vi stoler på dere bla bla dugnadsånd--->
+
+<!--
 Vi bør skrive noe om:
 
 - firebase, .env og sånn
 - Prettier config og oppsett
 - Kanskje hvilket techstacken
+-->
+
+Vi anbefaller dere å bruke prettier.
+
+### Kjøre opp prosjektet
+
+For å laste ned alle dependencies projsektet krever.
 
 ```bash
 npm install
 ```
 
-For å kjøre prosjektet med hot-reloading for utvikling
+Deretter kan du kjøre opp prosjektet med hot-reloading, som er lurt for utvikling, med
 
 ```bash
 npm run serve
