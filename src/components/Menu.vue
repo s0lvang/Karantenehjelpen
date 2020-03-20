@@ -108,7 +108,11 @@ export default {
       this.close();
     },
     logout() {
-      signOut(this.$store, this.$router, this.close);
+      signOut(() => {
+        this.$store.dispatch("SET_CURRENT_USER", null);
+        this.$router.push("/login");
+        this.close();
+      });
     }
   },
   computed: {
