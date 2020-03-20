@@ -14,17 +14,13 @@
     <h4 align="center"><a href="https://karantenehjelpen.no/">Nettside</a> | <a href="./CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/s0lvang/Karantenehjelpen/issues">Bug-rapport</a> | <a href="mailto:karantenehjelpen@online.ntnu.no">Kontakt</a></h4>
 </p>
 
-[**Karantenehjelpen**](https://karantenehjelpen.no) er en nettside for å hjelpe folk som sitter i karantene, til å komme i kontakt med folk som kan hjelpe de.
+[**Karantenehjelpen**](https://karantenehjelpen.no) er en nettside hvor personer som ikke har mulighet til å utføre hverdagslige oppgaver grunnet koronavirus, kan komme i kontakt med friske personer som ønsker å hjelpe til. 
 
-Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der man lett kommer nær andre. Da kan det bli veldig vanskelig å få handlet inn.
-
-Karantenehjelpen skal hjelpe de som sitter i karantene å komme i kontakt med friske folk som ønsker å hjelpe.
-
-Vi trenger både folk som er friske og vil stille opp for sine naboer, og tilbyr handlehjelp til de som trenger det mest.
+Om du enten trenger hjelp med å handle inn matvarer, eller om du f.eks trenger hjelp til å gå tur med hunden din, kan du legge ut en enkel forespørsel på nettsiden. Da vil den dukke opp for alle som har lyst til å hjelpe deg og forhåpentligvis vil en av de ta på seg oppdraget!
 
 **Følg FHI sine råd!**
 
-Hold avstand til hverandre, prøv å unngå å ta deg selv i ansiktet, og praktiser god håndhygiene. [Se her for mer informasjon](https://www.fhi.no/sv/smittsomme-sykdommer/corona/).
+Det er viktig at alle bidrar i nasjonaldugnaden, derfor oppfordrer vi på det sterkeste at du følger FHI sine råd. [Se her for mer informasjon](https://www.fhi.no/nettpub/coronavirus/fakta/rad-og-informajon-til-befolkningen-om-nytt-koronavirus-coronavirus-2019-nco/).
 
 Her kan vi se et bilde av startsiden vår:
 
@@ -40,7 +36,7 @@ Karantenehjelpen er et open-source prosjekt og derfor vil vi gjerne ønske dere 
 
 ## Utvikling og Oppsett
 
-Teknologistacken vår består av **Vue** i frontenden og **Firebase** som en løsning for blant annet autentisering, databasehåndtering, hosting osv.
+Teknologistacken vår består av **Vue** i frontenden og **Firebase** som en løsning for blant annet autentisering, databasehåndtering og hosting.
 
 For å kunne kjøre opp nettsiden til å kjøre opp lokalt så trenger du:
 
@@ -60,7 +56,7 @@ Vi bør skrive noe om:
 - Kanskje hvilket techstacken
 -->
 
-Vi anbefaller dere å bruke prettier.
+Vi anbefaler å bruke prettier.
 
 ### Kjøre opp prosjektet
 
@@ -92,6 +88,7 @@ npm run prettier-fix
 ## Bidragsytere
 
 <!-- stapp inn en av de kule bildene der de viser github bildet av alle contributors i hele repoet. -->
+
 
 ## Credits
 
