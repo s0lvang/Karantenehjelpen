@@ -1,5 +1,20 @@
 import fb from "firebase";
+import fbh from "@/firebaseConfig.js";
 import { getRedirectUrl } from "@/helpers/auth";
+
+/**
+ * HELPERS
+ */
+
+const retrieveRequest = (userId, requestId) =>
+  fbh.usersCollection
+    .doc(userId)
+    .collection("requests")
+    .doc(requestId);
+
+/**
+ * HELPERS END
+ */
 
 export const signOut = async callback => {
   try {
@@ -76,5 +91,25 @@ export const login = async (url, dialogControl, callback) => {
   }
 };
 
+export const updateRequest = async (userId, requestId, payload, callback) => {
+  try {
+    await retrieveRequest(userId, requestId).update(payload);
+
+    callback();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const signInWithGoogle = () =>
   fb.auth().signInWithRedirect(new fb.auth.GoogleAuthProvider());
+
+export const deleteRequest = async (userId, requestId, callback) => {
+  try {
+    await retrieveRequest(userId, requestId).delete();
+
+    callback();
+  } catch (err) {
+    console.error(err);
+  }
+};
