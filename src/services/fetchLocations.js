@@ -11,15 +11,10 @@ const params = {
 };
 
 export default async function fetchLocation(location) {
-  try {
-    const resp = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?${prepareParams(
-        params
-      )}`
-    );
-    return (await resp.json()).features;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
+  const resp = await fetch(
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?${prepareParams(
+      params
+    )}`
+  );
+  return (await resp.json()).features;
 }
