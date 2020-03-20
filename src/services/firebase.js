@@ -138,7 +138,5 @@ export const getDelivered = async (callback = () => { }) => {
     .where("delivered", "==", true)
     .get();
 
-  console.log(resp.docs);
-
   callback(resp.docs.length);
 };
