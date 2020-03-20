@@ -32,8 +32,10 @@
 <script>
 import GoogleLoginButton from "@/components/GoogleLoginButton.vue";
 import LoginArea from "@/components/LoginArea.vue";
-import firebase from "firebase";
-import { handleSignedIn } from "@/helpers/auth";
+import {
+  setUpGoogleSignInCompleteListener,
+  handleSignedIn
+} from "@/helpers/auth";
 
 export default {
   name: "login",
@@ -41,20 +43,16 @@ export default {
     GoogleLoginButton,
     LoginArea
   },
-  methods: {
-    googleSetUpSignInCompleteListener() {
-      firebase
-        .auth()
-        .getRedirectResult()
-        .then(result => {
-          const { user } = result;
-          if (user) {
-            handleSignedIn(this, user);
-          }
-        })
-        .catch(error => {
-          console.log(`something went wrong ${error.message}`);
-          /* TODO: We should have a handler here for when we add Vipps etc
+  created() {
+    try {
+      setUpGoogleSignInCompleteListener(result => {
+        const { user } = result;
+        if (user) {
+          handleSignedIn(this, user);
+        }
+      });
+    } catch (err) {
+      /* TODO: We should have a handler here for when we add Vipps etc
           if (errorCode === "auth/account-exists-with-different-credential") {
             alert(
               "You have already signed up with a different auth provider for that email."
@@ -65,11 +63,8 @@ export default {
             console.error(error);
           }
           */
-        });
+      console.error(err);
     }
-  },
-  created() {
-    this.googleSetUpSignInCompleteListener();
   }
 };
 </script>
