@@ -16,7 +16,7 @@ const retrieveRequest = (userId, requestId) =>
  * HELPERS END
  */
 
-export const signOut = async callback => {
+export const signOut = async (callback = () => { }) => {
   try {
     await fb.auth().signOut();
 
@@ -39,7 +39,7 @@ const ACTION_CODE_SETTINGS = {
  * @returns string if error, null if success
  * @param {Function} callback Callback on success
  */
-export const registerWithEmail = async (email, callback) => {
+export const registerWithEmail = async (email, callback = () => { }) => {
   try {
     await fb.auth().sendSignInLinkToEmail(email, ACTION_CODE_SETTINGS);
     window.localStorage.setItem("emailForSignIn", email);
@@ -53,7 +53,7 @@ export const registerWithEmail = async (email, callback) => {
   }
 };
 
-export const login = async (url, dialogControl, callback) => {
+export const login = async (url, dialogControl, callback = () => { }) => {
   try {
     if (!fb.auth().isSignInWithEmailLink(url)) {
       return null;
@@ -91,7 +91,12 @@ export const login = async (url, dialogControl, callback) => {
   }
 };
 
-export const updateRequest = async (userId, requestId, payload, callback) => {
+export const updateRequest = async (
+  userId,
+  requestId,
+  payload,
+  callback = () => { }
+) => {
   try {
     await retrieveRequest(userId, requestId).update(payload);
 
@@ -101,10 +106,22 @@ export const updateRequest = async (userId, requestId, payload, callback) => {
   }
 };
 
+export const createRequest = async (userId, request, callback = () => { }) => {
+  await fb.usersCollection
+    .doc(userId)
+    .collection("requests")
+    .add({
+      createdOn: new Date(),
+      ...request
+    });
+
+  callback();
+};
+
 export const signInWithGoogle = () =>
   fb.auth().signInWithRedirect(new fb.auth.GoogleAuthProvider());
 
-export const deleteRequest = async (userId, requestId, callback) => {
+export const deleteRequest = async (userId, requestId, callback = () => { }) => {
   try {
     await retrieveRequest(userId, requestId).delete();
 
@@ -112,4 +129,16 @@ export const deleteRequest = async (userId, requestId, callback) => {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const updateUserPhoneNumber = (userId, phoneNumber) =>
+  fbh.additionalUserInfoCollection.doc(userId).update({ phoneNumber });
+
+export const deleteUser = (userId, callback = () => { }) => {
+  fbh.usersCollection.doc(userId).delete();
+  fbh.additionalUserInfoCollection.doc(userId).delete();
+
+  fb.auth().currentUser.delete();
+
+  callback();
 };
