@@ -75,3 +75,6 @@ export const login = async (url, dialogControl, callback) => {
     return err.code;
   }
 };
+
+export const signInWithGoogle = () =>
+  fb.auth().signInWithRedirect(new fb.auth.GoogleAuthProvider());
