@@ -8,15 +8,12 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { signInWithGoogle } from "@/services/firebase";
 
 export default {
   name: "LoginButton",
   methods: {
-    signInWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
-    }
+    signInWithGoogle
   }
 };
 </script>

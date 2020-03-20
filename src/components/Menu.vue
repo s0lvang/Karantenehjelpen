@@ -3,9 +3,9 @@
     <a
       tabIndex="0"
       class="brand"
-      @click="goToStart"
-      v-on:keyup.enter="goToStart"
-      v-on:keyup.space="goToStart"
+      @click="navigate('StartScreen')"
+      v-on:keyup.enter="navigate('StartScreen')"
+      v-on:keyup.space="navigate('StartScreen')"
     >
       <img src="@/assets/logo.svg" alt="logo" />
       <h1>
@@ -24,43 +24,43 @@
     <nav v-if="getUser" :class="open ? 'block' : 'hidden'">
       <a
         tabIndex="0"
-        @click="toAllRequests"
-        v-on:keyup.enter="toAllRequests"
-        v-on:keyup.space="toAllRequests"
+        @click="navigate('AllRequests')"
+        v-on:keyup.enter="navigate('AllRequests')"
+        v-on:keyup.space="navigate('AllRequests')"
       >
         Oppdragslisten
       </a>
       <a
         tabIndex="0"
-        @click="myAssignedRequests"
-        v-on:keyup.enter="myAssignedRequests"
-        v-on:keyup.space="myAssignedRequests"
+        @click="navigate('MyAssignedRequests')"
+        v-on:keyup.enter="navigate('MyAssignedRequests')"
+        v-on:keyup.space="navigate('MyAssignedRequests')"
       >
         Mine oppdrag
       </a>
       <span class="divider" />
       <a
         tabIndex="0"
-        @click="newRequest"
-        v-on:keyup.enter="newRequest"
-        v-on:keyup.space="newRequest"
+        @click="navigate('CreateRequest')"
+        v-on:keyup.enter="navigate('CreateRequest')"
+        v-on:keyup.space="navigate('CreateRequest')"
       >
         Ny bestilling
       </a>
       <a
         tabIndex="0"
-        @click="myRequests"
-        v-on:keyup.enter="myRequests"
-        v-on:keyup.space="myRequests"
+        @click="navigate('MyRequests')"
+        v-on:keyup.enter="navigate('MyRequests')"
+        v-on:keyup.space="navigate('MyRequests')"
       >
         Mine bestillinger
       </a>
       <span class="divider" />
       <a
         tabIndex="0"
-        @click="myPage"
-        v-on:keyup.enter="myPage"
-        v-on:keyup.space="myPage"
+        @click="navigate('MyPage')"
+        v-on:keyup.enter="navigate('MyPage')"
+        v-on:keyup.space="navigate('MyPage')"
       >
         Min side
       </a>
@@ -77,7 +77,10 @@
 </template>
 
 <script>
-import fb from "firebase";
+import { signOut } from "@/services/firebase";
+
+const camelToLisp = str =>
+  str.replace(/[\w]([A-Z])/g, m => `${m[0]}-${m[1]}`).toLowerCase();
 
 export default {
   name: "Menu",
@@ -93,53 +96,23 @@ export default {
     close() {
       this.open = false;
     },
-    myRequests() {
-      if (this.$route.name !== "MyRequests") {
-        this.$router.push("/my-requests");
-      }
-      this.close();
-    },
-    myAssignedRequests() {
-      if (this.$route.name !== "MyAssignedRequests") {
-        this.$router.push("/my-assigned-requests");
-      }
-      this.close();
-    },
-    toAllRequests() {
-      if (this.$route.name !== "AllRequests") {
-        this.$router.push("/all-requests");
-      }
-      this.close();
-    },
-    newRequest() {
-      if (this.$route.name !== "CreateRequest") {
-        this.$router.push("/create-request");
-      }
-      this.close();
-    },
-    myPage() {
-      if (this.$route.name !== "MyPage") {
-        this.$router.push("/my-page");
-      }
-      this.close();
-    },
-    goToStart() {
-      if (this.$route.name !== "StartScreen") {
-        this.$router.push("/start-screen");
+    navigate(to) {
+      /**
+       * Check om inkommende route er samme som nåværende. Hvis ikke,
+       * gjør om MæhmedPakkaBaggen til mæhmed-pakka-bagen, fordi det er
+       * sånn routesene ser ut.
+       */
+      if (this.$route.name !== to) {
+        this.$router.push(`/${camelToLisp(to)}`);
       }
       this.close();
     },
     logout() {
-      fb.auth()
-        .signOut()
-        .then(() => {
-          this.$store.dispatch("SET_CURRENT_USER", null);
-          this.$router.push("/login");
-          this.close();
-        })
-        .catch(error => {
-          console.log(`something went wrong ${error.message}`);
-        });
+      signOut(() => {
+        this.$store.dispatch("SET_CURRENT_USER", null);
+        this.$router.push("/login");
+        this.close();
+      });
     }
   },
   computed: {

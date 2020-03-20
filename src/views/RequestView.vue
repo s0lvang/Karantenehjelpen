@@ -62,8 +62,8 @@
 <script>
 import DetailedRequest from "@/components/DetailedRequest.vue";
 import Button from "@/components/shared/Button.vue";
-import fb from "@/firebaseConfig.js";
 import sms from "@/services/sms";
+import { updateRequest, deleteRequest } from "@/services/firebase";
 
 const printItemNames = items =>
   items.map(i => `${i.count}x ${i.itemName}`).join("\n");
@@ -110,70 +110,64 @@ export default {
     goToEdit() {
       this.$router.push(`/edit/${this.getRequest.id}`);
     },
-    notifyUserThatOrderIsComplete() {
-      this.$dialog
-        .confirm(
+    async notifyUserThatOrderIsComplete() {
+      try {
+        await this.$dialog.confirm(
           "Dette vil sende en purremelding til kunden, er du sikker på at du vil sende den?"
-        )
-        .then(() => {
-          sms(
-            this.getRequest.phoneNumber,
-            `${
-              this.$store.getters.name
-            } påstår å ha levert din ordre på: \n\n${printItemNames(
-              this.getRequest.items
-            )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/request/${
-              this.getRequest.id
-            }.`
-          );
-          this.userIsNotifiedAboutCompletedOrder = true;
-          alert(
-            "Kunden har blitt varslet om at du har levert varene. Vennligst tillat opptil en halvtime før kunden har markert oppdraget som utført."
-          );
-        });
+        );
+
+        sms(
+          this.getRequest.phoneNumber,
+          `${
+            this.$store.getters.name
+          } påstår å ha levert din ordre på: \n\n${printItemNames(
+            this.getRequest.items
+          )}\n\nHvis dette stemmer, vennligst marker ordren som fullført på https://karantenehjelpen.no/request/${
+            this.getRequest.id
+          }.`
+        );
+        this.userIsNotifiedAboutCompletedOrder = true;
+        alert(
+          "Kunden har blitt varslet om at du har levert varene. Vennligst tillat opptil en halvtime før kunden har markert oppdraget som utført."
+        );
+      } catch (err) {
+        console.info("Bruker ville ikke varsle mottaker.");
+      } // user declined
     },
     markAsDelivered() {
-      fb.usersCollection
-        .doc(this.$store.getters.id)
-        .collection("requests")
-        .doc(this.$route.params.id)
-        .update({
-          delivered: !this.getRequest.delivered
-        })
-        .then(() => this.$router.push("/my-requests"))
-        .catch(error => console.log(error));
+      updateRequest(
+        this.$store.getters.id,
+        this.$route.params.id,
+        { delivered: !this.getRequest.delivered },
+        () => this.$router.push("/my-requests")
+      );
     },
-    deleteRequest() {
-      this.$dialog
-        .confirm("Er du sikker på at du vil slette bestillingen")
-        .then(() => {
-          fb.usersCollection
-            .doc(this.$store.getters.id)
-            .collection("requests")
-            .doc(this.$route.params.id)
-            .delete()
-            .then(() => this.$router.push("/my-requests"))
-            .catch(error => console.log(error));
-        })
-        .catch(error => console.log(error));
+    async deleteRequest() {
+      try {
+        await this.$dialog.confirm(
+          "Er du sikker på at du vil slette bestillingen"
+        );
+        deleteRequest(this.$store.getters.id, this.$route.params.id, () =>
+          this.$router.push("/my-requests")
+        );
+      } catch (err) {
+        console.info("Bruker ville ikke slette annonse.");
+      }
     },
     connectUserToRequest() {
-      fb.usersCollection
-        .doc(this.getRequest.uid)
-        .collection("requests")
-        .doc(this.$route.params.id)
-        .update(
-          !this.requestIsTaken
+      updateRequest(
+        this.getRequest.uid,
+        this.$route.params.id,
+        {
+          connectedUser: !this.requestIsTaken
             ? {
-                connectedUser: {
-                  name: this.$store.getters.name,
-                  email: this.$store.getters.email,
-                  phoneNumber: this.$store.getters.phoneNumber
-                }
+                name: this.$store.getters.name,
+                email: this.$store.getters.email,
+                phoneNumber: this.$store.getters.phoneNumber
               }
-            : { connectedUser: null }
-        )
-        .then(() => {
+            : null
+        },
+        () =>
           sms(
             this.getRequest.phoneNumber,
             this.requestIsTaken
@@ -188,9 +182,8 @@ export default {
                 } har sagt fra seg din ordre på: \n\n${printItemNames(
                   this.getRequest.items
                 )}`
-          );
-        })
-        .catch(error => console.log(error));
+          )
+      );
     }
   }
 };

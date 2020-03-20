@@ -82,6 +82,12 @@ export const handleSignedIn = async (context, user) => {
     });
 };
 
+export const setUpGoogleSignInCompleteListener = async (
+  callback = () => {}
+) => {
+  callback(await firebase.auth().getRedirectResult());
+};
+
 export const getErrorMessage = errorCode => {
   switch (errorCode) {
     case "auth/invalid-password":
