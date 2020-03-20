@@ -3,7 +3,7 @@
     <div class="formContainer">
       <form>
         <div class="inputContainer">
-          <label for="email">Epostaddresse</label>
+          <label for="email">E-postadresse</label>
           <input id="email" type="email" v-model="email" />
         </div>
         <div class="authContainer">
