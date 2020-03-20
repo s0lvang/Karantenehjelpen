@@ -97,21 +97,27 @@ export default {
         await this.$dialog.confirm(
           "Dette vil slette brukeren din og alle dine oppdrag er du sikker på at du ønsker å slette deg selv"
         );
-        this.$store.getters.requests.forEach(async request => {
-          if (request.email === this.$store.getters.email) {
-            console.log(`deleting`);
-            await deleteRequest(request.uid, request.id);
-          } else if (
-            request.connectedUser &&
-            (request.connectedUser.email === this.$store.getters.email ||
-              request.connectedUser.phoneNumber ===
-                this.$store.getters.phoneNumber)
-          ) {
-            await updateRequest(request.uid, request.id, {
-              connectedUser: null
-            });
+        this.$store.getters.requests.forEach(
+          async ({ email, uid, id, connectedUser }) => {
+            if (email === this.$store.getters.email) {
+              await deleteRequest(uid, id);
+              return;
+            }
+
+            if (!connectedUser) {
+              return;
+            }
+
+            if (
+              connectedUser.email === this.$store.getters.email ||
+              connectedUser.phoneNumber === this.$store.getters.phoneNumber
+            ) {
+              await updateRequest(uid, id, {
+                connectedUser: null
+              });
+            }
           }
-        });
+        );
 
         await deleteUser(this.$store.getters.id);
 
