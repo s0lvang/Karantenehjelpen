@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import fb from "firebase";
+import { signOut } from "@/services/firebase";
 
 export default {
   name: "Menu",
@@ -130,16 +130,7 @@ export default {
       this.close();
     },
     logout() {
-      fb.auth()
-        .signOut()
-        .then(() => {
-          this.$store.dispatch("SET_CURRENT_USER", null);
-          this.$router.push("/login");
-          this.close();
-        })
-        .catch(error => {
-          console.log(`something went wrong ${error.message}`);
-        });
+      signOut(this.$store, this.$router, this.close);
     }
   },
   computed: {
