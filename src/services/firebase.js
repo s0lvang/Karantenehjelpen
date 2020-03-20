@@ -99,7 +99,7 @@ export const updateRequest = async (
 };
 
 export const createRequest = async (userId, request, callback = () => { }) => {
-  await fb.usersCollection
+  await fbh.usersCollection
     .doc(userId)
     .collection("requests")
     .add({
