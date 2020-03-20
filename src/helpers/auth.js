@@ -83,7 +83,7 @@ export const handleSignedIn = async (context, user) => {
 };
 
 export const setUpGoogleSignInCompleteListener = async (
-  callback = () => { }
+  callback = () => {}
 ) => {
   callback(await firebase.auth().getRedirectResult());
 };
