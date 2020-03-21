@@ -148,6 +148,7 @@ export const getOngoingCount = async (callback = () => {}) => {
   const resp = await fb
     .firestore()
     .collectionGroup("requests")
+    .where("delivered", "==", false)
     .orderBy("connectedUser")
     .startAfter(null)
     .get();
