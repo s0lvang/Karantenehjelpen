@@ -143,3 +143,13 @@ export const getDelivered = async (callback = () => {}) => {
 
   callback(resp.docs.length);
 };
+
+export const getOngoingCount = async (callback = () => {}) => {
+  const resp = await fb
+    .firestore()
+    .collectionGroup("requests")
+    .orderBy("connectedUser")
+    .startAfter(null)
+    .get();
+  callback(resp.docs.length);
+};
