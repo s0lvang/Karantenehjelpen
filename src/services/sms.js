@@ -2,11 +2,10 @@
 const twilioAccountSid = process.env.VUE_APP_ACCOUNT_SID;
 const twilioAuthToken = process.env.VUE_APP_AUTH_TOKEN;
 
-const encodeFormData = data => (
+const encodeFormData = data =>
   Object.keys(data)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&")
-);
+    .join("&");
 
 export default async (to, body) => {
   const resp = await fetch(
@@ -25,7 +24,7 @@ export default async (to, body) => {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
       }
     }
-  )
+  );
 
   const data = await resp.json();
   console.info(`SMS sent ${data.date_created} to ${data.to}.`);
