@@ -14,9 +14,9 @@
     <h4 align="center"><a href="https://karantenehjelpen.no/">Nettside</a> | <a href="./CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/s0lvang/Karantenehjelpen/issues">Bug-rapport</a> | <a href="mailto:karantenehjelpen@online.ntnu.no">Kontakt</a></h4>
 </p>
 
-[**Karantenehjelpen**](https://karantenehjelpen.no) er en nettside hvor personer som ikke har mulighet til å utføre hverdagslige oppgaver grunnet koronavirus, kan komme i kontakt med friske personer som ønsker å hjelpe til. 
+[**Karantenehjelpen**](https://karantenehjelpen.no) er en nettside hvor personer som ikke har mulighet til å utføre hverdagslige oppgaver grunnet koronaviruset kan komme i kontakt med friske personer som ønsker å hjelpe til. 
 
-Om du enten trenger hjelp med å handle inn matvarer, eller om du f.eks trenger hjelp til å gå tur med hunden din, kan du legge ut en enkel forespørsel på nettsiden. Da vil den dukke opp for alle som har lyst til å hjelpe deg og forhåpentligvis vil en av de ta på seg oppdraget!
+Om du skulle trenge hjelp med å handle inn matvarer, eller gå tur med hunden din, kan du legge ut en enkel forespørsel på nettsiden. Da vil den dukke opp for alle som har lyst til å hjelpe deg, og forhåpentligvis vil en av de ta på seg oppdraget!
 
 **Følg FHI sine råd!**
 
@@ -40,9 +40,9 @@ Teknologistacken vår består av **Vue** i frontenden og **Firebase** som en lø
 
 For å kunne kjøre opp nettsiden til å kjøre opp lokalt så trenger du:
 
-- Node.js og Npm
-- Sette envoriment variabler til Firebase.
-  - For å få all funksjonalitet (SMS og Kartet) til siden opp så kreves også envoriment variabler til Twilio og Mapbox
+- Node.js og `npm`
+- Sette envoriment-variabler for Firebase.
+  - For å få all funksjonalitet (SMS og Kartet) til siden opp så kreves også envoriment-variabler for Twilio og Mapbox
 
 Her kan du finne et eksempel på en [.env fil](./envexample). Vi kan tilby en liten testdatabase dere kan bruke.
 
@@ -56,7 +56,7 @@ Vi bør skrive noe om:
 - Kanskje hvilket techstacken
 -->
 
-Vi anbefaler å bruke prettier.
+Vi anbefaler å bruke `prettier` for linting av koden.
 
 ### Kjøre opp prosjektet
 
