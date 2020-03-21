@@ -8,23 +8,47 @@
     <p>
       Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
       man lett kommer nær andre. Da kan det bli veldig vanskelig å få handlet
-      inn.
+      inn det man trenger til livets opphold.
     </p>
     <p>
-      Karantenehjelpen skal hjelpe de som sitter i karantene å komme i kontakt
-      med friske folk som ønsker å hjelpe.
+      Karantenehjelpen er til for å hjelpe de som sitter i karantene å komme i
+      kontakt med friske folk som ønsker å hjelpe.
     </p>
     <p>
-      Vi trenger både folk som er friske og vil stille opp for sine naboer, og
-      tilbyr handlehjelp til de som trenger det mest.
+      Vi trenger friske folk som har lyst til å delta i den nasjonale dugnaden
+      ved å hjelpe dem som sitter i karantene med innkjøp.
     </p>
     <strong>Følg FHI sine råd!</strong>
     <p>
       Hold avstand til hverandre, prøv å unngå å ta deg selv i ansiktet, og
       praktiser god håndhygiene.
-      <a href="https://www.fhi.no/sv/smittsomme-sykdommer/corona/"
+      <a
+        href="https://www.fhi.no/sv/smittsomme-sykdommer/corona/"
+        target="_blank"
         >Se her for mer informasjon.</a
       >
+
+      Vi anbefaler også å følge
+      <a href="https://ila.frivilligsentral.no/irisfile/189790/" target="_blank"
+        >Løkkan og Ila Frivillighetssentraler sine rutiner for praktiske
+        frivillige tjenester</a
+      >
+    </p>
+    <strong>Hvem står bak Karantenehjelpen?</strong>
+    <p>
+      Nettsiden ble startet opp av en gjeng Informatikk-studenter på NTNU, og
+      drift og utvikling skjer på frivillig basis. Kildekoden ligger
+      tilgjengelig
+      <a href="https://github.com/s0lvang/Karantenehjelpen" target="_blank"
+        >på GitHub</a
+      >, hvor hvem som helst kan bidra. Tjenesten er helt gratis å bruke, og vil
+      aldri inneholde reklamer. Vi har mottat støtte til driftsutgifter fra
+      <a href="https://velferdstinget.no/" target="_blank">Velferdstinget</a>,
+      <a href="https://www.trondheim.no/student" target="_blank"
+        >StudyTrondheim</a
+      >, og
+      <a href="https://www.ntnu.no/ie" target="_blank">IE-fakultetet ved NTNU</a
+      >.
     </p>
   </section>
 </template>
