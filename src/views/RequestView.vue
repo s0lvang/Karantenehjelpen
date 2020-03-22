@@ -167,22 +167,28 @@ export default {
               }
             : null
         },
-        () =>
+        () => {
+          const requestBody = `${
+            this.getRequest.items.length > 0
+              ? printItemNames(this.getRequest.items)
+              : this.getRequest.otherNeed
+          }${this.getRequest.items.length > 0 &&
+            `\n\nog\n\n${this.getRequest.otherNeed}`}`;
+
           sms(
             this.getRequest.phoneNumber,
             this.requestIsTaken
-              ? `${
-                  this.$store.getters.name
-                } har tatt din ordre på: \n\n${printItemNames(
-                  this.getRequest.items
-                )}\n\nDu kan nå din lille hjelper på ${this.$store.getters
-                  .phoneNumber || this.$store.getters.email}.`
-              : `${
-                  this.$store.getters.name
-                } har sagt fra seg din ordre på: \n\n${printItemNames(
-                  this.getRequest.items
-                )}`
-          )
+              ? `${this.$store.getters.name} har tatt ditt oppdrag på: 
+
+${requestBody}
+
+Du kan nå din lille hjelper på ${this.$store.getters.phoneNumber ||
+                  this.$store.getters.email}.`
+              : `${this.$store.getters.name} har sagt fra seg ditt oppdrag på: 
+
+${requestBody}`
+          );
+        }
       );
     }
   }
