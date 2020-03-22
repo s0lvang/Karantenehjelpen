@@ -15,6 +15,11 @@
       >{{ delivered === null ? "Laster antall" : delivered }} fullførte
       oppdrag{{ delivered === null ? "..." : "" }}</small
     >
+    <small
+      >{{ ongoing === null ? "Laster antall" : ongoing }} pågående oppdrag{{
+        ongoing === null ? "..." : ""
+      }}</small
+    >
     <section v-if="getRequests.length && this.mapEnabled">
       <AllRequestsMap
         :requests="getRequests"
@@ -42,7 +47,7 @@ import Request from "@/components/Request.vue";
 import AllRequestsMap from "@/components/AllRequestsMap.vue";
 import coordinateDistance from "@/helpers/coord";
 import Icon from "@/components/shared/Icon.vue";
-import { getDelivered } from "@/services/firebase";
+import { getDelivered, getOngoingCount } from "@/services/firebase";
 
 export default {
   name: "AllRequests",
@@ -54,7 +59,8 @@ export default {
   data() {
     return {
       mapEnabled: false,
-      delivered: null
+      delivered: null,
+      ongoing: null
     };
   },
   computed: {
@@ -97,6 +103,9 @@ export default {
   mounted() {
     getDelivered(count => {
       this.delivered = count;
+    });
+    getOngoingCount(count => {
+      this.ongoing = count;
     });
   }
 };
