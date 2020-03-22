@@ -47,19 +47,11 @@ For å kunne kjøre opp nettsiden til å kjøre opp lokalt så trenger du:
 - Sette envoriment-variabler for Firebase.
   - For å få all funksjonalitet (SMS og Kartet) til siden opp så kreves også envoriment-variabler for Twilio og Mapbox
 
-Her kan du finne et eksempel på en [.env fil](./envexample). Vi kan tilby en liten testdatabase dere kan bruke.
+Her kan du finne et eksempel på en [.env fil](./env_example). Vi har lagt til en Firebase instansen som kan bli tatt i bruk og stoler på at dere kun bruker den for å bidra.
 
 <!-- Skriv noe om plis ikke fuck firebaseinstansen opp vi stoler på dere bla bla dugnadsånd--->
 
-<!--
-Vi bør skrive noe om:
-
-- firebase, .env og sånn
-- Prettier config og oppsett
-- Kanskje hvilket techstacken
--->
-
-Vi anbefaler å bruke `prettier` for linting av koden.
+Vi i Karantenehjelpen anbefaller VScode som en flott editor for å bidra. Den er lett å bruke og fungerer flott out of the box. Dessuten kan du også anbefalle å laste ned Prettier og Vetur som plugins. Det er en vscode-workspace fil i repoet for å sette opp pluginsene med riktig settings!
 
 ### Kjøre opp prosjektet
 
