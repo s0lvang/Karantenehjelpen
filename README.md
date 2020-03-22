@@ -88,7 +88,7 @@ npm run prettier-fix
 ## Bidragsytere
 
 <!-- stapp inn en av de kule bildene der de viser github bildet av alle contributors i hele repoet. -->
-
+[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/0)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/0)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/1)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/1)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/2)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/2)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/3)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/3)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/4)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/4)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/5)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/5)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/6)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/6)[![](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/images/7)](https://sourcerer.io/fame/FredrikAugust/s0lvang/Karantenehjelpen/links/7)
 
 ## Credits
 
