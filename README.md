@@ -51,7 +51,7 @@ Her kan du finne et eksempel på en [.env fil](./.env_example). Vi har lagt til 
 
 <!-- Skriv noe om plis ikke fuck firebaseinstansen opp vi stoler på dere bla bla dugnadsånd--->
 
-Vi i Karantenehjelpen anbefaller VScode som en flott editor for å bidra. Den er lett å bruke og fungerer flott out of the box. Dessuten kan du også anbefalle å laste ned Prettier og Vetur som plugins. Det er en vscode-workspace fil i repoet for å sette opp pluginsene med riktig settings!
+Vi i Karantenehjelpen anbefaller VScode som en flott editor for å bidra. Den er lett å bruke og fungerer flott out of the box. Dessuten anbefaller vi å laste ned Prettier og Vetur som plugins. Det er også en vscode-workspace fil i repoet for å sette opp pluginsene med settingsene vi bruker!
 
 ### Kjøre opp prosjektet
 
