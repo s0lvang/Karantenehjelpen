@@ -47,7 +47,7 @@ For å kunne kjøre opp nettsiden til å kjøre opp lokalt så trenger du:
 - Sette envoriment-variabler for Firebase.
   - For å få all funksjonalitet (SMS og Kartet) til siden opp så kreves også envoriment-variabler for Twilio og Mapbox
 
-Her kan du finne et eksempel på en [.env fil](./env_example). Vi har lagt til en Firebase instansen som kan bli tatt i bruk og stoler på at dere kun bruker den for å bidra.
+Her kan du finne et eksempel på en [.env fil](./.env_example). Vi har lagt til en Firebase instansen som kan bli tatt i bruk og stoler på at dere kun bruker den for å bidra.
 
 <!-- Skriv noe om plis ikke fuck firebaseinstansen opp vi stoler på dere bla bla dugnadsånd--->
 
