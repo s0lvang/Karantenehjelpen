@@ -22,6 +22,9 @@ Om du skulle trenge hjelp med å handle inn matvarer, eller gå tur med hunden d
 
 Det er viktig at alle bidrar i nasjonaldugnaden, derfor oppfordrer vi på det sterkeste at du følger FHI sine råd. [Se her for mer informasjon](https://www.fhi.no/nettpub/coronavirus/fakta/rad-og-informajon-til-befolkningen-om-nytt-koronavirus-coronavirus-2019-nco/).
 
+Vi anbefaler også å følge [Løkkan og Ila Frivillighetssentraler sine rutiner for praktiske frivillige tjenester](https://ila.frivilligsentral.no/irisfile/189790/) om man skal ut på oppdrag. 
+
+
 Her kan vi se et bilde av startsiden vår:
 
 ![Bilde av startside](/src/assets/startside.jpg)
