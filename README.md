@@ -83,7 +83,7 @@ npm run prettier-fix
 
 ## Historie
 
-I midten av uke 11 hørte vi at helsefagstudentene ble bedt om å bidra i helsetjenesten. Vi som IT-studenter tenkte, vi har jo også kompetanse som kan være relevant. Så vi kastet oss rundt å startet dette prosjektet. Teamet vokste fort. Det var mange i linjeforeningen Online som syntes prosjektet var spennende, og innen lansering 18. mars var vi 7 på teamet og flere har vi blitt siden. 
+I midten av uke 11 hørte vi at helsefagstudentene ble bedt om å bidra i helsetjenesten. Vi som IT-studenter tenkte, vi også kompetanse som kan være relevant. Så vi kastet oss rundt å startet dette prosjektet. Teamet vokste fort. Det var mange i linjeforeningen Online som syntes prosjektet var spennende, og innen lansering 18. mars var vi 7 på teamet og flere har vi blitt siden. 
 
 I løpet av den intense uken med utvikling dukket det opp flere store facebook grupper med folk som ønsket å hjelpe til i den nasjonalle dugnaden. Det bekreftet vår hypotese om dugnadsviljen i Norge og motiverte oss til å fortsette. Når vi lanserte 18. mars ble vi møtt av en utrolig respons. Siden den gang har vi fått økonomisk støtte fra Velferdstinget i Gjøvik, Ålesund og Trondheim, StudyTrondheim og IE-fakultetet ved NTNU. Vi har også fått administrativ støtte fra Linjeforeningen Online. 
 
