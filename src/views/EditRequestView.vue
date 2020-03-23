@@ -16,7 +16,7 @@
 <script>
 import CreateEditRequest from "@/components/CreateEditRequest.vue";
 import RequestSummary from "@/components/RequestSummary.vue";
-import fb from "@/firebaseConfig.js";
+import { updateRequest } from "@/services/firebase";
 
 export default {
   name: "EditRequestView",
@@ -33,23 +33,24 @@ export default {
   methods: {
     createRequest(request) {
       this.showSpinner = true;
-      fb.usersCollection
-        .doc(this.$store.getters.id)
-        .collection("requests")
-        .doc(this.$route.params.id)
-        .update(request)
-        .then(() => {
-          this.$store.dispatch("SET_ADDRESS", "");
-          this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", "");
-          this.$store.dispatch("SET_PHONE_NUMBER_INPUT", "");
-          this.$store.dispatch("SET_PAYMENT_SOLUTION", "");
-          this.$store.dispatch("SET_ITEMS", []);
-          this.showSpinner = false;
-          this.$router.push("/all-requests");
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      try {
+        updateRequest(
+          this.$store.getters.id,
+          this.$route.params.id,
+          request,
+          () => {
+            this.$store.dispatch("SET_ADDRESS", "");
+            this.$store.dispatch("SET_ARRIVAL_DESCRIPTION", "");
+            this.$store.dispatch("SET_PHONE_NUMBER_INPUT", "");
+            this.$store.dispatch("SET_PAYMENT_SOLUTION", "");
+            this.$store.dispatch("SET_ITEMS", []);
+            this.showSpinner = false;
+            this.$router.push("/all-requests");
+          }
+        );
+      } catch (err) {
+        console.error(`Error occured when updating request: ${err}`);
+      }
     },
     toSummary() {
       this.step += 1;

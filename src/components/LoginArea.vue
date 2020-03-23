@@ -3,7 +3,7 @@
     <div class="formContainer">
       <form>
         <div class="inputContainer">
-          <label for="email">Epostaddresse</label>
+          <label for="email">E-postadresse</label>
           <input id="email" type="email" v-model="email" />
         </div>
         <div class="authContainer">
@@ -19,18 +19,15 @@
     </div>
     <p class="error" v-if="errorCode">{{ errorMessage }}</p>
     <p class="success" v-if="sentMail">
-      Sjekk eposten din for lenke å logge inn med!
+      En lenke du kan logge inn med har blitt sendt til {{ email }} <br />
+      Mailen kan ta et par minuter. Husk også å sjekk spam/søppeldunken!
     </p>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
-import {
-  handleSignedIn,
-  getErrorMessage,
-  getRedirectUrl
-} from "@/helpers/auth";
+import { getErrorMessage, handleSignedIn } from "@/helpers/auth";
+import { registerWithEmail, login, isAuthLink } from "@/services/firebase";
 import Button from "@/components/shared/Button.vue";
 
 export default {
@@ -47,63 +44,20 @@ export default {
   },
   computed: {
     errorMessage() {
-      return getErrorMessage(this.errorCode);
+      return getErrorMessage(this.errorCode, isAuthLink(window.location.href));
     }
   },
   methods: {
-    register() {
-      const actionCodeSettings = {
-        // URL you want to redirect back to. The domain (www.example.com) for this
-        // URL must be whitelisted in the Firebase Console.
-        url: getRedirectUrl(),
-        // This must be true.
-        handleCodeInApp: true,
-        lang: "no"
-      };
-      firebase
-        .auth()
-        .sendSignInLinkToEmail(this.email, actionCodeSettings)
-        .then(() => {
-          window.localStorage.setItem("emailForSignIn", this.email);
-          this.sentMail = true;
-          this.errorCode = null;
-        })
-        .catch(err => {
-          this.errorCode = err.code;
-        });
+    async register() {
+      this.errorCode = await registerWithEmail(this.email, () => {
+        this.sentMail = true;
+      });
     }
   },
   async beforeMount() {
-    const login = async url => {
-      try {
-        const fb = firebase.auth();
-        if (fb.isSignInWithEmailLink(url)) {
-          let email = window.localStorage.getItem("emailForSignIn");
-          if (!email) {
-            // If the user opens the link on another device
-            email = await this.$dialog.prompt(
-              {
-                title: "Epostadresse",
-                body: "Skriv inn epostadressen din",
-                promptHelp: `Skriv din epostadresse i boksen under og trykk "[+:okText]"`
-              },
-              {
-                okText: "Fortsett",
-                cancelText: "Lukk",
-                customClass: "phone-prompt"
-              }
-            ).then(dialog => dialog.data);
-          }
-          await fb
-            .signInWithEmailLink(email, url)
-            .then(() => handleSignedIn(this, fb.currentUser))
-            .then(() => window.localStorage.removeItem("emailForSignIn"))
-        }
-      } catch (err) {
-        this.errorCode = err.code;
-      }
-    };
-    await login(window.location.href);
+    this.errorCode = await login(window.location.href, this.$dialog, currUser =>
+      handleSignedIn(this, currUser)
+    );
   }
 };
 </script>

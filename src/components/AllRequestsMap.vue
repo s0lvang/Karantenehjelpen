@@ -102,10 +102,10 @@ export default {
 }
 
 #all-requests-map {
-  margin: 1em auto 2em;
+  margin: 0 auto 2em;
   position: relative;
   height: 65vh;
-  z-index: 1000;
+  z-index: 199;
   width: 100vw;
   left: 50%;
   margin-left: -50vw;

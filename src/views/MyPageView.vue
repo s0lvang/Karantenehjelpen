@@ -4,7 +4,7 @@
     <section>
       <PhoneNumberInput
         labelText="Telefonnummer (uten landskode)"
-        placeholderText="98765432"
+        placeholderText="00000000"
         @emitNumberInput="updatePhoneNumberInput"
         @emitButton="checkButton"
         :existing="phoneNumberInput"
@@ -34,8 +34,13 @@
 <script>
 import Button from "@/components/shared/Button.vue";
 import PhoneNumberInput from "@/components/shared/PhoneNumberInput.vue";
-import fb from "@/firebaseConfig.js";
-import firebase from "firebase";
+import {
+  updateUserPhoneNumber,
+  updateRequest,
+  deleteRequest,
+  deleteUser,
+  signOut
+} from "@/services/firebase";
 
 export default {
   name: "MyPage",
@@ -63,28 +68,23 @@ export default {
     },
 
     updatePhoneNumber() {
-      fb.additionalUserInfoCollection
-        .doc(this.$store.getters.id)
-        .update({ phoneNumber: this.phoneNumberInput });
+      updateUserPhoneNumber(this.$store.getters.id, this.phoneNumberInput);
+
       this.$store.getters.requests
         .filter(
           request =>
             request.connectedUser &&
             request.connectedUser.email === this.$store.getters.email
         )
-        .forEach(request => {
-          fb.usersCollection
-            .doc(request.uid)
-            .collection("requests")
-            .doc(request.id)
-            .update({
-              connectedUser: {
-                phoneNumber: this.phoneNumberInput,
-                name: this.$store.getters.name,
-                email: this.$store.getters.email
-              }
-            });
-        });
+        .forEach(request =>
+          updateRequest(request.uid, request.id, {
+            connectedUser: {
+              phoneNumber: this.phoneNumberInput,
+              name: this.$store.getters.name,
+              email: this.$store.getters.email
+            }
+          })
+        );
       this.$store.dispatch("SET_CURRENT_USER", {
         ...this.$store.getters.currentUser,
         phoneNumber: this.phoneNumberInput
@@ -92,45 +92,45 @@ export default {
       this.$dialog.alert("Nummeret ditt er oppdatert!");
     },
 
-    deleteMe() {
-      this.$dialog
-        .confirm(
+    async deleteMe() {
+      try {
+        await this.$dialog.confirm(
           "Dette vil slette brukeren din og alle dine oppdrag er du sikker på at du ønsker å slette deg selv"
-        )
-        .then(() => {
-          this.$store.getters.requests.forEach(request => {
-            if (request.email === this.$store.getters.email) {
-              fb.usersCollection
-                .doc(request.uid)
-                .collection("requests")
-                .doc(request.id)
-                .delete();
-            } else if (
-              request.connectedUser &&
-              (request.connectedUser.email === this.$store.getters.email ||
-                request.connectedUser.phoneNumber ===
-                  this.$store.getters.phoneNumber)
-            ) {
-              fb.usersCollection
-                .doc(request.uid)
-                .collection("requests")
-                .doc(request.id)
-                .update({ connectedUser: null });
+        );
+        this.$store.getters.requests.forEach(
+          async ({ email, uid, id, connectedUser }) => {
+            if (email === this.$store.getters.email) {
+              await deleteRequest(uid, id);
+              return;
             }
-          });
-          fb.usersCollection.doc(this.$store.getters.id).delete();
-          fb.additionalUserInfoCollection.doc(this.$store.getters.id).delete();
-          firebase
-            .auth()
-            .signOut()
-            .then(() => {
-              this.$store.dispatch("SET_CURRENT_USER", null);
-              this.$router.push("/login");
-            })
-            .catch(error => {
-              console.log(`something went wrong ${error.message}`);
-            });
+
+            if (!connectedUser) {
+              return;
+            }
+
+            if (
+              connectedUser.email === this.$store.getters.email ||
+              connectedUser.phoneNumber === this.$store.getters.phoneNumber
+            ) {
+              await updateRequest(uid, id, {
+                connectedUser: null
+              });
+            }
+          }
+        );
+
+        await deleteUser(this.$store.getters.id);
+
+        await signOut(() => {
+          this.$store.dispatch("SET_CURRENT_USER", null);
+          this.$router.push("/login");
         });
+      } catch (err) {
+        console.info(
+          `Brukeren ville ikke (eller kunne ikke) slette brukeren sin. ${err}`
+        );
+        console.error(err);
+      }
     }
   }
 };

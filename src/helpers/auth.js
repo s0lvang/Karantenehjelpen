@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import fb from "@/firebaseConfig.js";
 
-export const handleSignedIn = async(context, user) => {
+export const handleSignedIn = async (context, user) => {
   if (!user.displayName) {
     await context.$dialog
       .prompt(
@@ -82,12 +82,20 @@ export const handleSignedIn = async(context, user) => {
     });
 };
 
-export const getErrorMessage = errorCode => {
+export const setUpGoogleSignInCompleteListener = async (
+  callback = () => {}
+) => {
+  callback(await firebase.auth().getRedirectResult());
+};
+
+export const getErrorMessage = (errorCode, isAuthLink) => {
   switch (errorCode) {
     case "auth/invalid-password":
       return "Passordet er feil!";
     case "auth/invalid-email":
-      return "Formatet på mailen er feil!";
+      return isAuthLink
+        ? "Epostadressen skrevet inn er ikke den samme som denne lenken ble sendt til, last siden på nytt og prøv igjen!"
+        : "Epostadressen skrevet inn er ugyldig";
     case "auth/email-already-in-use":
       return "Mailen skrevet inn er allerede i bruk";
     case "auth/too-many-requests":
