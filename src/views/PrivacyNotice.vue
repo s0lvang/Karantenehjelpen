@@ -16,13 +16,15 @@
     <a href="https://karantenehjelpen.no/my-page">Min side</a>.
     <!-- TODO: Link to other view in a more Vue-like manner -->
     <!-- TODO: Verifisere at disse dataene faktisk slettes hos tredjeparter -->
-    På Min Side kan du også redigere telefonnummeret ditt. ved andre
-    henvendelser om personvern, send en e-post til
+    På <a href="https://karantenehjelpen.no/my-page">Min side</a> kan du også
+    redigere telefonnummeret ditt. Ved andre henvendelser om personvern, send en
+    e-post til
     <a href="mailto:karantenehjelpen@online.ntnu.no"
       >karantenehjelpen@online.ntnu.no</a
     >
     <h3>Cookies</h3>
     Vi bruker cookies til å holde deg innlogget på siden.
+    <!-- TODO: Write more about these cookies -->
     <h3>Kontakt</h3>
     Skulle du lure på noe mer, er det bare å ta kontakt på
     <a href="mailto:karantenehjelpen@online.ntnu.no"
