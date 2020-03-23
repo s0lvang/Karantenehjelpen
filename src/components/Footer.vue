@@ -19,9 +19,6 @@
         />
       </svg>
     </a>
-    <a href="personvern">
-      Personvern
-    </a>
   </footer>
 </template>
 

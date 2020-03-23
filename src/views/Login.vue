@@ -6,48 +6,73 @@
     <LoginArea />
     <strong>Hva er Karantenehjelpen?</strong>
     <p>
-      Når du sitter i hjemmekarantene skal du ikke oppholde deg på steder der
-      man lett kommer nær andre. Da kan det bli veldig vanskelig å få handlet
-      inn det man trenger til livets opphold.
+      Karantenehjelpen er en nettside hvor personer som ikke har mulighet til å
+      utføre hverdagslige oppgaver grunnet koronaviruset kan komme i kontakt med
+      friske personer som ønsker å hjelpe til.
     </p>
     <p>
-      Karantenehjelpen er til for å hjelpe de som sitter i karantene å komme i
-      kontakt med friske folk som ønsker å hjelpe.
-    </p>
-    <p>
-      Vi trenger friske folk som har lyst til å delta i den nasjonale dugnaden
-      ved å hjelpe dem som sitter i karantene med innkjøp.
+      Om du skulle trenge hjelp med å handle inn matvarer, eller gå tur med
+      hunden din, kan du legge ut en enkel forespørsel på nettsiden. Da vil den
+      dukke opp for alle som har lyst til å hjelpe deg, og forhåpentligvis vil
+      en av de ta på seg oppdraget!
     </p>
     <strong>Følg FHI sine råd!</strong>
     <p>
-      Hold avstand til hverandre, prøv å unngå å ta deg selv i ansiktet, og
-      praktiser god håndhygiene.
+      Det er viktig at alle bidrar i nasjonaldugnaden, derfor oppfordrer vi på
+      det sterkeste at du følger FHI sine råd. Hold avstand til hverandre, prøv
+      å unngå å ta deg selv i ansiktet, og praktiser god håndhygiene.
       <a
         href="https://www.fhi.no/sv/smittsomme-sykdommer/corona/"
         target="_blank"
         >Se her for mer informasjon.</a
       >
-
+    </p>
+    <p>
       Vi anbefaler også å følge
       <a href="https://ila.frivilligsentral.no/irisfile/189790/" target="_blank"
         >Løkkan og Ila Frivillighetssentraler sine rutiner for praktiske
         frivillige tjenester</a
       >
+      om man skal ut på oppdrag.
     </p>
-    <strong>Hvem står bak Karantenehjelpen?</strong>
+    <strong>Historie</strong>
     <p>
-      Nettsiden ble startet opp av en gjeng Informatikk-studenter på NTNU, og
-      drift og utvikling skjer på frivillig basis. Kildekoden ligger
-      tilgjengelig
-      <a href="https://github.com/s0lvang/Karantenehjelpen" target="_blank"
-        >på GitHub</a
-      >, hvor hvem som helst kan bidra. Tjenesten er helt gratis å bruke, og vil
-      aldri inneholde reklamer. Vi har mottat støtte til driftsutgifter fra
-      <a href="https://velferdstinget.no/" target="_blank">Velferdstinget</a>,
+      I midten av uke 11 hørte vi at helsefagstudentene ble bedt om å bidra i
+      helsetjenesten. Vi som IT-studenter tenkte, vi også kompetanse som kan
+      være relevant. Så vi kastet oss rundt å startet dette prosjektet. Teamet
+      vokste fort. Det var mange i linjeforeningen Online som syntes prosjektet
+      var spennende, og innen lansering 18. mars var vi 7 på teamet og flere har
+      vi blitt siden.
+    </p>
+    <p>
+      I løpet av den intense uken med utvikling dukket det opp flere store
+      facebook grupper med folk som ønsket å hjelpe til i den nasjonalle
+      dugnaden. Det bekreftet vår hypotese om dugnadsviljen i Norge og motiverte
+      oss til å fortsette. Når vi lanserte 18. mars ble vi møtt av en utrolig
+      respons. Siden den gang har vi fått økonomisk støtte fra
+      <a href="https://velferdstinget.no/" target="_blank"
+        >Velferdstinget i Gjøvik, Ålesund og Trondheim</a
+      >,
       <a href="https://www.trondheim.no/student" target="_blank"
         >StudyTrondheim</a
-      >, og
+      >
+      og
       <a href="https://www.ntnu.no/ie" target="_blank">IE-fakultetet ved NTNU</a
+      >. Vi har også fått administrativ støtte fra
+      <a href="https://online.ntnu.no" target="_blank">Linjeforeningen Online</a
+      >.
+    </p>
+    <p>
+      Planen fremover er å videreutvikle løsningen og forsøke å være så klare
+      som vi kan for å fortsette støtten til de som ønsker å bidra i den
+      nasjonale dugnaden.
+    </p>
+    <strong>Bidra</strong>
+    <p>
+      Karantenehjelpen er et open-source prosjekt og derfor vil vi gjerne ønske
+      dere velkommen til å bidra
+      <a href="https://github.com/s0lvang/Karantenehjelpen" target="_blank"
+        >på GitHub</a
       >.
     </p>
   </section>
@@ -110,6 +135,11 @@ button {
     text-align: center;
   }
 }
+
+p {
+  margin-bottom: 0.5em;
+}
+
 .hr-text {
   line-height: 1em;
   position: relative;
