@@ -9,6 +9,7 @@ import MyRequestsView from "@/views/MyRequestsView.vue"; // eslint-disable
 import MyAssignedRequestsView from "@/views/MyAssignedRequestsView.vue"; // eslint-disable
 import EditRequestView from "@/views/EditRequestView.vue";
 import MyPageView from "@/views/MyPageView.vue";
+import PrivacyNotice from "@/views/PrivacyNotice.vue";
 import firebase from "firebase";
 
 Vue.use(VueRouter);
@@ -87,6 +88,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/privacy",
+    name: "PrivacyNotice",
+    component: PrivacyNotice
   }
 ];
 
