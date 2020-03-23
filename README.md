@@ -91,7 +91,7 @@ Planen fremover er å videreutvikle løsningen og forsøke å være så klare so
 
 ## Credits
 
-Logo lagd av [Richa @ Noun Project](https://thenounproject.com/ayushi12/collection/set-5/?i=2097590).
+Logo lagd av [Line Icons Pro @ Noun Project](https://thenounproject.com/lineiconspro/uploads/?i=2595880).
 
 Badges lagd med [Shields.io](https://shields.io/)
 
