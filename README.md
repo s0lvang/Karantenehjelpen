@@ -37,7 +37,7 @@ Karantenehjelpen er et open-source prosjekt og derfor vil vi gjerne ønske dere 
 
 <!-- Skrive noe mer inspirerende her Kanskje noe om dugnad? -->
 
-## Utvikling og Oppsett
+## Utvikling og oppsett
 
 Teknologistacken vår består av **Vue** i frontenden og **Firebase** som en løsning for blant annet autentisering, databasehåndtering og hosting.
 
