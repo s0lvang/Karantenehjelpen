@@ -8,17 +8,27 @@ jobs:
   deploy:
     if: "!github.event.release.prerelease"
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [1.x]
 
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
-      - name: "Deploy to Azure Web App"
-        uses: azure/webapps-deploy@v2
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build
+        env:
+          VUE_APP_MAPBOX_TOKEN: ${{ secrets.PROD_MAPBOX_TOKEN }}
+          VUE_APP_FIREBASE_CONFIG: ${{ secrets.PROD_FIREBASE_CONFIG }}
+          VUE_APP_ACCOUNT_SID: ${{ secrets.PROD_ACCOUNT_SID }}
+          VUE_APP_AUTH_TOKEN: ${{ secrets.PROD_AUTH_TOKEN }}
+      - name: Deploy to firebase
+        uses: w9jds/firebase-action@master
         with:
-          app-name: "onlineweb-frontend"
-          slot-name: "production"
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_e04e52940ded45e3afdf32dfab711104 }}
-          package: .
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: karantenehjelpen
