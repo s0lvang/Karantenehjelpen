@@ -19,6 +19,8 @@
         />
       </svg>
     </a>
+    <a href="privacy">Personvern</a>
+    <!-- TODO: Link to other view in a more Vue-like manner -->
   </footer>
 </template>
 
